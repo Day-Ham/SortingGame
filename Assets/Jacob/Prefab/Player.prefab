@@ -307,7 +307,7 @@ MonoBehaviour:
   pickupRange: 3
   pickupLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 128
   throwForce: 5
 --- !u!114 &8682283849523348199
 MonoBehaviour:
