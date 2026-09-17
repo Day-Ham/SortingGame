@@ -308,6 +308,7 @@ MonoBehaviour:
   pickupLayer:
     serializedVersion: 2
     m_Bits: 128
+  pickupSpeed: 25
   throwForce: 5
 --- !u!114 &8682283849523348199
 MonoBehaviour:
