@@ -1,16 +1,48 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemChecker : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public enum ContainerType
     {
-        
+        Ore,
+        Canister,
+        Hardrive,
+        Medicine,
+        Fuel,
+        Food,
+        Weapon
     }
 
-    // Update is called once per frame
-    void Update()
+    [Header("Container Info")]
+    [SerializeField] private ContainerType type;
+    private List<GameObject> heldItems = new List<GameObject>();
+
+    private ItemData itemData;
+
+    bool IsItemViable()
     {
-        
+        //if (heldItems.Count > 0) return true;
+        //if(heldItems.)
+
+        //if ()
+        //{
+
+        //}
+        return false;
+    }
+    public void PlaceItem()
+    {
+        //if ()
+        //{
+
+        //}
+    } 
+
+    
+    
+    void GetItemInfo()
+    {
+
     }
 }
