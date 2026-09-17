@@ -14,22 +14,19 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Throw")]
     [SerializeField] private float throwForce = 5f;
 
-    private GameObject heldObject;
+    public GameObject heldObject;
     private Rigidbody heldRigidbody;
 
     // Update is called once per frame
     void Update()
     {
-        if (heldObject != null)
-        {
-            MoveHeldObject();
-        }
+        
     }
 
     void TryPickup()
     {
-        Ray ray = new Ray(playerCamera.transform.position,playerCamera.transform.forward);
-        if (Physics.Raycast( ray,out RaycastHit hit,pickupRange,pickupLayer))
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange, pickupLayer))
         {
             Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
             Item item = hit.collider.GetComponent<Item>();
@@ -39,37 +36,32 @@ public class PlayerInteraction : MonoBehaviour
                 heldObject = rb.gameObject;
                 heldRigidbody = rb;
 
-                item.Held(true);
+                heldRigidbody.isKinematic = true;
+                heldObject.transform.SetParent(holdPoint);
 
-                heldObject.transform.position = holdPoint.position;
-                heldObject.transform.rotation = holdPoint.rotation;
+                heldObject.transform.localPosition = Vector3.zero;
+                heldObject.transform.localRotation = Quaternion.identity;
+
+                item.Held(true);
             }
         }
     }
 
-    void MoveHeldObject()
-    {
-        heldObject.transform.position = holdPoint.position;
-        heldObject.transform.rotation = holdPoint.rotation;
-    }
-
-    void DropObject()
-    {
-        heldRigidbody.isKinematic = false;
-        heldObject = null;
-        heldRigidbody = null;
-    }
 
     void ThrowObject()
     {
         Item item = heldObject.GetComponent<Item>();
+
         if (item != null)
         {
             item.Held(false);
         }
 
+        heldObject.transform.SetParent(null);
+
         heldRigidbody.isKinematic = false;
-        heldRigidbody.AddForce(playerCamera.transform.forward * throwForce,ForceMode.Impulse);
+
+        heldRigidbody.AddForce(playerCamera.transform.forward * throwForce, ForceMode.Impulse);
 
         heldObject = null;
         heldRigidbody = null;
@@ -84,10 +76,7 @@ public class PlayerInteraction : MonoBehaviour
         {
             TryPickup();
         }
-        else
-        {
-            DropObject();
-        }
+        
     }
 
     public void OnThrow(InputValue value)
