@@ -33,6 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5381342725236863772}
+  - {fileID: 832533794742149254}
   m_Father: {fileID: 1502565653597778672}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &839744199074796609
@@ -138,6 +139,37 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!1 &3938090920396090169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 832533794742149254}
+  m_Layer: 6
+  m_Name: Backpack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &832533794742149254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3938090920396090169}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.771, y: -0.908, z: -0.771}
+  m_LocalScale: {x: 0.43432, y: 0.43432, z: 0.43432}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2174637397969621097}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7123355942709442893
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,12 +336,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   playerCamera: {fileID: 839744199074796609}
   holdPoint: {fileID: 5381342725236863772}
+  backpackPoint: {fileID: 832533794742149254}
   pickupRange: 3
   pickupLayer:
     serializedVersion: 2
     m_Bits: 128
   pickupSpeed: 25
-  throwForce: 5
+  maxHeldItems: 5
+  switchDelay: 0.05
+  throwForce: 1
+  amountHeldText: {fileID: 0}
+  heldItemNameText: {fileID: 0}
+  backpackItemNames:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  heldObject: {fileID: 0}
+  heldItems: []
 --- !u!114 &8682283849523348199
 MonoBehaviour:
   m_ObjectHideFlags: 0

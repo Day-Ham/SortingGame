@@ -2,20 +2,31 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System.Collections;
+using TMPro;
 
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private Camera playerCamera;
     [SerializeField] private Transform holdPoint;
+    [SerializeField] private Transform backpackPoint;
 
     [Header("Pickup")]
     [SerializeField] private float pickupRange = 3f;
     [SerializeField] private LayerMask pickupLayer;
     [SerializeField] private float pickupSpeed = 12f;
 
+    [Header("Backpack")]
+    [SerializeField] private int maxHeldItems = 3;
+    [SerializeField] private float switchDelay = 0.25f;
+
     [Header("Throw")]
     [SerializeField] private float throwForce = 5f;
+
+    [Header("UI")]
+    [SerializeField] private TMP_Text amountHeldText;
+    [SerializeField] private TMP_Text heldItemNameText;
+    [SerializeField] private TMP_Text[] backpackItemNames;
 
     public GameObject heldObject;
     private Rigidbody heldRigidbody;
@@ -24,7 +35,12 @@ public class PlayerInteraction : MonoBehaviour
     private int activeItemIndex = -1;
 
     private bool isPickingUp;
+    private bool isSwitching;
 
+    private void Start()
+    {
+        UpdateInventoryUI();
+    }
     void Update()
     {
         if (heldObject != null && isPickingUp)
@@ -36,7 +52,14 @@ public class PlayerInteraction : MonoBehaviour
 
         if (scroll != 0 && heldItems.Count > 1)
         {
-            SwitchItem(scroll > 0 ? 1 : -1);
+            if (scroll > 0)
+            {
+                SwitchItem(1);
+            }
+            else
+            {
+                SwitchItem(-1);
+            }
         }
     }
 
@@ -50,6 +73,11 @@ public class PlayerInteraction : MonoBehaviour
 
             if (rb != null && item != null)
             {
+                if (heldItems.Count >= maxHeldItems)
+                {
+                    return;
+                }
+
                 if (heldObject != null)
                 {
                     heldObject.SetActive(false);
@@ -60,6 +88,7 @@ public class PlayerInteraction : MonoBehaviour
 
                 heldItems.Add(heldObject);
                 activeItemIndex = heldItems.Count - 1;
+                UpdateInventoryUI();
 
                 heldRigidbody.isKinematic = true;
                 item.Held(true);
@@ -72,6 +101,9 @@ public class PlayerInteraction : MonoBehaviour
 
     void SwitchItem(int direction)
     {
+        if (isSwitching)
+            return;
+
         if (heldObject != null)
         {
             heldObject.SetActive(false);
@@ -88,23 +120,23 @@ public class PlayerInteraction : MonoBehaviour
             activeItemIndex = heldItems.Count - 1;
         }
 
-        heldObject = heldItems[activeItemIndex];
-        heldRigidbody = heldObject.GetComponent<Rigidbody>();
-
-        heldObject.SetActive(true);
-        heldObject.transform.SetParent(holdPoint, true);
-
-        isPickingUp = true;
+        StartCoroutine(ShowNextItem());
     }
 
     void PickupLerp()
     {
         Transform obj = heldObject.transform;
-        obj.localPosition = Vector3.Lerp(obj.localPosition,Vector3.zero, pickupSpeed * Time.deltaTime);
-        obj.localRotation = Quaternion.Lerp(obj.localRotation, Quaternion.identity,pickupSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(obj.localPosition, Vector3.zero) < 0.01f && Quaternion.Angle(obj.localRotation, Quaternion.identity) < 1f)
+        obj.position = Vector3.Lerp(obj.position, holdPoint.position, pickupSpeed * Time.deltaTime);
+        obj.rotation = Quaternion.Lerp(obj.rotation,holdPoint.rotation,pickupSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(obj.position, holdPoint.position) < 0.01f && Quaternion.Angle(obj.rotation, holdPoint.rotation) < 1f)
         {
+            obj.position = holdPoint.position;
+            obj.rotation = holdPoint.rotation;
+
+            obj.SetParent(holdPoint, true);
+
             obj.localPosition = Vector3.zero;
             obj.localRotation = Quaternion.identity;
 
@@ -116,6 +148,7 @@ public class PlayerInteraction : MonoBehaviour
     void ThrowObject()
     {
         Item item = heldObject.GetComponent<Item>();
+
         if (item != null)
         {
             item.Held(false);
@@ -123,24 +156,20 @@ public class PlayerInteraction : MonoBehaviour
 
         heldItems.RemoveAt(activeItemIndex);
         heldObject.transform.SetParent(null);
+
         heldRigidbody.isKinematic = false;
-        Collider thrownCollider = heldObject.GetComponent<Collider>();
-
-        if (thrownCollider != null)
-        {
-            thrownCollider.enabled = false;
-            StartCoroutine(ReEnableCollider(thrownCollider));
-        }
-
-        heldRigidbody.AddForce( playerCamera.transform.forward * throwForce, ForceMode.Impulse);
+        heldRigidbody.AddForce(playerCamera.transform.forward * throwForce,ForceMode.Impulse);
 
         heldObject = null;
         heldRigidbody = null;
         isPickingUp = false;
 
+        heldItemNameText.text = "";
+
         if (heldItems.Count == 0)
         {
             activeItemIndex = -1;
+            UpdateInventoryUI();
             return;
         }
 
@@ -149,19 +178,71 @@ public class PlayerInteraction : MonoBehaviour
             activeItemIndex = 0;
         }
 
+        StartCoroutine(ShowNextItem());
+    }
+
+    IEnumerator ShowNextItem()
+    {
+        isSwitching = true;
+
+        yield return new WaitForSeconds(switchDelay);
+
         heldObject = heldItems[activeItemIndex];
         heldRigidbody = heldObject.GetComponent<Rigidbody>();
 
         heldObject.SetActive(true);
-        heldObject.transform.SetParent(holdPoint, true);
+
+        UpdateInventoryUI();
+
+        heldObject.transform.SetParent(backpackPoint, false);
+        heldObject.transform.localPosition = Vector3.zero;
+        heldObject.transform.localRotation = Quaternion.identity;
+
+        UpdateInventoryUI();
 
         isPickingUp = true;
+
+        isSwitching = false;
     }
 
-    IEnumerator ReEnableCollider(Collider col)
+    void UpdateInventoryUI()
     {
-        yield return new WaitForSeconds(0.15f);
-        col.enabled = true;
+        amountHeldText.text = heldItems.Count.ToString();
+
+        if (heldObject != null)
+        {
+            heldItemNameText.text = heldObject.name;
+        }
+        else
+        {
+            heldItemNameText.text = "";
+        }
+
+        int backpackCount = heldItems.Count;
+
+        if (heldObject != null)
+        {
+            backpackCount--;
+        }
+
+        int backpackIndex = 0;
+
+        for (int i = 0; i < heldItems.Count; i++)
+        {
+            if (heldItems[i] == heldObject)
+                continue;
+
+            if (backpackIndex < backpackItemNames.Length)
+            {
+                backpackItemNames[backpackIndex].text = heldItems[i].name;
+                backpackIndex++;
+            }
+        }
+
+        for (int i = backpackIndex; i < backpackItemNames.Length; i++)
+        {
+            backpackItemNames[i].text = "";
+        }
     }
 
     public void OnInteract(InputValue value)
