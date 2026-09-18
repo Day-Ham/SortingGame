@@ -338,13 +338,14 @@ MonoBehaviour:
   holdPoint: {fileID: 5381342725236863772}
   backpackPoint: {fileID: 832533794742149254}
   pickupRange: 3
-  pickupLayer:
+  interactLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 384
   pickupSpeed: 25
   maxHeldItems: 5
   switchDelay: 0.05
-  throwForce: 1
+  throwForce: 5
+  itemNameText: {fileID: 0}
   amountHeldText: {fileID: 0}
   heldItemNameText: {fileID: 0}
   backpackItemNames:
@@ -362,6 +363,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  lookedAtObject: {fileID: 0}
   heldObject: {fileID: 0}
   heldItems: []
 --- !u!114 &8682283849523348199

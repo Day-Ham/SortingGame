@@ -13,7 +13,7 @@ public class PlayerInteraction : MonoBehaviour
 
     [Header("Pickup")]
     [SerializeField] private float pickupRange = 3f;
-    [SerializeField] private LayerMask pickupLayer;
+    [SerializeField] private LayerMask interactLayer;
     [SerializeField] private float pickupSpeed = 12f;
 
     [Header("Backpack")]
@@ -24,9 +24,11 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float throwForce = 5f;
 
     [Header("UI")]
+    [SerializeField] private TMP_Text itemNameText;
     [SerializeField] private TMP_Text amountHeldText;
     [SerializeField] private TMP_Text heldItemNameText;
     [SerializeField] private TMP_Text[] backpackItemNames;
+    [SerializeField] private GameObject lookedAtObject;
 
     public GameObject heldObject;
     private Rigidbody heldRigidbody;
@@ -37,12 +39,18 @@ public class PlayerInteraction : MonoBehaviour
     private bool isPickingUp;
     private bool isSwitching;
 
+    private Item lookedAtItem;
+    
+
     private void Start()
     {
         UpdateInventoryUI();
     }
+
     void Update()
     {
+        CheckLookedAtObject();
+
         if (heldObject != null && isPickingUp)
         {
             PickupLerp();
@@ -52,51 +60,74 @@ public class PlayerInteraction : MonoBehaviour
 
         if (scroll != 0 && heldItems.Count > 1)
         {
-            if (scroll > 0)
-            {
-                SwitchItem(1);
-            }
-            else
-            {
-                SwitchItem(-1);
-            }
+            SwitchItem(scroll > 0 ? 1 : -1);
         }
     }
 
-    void TryPickup()
+    void CheckLookedAtObject()
     {
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange, pickupLayer))
+
+        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange, interactLayer))
         {
-            Rigidbody rb = hit.collider.GetComponent<Rigidbody>();
+            lookedAtObject = hit.collider.gameObject;
+
             Item item = hit.collider.GetComponent<Item>();
 
-            if (rb != null && item != null)
+            if (item != null)
             {
-                if (heldItems.Count >= maxHeldItems)
+                lookedAtItem = item;
+
+                if (item.Data != null)
                 {
-                    return;
+                    itemNameText.text = item.Data.displayName;
+                    itemNameText.gameObject.SetActive(true);
                 }
 
-                if (heldObject != null)
-                {
-                    heldObject.SetActive(false);
-                }
-
-                heldObject = rb.gameObject;
-                heldRigidbody = rb;
-
-                heldItems.Add(heldObject);
-                activeItemIndex = heldItems.Count - 1;
-                UpdateInventoryUI();
-
-                heldRigidbody.isKinematic = true;
-                item.Held(true);
-                heldObject.transform.SetParent(holdPoint, true);
-
-                isPickingUp = true;
+                return;
             }
         }
+
+        lookedAtObject = null;
+        lookedAtItem = null;
+
+        itemNameText.text = "";
+        itemNameText.gameObject.SetActive(false);
+    }
+
+    void TryPickup(Item item)
+    {
+        GameObject obj = item.gameObject;
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+
+        if (rb != null && item != null)
+        {
+
+            if (heldItems.Count >= maxHeldItems)
+            {
+                return;
+
+            }
+
+            if (heldObject != null)
+            {
+                heldObject.SetActive(false);
+            }
+
+            heldObject = rb.gameObject;
+            heldRigidbody = rb;
+
+            heldItems.Add(heldObject);
+            activeItemIndex = heldItems.Count - 1;
+            UpdateInventoryUI();
+
+            heldRigidbody.isKinematic = true;
+            item.Held(true);
+            heldObject.transform.SetParent(holdPoint, true);
+
+            isPickingUp = true;
+        }
+
     }
 
     void SwitchItem(int direction)
@@ -128,7 +159,7 @@ public class PlayerInteraction : MonoBehaviour
         Transform obj = heldObject.transform;
 
         obj.position = Vector3.Lerp(obj.position, holdPoint.position, pickupSpeed * Time.deltaTime);
-        obj.rotation = Quaternion.Lerp(obj.rotation,holdPoint.rotation,pickupSpeed * Time.deltaTime);
+        obj.rotation = Quaternion.Lerp(obj.rotation, holdPoint.rotation, pickupSpeed * Time.deltaTime);
 
         if (Vector3.Distance(obj.position, holdPoint.position) < 0.01f && Quaternion.Angle(obj.rotation, holdPoint.rotation) < 1f)
         {
@@ -158,7 +189,7 @@ public class PlayerInteraction : MonoBehaviour
         heldObject.transform.SetParent(null);
 
         heldRigidbody.isKinematic = false;
-        heldRigidbody.AddForce(playerCamera.transform.forward * throwForce,ForceMode.Impulse);
+        heldRigidbody.AddForce(playerCamera.transform.forward * throwForce, ForceMode.Impulse);
 
         heldObject = null;
         heldRigidbody = null;
@@ -211,18 +242,20 @@ public class PlayerInteraction : MonoBehaviour
 
         if (heldObject != null)
         {
-            heldItemNameText.text = heldObject.name;
+            Item heldItem = heldObject.GetComponent<Item>();
+
+            if (heldItem != null && heldItem.Data != null)
+            {
+                heldItemNameText.text = heldItem.Data.displayName;
+            }
+            else
+            {
+                heldItemNameText.text = "";
+            }
         }
         else
         {
             heldItemNameText.text = "";
-        }
-
-        int backpackCount = heldItems.Count;
-
-        if (heldObject != null)
-        {
-            backpackCount--;
         }
 
         int backpackIndex = 0;
@@ -232,9 +265,19 @@ public class PlayerInteraction : MonoBehaviour
             if (heldItems[i] == heldObject)
                 continue;
 
+            Item item = heldItems[i].GetComponent<Item>();
+
             if (backpackIndex < backpackItemNames.Length)
             {
-                backpackItemNames[backpackIndex].text = heldItems[i].name;
+                if (item != null && item.Data != null)
+                {
+                    backpackItemNames[backpackIndex].text = item.Data.displayName;
+                }
+                else
+                {
+                    backpackItemNames[backpackIndex].text = "";
+                }
+
                 backpackIndex++;
             }
         }
@@ -250,7 +293,21 @@ public class PlayerInteraction : MonoBehaviour
         if (!value.isPressed)
             return;
 
-        TryPickup();
+        if (lookedAtObject == null)
+            return;
+
+        Item item = lookedAtObject.GetComponent<Item>();
+        if (item != null)
+        {
+            TryPickup(item);
+            return;
+        }
+
+        ItemChecker checker = lookedAtObject.GetComponent<ItemChecker>();
+        if(checker != null)
+        {
+            //Blah blah blah
+        }
     }
 
     public void OnThrow(InputValue value)

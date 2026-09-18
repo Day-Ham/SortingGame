@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
+    [SerializeField] private ItemData itemData;
+    public ItemData Data => itemData;
+
     private Rigidbody rb;
 
     [SerializeField] private float stopSpeed = 0.05f;
