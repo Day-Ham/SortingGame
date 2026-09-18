@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 7123123413308467912}
   - component: {fileID: 562408353911562306}
   - component: {fileID: 4084624209270009700}
-  - component: {fileID: 5574864849330573714}
   - component: {fileID: 8912106693626513367}
-  m_Layer: 0
+  - component: {fileID: 3117449370806905203}
+  m_Layer: 7
   m_Name: Canister
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,19 +116,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &5574864849330573714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7503926167627998214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8d8f4013e92d8d438119654da8e42b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Item
-  itemData: {fileID: 11400000, guid: 7d520752cd2a14a439e73a41ff97c6a3, type: 2}
 --- !u!54 &8912106693626513367
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,3 +143,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3117449370806905203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7503926167627998214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b10bb59d30d4b44996b88eb159ef9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  itemData: {fileID: 11400000, guid: 7d520752cd2a14a439e73a41ff97c6a3, type: 2}
+  stopSpeed: 0.05
+  stopTime: 0.2

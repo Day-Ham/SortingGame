@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using System.Collections;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float throwForce = 5f;
 
     [Header("UI")]
+    [SerializeField] private Image crosshairImage;
+    [SerializeField] private Sprite normalCrosshair;
+    [SerializeField] private Sprite oCrosshair;
+    [SerializeField] private Sprite xCrosshair;
     [SerializeField] private TMP_Text itemNameText;
     [SerializeField] private TMP_Text amountHeldText;
     [SerializeField] private TMP_Text heldItemNameText;
@@ -39,12 +44,16 @@ public class PlayerInteraction : MonoBehaviour
     private bool isPickingUp;
     private bool isSwitching;
 
-    private Item lookedAtItem;
-    
+    [Header("Item Spawner")]
+    ItemSpawner spawner;
 
     private void Start()
     {
         UpdateInventoryUI();
+
+        spawner = FindAnyObjectByType<ItemSpawner>();
+        if (spawner == null)
+            Debug.Log("Item Spawner is not found");
     }
 
     void Update()
@@ -72,12 +81,25 @@ public class PlayerInteraction : MonoBehaviour
         {
             lookedAtObject = hit.collider.gameObject;
 
-            Item item = hit.collider.GetComponent<Item>();
+            ItemChecker checker = lookedAtObject.GetComponent<ItemChecker>();
+            if (checker != null)
+            {
+                Debug.Log("Looking at a shelf");
+                if (checker.IsItemValid())
+                {
+                    crosshairImage.sprite = oCrosshair;
+                }
+                else
+                {
+                    crosshairImage.sprite = xCrosshair;
+                }
+                return;
+            }
+
+            Item item = lookedAtObject.GetComponent<Item>();
 
             if (item != null)
             {
-                lookedAtItem = item;
-
                 if (item.Data != null)
                 {
                     itemNameText.text = item.Data.displayName;
@@ -87,9 +109,9 @@ public class PlayerInteraction : MonoBehaviour
                 return;
             }
         }
-
         lookedAtObject = null;
-        lookedAtItem = null;
+
+        crosshairImage.sprite = normalCrosshair;
 
         itemNameText.text = "";
         itemNameText.gameObject.SetActive(false);
@@ -106,7 +128,6 @@ public class PlayerInteraction : MonoBehaviour
             if (heldItems.Count >= maxHeldItems)
             {
                 return;
-
             }
 
             if (heldObject != null)
@@ -175,28 +196,27 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-
-    void ThrowObject()
+    public void RemoveItemFromPlayer()
     {
-        Item item = heldObject.GetComponent<Item>();
+        if (heldObject == null) return;
 
+        Item item = heldObject.GetComponent<Item>();
         if (item != null)
         {
             item.Held(false);
         }
 
+        // Remove the active item from the inventory list
         heldItems.RemoveAt(activeItemIndex);
-        heldObject.transform.SetParent(null);
 
-        heldRigidbody.isKinematic = false;
-        heldRigidbody.AddForce(playerCamera.transform.forward * throwForce, ForceMode.Impulse);
-
+        // Clear local references
         heldObject = null;
         heldRigidbody = null;
         isPickingUp = false;
 
         heldItemNameText.text = "";
 
+        // Handle inventory state after removal
         if (heldItems.Count == 0)
         {
             activeItemIndex = -1;
@@ -211,6 +231,29 @@ public class PlayerInteraction : MonoBehaviour
 
         StartCoroutine(ShowNextItem());
     }
+
+    void ThrowObject()
+    {
+        if (heldObject == null) return;
+
+        // Cache references before RemoveItemFromPlayer clears them
+        GameObject objToThrow = heldObject;
+        Rigidbody rbToThrow = heldRigidbody;
+
+        // 1. Remove from inventory, update UI, and switch to next item
+        RemoveItemFromPlayer();
+
+        // 2. Apply throw-specific physics and parenting
+        objToThrow.transform.SetParent(spawner != null ? spawner.transform : null);
+
+        if (rbToThrow != null)
+        {
+            rbToThrow.isKinematic = false;
+            rbToThrow.AddForce(playerCamera.transform.forward * throwForce, ForceMode.Impulse);
+        }
+    }
+
+    
 
     IEnumerator ShowNextItem()
     {
@@ -296,6 +339,14 @@ public class PlayerInteraction : MonoBehaviour
         if (lookedAtObject == null)
             return;
 
+        ItemChecker checker = lookedAtObject.GetComponent<ItemChecker>();
+        if (checker != null)
+        {
+            Debug.Log("Trying to Place item");
+            checker.PlaceItem();
+            return;
+        }
+
         Item item = lookedAtObject.GetComponent<Item>();
         if (item != null)
         {
@@ -303,11 +354,7 @@ public class PlayerInteraction : MonoBehaviour
             return;
         }
 
-        ItemChecker checker = lookedAtObject.GetComponent<ItemChecker>();
-        if(checker != null)
-        {
-            //Blah blah blah
-        }
+        
     }
 
     public void OnThrow(InputValue value)

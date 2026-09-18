@@ -16,7 +16,7 @@ MonoBehaviour:
   description: 
   type: 5
   preferredOrientation: {x: 0, y: 0, z: 0}
-  rows: 0
-  columns: 0
-  spacing: {x: 0, y: 0}
+  rows: 2
+  columns: 3
+  spacing: {x: 0.1, y: 0.2}
   audioSFX: {fileID: 0}

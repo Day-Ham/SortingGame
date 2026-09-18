@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4626737888158900498}
   - component: {fileID: 6717884367719798824}
   - component: {fileID: 4577014619262853528}
-  - component: {fileID: 6385278438397842443}
   - component: {fileID: -2532213719801967254}
-  m_Layer: 0
+  - component: {fileID: -5924947976835670489}
+  m_Layer: 7
   m_Name: Medicine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,19 +114,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6385278438397842443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4864368375110794352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8d8f4013e92d8d438119654da8e42b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Item
-  itemData: {fileID: 11400000, guid: c31964e1cd575f54c872fd0ab634e90b, type: 2}
 --- !u!54 &-2532213719801967254
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,3 +141,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5924947976835670489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4864368375110794352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b10bb59d30d4b44996b88eb159ef9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  itemData: {fileID: 11400000, guid: c31964e1cd575f54c872fd0ab634e90b, type: 2}
+  stopSpeed: 0.05
+  stopTime: 0.2

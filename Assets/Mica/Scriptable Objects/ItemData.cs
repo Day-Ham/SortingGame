@@ -1,19 +1,9 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "ItemData", menuName = "Scriptable Objects/ItemData")]
 public class ItemData : ScriptableObject
 {
-    public enum ItemType
-    {
-        Ore,
-        Canister,
-        Hardrive,
-        Medicine,
-        Fuel,
-        Food,
-        Weapon
-    }
-
     [Header("Info")]
     public string displayName;
     public string description;

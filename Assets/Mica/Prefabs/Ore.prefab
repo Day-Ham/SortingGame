@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2046698487339434398}
   - component: {fileID: 4307840155691727921}
   - component: {fileID: 1423651914863697544}
-  - component: {fileID: 5933571713609383111}
   - component: {fileID: 5731627885844508238}
-  m_Layer: 0
+  - component: {fileID: 5035230212664105031}
+  m_Layer: 7
   m_Name: Ore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,19 +114,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5933571713609383111
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573732412732801550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8d8f4013e92d8d438119654da8e42b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Item
-  itemData: {fileID: 11400000, guid: 2871b1951308bf242b3dda3d9f094ce9, type: 2}
 --- !u!54 &5731627885844508238
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,3 +141,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5035230212664105031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573732412732801550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b10bb59d30d4b44996b88eb159ef9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  itemData: {fileID: 11400000, guid: 2871b1951308bf242b3dda3d9f094ce9, type: 2}
+  stopSpeed: 0.05
+  stopTime: 0.2

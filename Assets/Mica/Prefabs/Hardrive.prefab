@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4686422738412388049}
   - component: {fileID: 1085988166161251321}
   - component: {fileID: 3994750736518545448}
-  - component: {fileID: 2793457389720675296}
   - component: {fileID: 4677087649984356238}
-  m_Layer: 0
+  - component: {fileID: -705303233233408836}
+  m_Layer: 7
   m_Name: Hardrive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,19 +114,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2793457389720675296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 309819058986321488}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8d8f4013e92d8d438119654da8e42b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Item
-  itemData: {fileID: 11400000, guid: fec0eb0bb20bb57469692bbde484f7d8, type: 2}
 --- !u!54 &4677087649984356238
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,3 +141,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-705303233233408836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 309819058986321488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b10bb59d30d4b44996b88eb159ef9ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Item
+  itemData: {fileID: 11400000, guid: fec0eb0bb20bb57469692bbde484f7d8, type: 2}
+  stopSpeed: 0.05
+  stopTime: 0.2

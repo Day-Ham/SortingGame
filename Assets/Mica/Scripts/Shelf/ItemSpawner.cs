@@ -5,7 +5,7 @@ using UnityEngine;
 public class ItemSpawner : MonoBehaviour
 {
     [Header("Item")]
-    [SerializeField] private List<ItemSpawnEntry> items;
+    public List<ItemSpawnEntry> items;
     private GameObject currentItem;
 
     [Header("Spawning")]
@@ -48,7 +48,6 @@ public class ItemSpawner : MonoBehaviour
                     break;
                 }
             }
-            
         }
     }
 
