@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 3822682198896509901}
   - component: {fileID: 240337299482149312}
   - component: {fileID: 8331208016230216153}
+  - component: {fileID: 5367368567202462867}
   - component: {fileID: 8682283849523348199}
   m_Layer: 6
   m_Name: Player
@@ -366,6 +367,20 @@ MonoBehaviour:
   lookedAtObject: {fileID: 0}
   heldObject: {fileID: 0}
   heldItems: []
+--- !u!114 &5367368567202462867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7123355942709442893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ca147276229a8a44929f8e82bcde1de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerUpgrade
+  upgradeMenu: {fileID: 0}
+  skillsMenu: {fileID: 0}
 --- !u!114 &8682283849523348199
 MonoBehaviour:
   m_ObjectHideFlags: 0
