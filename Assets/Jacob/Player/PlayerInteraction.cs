@@ -18,6 +18,12 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private LayerMask pickUpLayer;
     [SerializeField] private float pickupSpeed = 12f;
 
+    [Header("Outline Settings")]
+    [SerializeField] private string outlineLayerName = "Outline";
+    private int outlineLayer;
+    private GameObject previousLookedAtObject;
+    private Dictionary<GameObject, int> originalLayers = new Dictionary<GameObject, int>();
+
     [Header("Backpack")]
     [SerializeField] private int maxHeldItems = 3;
     [SerializeField] private float switchDelay = 0.25f;
@@ -51,6 +57,8 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Start()
     {
+        outlineLayer = LayerMask.NameToLayer(outlineLayerName);
+
         UpdateInventoryUI();
 
         spawner = FindAnyObjectByType<ItemSpawner>();
@@ -77,20 +85,13 @@ public class PlayerInteraction : MonoBehaviour
 
     void CheckLookedAtObject()
     {
-        Ray ray = new Ray(
-            playerCamera.transform.position,
-            playerCamera.transform.forward
-        );
-
+        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         RaycastHit[] hits = Physics.RaycastAll(ray, pickupRange, pickUpLayer | interactLayer);
-
-        // sort from closest to farthest
         System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
         GameObject pickupObject = null;
         GameObject interactObject = null;
 
-        // find the closest object for each layer
         foreach (RaycastHit hit in hits)
         {
             GameObject obj = hit.collider.gameObject;
@@ -111,10 +112,10 @@ public class PlayerInteraction : MonoBehaviour
         {
             lookedAtObject = interactObject;
             ItemChecker shelf = lookedAtObject.GetComponent<ItemChecker>();
-            if(shelf != null)
+            if (shelf != null)
             {
                 Item lastItem = shelf.GetLastObject();
-                if(lastItem != null)
+                if (lastItem != null)
                 {
                     lookedAtObject = lastItem.gameObject;
                     Debug.Log("Looking at " + lookedAtObject.name);
@@ -138,10 +139,23 @@ public class PlayerInteraction : MonoBehaviour
             itemNameText.text = "";
             itemNameText.gameObject.SetActive(false);
 
+            UpdateOutlineTarget(null);
             return;
         }
 
-        // Check ItemChecker
+        //apply outline only to pickupable items that are not on a shelf
+        Item item = lookedAtObject.GetComponent<Item>();
+
+        if (item != null && item.GetComponentInParent<ItemChecker>() == null)
+        {
+            UpdateOutlineTarget(lookedAtObject);
+        }
+        else
+        {
+            UpdateOutlineTarget(null);
+        }
+
+        //check ItemChecker
         ItemChecker checker = lookedAtObject.GetComponent<ItemChecker>();
 
         if (checker != null)
@@ -163,9 +177,7 @@ public class PlayerInteraction : MonoBehaviour
             return;
         }
 
-        // Check Item
-        Item item = lookedAtObject.GetComponent<Item>();
-
+        // Check Item UI
         if (item != null && item.Data != null)
         {
             itemNameText.text = item.Data.displayName;
@@ -180,8 +192,59 @@ public class PlayerInteraction : MonoBehaviour
         itemNameText.gameObject.SetActive(false);
     }
 
+    private void UpdateOutlineTarget(GameObject newTarget)
+    {
+        if (previousLookedAtObject == newTarget)
+            return;
+
+        if (previousLookedAtObject != null)
+        {
+            RestoreLayer(previousLookedAtObject);
+        }
+
+        if (newTarget != null && outlineLayer != -1)
+        {
+            SetOutlineLayer(newTarget);
+        }
+
+        previousLookedAtObject = newTarget;
+    }
+
+    private void SetOutlineLayer(GameObject obj)
+    {
+        if (!originalLayers.ContainsKey(obj))
+        {
+            originalLayers[obj] = obj.layer;
+        }
+
+        obj.layer = outlineLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            SetOutlineLayer(child.gameObject);
+        }
+    }
+
+    private void RestoreLayer(GameObject obj)
+    {
+        if (originalLayers.TryGetValue(obj, out int originalLayer))
+        {
+            obj.layer = originalLayer;
+            originalLayers.Remove(obj);
+        }
+
+        foreach (Transform child in obj.transform)
+        {
+            RestoreLayer(child.gameObject);
+        }
+    }
+
     bool IsInLayerMask(GameObject obj, LayerMask layerMask)
     {
+        if (originalLayers.TryGetValue(obj, out int originalLayer))
+        {
+            return (layerMask.value & (1 << originalLayer)) != 0;
+        }
         return (layerMask.value & (1 << obj.layer)) != 0;
     }
 
@@ -192,6 +255,8 @@ public class PlayerInteraction : MonoBehaviour
 
         if (rb != null && item != null)
         {
+            UpdateOutlineTarget(null);
+
             if (heldObject != null)
             {
                 heldObject.SetActive(false);
@@ -210,7 +275,6 @@ public class PlayerInteraction : MonoBehaviour
 
             isPickingUp = true;
         }
-
     }
 
     void SwitchItem(int direction)
@@ -393,7 +457,7 @@ public class PlayerInteraction : MonoBehaviour
 
         if (lookedAtObject == null)
             return;
-        
+
         if (heldItems.Count >= maxHeldItems) return;
 
         Item item = lookedAtObject.GetComponent<Item>();
@@ -407,7 +471,7 @@ public class PlayerInteraction : MonoBehaviour
 
             TryPickup(item);
             return;
-        } 
+        }
     }
 
     public void OnThrow(InputValue value)
@@ -415,7 +479,7 @@ public class PlayerInteraction : MonoBehaviour
         if (!value.isPressed)
             return;
 
-        ItemChecker checker = lookedAtObject != null ? lookedAtObject.GetComponent<ItemChecker>(): null;
+        ItemChecker checker = lookedAtObject != null ? lookedAtObject.GetComponent<ItemChecker>() : null;
 
         if (checker != null && heldObject != null)
         {
@@ -429,6 +493,7 @@ public class PlayerInteraction : MonoBehaviour
             ThrowObject();
         }
     }
+
     public void UpgradeCapacity(int amount)
     {
         maxHeldItems += amount;

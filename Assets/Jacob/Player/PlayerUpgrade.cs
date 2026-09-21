@@ -8,6 +8,14 @@ public class PlayerUpgrade : MonoBehaviour
     [SerializeField] private GameObject upgradeMenu;
     [SerializeField] private GameObject skillsMenu;
 
+    [Header("Cost")]
+    [Header("Upgrade Prices")]
+    [SerializeField] private int capacityPrice = 50;
+    [SerializeField] private int sprintPrice = 50;
+    [SerializeField] private int reachPrice = 50;
+    [SerializeField] private int jumpPrice = 50;
+    [SerializeField] private CurrencyManager currencyManager;
+
     [Header("Upgrade Sliders")]
     [SerializeField] private Slider upgradeCapacitySlider;
     [SerializeField] private Slider upgradeSprintSlider;
@@ -25,6 +33,7 @@ public class PlayerUpgrade : MonoBehaviour
     [SerializeField] private Slider skill2Slider;
     [SerializeField] private Slider skill3Slider;
     [SerializeField] private Slider skill4Slider;
+
 
     //Upgrade References
     private PlayerMovement playerMovement;
@@ -148,12 +157,27 @@ public class PlayerUpgrade : MonoBehaviour
     {
         slider.value += 1f / maxLevels;
     }
+
+    private bool TryBuyUpgrade(ref int price)
+    {
+        if (currencyManager.coin < price)
+            return false;
+
+        currencyManager.ChangeCoin(-price);
+
+        price += 50;
+
+        return true;
+    }
     #endregion
 
     #region BuyUpgradeButtons
     public void BuyUpgradeCapacity()
     {
         if (upgradeCapacity >= 10)
+            return;
+
+        if (!TryBuyUpgrade(ref capacityPrice))
             return;
 
         upgradeCapacity += 2;
@@ -168,6 +192,9 @@ public class PlayerUpgrade : MonoBehaviour
         if (upgradeSprint >= 10f)
             return;
 
+        if (!TryBuyUpgrade(ref sprintPrice))
+            return;
+
         upgradeSprint += 2f;
 
         playerMovement.UpgradeSprint(2f);
@@ -180,6 +207,9 @@ public class PlayerUpgrade : MonoBehaviour
         if (upgradeReach >= 10f)
             return;
 
+        if (!TryBuyUpgrade(ref reachPrice))
+            return;
+
         upgradeReach += 2f;
 
         playerInteraction.UpgradeReach(2);
@@ -190,6 +220,9 @@ public class PlayerUpgrade : MonoBehaviour
     public void BuyUpgradeJump()
     {
         if (upgradeJump >= 3)
+            return;
+
+        if (!TryBuyUpgrade(ref jumpPrice))
             return;
 
         upgradeJump++;

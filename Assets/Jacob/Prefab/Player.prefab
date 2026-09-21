@@ -308,6 +308,7 @@ MonoBehaviour:
   sprintSpeed: 10
   jumpHeight: 2
   gravity: -9.81
+  maxJumps: 1
 --- !u!114 &240337299482149312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,8 +345,9 @@ MonoBehaviour:
     m_Bits: 256
   pickUpLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 136
   pickupSpeed: 25
+  outlineLayerName: Outline
   maxHeldItems: 5
   switchDelay: 0.05
   throwForce: 2
@@ -355,6 +357,7 @@ MonoBehaviour:
   xCrosshair: {fileID: 21300000, guid: 6ec4e6b1e09d3a246807a21226964772, type: 3}
   itemNameText: {fileID: 0}
   amountHeldText: {fileID: 0}
+  maxHeldItemsText: {fileID: 0}
   heldItemNameText: {fileID: 0}
   backpackItemNames:
   - {fileID: 0}
@@ -388,7 +391,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUpgrade
   upgradeMenu: {fileID: 0}
   skillsMenu: {fileID: 0}
-  upgradeSlider: {fileID: 0}
+  upgradeCapacitySlider: {fileID: 0}
+  upgradeSprintSlider: {fileID: 0}
+  upgradeReachSlider: {fileID: 0}
+  upgradeJumpSlider: {fileID: 0}
+  upgradeCapacity: 0
+  upgradeSprint: 0
+  upgradeReach: 0
+  upgradeJump: 0
+  skill1Slider: {fileID: 0}
+  skill2Slider: {fileID: 0}
+  skill3Slider: {fileID: 0}
+  skill4Slider: {fileID: 0}
   upgradeAmount: 0.2
 --- !u!114 &8682283849523348199
 MonoBehaviour:

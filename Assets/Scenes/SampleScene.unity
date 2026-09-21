@@ -3119,18 +3119,25 @@ MonoBehaviour:
   items:
   - item: {fileID: 7503926167627998214, guid: 0d706d2b76923f54a9f7b3fb71fcfa49, type: 3}
     amount: 2
+    isComplete: 0
   - item: {fileID: 3769025763063108664, guid: 6381125f374f0674d9186031d7c8653d, type: 3}
     amount: 3
+    isComplete: 0
   - item: {fileID: 1452103643031533270, guid: 3a7b394f0c112de41a411c012b98c61b, type: 3}
     amount: 4
+    isComplete: 0
   - item: {fileID: 309819058986321488, guid: 8966abfd77ac8084cb4f843fa1d13912, type: 3}
     amount: 5
+    isComplete: 0
   - item: {fileID: 4864368375110794352, guid: e454de373f661e4478139cf44cb30d74, type: 3}
     amount: 6
+    isComplete: 0
   - item: {fileID: 1573732412732801550, guid: 0e78b1951f11a2b46bb828d6cafed7c6, type: 3}
     amount: 6
+    isComplete: 0
   - item: {fileID: 7481607713453021184, guid: c5b6b91e6cecf3b46908ad9658f8b549, type: 3}
     amount: 8
+    isComplete: 0
   spawnArea: {fileID: 394142190}
   spawnHeight: 0.5
   maxAttempts: 30
@@ -7026,6 +7033,54 @@ RectTransform:
   m_AnchoredPosition: {x: 763, y: -484}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1050000484
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1050000486}
+  - component: {fileID: 1050000485}
+  m_Layer: 0
+  m_Name: CurrencyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1050000485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050000484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 872b2c2905722564886fa1783756407b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrencyManager
+  coin: 0
+  mana: 0
+  coinTxt: {fileID: 1773780968}
+  manaTxt: {fileID: 363058952}
+--- !u!4 &1050000486
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1050000484}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3863, y: 0.30882, z: -4.95}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1062047177
 GameObject:
   m_ObjectHideFlags: 0
@@ -8807,7 +8862,7 @@ GameObject:
   - component: {fileID: 1394466798}
   - component: {fileID: 1394466797}
   - component: {fileID: 1394466796}
-  m_Layer: 3
+  m_Layer: 9
   m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13925,3 +13980,4 @@ SceneRoots:
   - {fileID: 115790160}
   - {fileID: 1189345605}
   - {fileID: 738661712}
+  - {fileID: 1050000486}

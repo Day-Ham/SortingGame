@@ -11,6 +11,11 @@ public class CurrencyManager : MonoBehaviour
     [SerializeField] private TMP_Text coinTxt;
     [SerializeField] private TMP_Text manaTxt;
 
+    private void Start()
+    {
+        UpdateUI();
+    }
+
     public void ChangeCoin(int value)
     {
         coin += value;
