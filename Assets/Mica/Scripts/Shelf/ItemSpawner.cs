@@ -79,4 +79,5 @@ public class ItemSpawnEntry
 {
     public GameObject item;
     public int amount;
+    public bool isComplete;
 }

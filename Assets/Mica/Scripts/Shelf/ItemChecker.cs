@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class ItemChecker : MonoBehaviour
 {
@@ -26,6 +26,9 @@ public class ItemChecker : MonoBehaviour
     [Header("Item Spawner")]
     ItemSpawner spawner;
 
+    [Header("Currency Manager")]
+    CurrencyManager currency;
+
     private void Awake()
     {
         player = FindAnyObjectByType<PlayerInteraction>();
@@ -35,6 +38,10 @@ public class ItemChecker : MonoBehaviour
         spawner = FindAnyObjectByType<ItemSpawner>();
         if (spawner == null)
             Debug.Log("Item Spawner is not found");
+
+        currency = FindAnyObjectByType<CurrencyManager>();
+        if (currency == null)
+            Debug.Log("Currency Manager is not found");
     }
 
     private void Update()
@@ -97,7 +104,7 @@ public class ItemChecker : MonoBehaviour
         heldItems.Add(currentItem);
 
         // Item Data
-        AddCurrency(); //adds money if first time being placed on shelf
+        AddCoin(); //adds money if first time being placed on shelf
 
         Vector3 orientation = currentItem.Data.preferredOrientation;
         int rows = currentItem.Data.rows;
@@ -185,20 +192,36 @@ public class ItemChecker : MonoBehaviour
 
     private void CheckIfItemIsComplete()
     {
-        if (heldItems.Count == maxItems)
+        if (heldItems.Count != maxItems) return;
+
+        if (spawner.items.Count == 0) return;
+        foreach (ItemSpawnEntry item in spawner.items)
         {
-            Debug.Log("Shelf is complete; Mana++");
-            //add logic to add mana and record that specific item is complete
+            Item itemInfo = item.item.GetComponent<Item>();
+            if (itemInfo == null) continue;
+
+            if (itemInfo.Data.displayName == displayName)
+            {
+                AddMana(item);
+                return;
+            }
         }
     }
 
-    private void AddCurrency()
+    private void AddCoin()
     {
-        if (!currentItem.IsPlaced)
-        {
-            currentItem.IsPlaced = true;
-            Debug.Log("Money++");
-        }
+        if (currentItem.IsPlaced) return;
+        
+        currentItem.IsPlaced = true;
+        currency.ChangeCoin(1);
+    }
+
+    private void AddMana(ItemSpawnEntry item)
+    {
+        if (item.isComplete) return;
+
+        item.isComplete = true;
+        currency.ChangeMana(1);
     }
 
     private void UpdateUI()
