@@ -7,7 +7,8 @@ using static UnityEditor.Progress;
 public class ItemChecker : MonoBehaviour
 {
     [Header("Info")]
-    [SerializeField] private ItemType type;
+    [SerializeField] private ItemType itemType;
+    [SerializeField] private ShelfType shelfType;
     [SerializeField] private BoxCollider shelfArea;
 
     [Header("Items")]
@@ -63,7 +64,7 @@ public class ItemChecker : MonoBehaviour
         }
 
         //is the item type the same as the container type?
-        if (currentItem.Data.type != type)
+        if (currentItem.Data.type != itemType)
         {
             Debug.Log("Held item not same type as container type");
             return false;
@@ -113,22 +114,45 @@ public class ItemChecker : MonoBehaviour
 
         Bounds bounds = shelfArea.bounds;
         Vector3 botCenter = new Vector3(bounds.center.x, bounds.min.y, bounds.center.z);
+        Vector3 backCenter = new Vector3(bounds.center.x, bounds.center.y, bounds.min.z);
 
         Bounds itemBounds = currentItem.GetComponent<Collider>().bounds;
-        float height = Mathf.Abs(itemBounds.max.y - itemBounds.min.y);
+        float itemHeight = Mathf.Abs(itemBounds.max.y - itemBounds.min.y);
 
         //Placement
         for (int k = 0; k < heldItems.Count; k++)
         {
-            int c = k % cols;
-            int r = k / cols;
+            int r;
+            int c;
 
-            float width = (cols - 1) * spacing.x;
-            float length = (rows - 1) * spacing.y;
+            float x = 0;
+            float y = 0;
+            float z = 0;
 
-            float x = (botCenter.x - (width / 2)) + (spacing.x * c);
-            float z = (botCenter.z - (length / 2)) + (spacing.y * r);
-            float y = botCenter.y + (height / 2);
+            if (shelfType == ShelfType.Horizontal)
+            {
+                c = cols - 1 - (k % cols); 
+                r = k / cols; 
+                
+                float width = (cols - 1) * spacing.x; 
+                float length = (rows - 1) * spacing.y;
+
+                x = (botCenter.x - (width / 2)) + (spacing.x * c); 
+                z = (botCenter.z - (length / 2)) + (spacing.y * r); 
+                y = botCenter.y + (itemHeight / 2);
+            }
+            else if (shelfType == ShelfType.Vertical)
+            {
+                r = k % rows;
+                c = cols - 1 - (k / rows);
+
+                float width = (cols - 1) * spacing.x;
+                float height = (rows - 1) * spacing.y;
+
+                x = (backCenter.x - (width / 2)) + (spacing.x * c);
+                y = (backCenter.y + (height / 2)) - (spacing.y * r);
+                z = backCenter.z + (itemHeight / 2);
+            }
 
             Vector3 targetPoint = new Vector3(x, y, z);
 
@@ -137,7 +161,8 @@ public class ItemChecker : MonoBehaviour
             heldItems[k].transform.rotation = Quaternion.Euler(orientation);
 
             Rigidbody rb = heldItems[k].GetComponent<Rigidbody>();
-            if (rb != null) rb.isKinematic = true;
+            if (rb != null)
+                rb.isKinematic = true;
 
             Debug.Log("Placed " + heldItems[k].name + " on the shelf.");
         }

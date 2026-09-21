@@ -10518,7 +10518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc1e2227c3afc94497cfd3d58242979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemChecker
-  type: 0
+  itemType: 0
+  shelfType: 1
   shelfArea: {fileID: 1565468871}
   heldItems: []
   displayName: 
