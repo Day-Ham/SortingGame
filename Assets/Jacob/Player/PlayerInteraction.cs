@@ -410,7 +410,6 @@ public class PlayerInteraction : MonoBehaviour
         } 
     }
 
-
     public void OnThrow(InputValue value)
     {
         if (!value.isPressed)

@@ -13,7 +13,7 @@ public class ItemChecker : MonoBehaviour
     [Header("Items")]
     [SerializeField] private List<Item> heldItems = new List<Item>();
     [SerializeField] private string displayName;
-    private Item currentItem;
+    [SerializeField] private Item currentItem;
     [SerializeField] private int maxItems;
 
     [Header("UI")]
@@ -88,16 +88,17 @@ public class ItemChecker : MonoBehaviour
             return;
         }
 
+        //Change container information
         displayName = currentItem.Data.displayName;
-        
         if (heldItems.Count == 0)
         {
             SetMaxItems();
         }
-
         heldItems.Add(currentItem);
 
         // Item Data
+        AddCurrency(); //adds money if first time being placed on shelf
+
         Vector3 orientation = currentItem.Data.preferredOrientation;
         int rows = currentItem.Data.rows;
         int cols = currentItem.Data.columns;
@@ -109,6 +110,7 @@ public class ItemChecker : MonoBehaviour
         Bounds itemBounds = currentItem.GetComponent<Collider>().bounds;
         float height = Mathf.Abs(itemBounds.max.y - itemBounds.min.y);
 
+        //Placement
         for (int k = 0; k < heldItems.Count; k++)
         {
             int c = k % cols;
@@ -185,8 +187,17 @@ public class ItemChecker : MonoBehaviour
     {
         if (heldItems.Count == maxItems)
         {
-            Debug.Log("Shelf is complete");
-            //insert score checker for this item, tag as item completed.
+            Debug.Log("Shelf is complete; Mana++");
+            //add logic to add mana and record that specific item is complete
+        }
+    }
+
+    private void AddCurrency()
+    {
+        if (!currentItem.IsPlaced)
+        {
+            currentItem.IsPlaced = true;
+            Debug.Log("Money++");
         }
     }
 
