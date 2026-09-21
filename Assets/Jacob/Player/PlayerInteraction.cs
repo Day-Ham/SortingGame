@@ -15,6 +15,7 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Pickup")]
     [SerializeField] private float pickupRange = 3f;
     [SerializeField] private LayerMask interactLayer;
+    [SerializeField] private LayerMask pickUpLayer;
     [SerializeField] private float pickupSpeed = 12f;
 
     [Header("Backpack")]
@@ -75,46 +76,112 @@ public class PlayerInteraction : MonoBehaviour
 
     void CheckLookedAtObject()
     {
-        Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
+        Ray ray = new Ray(
+            playerCamera.transform.position,
+            playerCamera.transform.forward
+        );
 
-        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange, interactLayer))
+        RaycastHit[] hits = Physics.RaycastAll(ray, pickupRange, pickUpLayer | interactLayer);
+
+        // sort from closest to farthest
+        System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+        GameObject pickupObject = null;
+        GameObject interactObject = null;
+
+        // find the closest object for each layer
+        foreach (RaycastHit hit in hits)
         {
-            lookedAtObject = hit.collider.gameObject;
+            GameObject obj = hit.collider.gameObject;
 
-            ItemChecker checker = lookedAtObject.GetComponent<ItemChecker>();
-            if (checker != null)
+            if (pickupObject == null && IsInLayerMask(obj, pickUpLayer))
             {
-                Debug.Log("Looking at a shelf");
-                if (checker.IsItemValid())
-                {
-                    crosshairImage.sprite = oCrosshair;
-                }
-                else
-                {
-                    crosshairImage.sprite = xCrosshair;
-                }
-                return;
+                pickupObject = obj;
             }
 
-            Item item = lookedAtObject.GetComponent<Item>();
-
-            if (item != null)
+            if (interactObject == null && IsInLayerMask(obj, interactLayer))
             {
-                if (item.Data != null)
-                {
-                    itemNameText.text = item.Data.displayName;
-                    itemNameText.gameObject.SetActive(true);
-                }
-
-                return;
+                interactObject = obj;
             }
         }
-        lookedAtObject = null;
+
+        // prio pickup layer over interact layer, find last object put on the shelf
+        if (pickupObject != null && interactObject != null)
+        {
+            lookedAtObject = interactObject;
+            ItemChecker shelf = lookedAtObject.GetComponent<ItemChecker>();
+            if(shelf != null)
+            {
+                Item lastItem = shelf.GetLastObject();
+                if(lastItem != null)
+                {
+                    lookedAtObject = lastItem.gameObject;
+                    Debug.Log("Looking at " + lookedAtObject.name);
+                }
+            }
+        }
+        else if (pickupObject != null)
+        {
+            lookedAtObject = pickupObject;
+        }
+        else if (interactObject != null)
+        {
+            lookedAtObject = interactObject;
+        }
+        else
+        {
+            lookedAtObject = null;
+
+            crosshairImage.sprite = normalCrosshair;
+
+            itemNameText.text = "";
+            itemNameText.gameObject.SetActive(false);
+
+            return;
+        }
+
+        // Check ItemChecker
+        ItemChecker checker = lookedAtObject.GetComponent<ItemChecker>();
+
+        if (checker != null)
+        {
+            Debug.Log("Looking at a shelf");
+
+            if (checker.IsItemValid())
+            {
+                crosshairImage.sprite = oCrosshair;
+            }
+            else
+            {
+                crosshairImage.sprite = xCrosshair;
+            }
+
+            itemNameText.text = "";
+            itemNameText.gameObject.SetActive(false);
+
+            return;
+        }
+
+        // Check Item
+        Item item = lookedAtObject.GetComponent<Item>();
+
+        if (item != null && item.Data != null)
+        {
+            itemNameText.text = item.Data.displayName;
+            itemNameText.gameObject.SetActive(true);
+
+            return;
+        }
 
         crosshairImage.sprite = normalCrosshair;
 
         itemNameText.text = "";
         itemNameText.gameObject.SetActive(false);
+    }
+
+    bool IsInLayerMask(GameObject obj, LayerMask layerMask)
+    {
+        return (layerMask.value & (1 << obj.layer)) != 0;
     }
 
     void TryPickup(Item item)
@@ -124,12 +191,6 @@ public class PlayerInteraction : MonoBehaviour
 
         if (rb != null && item != null)
         {
-
-            if (heldItems.Count >= maxHeldItems)
-            {
-                return;
-            }
-
             if (heldObject != null)
             {
                 heldObject.SetActive(false);
@@ -206,17 +267,14 @@ public class PlayerInteraction : MonoBehaviour
             item.Held(false);
         }
 
-        // Remove the active item from the inventory list
         heldItems.RemoveAt(activeItemIndex);
 
-        // Clear local references
         heldObject = null;
         heldRigidbody = null;
         isPickingUp = false;
 
         heldItemNameText.text = "";
 
-        // Handle inventory state after removal
         if (heldItems.Count == 0)
         {
             activeItemIndex = -1;
@@ -236,14 +294,11 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (heldObject == null) return;
 
-        // Cache references before RemoveItemFromPlayer clears them
         GameObject objToThrow = heldObject;
         Rigidbody rbToThrow = heldRigidbody;
 
-        // 1. Remove from inventory, update UI, and switch to next item
         RemoveItemFromPlayer();
 
-        // 2. Apply throw-specific physics and parenting
         objToThrow.transform.SetParent(spawner != null ? spawner.transform : null);
 
         if (rbToThrow != null)
@@ -252,8 +307,6 @@ public class PlayerInteraction : MonoBehaviour
             rbToThrow.AddForce(playerCamera.transform.forward * throwForce, ForceMode.Impulse);
         }
     }
-
-    
 
     IEnumerator ShowNextItem()
     {
@@ -338,29 +391,36 @@ public class PlayerInteraction : MonoBehaviour
 
         if (lookedAtObject == null)
             return;
-
-        ItemChecker checker = lookedAtObject.GetComponent<ItemChecker>();
-        if (checker != null)
-        {
-            Debug.Log("Trying to Place item");
-            checker.PlaceItem();
-            return;
-        }
+        
+        if (heldItems.Count >= maxHeldItems) return;
 
         Item item = lookedAtObject.GetComponent<Item>();
         if (item != null)
         {
+            ItemChecker shelf = item.GetComponentInParent<ItemChecker>();
+            if (shelf != null)
+            {
+                shelf.RemoveItem();
+            }
+
             TryPickup(item);
             return;
-        }
-
-        
+        } 
     }
 
     public void OnThrow(InputValue value)
     {
         if (!value.isPressed)
             return;
+
+        ItemChecker checker = lookedAtObject != null ? lookedAtObject.GetComponent<ItemChecker>(): null;
+
+        if (checker != null && heldObject != null)
+        {
+            Debug.Log("Trying to Place item");
+            checker.PlaceItem();
+            return;
+        }
 
         if (heldObject != null)
         {

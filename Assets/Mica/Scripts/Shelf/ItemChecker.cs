@@ -1,17 +1,24 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemChecker : MonoBehaviour
 {
-    [Header("Container Info")]
+    [Header("Info")]
     [SerializeField] private ItemType type;
     [SerializeField] private BoxCollider shelfArea;
 
-    [Header("Container Items")]
+    [Header("Items")]
     [SerializeField] private List<Item> heldItems = new List<Item>();
     [SerializeField] private string displayName;
     private Item currentItem;
+    [SerializeField] private int maxItems;
+
+    [Header("UI")]
+    [SerializeField] private TMP_Text displayNameTxt;
+    [SerializeField] private Image background;
 
     [Header("Player")]
     PlayerInteraction player;
@@ -28,6 +35,11 @@ public class ItemChecker : MonoBehaviour
         spawner = FindAnyObjectByType<ItemSpawner>();
         if (spawner == null)
             Debug.Log("Item Spawner is not found");
+    }
+
+    private void Update()
+    {
+        UpdateUI();
     }
 
     public bool IsItemValid()
@@ -77,6 +89,12 @@ public class ItemChecker : MonoBehaviour
         }
 
         displayName = currentItem.Data.displayName;
+        
+        if (heldItems.Count == 0)
+        {
+            SetMaxItems();
+        }
+
         heldItems.Add(currentItem);
 
         // Item Data
@@ -105,7 +123,7 @@ public class ItemChecker : MonoBehaviour
 
             Vector3 targetPoint = new Vector3(x, y, z);
 
-            heldItems[k].transform.SetParent(null);
+            heldItems[k].transform.SetParent(transform);
             heldItems[k].transform.position = targetPoint;
             heldItems[k].transform.rotation = Quaternion.Euler(orientation);
 
@@ -116,5 +134,64 @@ public class ItemChecker : MonoBehaviour
         }
 
         player.RemoveItemFromPlayer();
+        UpdateUI();
+        CheckIfItemIsComplete();
+    }
+
+    public void RemoveItem()
+    {
+        if (heldItems.Count == 0) return;
+
+        Item item = heldItems[heldItems.Count - 1];
+        heldItems.RemoveAt(heldItems.Count - 1);
+
+        if (heldItems.Count == 0)
+        {
+            maxItems = 0;
+            displayName = "";
+        }
+
+        UpdateUI();
+    }
+
+    public Item GetLastObject()
+    {
+        if (heldItems.Count > 0)
+        {
+            Item removedItem = heldItems[heldItems.Count - 1];
+            return removedItem;
+        }
+        return null;
+    }
+
+    private void SetMaxItems()
+    {
+        if (spawner.items.Count == 0) return;
+
+        foreach (ItemSpawnEntry item in spawner.items)
+        {
+            Item itemInfo = item.item.GetComponent<Item>();
+            if (itemInfo == null) continue;
+
+            if (itemInfo.Data.displayName == displayName)
+            {
+                maxItems = item.amount;
+                return;
+            }
+        }
+    }
+
+    private void CheckIfItemIsComplete()
+    {
+        if (heldItems.Count == maxItems)
+        {
+            Debug.Log("Shelf is complete");
+            //insert score checker for this item, tag as item completed.
+        }
+    }
+
+    private void UpdateUI()
+    {
+        displayNameTxt.text = heldItems.Count > 0 ? displayName : "";
     }
 }

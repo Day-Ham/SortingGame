@@ -16,13 +16,6 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private int maxAttempts = 30;
     [SerializeField] private LayerMask obstacleLayer;
 
-    [Serializable]
-    public class ItemSpawnEntry
-    {
-        public GameObject item;
-        public int amount;
-    }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -79,4 +72,11 @@ public class ItemSpawner : MonoBehaviour
 
         Gizmos.DrawWireCube(spawnArea.bounds.center, spawnArea.bounds.size);
     }
+}
+
+[Serializable]
+public class ItemSpawnEntry
+{
+    public GameObject item;
+    public int amount;
 }

@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 3822682198896509901}
   - component: {fileID: 240337299482149312}
   - component: {fileID: 8331208016230216153}
-  - component: {fileID: 5367368567202462867}
+  - component: {fileID: 5305841322806996349}
   - component: {fileID: 8682283849523348199}
   m_Layer: 6
   m_Name: Player
@@ -342,10 +342,17 @@ MonoBehaviour:
   interactLayer:
     serializedVersion: 2
     m_Bits: 384
+  pickUpLayer:
+    serializedVersion: 2
+    m_Bits: 0
   pickupSpeed: 25
   maxHeldItems: 5
   switchDelay: 0.05
   throwForce: 5
+  crosshairImage: {fileID: 0}
+  normalCrosshair: {fileID: 0}
+  oCrosshair: {fileID: 0}
+  xCrosshair: {fileID: 0}
   itemNameText: {fileID: 0}
   amountHeldText: {fileID: 0}
   heldItemNameText: {fileID: 0}
@@ -367,7 +374,7 @@ MonoBehaviour:
   lookedAtObject: {fileID: 0}
   heldObject: {fileID: 0}
   heldItems: []
---- !u!114 &5367368567202462867
+--- !u!114 &5305841322806996349
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
