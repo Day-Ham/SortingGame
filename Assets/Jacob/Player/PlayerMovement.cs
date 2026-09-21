@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravity = -9.81f;
 
+    [SerializeField] private int maxJumps = 1;
+    private int jumpsRemaining;
+
     private Vector3 velocity;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -55,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 velocity.y = -2f;
             }
+
+            jumpsRemaining = maxJumps;
         }
 
         velocity.y += gravity * Time.deltaTime;
@@ -63,9 +68,33 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputValue value)
     {
-        if (value.isPressed && controller.isGrounded)
+        if (!value.isPressed)
+            return;
+
+        if (controller.isGrounded)
         {
+            jumpsRemaining = maxJumps - 1;
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            return;
+        }
+
+        if (jumpsRemaining > 0)
+        {
+            jumpsRemaining--;
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
+    }
+
+    public void UpgradeSprint(float amount)
+    {
+        sprintSpeed += amount;
+    }
+
+    public void UpgradeJump()
+    {
+        if (maxJumps >= 4)
+            return;
+
+        maxJumps++;
     }
 }

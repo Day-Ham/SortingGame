@@ -341,18 +341,18 @@ MonoBehaviour:
   pickupRange: 3
   interactLayer:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 256
   pickUpLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   pickupSpeed: 25
   maxHeldItems: 5
   switchDelay: 0.05
-  throwForce: 5
+  throwForce: 2
   crosshairImage: {fileID: 0}
-  normalCrosshair: {fileID: 0}
-  oCrosshair: {fileID: 0}
-  xCrosshair: {fileID: 0}
+  normalCrosshair: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  oCrosshair: {fileID: -1937887712669590171, guid: 8bc4eeccf2d559d449c9563bfa1802d4, type: 3}
+  xCrosshair: {fileID: 21300000, guid: 6ec4e6b1e09d3a246807a21226964772, type: 3}
   itemNameText: {fileID: 0}
   amountHeldText: {fileID: 0}
   heldItemNameText: {fileID: 0}
@@ -388,6 +388,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUpgrade
   upgradeMenu: {fileID: 0}
   skillsMenu: {fileID: 0}
+  upgradeSlider: {fileID: 0}
+  upgradeAmount: 0.2
 --- !u!114 &8682283849523348199
 MonoBehaviour:
   m_ObjectHideFlags: 0

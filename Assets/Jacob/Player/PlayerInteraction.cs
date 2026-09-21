@@ -32,6 +32,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private Sprite xCrosshair;
     [SerializeField] private TMP_Text itemNameText;
     [SerializeField] private TMP_Text amountHeldText;
+    [SerializeField] private TMP_Text maxHeldItemsText;
     [SerializeField] private TMP_Text heldItemNameText;
     [SerializeField] private TMP_Text[] backpackItemNames;
     [SerializeField] private GameObject lookedAtObject;
@@ -335,6 +336,7 @@ public class PlayerInteraction : MonoBehaviour
     void UpdateInventoryUI()
     {
         amountHeldText.text = heldItems.Count.ToString();
+        maxHeldItemsText.text = "/ " + maxHeldItems.ToString();
 
         if (heldObject != null)
         {
@@ -408,6 +410,7 @@ public class PlayerInteraction : MonoBehaviour
         } 
     }
 
+
     public void OnThrow(InputValue value)
     {
         if (!value.isPressed)
@@ -426,6 +429,16 @@ public class PlayerInteraction : MonoBehaviour
         {
             ThrowObject();
         }
+    }
+    public void UpgradeCapacity(int amount)
+    {
+        maxHeldItems += amount;
+        UpdateInventoryUI();
+    }
+
+    public void UpgradeReach(float amount)
+    {
+        pickupRange += amount;
     }
 
     private void OnDrawGizmosSelected()

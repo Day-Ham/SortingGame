@@ -1,11 +1,38 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerUpgrade : MonoBehaviour
 {
     [Header("Menus")]
     [SerializeField] private GameObject upgradeMenu;
     [SerializeField] private GameObject skillsMenu;
+
+    [Header("Upgrade Sliders")]
+    [SerializeField] private Slider upgradeCapacitySlider;
+    [SerializeField] private Slider upgradeSprintSlider;
+    [SerializeField] private Slider upgradeReachSlider;
+    [SerializeField] private Slider upgradeJumpSlider;
+
+    [Header("Upgrade Values")]
+    [SerializeField] private int upgradeCapacity = 0;
+    [SerializeField] private float upgradeSprint = 0f;
+    [SerializeField] private float upgradeReach = 0f;
+    [SerializeField] private int upgradeJump = 0;
+
+    [Header("Skill Sliders")]
+    [SerializeField] private Slider skill1Slider;
+    [SerializeField] private Slider skill2Slider;
+    [SerializeField] private Slider skill3Slider;
+    [SerializeField] private Slider skill4Slider;
+
+    //Upgrade References
+    private PlayerMovement playerMovement;
+    private PlayerLook playerLook;
+    private PlayerInteraction playerInteraction;
+
+
+    [SerializeField] private float upgradeAmount = 0.2f;
 
     PlayerInput playerInput;
 
@@ -19,6 +46,9 @@ public class PlayerUpgrade : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        playerMovement = GetComponent<PlayerMovement>();
+        playerLook = GetComponent<PlayerLook>();
+        playerInteraction = GetComponent<PlayerInteraction>();
 
         upgradeAction = playerInput.actions.FindAction("UpgradeMenu");
         skillsAction = playerInput.actions.FindAction("SkillsMenu");
@@ -61,6 +91,8 @@ public class PlayerUpgrade : MonoBehaviour
         CloseMenus();
     }
 
+
+    #region GeneralUse
     public void OpenUpgradeMenu()
     {
         upgradeMenu.SetActive(true);
@@ -111,4 +143,60 @@ public class PlayerUpgrade : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+    private void FillSlider(Slider slider, int maxLevels)
+    {
+        slider.value += 1f / maxLevels;
+    }
+    #endregion
+
+    #region BuyUpgradeButtons
+    public void BuyUpgradeCapacity()
+    {
+        if (upgradeCapacity >= 10)
+            return;
+
+        upgradeCapacity += 2;
+
+        playerInteraction.UpgradeCapacity(2);
+
+        FillSlider(upgradeCapacitySlider, 5);
+    }
+
+    public void BuyUpgradeSprint()
+    {
+        if (upgradeSprint >= 10f)
+            return;
+
+        upgradeSprint += 2f;
+
+        playerMovement.UpgradeSprint(2f);
+
+        FillSlider(upgradeSprintSlider, 5);
+    }
+
+    public void BuyUpgradeReach()
+    {
+        if (upgradeReach >= 10f)
+            return;
+
+        upgradeReach += 2f;
+
+        playerInteraction.UpgradeReach(2);
+
+        FillSlider(upgradeReachSlider, 5);
+    }
+
+    public void BuyUpgradeJump()
+    {
+        if (upgradeJump >= 3)
+            return;
+
+        upgradeJump++;
+
+        playerMovement.UpgradeJump();
+
+        FillSlider(upgradeJumpSlider, 3);
+    }
+    #endregion
 }
