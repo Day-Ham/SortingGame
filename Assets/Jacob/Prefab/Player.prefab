@@ -345,7 +345,7 @@ MonoBehaviour:
     m_Bits: 256
   pickUpLayer:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 1160
   pickupSpeed: 25
   outlineLayerName: Outline
   maxHeldItems: 5
@@ -391,6 +391,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUpgrade
   upgradeMenu: {fileID: 0}
   skillsMenu: {fileID: 0}
+  capacityPrice: 50
+  sprintPrice: 50
+  reachPrice: 50
+  jumpPrice: 50
+  currencyManager: {fileID: 0}
   upgradeCapacitySlider: {fileID: 0}
   upgradeSprintSlider: {fileID: 0}
   upgradeReachSlider: {fileID: 0}

@@ -40,9 +40,6 @@ public class PlayerUpgrade : MonoBehaviour
     private PlayerLook playerLook;
     private PlayerInteraction playerInteraction;
 
-
-    [SerializeField] private float upgradeAmount = 0.2f;
-
     PlayerInput playerInput;
 
     InputAction upgradeAction;
