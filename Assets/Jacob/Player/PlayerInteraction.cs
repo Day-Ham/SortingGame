@@ -7,6 +7,10 @@ using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
+    PlayerInput playerInput;
+    InputAction scrollUpAction;
+    InputAction scrollDownAction;
+
     [Header("References")]
     [SerializeField] private Camera playerCamera;
     [SerializeField] private Transform holdPoint;
@@ -57,6 +61,9 @@ public class PlayerInteraction : MonoBehaviour
 
     private void Start()
     {
+        playerInput = GetComponent<PlayerInput>();
+        scrollUpAction = playerInput.actions.FindAction("ScrollUp");
+        scrollDownAction = playerInput.actions.FindAction("ScrollDown");
         outlineLayer = LayerMask.NameToLayer(outlineLayerName);
 
         UpdateInventoryUI();
@@ -74,12 +81,27 @@ public class PlayerInteraction : MonoBehaviour
         {
             PickupLerp();
         }
+    }
 
-        float scroll = Mouse.current.scroll.y.ReadValue();
+    public void OnScrollUp(InputValue value)
+    {
+        if (!value.isPressed)
+            return;
 
-        if (scroll != 0 && heldItems.Count > 1)
+        if (heldItems.Count > 1)
         {
-            SwitchItem(scroll > 0 ? 1 : -1);
+            SwitchItem(1);
+        }
+    }
+
+    public void OnScrollDown(InputValue value)
+    {
+        if (!value.isPressed)
+            return;
+
+        if (heldItems.Count > 1)
+        {
+            SwitchItem(-1);
         }
     }
 
