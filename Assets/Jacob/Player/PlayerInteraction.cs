@@ -32,6 +32,8 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private int maxHeldItems = 3;
     [SerializeField] private float switchDelay = 0.25f;
 
+    public int MaxHeldItems => maxHeldItems;
+
     [Header("Throw")]
     [SerializeField] private float throwForce = 5f;
 
@@ -270,7 +272,7 @@ public class PlayerInteraction : MonoBehaviour
         return (layerMask.value & (1 << obj.layer)) != 0;
     }
 
-    void TryPickup(Item item)
+    public void TryPickup(Item item)
     {
         GameObject obj = item.gameObject;
         Rigidbody rb = obj.GetComponent<Rigidbody>();

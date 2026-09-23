@@ -4,6 +4,18 @@ using UnityEngine.UI;
 
 public class PlayerUpgrade : MonoBehaviour
 {
+    PlayerInput playerInput;
+    InputAction upgradeAction;
+    InputAction skillsAction;
+    InputAction escapeAction;
+    InputAction moveAction;
+    InputAction lookAction;
+    InputAction interactAction;
+    InputAction throwAction;
+    InputAction skill1Action;
+    InputAction skill2Action;
+    InputAction skill3Action;
+
     [Header("Menus")]
     [SerializeField] private GameObject upgradeMenu;
     [SerializeField] private GameObject skillsMenu;
@@ -40,18 +52,10 @@ public class PlayerUpgrade : MonoBehaviour
     private PlayerLook playerLook;
     private PlayerInteraction playerInteraction;
 
-    PlayerInput playerInput;
-
-    InputAction upgradeAction;
-    InputAction skillsAction;
-    InputAction escapeAction;
-
-    InputAction moveAction;
-    InputAction lookAction;
-
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+
         playerMovement = GetComponent<PlayerMovement>();
         playerLook = GetComponent<PlayerLook>();
         playerInteraction = GetComponent<PlayerInteraction>();
@@ -59,8 +63,15 @@ public class PlayerUpgrade : MonoBehaviour
         upgradeAction = playerInput.actions.FindAction("UpgradeMenu");
         skillsAction = playerInput.actions.FindAction("SkillsMenu");
         escapeAction = playerInput.actions.FindAction("Escape");
+
         moveAction = playerInput.actions.FindAction("Move");
         lookAction = playerInput.actions.FindAction("Look");
+
+        interactAction = playerInput.actions.FindAction("Interact");
+        throwAction = playerInput.actions.FindAction("Throw");
+        skill1Action = playerInput.actions.FindAction("Skill1");
+        skill2Action = playerInput.actions.FindAction("Skill2");
+        skill3Action = playerInput.actions.FindAction("Skill3");
     }
 
     private void Start()
@@ -130,12 +141,26 @@ public class PlayerUpgrade : MonoBehaviour
     {
         moveAction.Disable();
         lookAction.Disable();
+
+        interactAction.Disable();
+        throwAction.Disable();
+
+        skill1Action.Disable();
+        skill2Action.Disable();
+        skill3Action.Disable();
     }
 
     private void EnablePlayerControl()
     {
         moveAction.Enable();
         lookAction.Enable();
+
+        interactAction.Enable();
+        throwAction.Enable();
+
+        skill1Action.Enable();
+        skill2Action.Enable();
+        skill3Action.Enable();
     }
 
     private void UnlockCursor()

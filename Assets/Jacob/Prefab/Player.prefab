@@ -186,6 +186,7 @@ GameObject:
   - component: {fileID: 240337299482149312}
   - component: {fileID: 8331208016230216153}
   - component: {fileID: 5305841322806996349}
+  - component: {fileID: 7123180922432389386}
   - component: {fileID: 8682283849523348199}
   m_Layer: 6
   m_Name: Player
@@ -345,12 +346,12 @@ MonoBehaviour:
     m_Bits: 256
   pickUpLayer:
     serializedVersion: 2
-    m_Bits: 1160
+    m_Bits: 3208
   pickupSpeed: 25
   outlineLayerName: Outline
   maxHeldItems: 5
   switchDelay: 0.05
-  throwForce: 2
+  throwForce: 5
   crosshairImage: {fileID: 0}
   normalCrosshair: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   oCrosshair: {fileID: -1937887712669590171, guid: 8bc4eeccf2d559d449c9563bfa1802d4, type: 3}
@@ -408,7 +409,35 @@ MonoBehaviour:
   skill2Slider: {fileID: 0}
   skill3Slider: {fileID: 0}
   skill4Slider: {fileID: 0}
-  upgradeAmount: 0.2
+--- !u!114 &7123180922432389386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7123355942709442893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961a3394ee389104a8011f920b972afc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSkills
+  playerInteraction: {fileID: 8331208016230216153}
+  currencyManager: {fileID: 0}
+  highlightDuration: 10
+  skill1Cooldown: 20
+  highlightLayerName: Highlight
+  shelfHighlightLayerName: ShelfHighlight
+  skill1Icon: {fileID: 0}
+  skill1CooldownSlider: {fileID: 0}
+  skill1LevelSlider: {fileID: 0}
+  skill1Level: 0
+  skill1Price: 50
+  skill2Cooldown: 20
+  skill2Icon: {fileID: 0}
+  skill2CooldownSlider: {fileID: 0}
+  skill2LevelSlider: {fileID: 0}
+  skill2Level: 0
+  skill2Price: 50
 --- !u!114 &8682283849523348199
 MonoBehaviour:
   m_ObjectHideFlags: 0
