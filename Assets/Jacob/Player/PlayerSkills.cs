@@ -33,10 +33,18 @@ public class PlayerSkills : MonoBehaviour
     [SerializeField] private int skill2Level;
     [SerializeField] private int skill2Price = 50;
 
+    [Header("Skill 3")]
+    [SerializeField] private float skill3Cooldown = 30f;
+    [SerializeField] private GameObject skill3Icon;
+    [SerializeField] private Slider skill3CooldownSlider;
+    [SerializeField] private Slider skill3LevelSlider;
+    [SerializeField] private int skill3Level;
+    [SerializeField] private int skill3Price = 50;
 
     private float highlightTimer;
     private float skill1CooldownTimer;
     private float skill2CooldownTimer;
+    private float skill3CooldownTimer;
 
     private int highlightLayer;
     private int shelfHighlightLayer;
@@ -47,6 +55,7 @@ public class PlayerSkills : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        playerInteraction = GetComponent<PlayerInteraction>();
         skill1Action = playerInput.actions.FindAction("Skill1");
         skill2Action = playerInput.actions.FindAction("Skill2");
         skill3Action = playerInput.actions.FindAction("Skill3");
@@ -59,13 +68,31 @@ public class PlayerSkills : MonoBehaviour
     {
         skill1Icon.SetActive(skill1Level > 0);
         skill2Icon.SetActive(skill2Level > 0);
-        skill1CooldownSlider.value = 0f;
-        skill2CooldownSlider.value = 0f;
+        skill3Icon.SetActive(skill3Level > 0);
+        skill1CooldownSlider.value = 1f;
+        skill2CooldownSlider.value = 1f;
+        skill3CooldownSlider.value = 1f;
     }
 
     private void Update()
     {
-        // Skill 1 highlight duration
+        for (int i = highlightedObjects.Count - 1; i >= 0; i--)
+        {
+            GameObject obj = highlightedObjects[i];
+
+            if (obj == null)
+            {
+                highlightedObjects.RemoveAt(i);
+                continue;
+            }
+
+            if (obj.transform.IsChildOf(playerInteraction.transform))
+            {
+                RestoreLayer(obj);
+                highlightedObjects.RemoveAt(i);
+            }
+        }
+
         if (highlightTimer > 0f)
         {
             highlightTimer -= Time.deltaTime;
@@ -104,18 +131,34 @@ public class PlayerSkills : MonoBehaviour
                 skill2CooldownSlider.value = 1f;
             }
         }
+
+        if (skill3CooldownTimer > 0f)
+        {
+            skill3CooldownTimer -= Time.deltaTime;
+
+            skill3CooldownSlider.value =
+                1f - (skill3CooldownTimer / skill3Cooldown);
+
+            if (skill3CooldownTimer <= 0f)
+            {
+                skill3CooldownTimer = 0f;
+                skill3CooldownSlider.value = 1f;
+            }
+        }
     }
 
     private void OnEnable()
     {
         skill1Action.performed += OnSkill1Pressed;
         skill2Action.performed += OnSkill2Pressed;
+        skill3Action.performed += OnSkill3Pressed;
     }
 
     private void OnDisable()
     {
         skill1Action.performed -= OnSkill1Pressed;
         skill2Action.performed -= OnSkill2Pressed;
+        skill3Action.performed -= OnSkill3Pressed;
     }
 
     private void FillSlider(Slider slider, int maxLevels)
@@ -304,8 +347,12 @@ public class PlayerSkills : MonoBehaviour
 
             ItemChecker shelf = item.GetComponentInParent<ItemChecker>();
 
-            if(shelf == null)
+            if (shelf == null)
             {
+                RestoreLayer(item.gameObject);
+
+                highlightedObjects.Remove(item.gameObject);
+
                 playerInteraction.TryPickup(item);
             }
         }
@@ -336,6 +383,90 @@ public class PlayerSkills : MonoBehaviour
         skill2Price += 50;
         FillSlider(skill2LevelSlider, 5);
     }
+    #endregion
 
+    #region Skill 3
+
+    private void OnSkill3Pressed(InputAction.CallbackContext context)
+    {
+        ActivateSkill3();
+    }
+
+    private void ActivateSkill3()
+    {
+        if (skill3Level <= 0)
+            return;
+
+        if (skill3CooldownTimer > 0f)
+            return;
+
+        if (playerInteraction.heldItems.Count == 0)
+            return;
+
+        ItemChecker[] shelves = FindObjectsByType<ItemChecker>();
+
+        if (shelves.Length == 0)
+            return;
+
+        List<GameObject> backpackItems = new List<GameObject>(playerInteraction.heldItems);
+        foreach (GameObject itemObject in backpackItems)
+        {
+            if (itemObject == null)
+                continue;
+
+            Item item = itemObject.GetComponent<Item>();
+
+            if (item == null || item.Data == null)
+                continue;
+
+            ItemChecker matchingShelf = null;
+
+            foreach (ItemChecker shelf in shelves)
+            {
+                if (shelf == null)
+                    continue;
+
+                if (shelf.IsItemValid(item))
+                {
+                    matchingShelf = shelf;
+                    break;
+                }
+            }
+
+            if (matchingShelf == null)
+                continue;
+
+            playerInteraction.RemoveItemFromPlayer(itemObject);
+            matchingShelf.PlaceItem(item);
+        }
+
+        skill3CooldownTimer = skill3Cooldown;
+    }
+
+    public void BuySkill3()
+    {
+        if (skill3Level >= 5)
+            return;
+
+        if (currencyManager.coin < skill3Price)
+            return;
+
+        currencyManager.ChangeCoin(-skill3Price);
+
+        skill3Level++;
+
+        if (skill3Level == 1)
+        {
+            skill3Icon.SetActive(true);
+        }
+        else
+        {
+            skill3Cooldown -= 2f;
+        }
+
+        skill3Price += 50;
+
+        FillSlider(skill3LevelSlider, 5);
+    }
     #endregion
 }

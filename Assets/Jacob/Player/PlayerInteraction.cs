@@ -346,38 +346,72 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    public void RemoveItemFromPlayer()
+    public void RemoveItemFromPlayer(GameObject itemToRemove = null)
     {
-        if (heldObject == null) return;
+        if (heldItems.Count == 0)
+            return;
 
-        Item item = heldObject.GetComponent<Item>();
+        if (itemToRemove == null)
+        {
+            itemToRemove = heldObject;
+        }
+
+        if (itemToRemove == null)
+            return;
+
+        int removeIndex = heldItems.IndexOf(itemToRemove);
+
+        if (removeIndex == -1)
+            return;
+
+        Item item = itemToRemove.GetComponent<Item>();
+
         if (item != null)
         {
             item.Held(false);
         }
 
-        heldItems.RemoveAt(activeItemIndex);
+        bool wasActiveItem = itemToRemove == heldObject;
 
-        heldObject = null;
-        heldRigidbody = null;
-        isPickingUp = false;
+        heldItems.RemoveAt(removeIndex);
 
-        heldItemNameText.text = "";
-
-        if (heldItems.Count == 0)
+        if (wasActiveItem)
         {
-            activeItemIndex = -1;
+            heldObject = null;
+            heldRigidbody = null;
+            isPickingUp = false;
+
+            heldItemNameText.text = "";
+
+            if (heldItems.Count == 0)
+            {
+                activeItemIndex = -1;
+                UpdateInventoryUI();
+                return;
+            }
+
+            if (removeIndex >= heldItems.Count)
+            {
+                activeItemIndex = 0;
+            }
+            else
+            {
+                activeItemIndex = removeIndex;
+            }
+
+            StartCoroutine(ShowNextItem());
+        }
+        else
+        {
+            if (removeIndex < activeItemIndex)
+            {
+                activeItemIndex--;
+            }
+
             UpdateInventoryUI();
-            return;
         }
-
-        if (activeItemIndex >= heldItems.Count)
-        {
-            activeItemIndex = 0;
-        }
-
-        StartCoroutine(ShowNextItem());
     }
+
 
     void ThrowObject()
     {

@@ -50,18 +50,24 @@ public class ItemChecker : MonoBehaviour
         UpdateUI();
     }
 
-    public bool IsItemValid()
+    public bool IsItemValid(Item item = null)
     {
         //is the item valid?
-        
-        if (player.heldObject == null) return false;
 
-        currentItem = player.heldObject.GetComponent<Item>();
-        if(currentItem == null)
+        if (item == null)
+        {
+            if (player.heldObject == null) return false;
+
+            item = player.heldObject.GetComponent<Item>();
+        }
+
+        if (item == null)
         {
             Debug.Log("Held item does not have the Item script attached");
             return false;
         }
+
+        currentItem = item;
 
         //is the item type the same as the container type?
         if (currentItem.Data.type != itemType)
@@ -87,14 +93,21 @@ public class ItemChecker : MonoBehaviour
         return false;
     }
 
-    public void PlaceItem()
+    public void PlaceItem(Item item = null)
     {
-        if (!IsItemValid())
+        if (item == null)
         {
-            Debug.Log("Item cannot be placed on the shelf.");
-            currentItem = null;
-            return;
+            if (!IsItemValid())
+            {
+                Debug.Log("Item cannot be placed on the shelf.");
+                currentItem = null;
+                return;
+            }
+
+            currentItem = player.heldObject.GetComponent<Item>();
         }
+
+        currentItem.gameObject.SetActive(true);
 
         //Change container information
         displayName = currentItem.Data.displayName;
@@ -167,7 +180,10 @@ public class ItemChecker : MonoBehaviour
             Debug.Log("Placed " + heldItems[k].name + " on the shelf.");
         }
 
-        player.RemoveItemFromPlayer();
+        if (item == null)
+        {
+            player.RemoveItemFromPlayer();
+        }
         UpdateUI();
         CheckIfItemIsComplete();
     }
