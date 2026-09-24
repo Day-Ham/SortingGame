@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Samples.RebindUI;
 using UnityEngine.UI;
 
 public class ResetDeviceBindings : MonoBehaviour
@@ -12,6 +13,7 @@ public class ResetDeviceBindings : MonoBehaviour
     [Header("Control Schemas")]
     [SerializeField] private List<ControlSchema> controlSchema;
     private string _targetControlSchema;
+    private RebindSaveLoad _targetRebindSaveLoad;
 
     private void Start()
     {
@@ -28,6 +30,10 @@ public class ResetDeviceBindings : MonoBehaviour
                 action.RemoveBindingOverride(InputBinding.MaskByGroup(_targetControlSchema));
             }
         }
+
+        //Save keybinds
+        _targetRebindSaveLoad.Save();
+        PlayerPrefs.Save();
     }
 
     private void CheckSchema()
@@ -37,6 +43,10 @@ public class ResetDeviceBindings : MonoBehaviour
             if (controlSchema[i].schemaPanel.activeInHierarchy)
             {
                 _targetControlSchema = controlSchema[i].schema;
+                _targetRebindSaveLoad = controlSchema[i].rebindSaveLoad;
+
+                Debug.Log("Control schema: " + _targetControlSchema);
+                Debug.Log("Rebind save load: " + _targetRebindSaveLoad);
                 return;
             }
         }
@@ -48,4 +58,5 @@ public class ControlSchema
 {
     public GameObject schemaPanel;
     public string schema;
+    public RebindSaveLoad rebindSaveLoad;
 }

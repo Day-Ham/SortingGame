@@ -45,6 +45,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 return;
 
             var rebinds = actions.SaveBindingOverridesAsJson();
+
             PlayerPrefs.SetString(playerPreferenceKey, rebinds);
         }
 

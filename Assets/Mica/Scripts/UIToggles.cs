@@ -9,6 +9,11 @@ public class UIToggles : MonoBehaviour
     [SerializeField] private List<GameObject> panels = new List<GameObject>();
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void OnEnable()
+    {
+        ResetToFirstToggle();
+    }
+
     void Start()
     {
         for (int i = 0; i < toggles.Count; i++)
@@ -32,4 +37,11 @@ public class UIToggles : MonoBehaviour
             panels[i].SetActive(i == index);
         }
     }
+
+    public void ResetToFirstToggle()
+    {
+        toggles[0].isOn = true;
+    }
+
+    
 }
