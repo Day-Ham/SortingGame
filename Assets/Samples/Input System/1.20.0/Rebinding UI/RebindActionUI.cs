@@ -342,7 +342,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 if (actionWasEnabledPriorToRebind)
                     action.actionMap.Enable();
 
-                SaveActionBinding();
+                m_RebindOverlay.SetActive(false);
             }
 
             // An "InvalidOperationException: Cannot rebind action x while it is enabled" will
@@ -541,11 +541,6 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_CancelSwapButton.onClick.AddListener(CancelSwapBinding);
         }
 
-        private void Start()
-        {
-            LoadActionBinding();
-        }
-
         protected void Update()
         {
             if (m_RebindInfo != null)
@@ -603,20 +598,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             }
         }
 
-        private void SaveActionBinding()
-        {
-            var currentBinding = actionReference.action.actionMap.SaveBindingOverridesAsJson();
-            PlayerPrefs.SetString(m_Action.action.name + bindingId, currentBinding);
-        }
 
-        private void LoadActionBinding()
-        {
-            var savedBindings = PlayerPrefs.GetString(m_Action.action.name + bindingId);
-            if (!string.IsNullOrEmpty(savedBindings))
-            {
-                actionReference.action.actionMap.LoadBindingOverridesFromJson(savedBindings);
-            }
-        }
 
         //for keeping track of duplicates
         private RebindActionUI m_DuplicateBinding;
