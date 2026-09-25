@@ -1,26 +1,29 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class PlayerInteraction : MonoBehaviour
 {
-    PlayerInput playerInput;
-    InputAction scrollUpAction;
-    InputAction scrollDownAction;
-
     [Header("References")]
     [SerializeField] private Camera playerCamera;
     [SerializeField] private Transform holdPoint;
     [SerializeField] private Transform backpackPoint;
+
+    [Header("Look At")]
+    [SerializeField] private GameObject lookedAtObject;
 
     [Header("Pickup")]
     [SerializeField] private float pickupRange = 3f;
     [SerializeField] private LayerMask interactLayer;
     [SerializeField] private LayerMask pickUpLayer;
     [SerializeField] private float pickupSpeed = 12f;
+    public GameObject heldObject;
+    private Rigidbody heldRigidbody;
+    private int activeItemIndex = -1;
+    private bool isPickingUp;
 
     [Header("Outline Settings")]
     [SerializeField] private string outlineLayerName = "Outline";
@@ -31,41 +34,22 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Backpack")]
     [SerializeField] private int maxHeldItems = 3;
     [SerializeField] private float switchDelay = 0.25f;
-
+    public List<GameObject> heldItems = new List<GameObject>();
+    private bool isSwitching;
     public int MaxHeldItems => maxHeldItems;
 
     [Header("Throw")]
-    [SerializeField] private float throwForce = 5f;
-
-    [Header("UI")]
-    [SerializeField] private Image crosshairImage;
-    [SerializeField] private Sprite normalCrosshair;
-    [SerializeField] private Sprite oCrosshair;
-    [SerializeField] private Sprite xCrosshair;
-    [SerializeField] private TMP_Text itemNameText;
-    [SerializeField] private TMP_Text amountHeldText;
-    [SerializeField] private TMP_Text maxHeldItemsText;
-    [SerializeField] private TMP_Text heldItemNameText;
-    [SerializeField] private TMP_Text[] backpackItemNames;
-    [SerializeField] private GameObject lookedAtObject;
-
-    public GameObject heldObject;
-    private Rigidbody heldRigidbody;
-
-    public List<GameObject> heldItems = new List<GameObject>();
-    private int activeItemIndex = -1;
-
-    private bool isPickingUp;
-    private bool isSwitching;
+    [SerializeField] private float throwForce = 5f;    
 
     [Header("Item Spawner")]
     ItemSpawner spawner;
 
+    UIManager ui;
+
     private void Start()
     {
-        playerInput = GetComponent<PlayerInput>();
-        scrollUpAction = playerInput.actions.FindAction("ScrollUp");
-        scrollDownAction = playerInput.actions.FindAction("ScrollDown");
+        ui = UIManager.instance;
+
         outlineLayer = LayerMask.NameToLayer(outlineLayerName);
 
         UpdateInventoryUI();
@@ -78,6 +62,10 @@ public class PlayerInteraction : MonoBehaviour
     void Update()
     {
         CheckLookedAtObject();
+        OnScrollUp();
+        OnScrollDown();
+        OnInteract();
+        OnThrow();
 
         if (heldObject != null && isPickingUp)
         {
@@ -85,28 +73,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
-    public void OnScrollUp(InputValue value)
-    {
-        if (!value.isPressed)
-            return;
-
-        if (heldItems.Count > 1)
-        {
-            SwitchItem(1);
-        }
-    }
-
-    public void OnScrollDown(InputValue value)
-    {
-        if (!value.isPressed)
-            return;
-
-        if (heldItems.Count > 1)
-        {
-            SwitchItem(-1);
-        }
-    }
-
+    #region General
     void CheckLookedAtObject()
     {
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
@@ -158,10 +125,10 @@ public class PlayerInteraction : MonoBehaviour
         {
             lookedAtObject = null;
 
-            crosshairImage.sprite = normalCrosshair;
+            ui.SetCrosshair(ui.normalCrosshair);
 
-            itemNameText.text = "";
-            itemNameText.gameObject.SetActive(false);
+            ui.SetUIText(ui.lookedAtItemNameText, "");
+            ui.DisableUI(ui.lookedAtItemNameText.gameObject);
 
             UpdateOutlineTarget(null);
             return;
@@ -179,24 +146,25 @@ public class PlayerInteraction : MonoBehaviour
             UpdateOutlineTarget(null);
         }
 
-        //check ItemChecker
+        //check the shelf in ItemChecker
         ItemChecker checker = lookedAtObject.GetComponent<ItemChecker>();
 
         if (checker != null)
         {
             Debug.Log("Looking at a shelf");
-
+            
+            //check if item is viable to be put on the shelf and change crosshairs to match
             if (checker.IsItemValid())
             {
-                crosshairImage.sprite = oCrosshair;
+                ui.SetCrosshair(ui.oCrosshair);
             }
             else
             {
-                crosshairImage.sprite = xCrosshair;
+                ui.SetCrosshair(ui.xCrosshair);
             }
 
-            itemNameText.text = "";
-            itemNameText.gameObject.SetActive(false);
+            ui.SetUIText(ui.lookedAtItemNameText, "");
+            ui.DisableUI(ui.lookedAtItemNameText.gameObject);
 
             return;
         }
@@ -204,18 +172,72 @@ public class PlayerInteraction : MonoBehaviour
         // Check Item UI
         if (item != null && item.Data != null)
         {
-            itemNameText.text = item.Data.displayName;
-            itemNameText.gameObject.SetActive(true);
-
+            ui.SetUIText(ui.lookedAtItemNameText, item.Data.displayName);
+            ui.EnableUI(ui.lookedAtItemNameText.gameObject);
             return;
         }
 
-        crosshairImage.sprite = normalCrosshair;
+        ui.SetCrosshair(ui.normalCrosshair);
 
-        itemNameText.text = "";
-        itemNameText.gameObject.SetActive(false);
+        ui.SetUIText(ui.lookedAtItemNameText, "");
+        ui.DisableUI(ui.lookedAtItemNameText.gameObject);
     }
 
+    void UpdateInventoryUI()
+    {
+        ui.SetUIText(ui.amountHeldText, heldItems.Count.ToString());
+        ui.SetUIText(ui.maxHeldItemsText, "/ " + maxHeldItems.ToString());
+
+        if (heldObject != null)
+        {
+            Item heldItem = heldObject.GetComponent<Item>();
+
+            if (heldItem != null && heldItem.Data != null)
+            {
+                ui.SetUIText(ui.heldItemNameText, heldItem.Data.displayName);
+            }
+            else
+            {
+                ui.SetUIText(ui.heldItemNameText, "");
+            }
+        }
+        else
+        {
+            ui.SetUIText(ui.heldItemNameText, "");
+        }
+
+        int backpackIndex = 0;
+
+        for (int i = 0; i < heldItems.Count; i++)
+        {
+            if (heldItems[i] == heldObject)
+                continue;
+
+            Item item = heldItems[i].GetComponent<Item>();
+
+            if (backpackIndex < ui.backpackItemNames.Length)
+            {
+                if (item != null && item.Data != null)
+                {
+                    ui.SetUIText(ui.backpackItemNames[backpackIndex], item.Data.displayName);
+                }
+                else
+                {
+                    ui.SetUIText(ui.backpackItemNames[backpackIndex], item.Data.displayName);
+                }
+
+                backpackIndex++;
+            }
+        }
+
+        for (int i = backpackIndex; i < ui.backpackItemNames.Length; i++)
+        {
+            ui.SetUIText(ui.backpackItemNames[i], "");
+        }
+    }
+    #endregion
+
+    #region Outline
     private void UpdateOutlineTarget(GameObject newTarget)
     {
         if (previousLookedAtObject == newTarget)
@@ -272,6 +294,33 @@ public class PlayerInteraction : MonoBehaviour
         return (layerMask.value & (1 << obj.layer)) != 0;
     }
 
+    #endregion
+
+    #region Pick Up
+    public void OnInteract()
+    {
+        if (!UserInput.instance.InteractionInput)
+            return;
+
+        if (lookedAtObject == null)
+            return;
+
+        if (heldItems.Count >= maxHeldItems) return;
+
+        Item item = lookedAtObject.GetComponent<Item>();
+        if (item != null)
+        {
+            ItemChecker shelf = item.GetComponentInParent<ItemChecker>();
+            if (shelf != null)
+            {
+                shelf.RemoveItem();
+            }
+
+            TryPickup(item);
+            return;
+        }
+    }
+
     public void TryPickup(Item item)
     {
         GameObject obj = item.gameObject;
@@ -301,6 +350,51 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    void PickupLerp()
+    {
+        Transform obj = heldObject.transform;
+
+        obj.position = Vector3.Lerp(obj.position, holdPoint.position, pickupSpeed * Time.deltaTime);
+        obj.rotation = Quaternion.Lerp(obj.rotation, holdPoint.rotation, pickupSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(obj.position, holdPoint.position) < 0.01f && Quaternion.Angle(obj.rotation, holdPoint.rotation) < 1f)
+        {
+            obj.position = holdPoint.position;
+            obj.rotation = holdPoint.rotation;
+
+            obj.SetParent(holdPoint, true);
+
+            obj.localPosition = Vector3.zero;
+            obj.localRotation = Quaternion.identity;
+
+            isPickingUp = false;
+        }
+    }
+    #endregion
+
+    #region Backpack
+    public void OnScrollUp()
+    {
+        if (!UserInput.instance.ScrollUpInput)
+            return;
+
+        if (heldItems.Count > 1)
+        {
+            SwitchItem(1);
+        }
+    }
+
+    public void OnScrollDown()
+    {
+        if (!UserInput.instance.ScrollDownInput)
+            return;
+
+        if (heldItems.Count > 1)
+        {
+            SwitchItem(-1);
+        }
+    }
+
     void SwitchItem(int direction)
     {
         if (isSwitching)
@@ -325,24 +419,67 @@ public class PlayerInteraction : MonoBehaviour
         StartCoroutine(ShowNextItem());
     }
 
-    void PickupLerp()
+    IEnumerator ShowNextItem()
     {
-        Transform obj = heldObject.transform;
+        isSwitching = true;
 
-        obj.position = Vector3.Lerp(obj.position, holdPoint.position, pickupSpeed * Time.deltaTime);
-        obj.rotation = Quaternion.Lerp(obj.rotation, holdPoint.rotation, pickupSpeed * Time.deltaTime);
+        yield return new WaitForSeconds(switchDelay);
 
-        if (Vector3.Distance(obj.position, holdPoint.position) < 0.01f && Quaternion.Angle(obj.rotation, holdPoint.rotation) < 1f)
+        heldObject = heldItems[activeItemIndex];
+        heldRigidbody = heldObject.GetComponent<Rigidbody>();
+
+        heldObject.SetActive(true);
+
+        UpdateInventoryUI();
+
+        heldObject.transform.SetParent(backpackPoint, false);
+        heldObject.transform.localPosition = Vector3.zero;
+        heldObject.transform.localRotation = Quaternion.identity;
+
+        UpdateInventoryUI();
+
+        isPickingUp = true;
+
+        isSwitching = false;
+    }
+    #endregion
+
+    #region Throw
+    public void OnThrow()
+    {
+        if (!UserInput.instance.ThrowInput)
+            return;
+
+        ItemChecker checker = lookedAtObject != null ? lookedAtObject.GetComponent<ItemChecker>() : null;
+
+        if (checker != null && heldObject != null)
         {
-            obj.position = holdPoint.position;
-            obj.rotation = holdPoint.rotation;
+            Debug.Log("Trying to Place item");
+            checker.PlaceItem();
+            return;
+        }
 
-            obj.SetParent(holdPoint, true);
+        if (heldObject != null)
+        {
+            ThrowObject();
+        }
+    }
 
-            obj.localPosition = Vector3.zero;
-            obj.localRotation = Quaternion.identity;
+    void ThrowObject()
+    {
+        if (heldObject == null) return;
 
-            isPickingUp = false;
+        GameObject objToThrow = heldObject;
+        Rigidbody rbToThrow = heldRigidbody;
+
+        RemoveItemFromPlayer();
+
+        objToThrow.transform.SetParent(spawner != null ? spawner.transform : null);
+
+        if (rbToThrow != null)
+        {
+            rbToThrow.isKinematic = false;
+            rbToThrow.AddForce(playerCamera.transform.forward * throwForce, ForceMode.Impulse);
         }
     }
 
@@ -381,7 +518,7 @@ public class PlayerInteraction : MonoBehaviour
             heldRigidbody = null;
             isPickingUp = false;
 
-            heldItemNameText.text = "";
+            ui.SetUIText(ui.heldItemNameText, "");
 
             if (heldItems.Count == 0)
             {
@@ -411,147 +548,9 @@ public class PlayerInteraction : MonoBehaviour
             UpdateInventoryUI();
         }
     }
+    #endregion
 
-
-    void ThrowObject()
-    {
-        if (heldObject == null) return;
-
-        GameObject objToThrow = heldObject;
-        Rigidbody rbToThrow = heldRigidbody;
-
-        RemoveItemFromPlayer();
-
-        objToThrow.transform.SetParent(spawner != null ? spawner.transform : null);
-
-        if (rbToThrow != null)
-        {
-            rbToThrow.isKinematic = false;
-            rbToThrow.AddForce(playerCamera.transform.forward * throwForce, ForceMode.Impulse);
-        }
-    }
-
-    IEnumerator ShowNextItem()
-    {
-        isSwitching = true;
-
-        yield return new WaitForSeconds(switchDelay);
-
-        heldObject = heldItems[activeItemIndex];
-        heldRigidbody = heldObject.GetComponent<Rigidbody>();
-
-        heldObject.SetActive(true);
-
-        UpdateInventoryUI();
-
-        heldObject.transform.SetParent(backpackPoint, false);
-        heldObject.transform.localPosition = Vector3.zero;
-        heldObject.transform.localRotation = Quaternion.identity;
-
-        UpdateInventoryUI();
-
-        isPickingUp = true;
-
-        isSwitching = false;
-    }
-
-    void UpdateInventoryUI()
-    {
-        amountHeldText.text = heldItems.Count.ToString();
-        maxHeldItemsText.text = "/ " + maxHeldItems.ToString();
-
-        if (heldObject != null)
-        {
-            Item heldItem = heldObject.GetComponent<Item>();
-
-            if (heldItem != null && heldItem.Data != null)
-            {
-                heldItemNameText.text = heldItem.Data.displayName;
-            }
-            else
-            {
-                heldItemNameText.text = "";
-            }
-        }
-        else
-        {
-            heldItemNameText.text = "";
-        }
-
-        int backpackIndex = 0;
-
-        for (int i = 0; i < heldItems.Count; i++)
-        {
-            if (heldItems[i] == heldObject)
-                continue;
-
-            Item item = heldItems[i].GetComponent<Item>();
-
-            if (backpackIndex < backpackItemNames.Length)
-            {
-                if (item != null && item.Data != null)
-                {
-                    backpackItemNames[backpackIndex].text = item.Data.displayName;
-                }
-                else
-                {
-                    backpackItemNames[backpackIndex].text = "";
-                }
-
-                backpackIndex++;
-            }
-        }
-
-        for (int i = backpackIndex; i < backpackItemNames.Length; i++)
-        {
-            backpackItemNames[i].text = "";
-        }
-    }
-
-    public void OnInteract(InputValue value)
-    {
-        if (!value.isPressed)
-            return;
-
-        if (lookedAtObject == null)
-            return;
-
-        if (heldItems.Count >= maxHeldItems) return;
-
-        Item item = lookedAtObject.GetComponent<Item>();
-        if (item != null)
-        {
-            ItemChecker shelf = item.GetComponentInParent<ItemChecker>();
-            if (shelf != null)
-            {
-                shelf.RemoveItem();
-            }
-
-            TryPickup(item);
-            return;
-        }
-    }
-
-    public void OnThrow(InputValue value)
-    {
-        if (!value.isPressed)
-            return;
-
-        ItemChecker checker = lookedAtObject != null ? lookedAtObject.GetComponent<ItemChecker>() : null;
-
-        if (checker != null && heldObject != null)
-        {
-            Debug.Log("Trying to Place item");
-            checker.PlaceItem();
-            return;
-        }
-
-        if (heldObject != null)
-        {
-            ThrowObject();
-        }
-    }
-
+    #region Upgrades
     public void UpgradeCapacity(int amount)
     {
         maxHeldItems += amount;
@@ -562,6 +561,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         pickupRange += amount;
     }
+    #endregion
 
     private void OnDrawGizmosSelected()
     {

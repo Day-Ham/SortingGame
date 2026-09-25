@@ -4,22 +4,6 @@ using UnityEngine.UI;
 
 public class PlayerUpgrade : MonoBehaviour
 {
-    PlayerInput playerInput;
-    InputAction upgradeAction;
-    InputAction skillsAction;
-    InputAction escapeAction;
-    InputAction moveAction;
-    InputAction lookAction;
-    InputAction interactAction;
-    InputAction throwAction;
-    InputAction skill1Action;
-    InputAction skill2Action;
-    InputAction skill3Action;
-
-    [Header("Menus")]
-    [SerializeField] private GameObject upgradeMenu;
-    [SerializeField] private GameObject skillsMenu;
-
     [Header("Cost")]
     [Header("Upgrade Prices")]
     [SerializeField] private int capacityPrice = 50;
@@ -28,158 +12,32 @@ public class PlayerUpgrade : MonoBehaviour
     [SerializeField] private int jumpPrice = 50;
     [SerializeField] private CurrencyManager currencyManager;
 
-    [Header("Upgrade Sliders")]
-    [SerializeField] private Slider upgradeCapacitySlider;
-    [SerializeField] private Slider upgradeSprintSlider;
-    [SerializeField] private Slider upgradeReachSlider;
-    [SerializeField] private Slider upgradeJumpSlider;
-
     [Header("Upgrade Values")]
     [SerializeField] private int upgradeCapacity = 0;
     [SerializeField] private float upgradeSprint = 0f;
     [SerializeField] private float upgradeReach = 0f;
     [SerializeField] private int upgradeJump = 0;
 
-    [Header("Skill Sliders")]
-    [SerializeField] private Slider skill1Slider;
-    [SerializeField] private Slider skill2Slider;
-    [SerializeField] private Slider skill3Slider;
-    [SerializeField] private Slider skill4Slider;
-
-
     //Upgrade References
     private PlayerMovement playerMovement;
     private PlayerLook playerLook;
     private PlayerInteraction playerInteraction;
 
+    UIManager ui;
+
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
-
         playerMovement = GetComponent<PlayerMovement>();
         playerLook = GetComponent<PlayerLook>();
         playerInteraction = GetComponent<PlayerInteraction>();
-
-        upgradeAction = playerInput.actions.FindAction("UpgradeMenu");
-        skillsAction = playerInput.actions.FindAction("SkillsMenu");
-        escapeAction = playerInput.actions.FindAction("Escape");
-
-        moveAction = playerInput.actions.FindAction("Move");
-        lookAction = playerInput.actions.FindAction("Look");
-
-        interactAction = playerInput.actions.FindAction("Interact");
-        throwAction = playerInput.actions.FindAction("Throw");
-        skill1Action = playerInput.actions.FindAction("Skill1");
-        skill2Action = playerInput.actions.FindAction("Skill2");
-        skill3Action = playerInput.actions.FindAction("Skill3");
     }
 
     private void Start()
     {
-        CloseMenus();
+        ui = UIManager.instance;
     }
-
-    private void OnEnable()
-    {
-        upgradeAction.performed += OnUpgradePressed;
-        skillsAction.performed += OnSkillsPressed;
-        escapeAction.performed += OnEscapePressed;
-    }
-
-    private void OnDisable()
-    {
-        upgradeAction.performed -= OnUpgradePressed;
-        skillsAction.performed -= OnSkillsPressed;
-        escapeAction.performed -= OnEscapePressed;
-    }
-
-    private void OnUpgradePressed(InputAction.CallbackContext context)
-    {
-        OpenUpgradeMenu();
-    }
-
-    private void OnSkillsPressed(InputAction.CallbackContext context)
-    {
-        OpenSkillsMenu();
-    }
-
-    private void OnEscapePressed(InputAction.CallbackContext context)
-    {
-        CloseMenus();
-    }
-
 
     #region GeneralUse
-    public void OpenUpgradeMenu()
-    {
-        upgradeMenu.SetActive(true);
-        skillsMenu.SetActive(false);
-
-        DisablePlayerControl();
-        UnlockCursor();
-    }
-
-    public void OpenSkillsMenu()
-    {
-        skillsMenu.SetActive(true);
-        upgradeMenu.SetActive(false);
-
-        DisablePlayerControl();
-        UnlockCursor();
-    }
-
-    public void CloseMenus()
-    {
-        upgradeMenu.SetActive(false);
-        skillsMenu.SetActive(false);
-
-        EnablePlayerControl();
-        LockCursor();
-    }
-
-    private void DisablePlayerControl()
-    {
-        moveAction.Disable();
-        lookAction.Disable();
-
-        interactAction.Disable();
-        throwAction.Disable();
-
-        skill1Action.Disable();
-        skill2Action.Disable();
-        skill3Action.Disable();
-    }
-
-    private void EnablePlayerControl()
-    {
-        moveAction.Enable();
-        lookAction.Enable();
-
-        interactAction.Enable();
-        throwAction.Enable();
-
-        skill1Action.Enable();
-        skill2Action.Enable();
-        skill3Action.Enable();
-    }
-
-    private void UnlockCursor()
-    {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
-
-    private void LockCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    private void FillSlider(Slider slider, int maxLevels)
-    {
-        slider.value += 1f / maxLevels;
-    }
-
     private bool TryBuyUpgrade(ref int price)
     {
         if (currencyManager.coin < price)
@@ -206,7 +64,7 @@ public class PlayerUpgrade : MonoBehaviour
 
         playerInteraction.UpgradeCapacity(2);
 
-        FillSlider(upgradeCapacitySlider, 5);
+        ui.FillSlider(ui.upgradeCapacitySlider, 5);
     }
 
     public void BuyUpgradeSprint()
@@ -221,7 +79,7 @@ public class PlayerUpgrade : MonoBehaviour
 
         playerMovement.UpgradeSprint(2f);
 
-        FillSlider(upgradeSprintSlider, 5);
+        ui.FillSlider(ui.upgradeSprintSlider, 5);
     }
 
     public void BuyUpgradeReach()
@@ -236,7 +94,7 @@ public class PlayerUpgrade : MonoBehaviour
 
         playerInteraction.UpgradeReach(2);
 
-        FillSlider(upgradeReachSlider, 5);
+        ui.FillSlider(ui.upgradeReachSlider, 5);
     }
 
     public void BuyUpgradeJump()
@@ -251,7 +109,7 @@ public class PlayerUpgrade : MonoBehaviour
 
         playerMovement.UpgradeJump();
 
-        FillSlider(upgradeJumpSlider, 3);
+        ui.FillSlider(ui.upgradeJumpSlider, 3);
     }
     #endregion
 }

@@ -3,30 +3,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    PlayerInput playerInput;
-    InputAction moveAction;
-    InputAction sprintAction;
-    InputAction jumpAction;
-
     CharacterController controller;
 
+    [Header("Player Settings")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintSpeed = 10f;
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravity = -9.81f;
-
     [SerializeField] private int maxJumps = 1;
-    private int jumpsRemaining;
 
+    private Vector2 moveInput;
+    private int jumpsRemaining;
     private Vector3 velocity;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
-        moveAction = playerInput.actions.FindAction("Move");
-        sprintAction = playerInput.actions.FindAction("Sprint");
-        jumpAction = playerInput.actions.FindAction("Jump");
         controller = GetComponent<CharacterController>();
     }
 
@@ -34,18 +26,19 @@ public class PlayerMovement : MonoBehaviour
     
 
     void Update()
-    { 
-        MovePlayer();
+    {
+        OnMove();
+        OnJump();
     }
 
-    void MovePlayer()
+    void OnMove()
     {
-        Vector2 dir = moveAction.ReadValue<Vector2>();
-        Vector3 moveDirection = transform.right * dir.x + transform.forward * dir.y;
+        moveInput = UserInput.instance.MoveInput;
+        Vector3 moveDirection = transform.right * moveInput.x + transform.forward * moveInput.y;
 
         float currentSpeed = moveSpeed;
 
-        if (sprintAction.IsPressed() && dir.y > 0)
+        if (UserInput.instance.SprintInput && moveInput.y > 0)
         {
             currentSpeed = sprintSpeed;
         }
@@ -66,9 +59,9 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    public void OnJump(InputValue value)
+    public void OnJump()
     {
-        if (!value.isPressed)
+        if (!UserInput.instance.JumpInput)
             return;
 
         if (controller.isGrounded)

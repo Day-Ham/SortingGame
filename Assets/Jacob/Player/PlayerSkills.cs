@@ -5,11 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerSkills : MonoBehaviour
 {
-    PlayerInput playerInput;
-    InputAction skill1Action;
-    InputAction skill2Action;
-    InputAction skill3Action;
-
     [Header("References")]
     [SerializeField] private PlayerInteraction playerInteraction;
     [SerializeField] private CurrencyManager currencyManager;
@@ -19,25 +14,16 @@ public class PlayerSkills : MonoBehaviour
     [SerializeField] private float skill1Cooldown = 20f;
     [SerializeField] private string highlightLayerName = "Highlight";
     [SerializeField] private string shelfHighlightLayerName = "ShelfHighlight";
-    [SerializeField] private GameObject skill1Icon;
-    [SerializeField] private Slider skill1CooldownSlider;
-    [SerializeField] private Slider skill1LevelSlider;
     [SerializeField] private int skill1Level;
     [SerializeField] private int skill1Price = 50;
 
     [Header("Skill 2")]
     [SerializeField] private float skill2Cooldown = 20f;
-    [SerializeField] private GameObject skill2Icon;
-    [SerializeField] private Slider skill2CooldownSlider;
-    [SerializeField] private Slider skill2LevelSlider;
     [SerializeField] private int skill2Level;
     [SerializeField] private int skill2Price = 50;
 
     [Header("Skill 3")]
     [SerializeField] private float skill3Cooldown = 30f;
-    [SerializeField] private GameObject skill3Icon;
-    [SerializeField] private Slider skill3CooldownSlider;
-    [SerializeField] private Slider skill3LevelSlider;
     [SerializeField] private int skill3Level;
     [SerializeField] private int skill3Price = 50;
 
@@ -51,31 +37,48 @@ public class PlayerSkills : MonoBehaviour
 
     private List<GameObject> highlightedObjects = new List<GameObject>();
     private Dictionary<GameObject, int> originalLayers = new Dictionary<GameObject, int>();
+    UIManager ui;
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
-        playerInteraction = GetComponent<PlayerInteraction>();
-        skill1Action = playerInput.actions.FindAction("Skill1");
-        skill2Action = playerInput.actions.FindAction("Skill2");
-        skill3Action = playerInput.actions.FindAction("Skill3");
-
         highlightLayer = LayerMask.NameToLayer(highlightLayerName);
         shelfHighlightLayer = LayerMask.NameToLayer(shelfHighlightLayerName);
     }
 
     private void Start()
     {
-        skill1Icon.SetActive(skill1Level > 0);
-        skill2Icon.SetActive(skill2Level > 0);
-        skill3Icon.SetActive(skill3Level > 0);
-        skill1CooldownSlider.value = 1f;
-        skill2CooldownSlider.value = 1f;
-        skill3CooldownSlider.value = 1f;
+        ui = UIManager.instance;
+
+        ui.DisableUI(ui.skill1Icon);
+        ui.DisableUI(ui.skill2Icon);
+        ui.DisableUI(ui.skill3Icon);
+
+        //skill1Icon.SetActive(skill1Level > 0);
+        //skill2Icon.SetActive(skill2Level > 0);
+        //skill3Icon.SetActive(skill3Level > 0);
+        
+        ui.skill1CooldownSlider.value = 1f;
+        ui.skill2CooldownSlider.value = 1f;
+        ui.skill3CooldownSlider.value = 1f;
     }
 
     private void Update()
     {
+        if (UserInput.instance.Skill1Input)
+        {
+            ActivateSkill1();
+        }
+
+        if (UserInput.instance.Skill2Input)
+        {
+            ActivateSkill2();
+        }
+
+        if (UserInput.instance.Skill3Input)
+        {
+            ActivateSkill3();
+        }
+
         for (int i = highlightedObjects.Count - 1; i >= 0; i--)
         {
             GameObject obj = highlightedObjects[i];
@@ -108,13 +111,12 @@ public class PlayerSkills : MonoBehaviour
         {
             skill1CooldownTimer -= Time.deltaTime;
 
-            skill1CooldownSlider.value =
-                1f - (skill1CooldownTimer / skill1Cooldown);
-
+            ui.UpdateTimerSlider(ui.skill1CooldownSlider, skill1Cooldown, skill1CooldownTimer);
+    
             if (skill1CooldownTimer <= 0f)
             {
                 skill1CooldownTimer = 0f;
-                skill1CooldownSlider.value = 1f;
+                ui.skill1CooldownSlider.value = 1f;
             }
         }
 
@@ -122,13 +124,13 @@ public class PlayerSkills : MonoBehaviour
         {
             skill2CooldownTimer -= Time.deltaTime;
 
-            skill2CooldownSlider.value =
-                1f - (skill2CooldownTimer / skill2Cooldown);
+            ui.UpdateTimerSlider(ui.skill2CooldownSlider, skill2Cooldown, skill2CooldownTimer);
+
 
             if (skill2CooldownTimer <= 0f)
             {
                 skill2CooldownTimer = 0f;
-                skill2CooldownSlider.value = 1f;
+                ui.skill2CooldownSlider.value = 1f;
             }
         }
 
@@ -136,42 +138,17 @@ public class PlayerSkills : MonoBehaviour
         {
             skill3CooldownTimer -= Time.deltaTime;
 
-            skill3CooldownSlider.value =
-                1f - (skill3CooldownTimer / skill3Cooldown);
+            ui.UpdateTimerSlider(ui.skill3CooldownSlider, skill3Cooldown, skill3CooldownTimer);
 
             if (skill3CooldownTimer <= 0f)
             {
                 skill3CooldownTimer = 0f;
-                skill3CooldownSlider.value = 1f;
+                ui.skill3CooldownSlider.value = 1f;
             }
         }
     }
 
-    private void OnEnable()
-    {
-        skill1Action.performed += OnSkill1Pressed;
-        skill2Action.performed += OnSkill2Pressed;
-        skill3Action.performed += OnSkill3Pressed;
-    }
-
-    private void OnDisable()
-    {
-        skill1Action.performed -= OnSkill1Pressed;
-        skill2Action.performed -= OnSkill2Pressed;
-        skill3Action.performed -= OnSkill3Pressed;
-    }
-
-    private void FillSlider(Slider slider, int maxLevels)
-    {
-        slider.value += 1f / maxLevels;
-    }
-
     #region Skill 1
-    private void OnSkill1Pressed(InputAction.CallbackContext context)
-    {
-        ActivateSkill1();
-    }
-
     private void ActivateSkill1()
     {
         if (skill1Level <= 0)
@@ -287,7 +264,7 @@ public class PlayerSkills : MonoBehaviour
 
         if (skill1Level == 1)
         {
-            skill1Icon.SetActive(true);
+            ui.EnableUI(ui.skill1Icon);
         }
         else
         {
@@ -295,16 +272,11 @@ public class PlayerSkills : MonoBehaviour
         }
 
         skill1Price += 50;
-        FillSlider(skill1LevelSlider, 5);
+        ui.FillSlider(ui.skill1Slider, 5);
     }
     #endregion
 
     #region Skill 2
-    private void OnSkill2Pressed(InputAction.CallbackContext context)
-    {
-        ActivateSkill2();
-    }
-
     private void ActivateSkill2()
     {
         if (skill2Level <= 0)
@@ -373,7 +345,7 @@ public class PlayerSkills : MonoBehaviour
 
         if (skill2Level == 1)
         {
-            skill2Icon.SetActive(true);
+            ui.EnableUI(ui.skill2Icon);
         }
         else
         {
@@ -381,17 +353,11 @@ public class PlayerSkills : MonoBehaviour
         }
 
         skill2Price += 50;
-        FillSlider(skill2LevelSlider, 5);
+        ui.FillSlider(ui.skill2Slider, 5);
     }
     #endregion
 
     #region Skill 3
-
-    private void OnSkill3Pressed(InputAction.CallbackContext context)
-    {
-        ActivateSkill3();
-    }
-
     private void ActivateSkill3()
     {
         if (skill3Level <= 0)
@@ -457,7 +423,7 @@ public class PlayerSkills : MonoBehaviour
 
         if (skill3Level == 1)
         {
-            skill3Icon.SetActive(true);
+            ui.EnableUI(ui.skill3Icon);
         }
         else
         {
@@ -466,7 +432,7 @@ public class PlayerSkills : MonoBehaviour
 
         skill3Price += 50;
 
-        FillSlider(skill3LevelSlider, 5);
+        ui.FillSlider(ui.skill3Slider, 5);
     }
     #endregion
 }
