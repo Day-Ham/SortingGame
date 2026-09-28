@@ -14,6 +14,7 @@ public class PlayerInteraction : MonoBehaviour
 
     [Header("Look At")]
     [SerializeField] private GameObject lookedAtObject;
+    public GameObject LookedAtObject => lookedAtObject;
 
     [Header("Pickup")]
     [SerializeField] private float pickupRange = 3f;

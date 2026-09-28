@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 8331208016230216153}
   - component: {fileID: 5305841322806996349}
   - component: {fileID: 7123180922432389386}
-  - component: {fileID: 8682283849523348199}
+  - component: {fileID: 2761665255294648470}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -340,6 +340,7 @@ MonoBehaviour:
   playerCamera: {fileID: 839744199074796609}
   holdPoint: {fileID: 5381342725236863772}
   backpackPoint: {fileID: 832533794742149254}
+  lookedAtObject: {fileID: 0}
   pickupRange: 3
   interactLayer:
     serializedVersion: 2
@@ -348,36 +349,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3208
   pickupSpeed: 25
+  heldObject: {fileID: 0}
   outlineLayerName: Outline
   maxHeldItems: 5
   switchDelay: 0.05
-  throwForce: 5
-  crosshairImage: {fileID: 0}
-  normalCrosshair: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  oCrosshair: {fileID: -1937887712669590171, guid: 8bc4eeccf2d559d449c9563bfa1802d4, type: 3}
-  xCrosshair: {fileID: 21300000, guid: 6ec4e6b1e09d3a246807a21226964772, type: 3}
-  itemNameText: {fileID: 0}
-  amountHeldText: {fileID: 0}
-  maxHeldItemsText: {fileID: 0}
-  heldItemNameText: {fileID: 0}
-  backpackItemNames:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  lookedAtObject: {fileID: 0}
-  heldObject: {fileID: 0}
   heldItems: []
+  throwForce: 5
 --- !u!114 &5305841322806996349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,25 +367,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca147276229a8a44929f8e82bcde1de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerUpgrade
-  upgradeMenu: {fileID: 0}
-  skillsMenu: {fileID: 0}
   capacityPrice: 50
   sprintPrice: 50
   reachPrice: 50
   jumpPrice: 50
   currencyManager: {fileID: 0}
-  upgradeCapacitySlider: {fileID: 0}
-  upgradeSprintSlider: {fileID: 0}
-  upgradeReachSlider: {fileID: 0}
-  upgradeJumpSlider: {fileID: 0}
   upgradeCapacity: 0
   upgradeSprint: 0
   upgradeReach: 0
   upgradeJump: 0
-  skill1Slider: {fileID: 0}
-  skill2Slider: {fileID: 0}
-  skill3Slider: {fileID: 0}
-  skill4Slider: {fileID: 0}
 --- !u!114 &7123180922432389386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,18 +394,15 @@ MonoBehaviour:
   skill1Cooldown: 20
   highlightLayerName: Highlight
   shelfHighlightLayerName: ShelfHighlight
-  skill1Icon: {fileID: 0}
-  skill1CooldownSlider: {fileID: 0}
-  skill1LevelSlider: {fileID: 0}
   skill1Level: 0
   skill1Price: 50
   skill2Cooldown: 20
-  skill2Icon: {fileID: 0}
-  skill2CooldownSlider: {fileID: 0}
-  skill2LevelSlider: {fileID: 0}
   skill2Level: 0
   skill2Price: 50
---- !u!114 &8682283849523348199
+  skill3Cooldown: 30
+  skill3Level: 0
+  skill3Price: 50
+--- !u!114 &2761665255294648470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -447,27 +411,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7123355942709442893}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Script: {fileID: 11500000, guid: 2c6aad3158e606c4c8b187844ab08da8, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: 74cfc5181c326fe4d82ab306150ae392, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerTutorial
+  tutorialText: {fileID: 0}
+  tutorialPanel: {fileID: 0}
 --- !u!1 &8256299471216784434
 GameObject:
   m_ObjectHideFlags: 0
