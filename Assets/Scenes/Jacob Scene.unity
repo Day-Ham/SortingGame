@@ -6289,6 +6289,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2034846787}
     m_Modifications:
+    - target: {fileID: 784919813985751347, guid: 2c6d51ef01d100443ae3c44ddc4d39fb, type: 3}
+      propertyPath: closeSettingsButton
+      value: 
+      objectReference: {fileID: 659174584}
     - target: {fileID: 1521190860990088579, guid: 2c6d51ef01d100443ae3c44ddc4d39fb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6386,14 +6390,25 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c6d51ef01d100443ae3c44ddc4d39fb, type: 3}
---- !u!1 &659174584 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7081546914215915408, guid: 2c6d51ef01d100443ae3c44ddc4d39fb, type: 3}
+--- !u!114 &659174584 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4691855406579395332, guid: 2c6d51ef01d100443ae3c44ddc4d39fb, type: 3}
   m_PrefabInstance: {fileID: 659174583}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &659174585 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7998318036125558409, guid: 2c6d51ef01d100443ae3c44ddc4d39fb, type: 3}
+  m_PrefabInstance: {fileID: 659174583}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &659174586 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7081546914215915408, guid: 2c6d51ef01d100443ae3c44ddc4d39fb, type: 3}
   m_PrefabInstance: {fileID: 659174583}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &661279291
@@ -6791,7 +6806,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 1521266989418688443, guid: 3b77bf1abdd2be546a5e976e323d78b6, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: f74b44212abb66b44823b5693d7a7dee, type: 3}
+  m_Resource: {fileID: 8300000, guid: ebca3f974f09832439b1f77c526fefc6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -11466,7 +11481,7 @@ GameObject:
   - component: {fileID: 1186921715}
   - component: {fileID: 1186921714}
   m_Layer: 0
-  m_Name: UIManager
+  m_Name: GameUIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11527,7 +11542,7 @@ MonoBehaviour:
   settingsButton: {fileID: 1329406968}
   returnToTitleScreenButton: {fileID: 1128823632}
   quitButton: {fileID: 1410553985}
-  settingsMenu: {fileID: 659174584}
+  settingsMenu: {fileID: 659174586}
   menus: []
   currentOpenMenu: {fileID: 0}
 --- !u!4 &1186921715
@@ -21792,10 +21807,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

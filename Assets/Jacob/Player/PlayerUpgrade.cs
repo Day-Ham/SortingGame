@@ -23,7 +23,7 @@ public class PlayerUpgrade : MonoBehaviour
     private PlayerLook playerLook;
     private PlayerInteraction playerInteraction;
 
-    UIManager ui;
+    GameUIManager ui;
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class PlayerUpgrade : MonoBehaviour
 
     private void Start()
     {
-        ui = UIManager.instance;
+        ui = GameUIManager.instance;
     }
 
     #region GeneralUse

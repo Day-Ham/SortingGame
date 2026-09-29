@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,8 @@ public class UIToggles : MonoBehaviour
                 }
             });
         }
+
+        ResetToFirstToggle();
     }
 
     private void ShowPanel(int index)

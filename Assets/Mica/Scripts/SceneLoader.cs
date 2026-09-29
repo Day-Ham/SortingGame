@@ -16,6 +16,11 @@ public class SceneLoader : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void LoadTitleScene()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
     public void LoadGameScene()
     {
         SceneManager.LoadScene("Jacob Scene");

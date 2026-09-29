@@ -1,14 +1,12 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class UIManager : MonoBehaviour
+public class GameUIManager : MonoBehaviour
 {
-    public static UIManager instance;
+    public static GameUIManager instance;
 
     [Header("Player HUD")]
     [Header("Crosshair")]
@@ -59,14 +57,14 @@ public class UIManager : MonoBehaviour
 
     [Header("Menu")]
     [Header("Pause Menu")]
-    [SerializeField] private GameObject pauseMenu;
+    public GameObject pauseMenu;
     [SerializeField] private Button resumeButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button returnToTitleScreenButton;
     [SerializeField] private Button quitButton;
 
     [Header("Settings Menu")]
-    [SerializeField] private GameObject settingsMenu;
+    public GameObject settingsMenu;
 
     //Checks
     [SerializeField] private List<GameObject> menus = new List<GameObject>();
@@ -74,6 +72,7 @@ public class UIManager : MonoBehaviour
 
     UserInput input;
     PauseManager pause;
+    SceneLoader sceneLoader;
 
     private void Awake()
     {
@@ -87,8 +86,12 @@ public class UIManager : MonoBehaviour
     {
         input = UserInput.instance;
         pause = PauseManager.instance;
+        sceneLoader = SceneLoader.Instance;
 
+        resumeButton.onClick.AddListener(ResumeButtonAction);
         settingsButton.onClick.AddListener(SetSettingsMenuAsCurrent);
+        returnToTitleScreenButton.onClick.AddListener(sceneLoader.LoadTitleScene);
+        quitButton.onClick.AddListener(sceneLoader.QuitGame);
 
         AddMenusToList();
 
@@ -198,7 +201,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private void SetAsCurrentOpenMenu(GameObject menu)
+    public void SetAsCurrentOpenMenu(GameObject menu)
     {
         currentOpenMenu = menu;
         EnableUI(currentOpenMenu);
@@ -225,4 +228,9 @@ public class UIManager : MonoBehaviour
         SetAsCurrentOpenMenu(settingsMenu);
     }
     #endregion
+
+    private void ResumeButtonAction()
+    {
+        CloseMenu(pauseMenu);
+    }
 }

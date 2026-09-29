@@ -31,7 +31,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             var rebinds = PlayerPrefs.GetString(playerPreferenceKey);
             if (string.IsNullOrEmpty(rebinds))
-                return; // OK, we may not have saved any binding overrides yet.
+                return; 
 
             actions.LoadBindingOverridesFromJson(rebinds);
         }
@@ -45,8 +45,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 return;
 
             var rebinds = actions.SaveBindingOverridesAsJson();
-
             PlayerPrefs.SetString(playerPreferenceKey, rebinds);
+            PlayerPrefs.Save();
         }
 
         private void OnEnable()

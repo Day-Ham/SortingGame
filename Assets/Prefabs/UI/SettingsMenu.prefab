@@ -146,7 +146,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7223094290372208451}
-  - component: {fileID: 4955819103226825771}
   m_Layer: 5
   m_Name: MNK
   m_TagString: Untagged
@@ -174,22 +173,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4955819103226825771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 203043304403953989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6c2da2db9374dada6761b5e35121c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem.RebindingUI::UnityEngine.InputSystem.Samples.RebindUI.RebindSaveLoad
-  actions: {fileID: -944628639613478452, guid: 74cfc5181c326fe4d82ab306150ae392, type: 3}
-  playerPreferenceKey: PlayerInputKEYBOARD
-  loadOnEnable: 0
-  saveOnDisable: 0
 --- !u!1 &242014658400391850
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +431,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7815260985957605718}
-  - component: {fileID: 5204932217994565181}
   - component: {fileID: 4228023750982324577}
   m_Layer: 5
   m_Name: Gamepad
@@ -477,22 +459,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5204932217994565181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 449255211500273298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6c2da2db9374dada6761b5e35121c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem.RebindingUI::UnityEngine.InputSystem.Samples.RebindUI.RebindSaveLoad
-  actions: {fileID: -944628639613478452, guid: 74cfc5181c326fe4d82ab306150ae392, type: 3}
-  playerPreferenceKey: PlayerInputGAMEPAD
-  loadOnEnable: 0
-  saveOnDisable: 0
 --- !u!114 &4228023750982324577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5873,6 +5839,7 @@ GameObject:
   - component: {fileID: 1162831553634285240}
   - component: {fileID: 9204383140844279734}
   - component: {fileID: 1665684713192721990}
+  - component: {fileID: 4423568760777038647}
   m_Layer: 5
   m_Name: Input
   m_TagString: Untagged
@@ -5939,10 +5906,26 @@ MonoBehaviour:
   controlSchema:
   - schemaPanel: {fileID: 203043304403953989}
     schema: Keyboard
-    rebindSaveLoad: {fileID: 4955819103226825771}
+    rebindSaveLoad: {fileID: 0}
   - schemaPanel: {fileID: 449255211500273298}
     schema: Gamepad
-    rebindSaveLoad: {fileID: 5204932217994565181}
+    rebindSaveLoad: {fileID: 0}
+--- !u!114 &4423568760777038647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5820653899762291232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6c2da2db9374dada6761b5e35121c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem.RebindingUI::UnityEngine.InputSystem.Samples.RebindUI.RebindSaveLoad
+  actions: {fileID: -944628639613478452, guid: 74cfc5181c326fe4d82ab306150ae392, type: 3}
+  playerPreferenceKey: input_bindings
+  loadOnEnable: 1
+  saveOnDisable: 1
 --- !u!1 &5966826452907765846
 GameObject:
   m_ObjectHideFlags: 0
@@ -7033,6 +7016,7 @@ MonoBehaviour:
   musicVolumeText: {fileID: 8000997056409787273}
   sfxVolumeSlider: {fileID: 1729306239955229378}
   sfxVolumeText: {fileID: 2195547666689076831}
+  closeSettingsButton: {fileID: 4691855406579395332}
 --- !u!1 &7176370438722925370
 GameObject:
   m_ObjectHideFlags: 0

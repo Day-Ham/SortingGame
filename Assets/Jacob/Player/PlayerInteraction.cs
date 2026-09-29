@@ -45,11 +45,11 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Item Spawner")]
     ItemSpawner spawner;
 
-    UIManager ui;
+    GameUIManager ui;
 
     private void Start()
     {
-        ui = UIManager.instance;
+        ui = GameUIManager.instance;
 
         outlineLayer = LayerMask.NameToLayer(outlineLayerName);
 

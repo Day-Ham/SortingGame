@@ -37,7 +37,7 @@ public class PlayerSkills : MonoBehaviour
 
     private List<GameObject> highlightedObjects = new List<GameObject>();
     private Dictionary<GameObject, int> originalLayers = new Dictionary<GameObject, int>();
-    UIManager ui;
+    GameUIManager ui;
 
     private void Awake()
     {
@@ -47,7 +47,7 @@ public class PlayerSkills : MonoBehaviour
 
     private void Start()
     {
-        ui = UIManager.instance;
+        ui = GameUIManager.instance;
 
         ui.DisableUI(ui.skill1Icon);
         ui.DisableUI(ui.skill2Icon);

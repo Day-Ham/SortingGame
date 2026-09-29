@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class SettingsPanel : MonoBehaviour
 {
+    public static SettingsPanel instance;
+
+    [Header("Audio")]
     [SerializeField] private Slider masterVolumeSlider;
     [SerializeField] private TMP_Text masterVolumeText;
 
@@ -13,7 +16,29 @@ public class SettingsPanel : MonoBehaviour
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private TMP_Text sfxVolumeText;
 
+    [Header("Other UI")]
+    [SerializeField] private Button closeSettingsButton;
+
+    GameUIManager gameUI;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     private void Start()
+    {
+        gameUI = GameUIManager.instance;
+
+        InitializeAudioSettings();
+
+        closeSettingsButton.onClick.AddListener(CloseSettingsMenu);
+    }
+
+    private void InitializeAudioSettings()
     {
         masterVolumeSlider.value = SettingsManager.Instance.GetMasterVolume();
         musicVolumeSlider.value = SettingsManager.Instance.GetMusicVolume();
@@ -56,5 +81,18 @@ public class SettingsPanel : MonoBehaviour
         masterVolumeSlider.onValueChanged.RemoveListener(SetMasterVolume);
         musicVolumeSlider.onValueChanged.RemoveListener(SetMusicVolume);
         sfxVolumeSlider.onValueChanged.RemoveListener(SetSFXVolume);
+    }
+
+    public void CloseSettingsMenu()
+    {
+        if(gameUI == null)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameUI.SetAsCurrentOpenMenu(gameUI.pauseMenu);
+            gameUI.DisableUI(gameUI.settingsMenu);
+        }
     }
 }
