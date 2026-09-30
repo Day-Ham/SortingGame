@@ -123,11 +123,14 @@ public class ItemChecker : MonoBehaviour
         Vector3 orientation = currentItem.Data.preferredOrientation;
         int rows = currentItem.Data.rows;
         int cols = currentItem.Data.columns;
-        Vector2 spacing = currentItem.Data.spacing;
+        Vector3 spacing = currentItem.Data.spacing;
 
-        Bounds bounds = shelfArea.bounds;
-        Vector3 botCenter = new Vector3(bounds.center.x, bounds.min.y, bounds.center.z);
-        Vector3 backCenter = new Vector3(bounds.center.x, bounds.center.y, bounds.min.z);
+        BoxCollider box = shelfArea as BoxCollider;
+        Vector3 localCenter = box != null ? box.center : Vector3.zero;
+        Vector3 localSize = box != null ? box.size : shelfArea.bounds.size;
+
+        Vector3 localBotCenter = new Vector3(localCenter.x, localCenter.y - (localSize.y / 2f), localCenter.z);
+        Vector3 localBackCenter = new Vector3(localCenter.x, localCenter.y, localCenter.z - (localSize.z / 2f));
 
         Bounds itemBounds = currentItem.GetComponent<Collider>().bounds;
         float itemHeight = Mathf.Abs(itemBounds.max.y - itemBounds.min.y);
@@ -148,30 +151,42 @@ public class ItemChecker : MonoBehaviour
                 r = k / cols; 
                 
                 float width = (cols - 1) * spacing.x; 
-                float length = (rows - 1) * spacing.y;
+                float length = (rows - 1) * spacing.z;
 
-                x = (botCenter.x - (width / 2)) + (spacing.x * c); 
-                z = (botCenter.z - (length / 2)) + (spacing.y * r); 
-                y = botCenter.y + (itemHeight / 2);
+                x = (localBotCenter.x - (width / 2)) + (spacing.x * c); 
+                z = (localBotCenter.z - (length / 2)) + (spacing.z * r); 
+                y = localBotCenter.y + (itemHeight / 2);
             }
             else if (shelfType == ShelfType.Vertical)
             {
-                r = k % rows;
-                c = cols - 1 - (k / rows);
+                c = cols - 1 - (k % cols);
+                r = k / cols;
 
                 float width = (cols - 1) * spacing.x;
-                float height = (rows - 1) * spacing.y;
+                float height = rows * spacing.z;
 
-                x = (backCenter.x - (width / 2)) + (spacing.x * c);
-                y = (backCenter.y + (height / 2)) - (spacing.y * r);
-                z = backCenter.z + (itemHeight / 2);
+                x = (localBackCenter.x - (width / 2)) + (spacing.x * c);
+                y = (localBackCenter.y + (height / 2)) - (spacing.z * r);
+                z = localBackCenter.z + (itemHeight / 2);
+            }
+            else if (shelfType == ShelfType.Slanted)
+            {
+                r = (rows - 1) - (k / cols);
+                c = cols - 1 - (k % cols);
+
+                float width = (cols - 1) * spacing.x;
+                float length = (rows - 1) * spacing.z;
+
+                x = (localBotCenter.x - (width / 2)) + (spacing.x * c);
+                y = localBotCenter.y + (itemHeight / 2) + (spacing.y * r);
+                z = (localBotCenter.z + (length / 2)) - (spacing.z * r);
             }
 
-            Vector3 targetPoint = new Vector3(x, y, z);
+            Vector3 localTargetPoint = new Vector3(x, y, z);
 
             heldItems[k].transform.SetParent(transform);
-            heldItems[k].transform.position = targetPoint;
-            heldItems[k].transform.rotation = Quaternion.Euler(orientation);
+            heldItems[k].transform.localPosition = localTargetPoint;
+            heldItems[k].transform.localRotation = Quaternion.Euler(orientation);
 
             Rigidbody rb = heldItems[k].GetComponent<Rigidbody>();
             if (rb != null)

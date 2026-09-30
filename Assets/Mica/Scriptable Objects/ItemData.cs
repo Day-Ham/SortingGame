@@ -15,7 +15,7 @@ public class ItemData : ScriptableObject
     [Header("Shelf Layout")]
     public int rows;
     public int columns;
-    public Vector2 spacing;
+    public Vector3 spacing;
 
     [Header("Audio SFX")]
     public AudioClip audioSFX;

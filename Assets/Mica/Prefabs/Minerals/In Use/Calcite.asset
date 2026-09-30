@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   displayName: Calcite
   description: 
-  type: 5
+  type: 0
   preferredOrientation: {x: 0, y: 0, z: 0}
   rows: 2
   columns: 3
-  spacing: {x: 0.5, y: 0.5}
+  spacing: {x: 0.5, y: 0.5, z: 0.5}
   audioSFX: {fileID: 0}
