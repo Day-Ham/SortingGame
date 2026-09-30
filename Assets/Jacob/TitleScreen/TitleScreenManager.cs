@@ -41,11 +41,11 @@ public class TitleScreenManager : MonoBehaviour
 
         playButton.onClick.AddListener(OpenPlayMenu);
         settingsButton.onClick.AddListener(OpenSettingsMenu);
-        quitButton.onClick.AddListener(sceneLoader.QuitGame);
+        quitButton.onClick.AddListener(QuitGame);
 
         //stage 1
         //stage1ResumeGameBtn.onClick.AddListener();
-        stage1NewGameBtn.onClick.AddListener(sceneLoader.LoadGameScene);
+        stage1NewGameBtn.onClick.AddListener(LoadStage1);
         //stage1ResumeTimedChallengeBtn.onClick.AddListener();
         //stage1TimedChallengeBtn.onClick.AddListener();
     }
@@ -80,5 +80,17 @@ public class TitleScreenManager : MonoBehaviour
         settingsMenu.SetActive(true);
 
         EventSystem.current.SetSelectedGameObject(settingsFirstSelected);
+    }
+
+    public void QuitGame()
+    {
+        if (sceneLoader == null) return;
+        sceneLoader.QuitGame();
+    }
+
+    public void LoadStage1()
+    {
+        if (sceneLoader == null) return;
+        sceneLoader.LoadGameScene();
     }
 }
