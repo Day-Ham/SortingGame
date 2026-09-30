@@ -90,7 +90,7 @@ public class GameUIManager : MonoBehaviour
 
         resumeButton.onClick.AddListener(ResumeButtonAction);
         settingsButton.onClick.AddListener(SetSettingsMenuAsCurrent);
-        returnToTitleScreenButton.onClick.AddListener(sceneLoader.LoadTitleScene);
+        returnToTitleScreenButton.onClick.AddListener(LoadTitleScreen);
         quitButton.onClick.AddListener(sceneLoader.QuitGame);
 
         AddMenusToList();
@@ -213,6 +213,7 @@ public class GameUIManager : MonoBehaviour
         }
 
         pause.DisablePlayerControl();
+        pause.UnlockCursor();
     }
 
     private void CloseMenu(GameObject menu)
@@ -232,5 +233,13 @@ public class GameUIManager : MonoBehaviour
     private void ResumeButtonAction()
     {
         CloseMenu(pauseMenu);
+    }
+
+    private void LoadTitleScreen()
+    {
+        ResumeButtonAction();
+        pause.DisablePlayerControl();
+        pause.UnlockCursor();
+        sceneLoader.LoadTitleScene();
     }
 }

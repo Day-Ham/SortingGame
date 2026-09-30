@@ -22,6 +22,7 @@ public class PauseManager : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0f;
         DisablePlayerControl();
+        UnlockCursor();
     }
 
     public void ResumeGame()
@@ -29,19 +30,28 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f;
         EnablePlayerControl();
+        LockCursor();
     }
 
     public void DisablePlayerControl()
     {
-        UserInput.instance.SetPlayerInput(false);
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        UserInput.instance.SetPlayerInput(false);  
     }
 
     public void EnablePlayerControl()
     {
-        UserInput.instance.SetPlayerInput(true);
+        UserInput.instance.SetPlayerInput(true);   
+    }
+
+    public void LockCursor()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

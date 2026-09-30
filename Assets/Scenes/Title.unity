@@ -1012,6 +1012,21 @@ MonoBehaviour:
   mainFirstSelected: {fileID: 1636289315}
   playFirstSelected: {fileID: 1404503040}
   settingsFirstSelected: {fileID: 748012548}
+  playButton: {fileID: 1636289317}
+  settingsButton: {fileID: 1257389718}
+  quitButton: {fileID: 543835315}
+  stage1ResumeGameBtn: {fileID: 541374376}
+  stage1NewGameBtn: {fileID: 623543804}
+  stage1ResumeTimedChallengeBtn: {fileID: 1444717239}
+  stage1TimedChallengeBtn: {fileID: 1155020709}
+  stage2ResumeGameBtn: {fileID: 636567384}
+  stage2NewGameBtn: {fileID: 536710629}
+  stage2ResumeTimedChallengeBtn: {fileID: 1393413308}
+  stage2TimedChallengeBtn: {fileID: 1894433694}
+  stage3ResumeGameBtn: {fileID: 117249872}
+  stage3NewGameBtn: {fileID: 935381011}
+  stage3ResumeTimedChallengeBtn: {fileID: 1611170963}
+  stage3TimedChallengeBtn: {fileID: 127893877}
 --- !u!1 &220774746
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,19 +3016,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 543835316}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1619441703}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: QuitGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &543835316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6387,19 +6390,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1257389719}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 217505393}
-        m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: OpenSettingsMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1257389719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8240,19 +8231,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1636289318}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 217505393}
-        m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: OpenPlayMenu
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1636289318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11019,7 +10998,7 @@ SceneRoots:
   - {fileID: 1440726011}
   - {fileID: 1968082467}
   - {fileID: 1926712845}
-  - {fileID: 1619441704}
   - {fileID: 217505392}
   - {fileID: 1010645979}
   - {fileID: 863273324}
+  - {fileID: 1619441704}
