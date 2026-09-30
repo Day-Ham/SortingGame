@@ -92,7 +92,7 @@ public class GameUIManager : MonoBehaviour
         resumeButton.onClick.AddListener(ResumeButtonAction);
         settingsButton.onClick.AddListener(SetSettingsMenuAsCurrent);
         returnToTitleScreenButton.onClick.AddListener(LoadTitleScreen);
-        quitButton.onClick.AddListener(sceneLoader.QuitGame);
+        quitButton.onClick.AddListener(QuitGame);
 
         AddMenusToList();
 
@@ -242,5 +242,13 @@ public class GameUIManager : MonoBehaviour
         pause.DisablePlayerControl();
         pause.UnlockCursor();
         sceneLoader.LoadTitleScene();
+    }
+
+    private void QuitGame()
+    {
+        ResumeButtonAction();
+        pause.DisablePlayerControl();
+        pause.UnlockCursor();
+        sceneLoader.QuitGame();
     }
 }

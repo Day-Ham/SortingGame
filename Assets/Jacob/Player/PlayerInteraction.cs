@@ -91,28 +91,38 @@ public class PlayerInteraction : MonoBehaviour
             if (pickupObject == null && IsInLayerMask(obj, pickUpLayer))
             {
                 pickupObject = obj;
+                Debug.Log("Pickup object: " + obj.name);
             }
 
             if (interactObject == null && IsInLayerMask(obj, interactLayer))
             {
                 interactObject = obj;
+                Debug.Log("Interact object: " + obj.name);
             }
         }
 
         // prio pickup layer over interact layer, find last object put on the shelf
         if (pickupObject != null && interactObject != null)
         {
-            lookedAtObject = interactObject;
-            ItemChecker shelf = lookedAtObject.GetComponent<ItemChecker>();
-            if (shelf != null)
+            ItemChecker shelfParent = pickupObject.GetComponentInParent<ItemChecker>();
+            if (shelfParent == null)
             {
-                Item lastItem = shelf.GetLastObject();
-                if (lastItem != null)
-                {
-                    lookedAtObject = lastItem.gameObject;
-                    Debug.Log("Looking at " + lookedAtObject.name);
-                }
+                lookedAtObject = pickupObject;
             }
+            else
+            {
+                lookedAtObject = interactObject;
+                ItemChecker shelf = lookedAtObject.GetComponent<ItemChecker>();
+                if (shelf != null)
+                {
+                    Item lastItem = shelf.GetLastObject();
+                    if (lastItem != null)
+                    {
+                        lookedAtObject = lastItem.gameObject;
+                        Debug.Log("Looking at " + lookedAtObject.name);
+                    }
+                }
+            }   
         }
         else if (pickupObject != null)
         {

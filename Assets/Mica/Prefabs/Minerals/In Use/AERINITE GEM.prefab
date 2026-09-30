@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: -7086385092897550805}
   - component: {fileID: -1091080380405752287}
   - component: {fileID: -6881685583947321890}
-  - component: {fileID: 3743894903284729518}
   m_Layer: 7
   m_Name: AERINITE GEM
   m_TagString: Untagged
@@ -159,32 +158,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3743894903284729518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5598393878936818879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3Internal.ES3Prefab
-  prefabId: 7676509972059595551
-  localRefs:
-    _Keys:
-    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-    - {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
-    - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
-    - {fileID: 1404111815727379325, guid: d67c156067434104e94649edcf0e0d2e, type: 3}
-    - {fileID: 1909172551203298398, guid: d67c156067434104e94649edcf0e0d2e, type: 3}
-    - {fileID: -6881685583947321890, guid: d67c156067434104e94649edcf0e0d2e, type: 3}
-    - {fileID: -1091080380405752287, guid: d67c156067434104e94649edcf0e0d2e, type: 3}
-    - {fileID: 8441937296095695490, guid: d67c156067434104e94649edcf0e0d2e, type: 3}
-    - {fileID: 5598393878936818879, guid: d67c156067434104e94649edcf0e0d2e, type: 3}
-    - {fileID: -7086385092897550805, guid: d67c156067434104e94649edcf0e0d2e, type: 3}
-    - {fileID: 11400000, guid: d15d86d83b0620b479a1403740988a89, type: 2}
-    - {fileID: 2100000, guid: a89a40b032290ac40824be0e1f77fdc5, type: 2}
-    - {fileID: -667516721053261590, guid: 6fe5a8e4d41d2d345a8abd83f646fb3d, type: 3}
-    _Values: 7793e99932af65098ba2ce3db637112210e8707740639648c43b18e38776c75052d5f170e9461034f39eaaa2ea6eb655cb8120f11e005526d5ce2a09687d7d0297e0141eba5fc63628c49620f2c6cc547a3d50f669469151803465e5e3f8346fe353f3f5a568642al
