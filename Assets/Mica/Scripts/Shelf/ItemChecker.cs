@@ -23,6 +23,7 @@ public class ItemChecker : MonoBehaviour
 
     [Header("Player")]
     PlayerInteraction player;
+    PlayerUpgrade playerUpgrade;
 
     [Header("Item Spawner")]
     ItemSpawner spawner;
@@ -30,9 +31,12 @@ public class ItemChecker : MonoBehaviour
     [Header("Currency Manager")]
     CurrencyManager currency;
 
+    private readonly HashSet<Item> itemsBeingPlaced = new HashSet<Item>();
+
     private void Awake()
     {
         player = FindAnyObjectByType<PlayerInteraction>();
+        playerUpgrade = FindAnyObjectByType<PlayerUpgrade>();
         if (player == null)
             Debug.Log("Player is not found");
 
@@ -95,6 +99,9 @@ public class ItemChecker : MonoBehaviour
 
     public void PlaceItem(Item item = null)
     {
+        if (item != null && heldItems.Contains(item))
+            return;
+
         if (item == null)
         {
             if (!IsItemValid())
@@ -283,5 +290,24 @@ public class ItemChecker : MonoBehaviour
     private void UpdateUI()
     {
         displayNameTxt.text = heldItems.Count > 0 ? displayName : "";
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!playerUpgrade.CanThrowToShelf)
+            return;
+
+        Item item = other.GetComponentInParent<Item>();
+
+        if (item == null)
+            return;
+
+        if (heldItems.Contains(item))
+            return;
+
+        if (!IsItemValid(item))
+            return;
+
+        PlaceItem(item);
     }
 }

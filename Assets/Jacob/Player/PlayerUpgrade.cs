@@ -10,6 +10,7 @@ public class PlayerUpgrade : MonoBehaviour
     [SerializeField] private int sprintPrice = 50;
     [SerializeField] private int reachPrice = 50;
     [SerializeField] private int jumpPrice = 50;
+    [SerializeField] private int throwToShelfPrice = 500;
     [SerializeField] private CurrencyManager currencyManager;
 
     [Header("Upgrade Values")]
@@ -17,6 +18,9 @@ public class PlayerUpgrade : MonoBehaviour
     [SerializeField] private float upgradeSprint = 0f;
     [SerializeField] private float upgradeReach = 0f;
     [SerializeField] private int upgradeJump = 0;
+    [SerializeField] private bool upgradeThrowToShelf = false;
+    [SerializeField] private bool canThrowToShelf = false;
+    public bool CanThrowToShelf => canThrowToShelf;
 
     //Upgrade References
     private PlayerMovement playerMovement;
@@ -110,6 +114,17 @@ public class PlayerUpgrade : MonoBehaviour
         playerMovement.UpgradeJump();
 
         ui.FillSlider(ui.upgradeJumpSlider, 3);
+    }
+
+    public void BuyUpgradeThrowToShelf()
+    {
+        if (canThrowToShelf) return;
+
+        if (!TryBuyUpgrade(ref throwToShelfPrice)) return;
+
+        canThrowToShelf = true;
+
+        ui.FillSlider(ui.upgradeThrowSlider, 1);
     }
     #endregion
 }

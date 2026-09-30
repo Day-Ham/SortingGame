@@ -33,6 +33,7 @@ public class GameUIManager : MonoBehaviour
     public Slider upgradeSprintSlider;
     public Slider upgradeReachSlider;
     public Slider upgradeJumpSlider;
+    public Slider upgradeThrowSlider;
 
     [Header("Skills")]
     [Header("Skills Menu")]

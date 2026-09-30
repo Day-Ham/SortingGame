@@ -354,7 +354,7 @@ MonoBehaviour:
   maxHeldItems: 5
   switchDelay: 0.05
   heldItems: []
-  throwForce: 5
+  throwForce: 10
 --- !u!114 &5305841322806996349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,11 +371,14 @@ MonoBehaviour:
   sprintPrice: 50
   reachPrice: 50
   jumpPrice: 50
+  throwToShelfPrice: 500
   currencyManager: {fileID: 0}
   upgradeCapacity: 0
   upgradeSprint: 0
   upgradeReach: 0
   upgradeJump: 0
+  upgradeThrowToShelf: 0
+  canThrowToShelf: 0
 --- !u!114 &7123180922432389386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerTutorial
   tutorialText: {fileID: 0}
   tutorialPanel: {fileID: 0}
+  tutorialCount: 1
 --- !u!1 &8256299471216784434
 GameObject:
   m_ObjectHideFlags: 0
