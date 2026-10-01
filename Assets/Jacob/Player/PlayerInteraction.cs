@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -24,7 +21,7 @@ public class PlayerInteraction : MonoBehaviour
     public GameObject heldObject;
     private Rigidbody heldRigidbody;
     private int activeItemIndex = -1;
-    private bool isPickingUp;
+    public bool isPickingUp;
 
     [Header("Outline Settings")]
     [SerializeField] private string outlineLayerName = "Outline";
@@ -36,7 +33,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private int maxHeldItems = 3;
     [SerializeField] private float switchDelay = 0.25f;
     public List<GameObject> heldItems = new List<GameObject>();
-    private bool isSwitching;
+    public bool isSwitching;
     public int MaxHeldItems => maxHeldItems;
 
     [Header("Throw")]
@@ -46,6 +43,8 @@ public class PlayerInteraction : MonoBehaviour
     ItemSpawner spawner;
 
     GameUIManager ui;
+
+
 
     private void Start()
     {
@@ -199,6 +198,20 @@ public class PlayerInteraction : MonoBehaviour
         ui.SetUIText(ui.amountHeldText, heldItems.Count.ToString());
         ui.SetUIText(ui.maxHeldItemsText, "/ " + maxHeldItems.ToString());
 
+        // No items
+        if (heldItems.Count == 0)
+        {
+            ui.SetUIText(ui.heldItemNameText, "");
+
+            for (int i = 0; i < ui.backpackItemNames.Length; i++)
+            {
+                ui.SetUIText(ui.backpackItemNames[i], "");
+            }
+
+            return;
+        }
+
+        // Current held item
         if (heldObject != null)
         {
             Item heldItem = heldObject.GetComponent<Item>();
@@ -217,31 +230,26 @@ public class PlayerInteraction : MonoBehaviour
             ui.SetUIText(ui.heldItemNameText, "");
         }
 
-        int backpackIndex = 0;
-
-        for (int i = 0; i < heldItems.Count; i++)
+        // Other backpack items, starting after the active item
+        for (int i = 1; i < heldItems.Count; i++)
         {
-            if (heldItems[i] == heldObject)
-                continue;
+            int index = (activeItemIndex + i) % heldItems.Count;
 
-            Item item = heldItems[i].GetComponent<Item>();
+            GameObject itemObject = heldItems[index];
 
-            if (backpackIndex < ui.backpackItemNames.Length)
+            if (itemObject == null) continue;
+
+            Item item = itemObject.GetComponent<Item>();
+
+            if (item != null && item.Data != null && i - 1 < ui.backpackItemNames.Length)
             {
-                if (item != null && item.Data != null)
-                {
-                    ui.SetUIText(ui.backpackItemNames[backpackIndex], item.Data.displayName);
-                }
-                else
-                {
-                    ui.SetUIText(ui.backpackItemNames[backpackIndex], item.Data.displayName);
-                }
-
-                backpackIndex++;
+                ui.SetUIText(ui.backpackItemNames[i - 1], item.Data.displayName);
             }
         }
 
-        for (int i = backpackIndex; i < ui.backpackItemNames.Length; i++)
+        // Clear unused backpack UI slots
+        int displayedItems = Mathf.Max(0, Mathf.Min(heldItems.Count - 1, ui.backpackItemNames.Length));
+        for (int i = displayedItems; i < ui.backpackItemNames.Length; i++)
         {
             ui.SetUIText(ui.backpackItemNames[i], "");
         }
@@ -408,8 +416,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void SwitchItem(int direction)
     {
-        if (isSwitching)
-            return;
+        if (isSwitching || isPickingUp) return;
 
         if (heldObject != null)
         {
@@ -441,31 +448,30 @@ public class PlayerInteraction : MonoBehaviour
 
         heldObject.SetActive(true);
 
-        UpdateInventoryUI();
-
         heldObject.transform.SetParent(backpackPoint, false);
         heldObject.transform.localPosition = Vector3.zero;
         heldObject.transform.localRotation = Quaternion.identity;
 
-        UpdateInventoryUI();
-
         isPickingUp = true;
-
         isSwitching = false;
+
+        UpdateInventoryUI();
     }
     #endregion
 
     #region Throw
     public void OnThrow()
     {
-        if (!UserInput.instance.ThrowInput)
-            return;
+        if (!UserInput.instance.ThrowInput) return;
+
+        if (isPickingUp || isSwitching) return;
 
         ItemChecker checker = lookedAtObject != null ? lookedAtObject.GetComponent<ItemChecker>() : null;
 
         if (checker != null && heldObject != null)
         {
             Debug.Log("Trying to Place item");
+            if (checker.isPlacingItem) return;            
             checker.PlaceItem();
             return;
         }
@@ -525,6 +531,8 @@ public class PlayerInteraction : MonoBehaviour
 
         if (wasActiveItem)
         {
+            itemToRemove.transform.SetParent(null, true);
+
             heldObject = null;
             heldRigidbody = null;
             isPickingUp = false;
@@ -574,7 +582,7 @@ public class PlayerInteraction : MonoBehaviour
     }
     #endregion
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         if (playerCamera == null)
             return;

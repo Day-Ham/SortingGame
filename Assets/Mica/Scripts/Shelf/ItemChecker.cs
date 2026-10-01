@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class ItemChecker : MonoBehaviour
 {
@@ -9,12 +10,14 @@ public class ItemChecker : MonoBehaviour
     [SerializeField] private ItemType itemType;
     [SerializeField] private ShelfType shelfType;
     [SerializeField] private BoxCollider shelfArea;
+    private List<Vector3> shelfPositions = new List<Vector3>();
 
     [Header("Items")]
-    [SerializeField] private List<Item> heldItems = new List<Item>();
+    public List<Item> heldItems = new List<Item>();
     [SerializeField] private string displayName;
     [SerializeField] private Item currentItem;
     [SerializeField] private int maxItems;
+    [SerializeField] private Vector3 orientation;
 
     [Header("UI")]
     [SerializeField] private TMP_Text displayNameTxt;
@@ -30,7 +33,9 @@ public class ItemChecker : MonoBehaviour
     [Header("Currency Manager")]
     CurrencyManager currency;
 
-    private readonly HashSet<Item> itemsBeingPlaced = new HashSet<Item>();
+    [Header("Placing Parameters")]
+    [SerializeField] private float moveSpeed = 30f;
+    public bool isPlacingItem;
 
     private void Awake()
     {
@@ -51,6 +56,11 @@ public class ItemChecker : MonoBehaviour
     private void Update()
     {
         UpdateUI();
+
+        if (isPlacingItem)
+        {
+            MoveToPlaceItem();
+        }
     }
 
     public bool IsItemValid(Item item = null)
@@ -79,12 +89,8 @@ public class ItemChecker : MonoBehaviour
             return false;
         }
 
-        //is the container empty?
-        if (heldItems.Count == 0)
-        {
-            return true;
-        }
-        else
+        //is the container has items
+        if (heldItems.Count > 0)
         {
             //check if container display name is the same as held item display name
             if (currentItem.Data.displayName == displayName)
@@ -92,41 +98,18 @@ public class ItemChecker : MonoBehaviour
                 return true;
             }
         }
+        else if (heldItems.Count == 0)
+        {
+            return true;
+        }
 
         return false;
     }
 
-    public void PlaceItem(Item item = null)
+    private void ComputeItemPlacements()
     {
-        if (item != null && heldItems.Contains(item))
-            return;
-
-        if (item == null)
-        {
-            if (!IsItemValid())
-            {
-                Debug.Log("Item cannot be placed on the shelf.");
-                currentItem = null;
-                return;
-            }
-
-            currentItem = player.heldObject.GetComponent<Item>();
-        }
-
-        currentItem.gameObject.SetActive(true);
-
-        //Change container information
-        displayName = currentItem.Data.displayName;
-        if (heldItems.Count == 0)
-        {
-            SetMaxItems();
-        }
-        heldItems.Add(currentItem);
-
         // Item Data
-        AddCoin(); //adds money if first time being placed on shelf
-
-        Vector3 orientation = currentItem.Data.preferredOrientation;
+        orientation = currentItem.Data.preferredOrientation;
         int rows = currentItem.Data.rows;
         int cols = currentItem.Data.columns;
         Vector3 spacing = currentItem.Data.spacing;
@@ -141,8 +124,8 @@ public class ItemChecker : MonoBehaviour
         Bounds itemBounds = currentItem.GetComponent<Collider>().bounds;
         float itemHeight = Mathf.Abs(itemBounds.max.y - itemBounds.min.y);
 
-        //Placement
-        for (int k = 0; k < heldItems.Count; k++)
+        //Computation of placements
+        for (int k = 0; k < maxItems; k++)
         {
             int r;
             int c;
@@ -153,14 +136,14 @@ public class ItemChecker : MonoBehaviour
 
             if (shelfType == ShelfType.Horizontal)
             {
-                c = cols - 1 - (k % cols); 
-                r = k / cols; 
-                
-                float width = (cols - 1) * spacing.x; 
+                c = cols - 1 - (k % cols);
+                r = k / cols;
+
+                float width = (cols - 1) * spacing.x;
                 float length = (rows - 1) * spacing.z;
 
-                x = (localBotCenter.x - (width / 2)) + (spacing.x * c); 
-                z = (localBotCenter.z - (length / 2)) + (spacing.z * r); 
+                x = (localBotCenter.x - (width / 2)) + (spacing.x * c);
+                z = (localBotCenter.z - (length / 2)) + (spacing.z * r);
                 y = localBotCenter.y + (itemHeight / 2);
             }
             else if (shelfType == ShelfType.Vertical)
@@ -189,24 +172,90 @@ public class ItemChecker : MonoBehaviour
             }
 
             Vector3 localTargetPoint = new Vector3(x, y, z);
-
-            heldItems[k].transform.SetParent(transform);
-            heldItems[k].transform.localPosition = localTargetPoint;
-            heldItems[k].transform.localRotation = Quaternion.Euler(orientation);
-
-            Rigidbody rb = heldItems[k].GetComponent<Rigidbody>();
-            if (rb != null)
-                rb.isKinematic = true;
-
-            Debug.Log("Placed " + heldItems[k].name + " on the shelf.");
+            shelfPositions.Add(localTargetPoint);
         }
+    }
+
+    public void PlaceItem(Item item = null)
+    {
+        if (isPlacingItem) return;
 
         if (item == null)
         {
-            player.RemoveItemFromPlayer();
+            if (!IsItemValid())
+            {
+                Debug.Log("Item cannot be placed on the shelf.");
+                currentItem = null;
+                return;
+            }
+
+            currentItem = player.heldObject.GetComponent<Item>();
         }
-        UpdateUI();
-        CheckIfItemIsComplete();
+        else
+        {
+            currentItem = item;
+        }
+
+        if (currentItem == null) return;
+
+        if (heldItems.Contains(currentItem)) return; //make sure no duplicates
+
+        currentItem.gameObject.SetActive(true);
+
+        //Change container information if it is empty
+        if (heldItems.Count == 0)
+        {
+            displayName = currentItem.Data.displayName;
+            SetMaxItems();
+            ComputeItemPlacements();
+        }
+        
+        //take ownership from player
+        if (item == null)
+        {
+            player.RemoveItemFromPlayer(currentItem.gameObject);
+        }
+        currentItem.transform.SetParent(transform);
+
+        heldItems.Add(currentItem);
+
+        AddCoin(); //adds money if first time being placed on shelf
+
+        isPlacingItem = true;
+    }
+
+    void MoveToPlaceItem()
+    {
+        int itemIndex = heldItems.Count - 1;
+
+        Rigidbody rb = heldItems[itemIndex].GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        Vector3 targetPosition = shelfPositions[itemIndex];
+        Quaternion targetRotation = Quaternion.Euler(orientation);
+
+        Vector3 newPosition = Vector3.Lerp(rb.position, transform.TransformPoint(targetPosition), moveSpeed * Time.fixedDeltaTime);
+        Quaternion newRotation = Quaternion.Lerp(rb.rotation, transform.rotation * targetRotation, moveSpeed * Time.fixedDeltaTime);
+
+        rb.Move(newPosition, newRotation);
+
+        if (Vector3.Distance(rb.position, transform.TransformPoint(targetPosition)) < 0.01f && Quaternion.Angle(rb.rotation, transform.rotation * targetRotation) < 1f)
+        {
+            rb.Move(transform.TransformPoint(targetPosition), transform.rotation * targetRotation);
+
+            UpdateUI();
+            CheckIfItemIsComplete();
+
+            isPlacingItem = false;
+            currentItem = null;
+            Debug.Log("Placed " + heldItems[itemIndex].name + " on the shelf.");
+        }
     }
 
     public void RemoveItem()
@@ -220,6 +269,7 @@ public class ItemChecker : MonoBehaviour
         {
             maxItems = 0;
             displayName = "";
+            shelfPositions.Clear();
         }
 
         UpdateUI();
@@ -308,5 +358,16 @@ public class ItemChecker : MonoBehaviour
             return;
 
         PlaceItem(item);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+
+        foreach (Vector3 pos in shelfPositions)
+        {
+            Vector3 worldPosition = transform.TransformPoint(pos);
+            Gizmos.DrawWireSphere(worldPosition, 0.15f);
+        }
     }
 }

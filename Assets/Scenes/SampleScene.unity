@@ -158,8 +158,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 1720159361}
   background: {fileID: 321390028}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &5501229
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1504,7 +1507,7 @@ RectTransform:
   m_Father: {fileID: 967272879}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 5.037506, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1658,8 +1661,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 674333231}
   background: {fileID: 967082692}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &142953540
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2686,8 +2692,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 1932509448}
   background: {fileID: 215648303}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &266360656
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4291,8 +4300,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 1625964385}
   background: {fileID: 1231668061}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &435039535
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4384,8 +4396,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 1134125484}
   background: {fileID: 1033095903}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &439269400
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4460,8 +4475,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 313659085}
   background: {fileID: 827652964}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &439659780
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5386,7 +5404,7 @@ PrefabInstance:
       objectReference: {fileID: 550378563}
     - target: {fileID: 1521190860990088579, guid: 2c6d51ef01d100443ae3c44ddc4d39fb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7081546914215915408, guid: 2c6d51ef01d100443ae3c44ddc4d39fb, type: 3}
       propertyPath: m_Name
@@ -5478,7 +5496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8768275027099111930, guid: 2c6d51ef01d100443ae3c44ddc4d39fb, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7937,7 +7955,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &731991708
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7992,7 +8010,7 @@ RectTransform:
   m_Father: {fileID: 365592445}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 5.037506, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8208,8 +8226,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 78079946}
   background: {fileID: 608064568}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &759257777
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9675,8 +9696,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 997888719}
   background: {fileID: 1399252925}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &885475879
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14046,8 +14070,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 1776031056}
   background: {fileID: 1075376443}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &1303524962
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14119,7 +14146,7 @@ RectTransform:
   m_Father: {fileID: 1245334653}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 5.037506, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15781,8 +15808,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 81016328}
   background: {fileID: 1709885247}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &1504759484
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19661,8 +19691,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 418528476}
   background: {fileID: 241916751}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &1854909689
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19721,8 +19754,11 @@ MonoBehaviour:
   displayName: 
   currentItem: {fileID: 0}
   maxItems: 0
+  orientation: {x: 0, y: 0, z: 0}
   displayNameTxt: {fileID: 472010535}
   background: {fileID: 1251076692}
+  moveSpeed: 30
+  isPlacingItem: 0
 --- !u!65 &1867550116
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20854,7 +20890,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1963973910
 MonoBehaviour:
   m_ObjectHideFlags: 0

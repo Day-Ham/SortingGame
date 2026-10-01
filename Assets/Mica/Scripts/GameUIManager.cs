@@ -146,6 +146,13 @@ public class GameUIManager : MonoBehaviour
             CloseMenu(currentOpenMenu);
             return;
         }
+
+        Debug.Log(
+    $"Menu: {(currentOpenMenu != null ? currentOpenMenu.name : "None")} | " +
+    $"Paused: {pause.isPaused} | " +
+    $"Cursor: {Cursor.lockState} | " +
+    $"Visible: {Cursor.visible}"
+);
     }
 
     #region Set UIs
@@ -222,7 +229,14 @@ public class GameUIManager : MonoBehaviour
         currentOpenMenu = null;
         DisableUI(menu);
 
-        pause.ResumeGame();
+        if (menu == pauseMenu || menu == settingsMenu)
+        {
+            pause.ResumeGame();
+            return;
+        }
+
+        pause.EnablePlayerControl();
+        pause.LockCursor();
     }
 
     private void SetSettingsMenuAsCurrent()

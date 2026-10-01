@@ -1,7 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System.Collections.Generic;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
+using System.Linq;
 
 public class PlayerSkills : MonoBehaviour
 {
@@ -369,44 +372,54 @@ public class PlayerSkills : MonoBehaviour
         if (playerInteraction.heldItems.Count == 0)
             return;
 
-        ItemChecker[] shelves = FindObjectsByType<ItemChecker>();
+        StartCoroutine(ActivateSkill3Routine());
 
-        if (shelves.Length == 0)
-            return;
+        skill3CooldownTimer = skill3Cooldown;
+    }
+
+    IEnumerator ActivateSkill3Routine()
+    {
+        ItemChecker[] shelves = FindObjectsByType<ItemChecker>()
+            .OrderByDescending(shelf => shelf.heldItems.Count) 
+            .ToArray();
+
+        if (shelves.Length == 0) yield break;
 
         List<GameObject> backpackItems = new List<GameObject>(playerInteraction.heldItems);
         foreach (GameObject itemObject in backpackItems)
         {
-            if (itemObject == null)
-                continue;
+            if (itemObject == null) continue;
 
             Item item = itemObject.GetComponent<Item>();
 
-            if (item == null || item.Data == null)
-                continue;
+            if (item == null || item.Data == null) continue;
 
             ItemChecker matchingShelf = null;
 
             foreach (ItemChecker shelf in shelves)
             {
-                if (shelf == null)
-                    continue;
+                if (shelf == null) continue;
 
                 if (shelf.IsItemValid(item))
                 {
                     matchingShelf = shelf;
                     break;
                 }
+                else
+                {
+                    continue;
+                }
             }
 
-            if (matchingShelf == null)
-                continue;
+            if (matchingShelf == null) continue;
 
+            yield return new WaitUntil(() => !matchingShelf.isPlacingItem && !playerInteraction.isPickingUp && !playerInteraction.isSwitching);
+            
             playerInteraction.RemoveItemFromPlayer(itemObject);
             matchingShelf.PlaceItem(item);
-        }
 
-        skill3CooldownTimer = skill3Cooldown;
+            //yield return new WaitUntil(() => !matchingShelf.isPlacingItem && !playerInteraction.isPickingUp && !playerInteraction.isSwitching);
+        }
     }
 
     public void BuySkill3()
