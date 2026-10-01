@@ -20,18 +20,18 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] private Button quitButton;
 
     [Header("Play Menu Buttons")]
-    [SerializeField] private Button stage1ResumeGameBtn;
+    //[SerializeField] private Button stage1ResumeGameBtn;
     [SerializeField] private Button stage1NewGameBtn;
-    [SerializeField] private Button stage1ResumeTimedChallengeBtn;
-    [SerializeField] private Button stage1TimedChallengeBtn;
-    [SerializeField] private Button stage2ResumeGameBtn;
-    [SerializeField] private Button stage2NewGameBtn;
-    [SerializeField] private Button stage2ResumeTimedChallengeBtn;
-    [SerializeField] private Button stage2TimedChallengeBtn;
-    [SerializeField] private Button stage3ResumeGameBtn;
-    [SerializeField] private Button stage3NewGameBtn;
-    [SerializeField] private Button stage3ResumeTimedChallengeBtn;
-    [SerializeField] private Button stage3TimedChallengeBtn;
+    //[SerializeField] private Button stage1ResumeTimedChallengeBtn;
+    //[SerializeField] private Button stage1TimedChallengeBtn;
+    //[SerializeField] private Button stage2ResumeGameBtn;
+    //[SerializeField] private Button stage2NewGameBtn;
+    //[SerializeField] private Button stage2ResumeTimedChallengeBtn;
+    //[SerializeField] private Button stage2TimedChallengeBtn;
+    //[SerializeField] private Button stage3ResumeGameBtn;
+    //[SerializeField] private Button stage3NewGameBtn;
+    //[SerializeField] private Button stage3ResumeTimedChallengeBtn;
+    //[SerializeField] private Button stage3TimedChallengeBtn;
 
     SceneLoader sceneLoader;
 
@@ -91,6 +91,6 @@ public class TitleScreenManager : MonoBehaviour
     public void LoadStage1()
     {
         if (sceneLoader == null) return;
-        sceneLoader.LoadGameScene();
+        sceneLoader.LoadStage1Scene();
     }
 }

@@ -1015,18 +1015,7 @@ MonoBehaviour:
   playButton: {fileID: 1636289317}
   settingsButton: {fileID: 1257389718}
   quitButton: {fileID: 543835315}
-  stage1ResumeGameBtn: {fileID: 541374376}
   stage1NewGameBtn: {fileID: 623543804}
-  stage1ResumeTimedChallengeBtn: {fileID: 1444717239}
-  stage1TimedChallengeBtn: {fileID: 1155020709}
-  stage2ResumeGameBtn: {fileID: 636567384}
-  stage2NewGameBtn: {fileID: 536710629}
-  stage2ResumeTimedChallengeBtn: {fileID: 1393413308}
-  stage2TimedChallengeBtn: {fileID: 1894433694}
-  stage3ResumeGameBtn: {fileID: 117249872}
-  stage3NewGameBtn: {fileID: 935381011}
-  stage3ResumeTimedChallengeBtn: {fileID: 1611170963}
-  stage3TimedChallengeBtn: {fileID: 127893877}
 --- !u!1 &220774746
 GameObject:
   m_ObjectHideFlags: 0
@@ -4392,6 +4381,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773250055}
   m_CullTransparentMesh: 1
+--- !u!1 &815754632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4832844077769897314, guid: 2c6d51ef01d100443ae3c44ddc4d39fb, type: 3}
+  m_PrefabInstance: {fileID: 7197577342001810197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &863273322
 GameObject:
   m_ObjectHideFlags: 0
@@ -4591,6 +4585,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 902522045}
   m_CullTransparentMesh: 1
+--- !u!1 &904156339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 904156341}
+  - component: {fileID: 904156340}
+  m_Layer: 0
+  m_Name: TitleScreenManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &904156340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904156339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fda71235701a6c540bc99b231651a5f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TitleScreenManager
+  mainMenu: {fileID: 978877219}
+  playMenu: {fileID: 495787411}
+  settingsMenu: {fileID: 267501158}
+  mainFirstSelected: {fileID: 1636289315}
+  playFirstSelected: {fileID: 1404503040}
+  settingsFirstSelected: {fileID: 815754632}
+  playButton: {fileID: 1636289317}
+  settingsButton: {fileID: 1257389718}
+  quitButton: {fileID: 543835315}
+  stage1NewGameBtn: {fileID: 623543804}
+--- !u!4 &904156341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904156339}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 976.5265, y: 490.288, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &932092830
 GameObject:
   m_ObjectHideFlags: 0
@@ -8058,6 +8106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5317ff6008c95594f9a866df6a43978c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
+  stage1Scene: Jacob Scene
 --- !u!4 &1619441704
 Transform:
   m_ObjectHideFlags: 0
@@ -11002,3 +11051,4 @@ SceneRoots:
   - {fileID: 1010645979}
   - {fileID: 863273324}
   - {fileID: 1619441704}
+  - {fileID: 904156341}
