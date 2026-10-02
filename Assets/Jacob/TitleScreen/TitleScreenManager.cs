@@ -10,9 +10,9 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] private GameObject settingsMenu;
 
     [Header("First Selected Option")]
-    [SerializeField] private GameObject mainFirstSelected;
-    [SerializeField] private GameObject playFirstSelected;
-    [SerializeField] private GameObject settingsFirstSelected;
+    [SerializeField] private GameObject playBtnObj;
+    [SerializeField] private GameObject stage1ToggleObj;
+    [SerializeField] private GameObject gameBtnToggleObj;
 
     [Header("Menu Buttons")]
     [SerializeField] private Button playButton;
@@ -49,15 +49,14 @@ public class TitleScreenManager : MonoBehaviour
     void Start()
     {
         OpenMainMenu();
+        EventSystem.current.SetSelectedGameObject(playBtnObj);
     }
 
     public void OpenMainMenu()
     {
         mainMenu.SetActive(true);
         playMenu.SetActive(false);
-        settingsMenu.SetActive(false);
-
-        EventSystem.current.SetSelectedGameObject(mainFirstSelected);
+        settingsMenu.SetActive(false);       
     }
 
     public void OpenPlayMenu()
@@ -65,8 +64,6 @@ public class TitleScreenManager : MonoBehaviour
         mainMenu.SetActive(false);
         playMenu.SetActive(true);
         settingsMenu.SetActive(false);
-
-        EventSystem.current.SetSelectedGameObject(playFirstSelected);
     }
 
     public void OpenSettingsMenu()
@@ -74,8 +71,6 @@ public class TitleScreenManager : MonoBehaviour
         mainMenu.SetActive(false);
         playMenu.SetActive(false);
         settingsMenu.SetActive(true);
-
-        EventSystem.current.SetSelectedGameObject(settingsFirstSelected);
     }
 
     public void QuitGame()

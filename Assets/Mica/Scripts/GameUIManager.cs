@@ -146,13 +146,6 @@ public class GameUIManager : MonoBehaviour
             CloseMenu(currentOpenMenu);
             return;
         }
-
-        Debug.Log(
-    $"Menu: {(currentOpenMenu != null ? currentOpenMenu.name : "None")} | " +
-    $"Paused: {pause.isPaused} | " +
-    $"Cursor: {Cursor.lockState} | " +
-    $"Visible: {Cursor.visible}"
-);
     }
 
     #region Set UIs
