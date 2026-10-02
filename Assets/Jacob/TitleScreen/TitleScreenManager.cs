@@ -33,12 +33,8 @@ public class TitleScreenManager : MonoBehaviour
     //[SerializeField] private Button stage3ResumeTimedChallengeBtn;
     //[SerializeField] private Button stage3TimedChallengeBtn;
 
-    SceneLoader sceneLoader;
-
     private void Awake()
     {
-        sceneLoader = SceneLoader.Instance;
-
         playButton.onClick.AddListener(OpenPlayMenu);
         settingsButton.onClick.AddListener(OpenSettingsMenu);
         quitButton.onClick.AddListener(QuitGame);
@@ -84,13 +80,18 @@ public class TitleScreenManager : MonoBehaviour
 
     public void QuitGame()
     {
-        if (sceneLoader == null) return;
-        sceneLoader.QuitGame();
+        if (SceneLoader.Instance == null) return;
+        SceneLoader.Instance.QuitGame();
     }
 
     public void LoadStage1()
     {
-        if (sceneLoader == null) return;
-        sceneLoader.LoadStage1Scene();
+        if (SceneLoader.Instance == null)
+        {
+            Debug.LogError("SceneLoader.Instance is NULL!");
+            return;
+        }
+
+        SceneLoader.Instance.LoadStage1Scene();
     }
 }

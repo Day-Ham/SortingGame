@@ -34,6 +34,7 @@ public class PlayerSkills : MonoBehaviour
     private float skill1CooldownTimer;
     private float skill2CooldownTimer;
     private float skill3CooldownTimer;
+    private bool skill3Used;
 
     private int highlightLayer;
     private int shelfHighlightLayer;
@@ -372,9 +373,8 @@ public class PlayerSkills : MonoBehaviour
         if (playerInteraction.heldItems.Count == 0)
             return;
 
+        skill3Used = false;
         StartCoroutine(ActivateSkill3Routine());
-
-        skill3CooldownTimer = skill3Cooldown;
     }
 
     IEnumerator ActivateSkill3Routine()
@@ -417,6 +417,11 @@ public class PlayerSkills : MonoBehaviour
             
             playerInteraction.RemoveItemFromPlayer(itemObject);
             matchingShelf.PlaceItem(item);
+
+            skill3Used = true;
+
+            if (skill3Used)
+                skill3CooldownTimer = skill3Cooldown;
 
             //yield return new WaitUntil(() => !matchingShelf.isPlacingItem && !playerInteraction.isPickingUp && !playerInteraction.isSwitching);
         }

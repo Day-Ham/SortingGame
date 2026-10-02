@@ -233,8 +233,6 @@ public class ItemChecker : MonoBehaviour
         if (rb != null)
         {
             rb.isKinematic = true;
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
         }
 
         Vector3 targetPosition = shelfPositions[itemIndex];

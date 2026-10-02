@@ -496,7 +496,20 @@ public class PlayerInteraction : MonoBehaviour
         if (rbToThrow != null)
         {
             rbToThrow.isKinematic = false;
-            rbToThrow.AddForce(playerCamera.transform.forward * throwForce, ForceMode.Impulse);
+            Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f) );
+
+            Vector3 targetPoint;
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+            {
+                targetPoint = hit.point;
+            }
+            else
+            {
+                targetPoint = ray.GetPoint(100f);
+            }
+
+            Vector3 throwDirection = (targetPoint - objToThrow.transform.position).normalized;
+            rbToThrow.AddForce(throwDirection * throwForce,ForceMode.Impulse);
         }
     }
 
