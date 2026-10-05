@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("itemType", "shelfType", "shelfArea", "heldItems", "displayName", "currentItem", "maxItems", "displayNameTxt", "background", "player", "spawner", "currency", "m_CancellationTokenSource", "enabled", "name")]
+	[ES3PropertiesAttribute("itemType", "shelfType", "shelfArea", "shelfPositions", "heldItems", "displayName", "currentItem", "maxItems", "displayNameTxt", "background", "player", "spawner", "currency", "m_CancellationTokenSource", "enabled", "name")]
 	public class ES3UserType_ItemChecker : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -19,7 +19,8 @@ namespace ES3Types
 			writer.WritePrivateField("itemType", instance);
 			writer.WritePrivateField("shelfType", instance);
 			writer.WritePrivateFieldByRef("shelfArea", instance);
-			writer.WritePrivateField("heldItems", instance);
+			writer.WritePrivateField("shelfPositions", instance);
+			writer.WriteProperty("heldItems", instance.heldItems, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<Item>)));
 			writer.WritePrivateField("displayName", instance);
 			writer.WritePrivateFieldByRef("currentItem", instance);
 			writer.WritePrivateField("maxItems", instance);
@@ -49,9 +50,12 @@ namespace ES3Types
 					case "shelfArea":
 					instance = (ItemChecker)reader.SetPrivateField("shelfArea", reader.Read<UnityEngine.BoxCollider>(), instance);
 					break;
-					case "heldItems":
-					instance = (ItemChecker)reader.SetPrivateField("heldItems", reader.Read<System.Collections.Generic.List<Item>>(), instance);
+					case "shelfPositions":
+					instance = (ItemChecker)reader.SetPrivateField("shelfPositions", reader.Read<System.Collections.Generic.List<UnityEngine.Vector3>>(), instance);
 					break;
+					case "heldItems":
+						instance.heldItems = reader.Read<System.Collections.Generic.List<Item>>();
+						break;
 					case "displayName":
 					instance = (ItemChecker)reader.SetPrivateField("displayName", reader.Read<System.String>(), instance);
 					break;

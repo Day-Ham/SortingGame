@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 5846724083077896068}
   - component: {fileID: 628985555210432171}
   - component: {fileID: 7431107031730080622}
+  - component: {fileID: -66132014029692459}
+  - component: {fileID: -6245186693385837168}
   m_Layer: 7
   m_Name: AERINITE ROCK
   m_TagString: Untagged
@@ -159,3 +161,55 @@ MonoBehaviour:
   stopSpeed: 0.05
   stopTime: 0.2
   IsPlaced: 0
+--- !u!114 &-66132014029692459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7441528449872033360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3Internal.ES3Prefab
+  prefabId: 4158902046102939124
+  localRefs:
+    _Keys:
+    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    - {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    - {fileID: 7431107031730080622, guid: a80c137b91742a742bb15e851191fd05, type: 3}
+    - {fileID: 11400000, guid: d15d86d83b0620b479a1403740988a89, type: 2}
+    - {fileID: 5136668790225972861, guid: a80c137b91742a742bb15e851191fd05, type: 3}
+    - {fileID: 4172688650823272483, guid: a80c137b91742a742bb15e851191fd05, type: 3}
+    - {fileID: 2100000, guid: a89a40b032290ac40824be0e1f77fdc5, type: 2}
+    - {fileID: 1483075898745509419, guid: dbdc8a4c7b7d5c94a9207936f2351ece, type: 3}
+    - {fileID: 3838341890580938454, guid: a80c137b91742a742bb15e851191fd05, type: 3}
+    - {fileID: 628985555210432171, guid: a80c137b91742a742bb15e851191fd05, type: 3}
+    - {fileID: 5846724083077896068, guid: a80c137b91742a742bb15e851191fd05, type: 3}
+    - {fileID: 7441528449872033360, guid: a80c137b91742a742bb15e851191fd05, type: 3}
+    - {fileID: -5328595987269340271, guid: dbdc8a4c7b7d5c94a9207936f2351ece, type: 3}
+    _Values: e9d07f7ff395ca087196f6f6a9b921027200422844f7e3746a170759e5c7bd0ad9dc1d7c160353015c80e378dad90e3b439ad65f218ef51f4c0bea23728fdd395300cf86d79e1876acbb343beb94654326439d7f9d1c2b67d33dc822ed7774325d55da26f6789c5a7f9ff5223ccef41el
+--- !u!114 &-6245186693385837168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7441528449872033360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3AutoSave
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  saveDestroyed: 0
+  componentsToSave:
+  - {fileID: 7431107031730080622}
+  - {fileID: 3838341890580938454}

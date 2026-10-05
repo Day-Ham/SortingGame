@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("itemData", "rb", "stopSpeed", "stopTime", "stoppedTimer", "<IsHeld>k__BackingField", "IsPlaced", "m_CancellationTokenSource", "IsHeld", "enabled", "name")]
+	[ES3PropertiesAttribute("itemData", "IsPlaced", "IsHeld", "enabled", "name")]
 	public class ES3UserType_Item : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -17,13 +17,7 @@ namespace ES3Types
 			var instance = (Item)obj;
 			
 			writer.WritePrivateFieldByRef("itemData", instance);
-			writer.WritePrivateFieldByRef("rb", instance);
-			writer.WritePrivateField("stopSpeed", instance);
-			writer.WritePrivateField("stopTime", instance);
-			writer.WritePrivateField("stoppedTimer", instance);
-			writer.WritePrivateField("<IsHeld>k__BackingField", instance);
 			writer.WriteProperty("IsPlaced", instance.IsPlaced, ES3Type_bool.Instance);
-			writer.WritePrivateField("m_CancellationTokenSource", instance);
 			writer.WritePrivateProperty("IsHeld", instance);
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 		}
@@ -39,27 +33,9 @@ namespace ES3Types
 					case "itemData":
 					instance = (Item)reader.SetPrivateField("itemData", reader.Read<ItemData>(), instance);
 					break;
-					case "rb":
-					instance = (Item)reader.SetPrivateField("rb", reader.Read<UnityEngine.Rigidbody>(), instance);
-					break;
-					case "stopSpeed":
-					instance = (Item)reader.SetPrivateField("stopSpeed", reader.Read<System.Single>(), instance);
-					break;
-					case "stopTime":
-					instance = (Item)reader.SetPrivateField("stopTime", reader.Read<System.Single>(), instance);
-					break;
-					case "stoppedTimer":
-					instance = (Item)reader.SetPrivateField("stoppedTimer", reader.Read<System.Single>(), instance);
-					break;
-					case "<IsHeld>k__BackingField":
-					instance = (Item)reader.SetPrivateField("<IsHeld>k__BackingField", reader.Read<System.Boolean>(), instance);
-					break;
 					case "IsPlaced":
 						instance.IsPlaced = reader.Read<System.Boolean>(ES3Type_bool.Instance);
 						break;
-					case "m_CancellationTokenSource":
-					instance = (Item)reader.SetPrivateField("m_CancellationTokenSource", reader.Read<System.Threading.CancellationTokenSource>(), instance);
-					break;
 					case "IsHeld":
 					instance = (Item)reader.SetPrivateProperty("IsHeld", reader.Read<System.Boolean>(), instance);
 					break;

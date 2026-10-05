@@ -7,6 +7,7 @@ public class ItemSpawner : MonoBehaviour
     [Header("Item")]
     public List<ItemSpawnEntry> items;
     private GameObject currentItem;
+    [SerializeField] private bool itemsSpawned;
 
     [Header("Spawning")]
     [SerializeField] private BoxCollider spawnArea;
@@ -19,6 +20,7 @@ public class ItemSpawner : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (itemsSpawned) return;
         InstantiateItems();
     }
 
@@ -42,6 +44,8 @@ public class ItemSpawner : MonoBehaviour
                 }
             }
         }
+
+        itemsSpawned = true;
     }
 
     Vector3 GetRandomSpawnPoint()

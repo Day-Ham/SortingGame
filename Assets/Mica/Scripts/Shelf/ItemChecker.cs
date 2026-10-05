@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -52,6 +53,27 @@ public class ItemChecker : MonoBehaviour
         if (currency == null)
             Debug.Log("Currency Manager is not found");
     }
+
+    //private IEnumerator Start()
+    //{
+    //    float timeout = 5f;
+    //    float elapsed = 0f;
+
+    //    while (transform.GetComponentsInChildren<Item>(true).Length == 0)
+    //    {
+    //        elapsed += Time.deltaTime;
+
+    //        if (elapsed >= timeout)
+    //        {
+    //            Debug.Log("No Item children found. Continuing anyway.");
+    //            break;
+    //        }
+
+    //        yield return null;
+    //    }
+
+    //    CleanAndReparent();
+    //}
 
     private void Update()
     {
@@ -356,6 +378,18 @@ public class ItemChecker : MonoBehaviour
             return;
 
         PlaceItem(item);
+    }
+
+    public void CleanAndReparent()
+    {       
+        heldItems.Clear();
+
+        Item[] items = transform.GetComponentsInChildren<Item>();
+
+        foreach (Item item in items)
+        {
+            heldItems.Add(item);
+        }
     }
 
     private void OnDrawGizmos()
