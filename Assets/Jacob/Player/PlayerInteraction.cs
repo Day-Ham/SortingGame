@@ -44,7 +44,7 @@ public class PlayerInteraction : MonoBehaviour
 
     GameUIManager ui;
 
-
+    [SerializeField] private LayerMask throwTargetLayers;
 
     private void Start()
     {
@@ -499,7 +499,7 @@ public class PlayerInteraction : MonoBehaviour
             Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f) );
 
             Vector3 targetPoint;
-            if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+            if (Physics.Raycast(ray, out RaycastHit hit, 100f, throwTargetLayers))
             {
                 targetPoint = hit.point;
             }
