@@ -350,16 +350,11 @@ MonoBehaviour:
     m_Bits: 3208
   pickupSpeed: 25
   heldObject: {fileID: 0}
-  isPickingUp: 0
   outlineLayerName: Outline
   maxHeldItems: 5
   switchDelay: 0.05
   heldItems: []
-  isSwitching: 0
   throwForce: 10
-  throwTargetLayers:
-    serializedVersion: 2
-    m_Bits: 256
 --- !u!114 &5305841322806996349
 MonoBehaviour:
   m_ObjectHideFlags: 0
