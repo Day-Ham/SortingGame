@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.7524357, y: 1.6923344, z: -26.130013}
-  m_LocalScale: {x: 15.000001, y: 15.000001, z: 15.000001}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -158,4 +158,8 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 280f157d7742614478305950b671cbc5, type: 2}
   stopSpeed: 0.05
   stopTime: 0.2
+  supportCheckDistance: 0.1
+  supportLayers:
+    serializedVersion: 2
+    m_Bits: 1
   IsPlaced: 0
