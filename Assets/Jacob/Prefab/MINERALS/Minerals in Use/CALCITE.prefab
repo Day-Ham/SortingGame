@@ -157,4 +157,8 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 1c659a2363187af4c91a56ea35d28f22, type: 2}
   stopSpeed: 0.05
   stopTime: 0.2
+  supportCheckDistance: 0.1
+  supportLayers:
+    serializedVersion: 2
+    m_Bits: 1
   IsPlaced: 0

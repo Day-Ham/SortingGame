@@ -10,6 +10,9 @@ public class Item : MonoBehaviour
     [SerializeField] private float stopSpeed = 0.05f;
     [SerializeField] private float stopTime = 0.2f;
 
+    [SerializeField] private float supportCheckDistance = 0.1f;
+    [SerializeField] private LayerMask supportLayers;
+
     private float stoppedTimer;
 
     public bool IsHeld { get; private set; }
@@ -22,26 +25,43 @@ public class Item : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsHeld)
+        if (IsHeld || IsPlaced)
         {
             stoppedTimer = 0f;
+            return;
+        }
+
+        if (rb.isKinematic)
+        {
+            if (!HasSupport())
+            {
+                rb.isKinematic = false;
+                stoppedTimer = 0f;
+            }
+
             return;
         }
 
         if (rb.linearVelocity.magnitude < stopSpeed)
         {
             stoppedTimer += Time.fixedDeltaTime;
-            if (stoppedTimer >= stopTime && !rb.isKinematic)
+
+            if (stoppedTimer >= stopTime)
             {
-                rb.linearVelocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
                 rb.isKinematic = true;
+                stoppedTimer = 0f;
             }
         }
         else
         {
             stoppedTimer = 0f;
         }
+    }
+
+    private bool HasSupport()
+    {
+        float rayDistance = GetComponent<Collider>().bounds.extents.y + supportCheckDistance;
+        return Physics.Raycast(transform.position, Vector3.down, rayDistance, supportLayers);
     }
 
     public void Held(bool held)
