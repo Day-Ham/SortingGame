@@ -54,27 +54,6 @@ public class ItemChecker : MonoBehaviour
             Debug.Log("Currency Manager is not found");
     }
 
-    //private IEnumerator Start()
-    //{
-    //    float timeout = 5f;
-    //    float elapsed = 0f;
-
-    //    while (transform.GetComponentsInChildren<Item>(true).Length == 0)
-    //    {
-    //        elapsed += Time.deltaTime;
-
-    //        if (elapsed >= timeout)
-    //        {
-    //            Debug.Log("No Item children found. Continuing anyway.");
-    //            break;
-    //        }
-
-    //        yield return null;
-    //    }
-
-    //    CleanAndReparent();
-    //}
-
     private void Update()
     {
         UpdateUI();
@@ -380,15 +359,34 @@ public class ItemChecker : MonoBehaviour
         PlaceItem(item);
     }
 
-    public void CleanAndReparent()
-    {       
+    public void CleanAndReorganize()
+    {
+        Debug.Log($"{name} has {transform.childCount} children before cleaning.");
         heldItems.Clear();
 
-        Item[] items = transform.GetComponentsInChildren<Item>();
-
-        foreach (Item item in items)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            heldItems.Add(item);
+            Item item = transform.GetChild(i).GetComponent<Item>();
+
+            if (item != null)
+            {
+                heldItems.Add(item);
+
+                int itemIndex = heldItems.Count - 1;
+
+                Rigidbody rb = heldItems[itemIndex].GetComponent<Rigidbody>();
+
+                if (rb != null)
+                {
+                    rb.isKinematic = true;
+                }
+
+                Vector3 targetPosition = shelfPositions[itemIndex];
+                Quaternion targetRotation = Quaternion.Euler(orientation);
+                rb.Move(transform.TransformPoint(targetPosition), transform.rotation * targetRotation);
+
+                UpdateUI();
+            }
         }
     }
 

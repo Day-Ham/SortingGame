@@ -74,6 +74,7 @@ public class GameUIManager : MonoBehaviour
     UserInput input;
     PauseManager pause;
     SceneLoader sceneLoader;
+    SaveManager saveManager;
 
     private void Awake()
     {
@@ -88,6 +89,7 @@ public class GameUIManager : MonoBehaviour
         input = UserInput.instance;
         pause = PauseManager.instance;
         sceneLoader = SceneLoader.Instance;
+        saveManager = FindAnyObjectByType<SaveManager>();
 
         resumeButton.onClick.AddListener(ResumeButtonAction);
         settingsButton.onClick.AddListener(SetSettingsMenuAsCurrent);
@@ -248,6 +250,7 @@ public class GameUIManager : MonoBehaviour
         ResumeButtonAction();
         pause.DisablePlayerControl();
         pause.UnlockCursor();
+        saveManager.SaveGame();
         sceneLoader.LoadTitleScene();
     }
 

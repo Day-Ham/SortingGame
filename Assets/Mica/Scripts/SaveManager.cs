@@ -3,26 +3,43 @@ using UnityEngine.SceneManagement;
 
 public class SaveManager : MonoBehaviour
 {
-    private void Awake()
+    public void StartNewGame()
     {
-        ES3AutoSaveMgr.Current.Load();
-        ItemChecker[] checkers = FindObjectsByType<ItemChecker>();
-
-        foreach (ItemChecker checker in checkers)
-        {
-            checker.CleanAndReparent();
-        }
+        SceneManager.LoadScene("SampleScene");
     }
+
     public void SaveGame()
     {
-        ES3.Save("SavedScene", SceneManager.GetActiveScene().name);
+        ES3Settings settings = new ES3Settings("SaveFile.es3");
+
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        ES3.Save("SavedScene", sceneName, settings);
+
+        Debug.Log("Saved scene: " + sceneName);
 
         ES3AutoSaveMgr.Current.Save();
+
+        Debug.Log("Auto Save completed.");
     }
 
-    public void LoadSaveFile()
+
+    public void LoadGame()
     {
-        string sceneName = ES3.Load<string>("SavedScene");
+        ES3Settings settings = new ES3Settings("SaveFile.es3");
+
+        Debug.Log("Save file exists: " + ES3.FileExists(settings));
+        Debug.Log("Key exists: " + ES3.KeyExists("SavedScene", settings));
+
+        if (!ES3.KeyExists("SavedScene", settings))
+        {
+            Debug.LogError("No saved game found.");
+            return;
+        }
+
+        string sceneName = ES3.Load<string>("SavedScene", settings);
+
+        Debug.Log("Loading scene: " + sceneName);
 
         SceneManager.sceneLoaded += OnSaveSceneLoaded;
         SceneManager.LoadScene(sceneName);
@@ -38,7 +55,7 @@ public class SaveManager : MonoBehaviour
 
         foreach (ItemChecker checker in checkers)
         {
-            checker.CleanAndReparent();
+            checker.CleanAndReorganize();
         }
     }
 }

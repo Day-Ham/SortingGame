@@ -9,8 +9,6 @@ public class SceneLoader : MonoBehaviour
     //[SerializeField] private string stage3Scene;
     private void Awake()
     {
-        Debug.Log("SceneLoader Awake!");
-
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -19,8 +17,6 @@ public class SceneLoader : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
-        Debug.Log("SceneLoader Instance assigned!");
     }
 
     public void LoadTitleScene()
