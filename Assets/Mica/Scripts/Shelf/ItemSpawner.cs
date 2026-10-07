@@ -38,7 +38,8 @@ public class ItemSpawner : MonoBehaviour
                     {
                         continue;
                     }
-                    GameObject newItem = Instantiate(item.item, spawnPoint, Quaternion.identity);
+
+                    GameObject newItem = Instantiate(item.item, spawnPoint, Quaternion.Euler(GetRandomRotation()));
                     newItem.transform.SetParent(transform);
                     break;
                 }
@@ -56,6 +57,14 @@ public class ItemSpawner : MonoBehaviour
         float randomZ = UnityEngine.Random.Range(bounds.min.z,bounds.max.z);
 
         return new Vector3(randomX, bounds.min.y + spawnHeight,randomZ);
+    }
+    Vector3 GetRandomRotation()
+    {
+        float randomX = UnityEngine.Random.Range(0,360);
+        float randomY = UnityEngine.Random.Range(0,360);
+        float randomZ = UnityEngine.Random.Range(0, 360);
+
+        return new Vector3(randomX, randomY, randomZ);
     }
 
     private bool IsPositionBlocked(Vector3 position)
