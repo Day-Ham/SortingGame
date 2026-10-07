@@ -374,6 +374,22 @@ public class PlayerInteraction : MonoBehaviour
 
     void PickupLerp()
     {
+        //play pick up audio
+        if (playPickUpSFX)
+        {
+            AudioSource audioSource = heldObject.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                Item item = heldObject.GetComponent<Item>();
+                if (item != null && item.Data != null)
+                {
+                    audioSource.clip = item.Data.pickUpSFX;
+                    audioSource.Play();
+                    playPickUpSFX = false;
+                }
+            }
+        }
+        
         Transform obj = heldObject.transform;
 
         obj.position = Vector3.Lerp(obj.position, holdPoint.position, pickupSpeed * Time.deltaTime);
@@ -390,19 +406,7 @@ public class PlayerInteraction : MonoBehaviour
             obj.localRotation = Quaternion.identity;
 
             isPickingUp = false;
-
-            //play put down audio
-            if (!playPickUpSFX) return;
-            AudioSource audioSource = heldObject.GetComponent<AudioSource>();
-            if (audioSource != null)
-            {
-                Item item = heldObject.GetComponent<Item>();
-                if (item != null && item.Data != null)
-                {
-                    audioSource.clip = item.Data.pickUpSFX;
-                    audioSource.Play();
-                }
-            }
+            playPickUpSFX = false;
         }
     }
     #endregion

@@ -19,5 +19,5 @@ MonoBehaviour:
   rows: 2
   columns: 3
   spacing: {x: 0.5, y: 0.5, z: 0.5}
-  pickUpSFX: {fileID: 8300000, guid: e8c87f843729352408198611e7dd8e9f, type: 3}
-  putDownSFX: {fileID: 8300000, guid: 6c02b06065c881546b31806963334a79, type: 3}
+  pickUpSFX: {fileID: 8300000, guid: fc367bf535b89b84888bd7c911b43a4e, type: 3}
+  putDownSFX: {fileID: 8300000, guid: a990fd8f3fd8e7f42b6d216f17fb3d76, type: 3}
