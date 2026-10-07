@@ -18,5 +18,7 @@ public class ItemData : ScriptableObject
     public Vector3 spacing;
 
     [Header("Audio SFX")]
-    public AudioClip audioSFX;
+    public AudioClip pickUpSFX;
+    public AudioClip putDownSFX;
+
 }

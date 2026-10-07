@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using static UnityEditor.Progress;
 
@@ -42,6 +43,7 @@ public class ItemChecker : MonoBehaviour
     {
         player = FindAnyObjectByType<PlayerInteraction>();
         playerUpgrade = FindAnyObjectByType<PlayerUpgrade>();
+       
         if (player == null)
             Debug.Log("Player is not found");
 
@@ -110,7 +112,8 @@ public class ItemChecker : MonoBehaviour
     private void ComputeItemPlacements()
     {
         // Item Data
-        orientation = currentItem.Data.preferredOrientation;
+        orientation = currentItem.Data.preferredOrientation; 
+        
         int rows = currentItem.Data.rows;
         int cols = currentItem.Data.columns;
         Vector3 spacing = currentItem.Data.spacing;
@@ -246,6 +249,7 @@ public class ItemChecker : MonoBehaviour
 
         if (Vector3.Distance(rb.position, transform.TransformPoint(targetPosition)) < 0.01f && Quaternion.Angle(rb.rotation, transform.rotation * targetRotation) < 1f)
         {
+            //finalize position
             rb.Move(transform.TransformPoint(targetPosition), transform.rotation * targetRotation);
 
             UpdateUI();
@@ -253,7 +257,16 @@ public class ItemChecker : MonoBehaviour
 
             isPlacingItem = false;
             currentItem = null;
+
             Debug.Log("Placed " + heldItems[itemIndex].name + " on the shelf.");
+            
+            //play put down audio
+            AudioSource audioSource = heldItems[itemIndex].GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.clip = heldItems[itemIndex].Data.putDownSFX;
+                audioSource.Play();
+            }
         }
     }
 

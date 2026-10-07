@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerInteraction : MonoBehaviour
     private Rigidbody heldRigidbody;
     private int activeItemIndex = -1;
     public bool isPickingUp;
+    private bool playPickUpSFX;
 
     [Header("Outline Settings")]
     [SerializeField] private string outlineLayerName = "Outline";
@@ -366,6 +368,7 @@ public class PlayerInteraction : MonoBehaviour
             heldObject.transform.SetParent(holdPoint, true);
 
             isPickingUp = true;
+            playPickUpSFX = true;
         }
     }
 
@@ -387,6 +390,19 @@ public class PlayerInteraction : MonoBehaviour
             obj.localRotation = Quaternion.identity;
 
             isPickingUp = false;
+
+            //play put down audio
+            if (!playPickUpSFX) return;
+            AudioSource audioSource = heldObject.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                Item item = heldObject.GetComponent<Item>();
+                if (item != null && item.Data != null)
+                {
+                    audioSource.clip = item.Data.pickUpSFX;
+                    audioSource.Play();
+                }
+            }
         }
     }
     #endregion
@@ -452,10 +468,11 @@ public class PlayerInteraction : MonoBehaviour
         heldObject.transform.localPosition = Vector3.zero;
         heldObject.transform.localRotation = Quaternion.identity;
 
+        playPickUpSFX = false;
         isPickingUp = true;
         isSwitching = false;
 
-        UpdateInventoryUI();
+        UpdateInventoryUI();  
     }
     #endregion
 
