@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsPanel : MonoBehaviour
@@ -85,7 +86,15 @@ public class SettingsPanel : MonoBehaviour
 
     public void CloseSettingsMenu()
     {
-        if(gameUI == null)
+        Scene currentScene = SceneManager.GetActiveScene();
+        if (currentScene.buildIndex == 0)
+        {
+            TitleScreenManager title = FindAnyObjectByType<TitleScreenManager>();
+            title.OpenMainMenu();
+            return;
+        }
+        
+        if (gameUI == null)
         {
             gameObject.SetActive(false);
         }

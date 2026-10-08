@@ -36,7 +36,6 @@ public class TitleScreenManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private GameObject settingsMenu;
-    [SerializeField] private Button settingsBackBtn;
 
     private int stageIndex;
     [SerializeField] private bool stage1NewGameCreated;
@@ -54,7 +53,6 @@ public class TitleScreenManager : MonoBehaviour
         newGameBtn.onClick.AddListener(NewGame);
         resumeGameBtn.onClick.AddListener(LoadStage);
         playBackBtn.onClick.AddListener(OpenMainMenu);
-        settingsBackBtn.onClick.AddListener(OpenMainMenu);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -130,6 +128,7 @@ public class TitleScreenManager : MonoBehaviour
                 stage3NewGameCreated = true;
                 break;
         }
+        
 
         SaveManager.instance.SaveGame();
         SceneLoader.Instance.LoadSceneByIndex(stageIndex);
