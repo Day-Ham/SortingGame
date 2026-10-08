@@ -21,6 +21,13 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
         Gizmos.DrawLine(gameObject.transform.position, elemtentToSelect.gameObject.transform.position);
     }
 
+    private void Awake()
+    {
+        eventSystem = FindAnyObjectByType<EventSystem>();
+        if (eventSystem == null)
+            Debug.Log("Did not find an Event System in your Scene", this);
+    }
+
     private void Reset()
     {
         eventSystem = FindAnyObjectByType<EventSystem>();

@@ -251,7 +251,7 @@ public class GameUIManager : MonoBehaviour
         pause.DisablePlayerControl();
         pause.UnlockCursor();
         saveManager.SaveGame();
-        sceneLoader.LoadTitleScene();
+        sceneLoader.LoadSceneByIndex(0);
     }
 
     private void QuitGame()

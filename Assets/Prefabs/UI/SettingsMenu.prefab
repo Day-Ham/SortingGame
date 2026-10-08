@@ -7570,6 +7570,7 @@ GameObject:
   - component: {fileID: 5600305786058598660}
   - component: {fileID: 5509024621466289472}
   - component: {fileID: 726529058898948187}
+  - component: {fileID: 3603415419282899086}
   m_Layer: 5
   m_Name: InputToggle
   m_TagString: Untagged
@@ -7643,7 +7644,31 @@ MonoBehaviour:
   m_Group: {fileID: 5502321701093358853}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3603415419282899086}
+        m_TargetAssemblyTypeName: SetsUIElementToSelectOnInteraction, Assembly-CSharp
+        m_MethodName: JumpToElement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9204383140844279734}
+        m_TargetAssemblyTypeName: UIToggles, Assembly-CSharp
+        m_MethodName: ResetToFirstToggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!222 &5509024621466289472
 CanvasRenderer:
@@ -7683,6 +7708,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3603415419282899086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7982898113758249051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 952f6b1f3da84444391e1791f967ab9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
+  eventSystem: {fileID: 0}
+  elemtentToSelect: {fileID: 5345627886380496389}
+  showVisualization: 0
+  navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &8072592569304188685
 GameObject:
   m_ObjectHideFlags: 0
