@@ -1,0 +1,296 @@
+fileFormatVersion: 2
+guid: 7a5c44a1a8ce44c43bc4189df8c6f927
+ModelImporter:
+  serializedVersion: 24600
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Antenna_Low_DefaultMaterial_BaseColor
+    second: {fileID: 2800000, guid: 308623623a01a9747a94396d81f008ac, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Antenna_Low_DefaultMaterial_Metallic
+    second: {fileID: 2800000, guid: cf05bc0f4a9a6a345814bbd737365ba6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Antenna_Low_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: c43c7a69b02e853419415fe54b296b6e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Antenna_Low_DefaultMaterial_Roughness
+    second: {fileID: 2800000, guid: bb288d7cca17e334cba62811b209aa88, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_BackScrews_Low_DefaultMaterial_BaseColor
+    second: {fileID: 2800000, guid: 0e14f119ffe23c4439232f921efb9486, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_BackScrews_Low_DefaultMaterial_Metallic
+    second: {fileID: 2800000, guid: 9c249dd79a1424242b1c7fa3b6c526c3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_BackScrews_Low_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: cdbee0a098f17ab42bd13a7766fad1ee, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_BackScrews_Low_DefaultMaterial_Roughness
+    second: {fileID: 2800000, guid: 955a82c9a56342641b282eddc9d30c5f, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Base_Low_DefaultMaterial_BaseColor
+    second: {fileID: 2800000, guid: 84b4570138eb31b4886582391bd17201, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Base_Low_DefaultMaterial_Metallic
+    second: {fileID: 2800000, guid: b815f797963b97a47923e9989e3b4a00, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Base_Low_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 9c9c8488fbce64649b58e543545dfd04, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Base_Low_DefaultMaterial_Roughness
+    second: {fileID: 2800000, guid: f5d9fbfb620dac8409a21a8b9931de29, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Mic_Low_DefaultMaterial_BaseColor
+    second: {fileID: 2800000, guid: 484fa810da4e33c419534537cdeb9dfd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Mic_Low_DefaultMaterial_Metallic
+    second: {fileID: 2800000, guid: 263e8b20cc219414e907ffec303bc6e5, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Mic_Low_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: f6572c4ee09b9ad42aa1bdcf320c8f7b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Mic_Low_DefaultMaterial_Roughness
+    second: {fileID: 2800000, guid: 0b6127be6118aec40b9728b5b13813ab, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_SideButton_Big_Low_DefaultMaterial_BaseColor
+    second: {fileID: 2800000, guid: 1cc8bf850947c8e40a6d36dbce748b7e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_SideButton_Big_Low_DefaultMaterial_Metallic
+    second: {fileID: 2800000, guid: e392b1ff283d91a4aac09b858f003dba, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_SideButton_Big_Low_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 32fcb49df8305894a874b31f66fc3fc9, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_SideButton_Big_Low_DefaultMaterial_Roughness
+    second: {fileID: 2800000, guid: 6ecc342e4ace9544d9b2c93858b64aa7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_SideButton_Small_Low_DefaultMaterial_BaseColor
+    second: {fileID: 2800000, guid: 1c4680368d9ea024798e55158956782e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_SideButton_Small_Low_DefaultMaterial_Metallic
+    second: {fileID: 2800000, guid: 292737897b0d8f34484759678ef64683, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_SideButton_Small_Low_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 94403e4b0376fa44eaba50c6f5229875, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_SideButton_Small_Low_DefaultMaterial_Roughness
+    second: {fileID: 2800000, guid: 2a2afe09057077b4f9501083fb4a4ddc, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Speaker_Low_DefaultMaterial_BaseColor
+    second: {fileID: 2800000, guid: c63e446c9dc208c43af64cc7a0a7bcfd, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Speaker_Low_DefaultMaterial_Metallic
+    second: {fileID: 2800000, guid: 47118e41e54531a4591fd5087dbcbd3b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Speaker_Low_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: da0b8586066178e45b57d981f66fa1ec, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_Speaker_Low_DefaultMaterial_Roughness
+    second: {fileID: 2800000, guid: 080c601907130a043a7ea19886a1aa73, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_TopButton_Left_Low_DefaultMaterial_BaseColor
+    second: {fileID: 2800000, guid: caed48b7509704144b613ab63166a779, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_TopButton_Left_Low_DefaultMaterial_Metallic
+    second: {fileID: 2800000, guid: 5fcf42fe47a989149b63e93a38e80332, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_TopButton_Left_Low_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 8e29d518ea16b91449eb23425d2d4bef, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_TopButton_Left_Low_DefaultMaterial_Roughness
+    second: {fileID: 2800000, guid: 508409e1f314c344aa677a29c997e572, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_TopButton_Right_Low_DefaultMaterial_BaseColor
+    second: {fileID: 2800000, guid: 810e2fc850c139342a470ece8dd73bde, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_TopButton_Right_Low_DefaultMaterial_Metallic
+    second: {fileID: 2800000, guid: 5aead62c6e1b4764fb3b3146f7132e3d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_TopButton_Right_Low_DefaultMaterial_Normal
+    second: {fileID: 2800000, guid: 7af3665a13ffb5844a7cf461c31b26d3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: WT_TopButton_Right_Low_DefaultMaterial_Roughness
+    second: {fileID: 2800000, guid: 09e21fc97d1c53244b1b0854f2546e85, type: 3}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+    searchTexturesGlobally: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    preBakeConvexCollisionMesh: 0
+    preBakeTriangleCollisionMesh: 0
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    generateMeshLods: 0
+    meshLodGenerationFlags: 0
+    maximumMeshLod: -1
+    importUVs: -1
+    importVertexColors: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+    calculateBlendshapeNormalsDeltaFromImportedNormals: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
