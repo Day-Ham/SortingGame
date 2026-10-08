@@ -16,6 +16,8 @@ public class Item : MonoBehaviour
     private float stoppedTimer;
 
     public bool IsHeld { get; private set; }
+    public Transform HeldBy { get; private set; }
+
     public bool IsPlaced;
 
     private void Awake()
@@ -64,9 +66,19 @@ public class Item : MonoBehaviour
         return Physics.Raycast(transform.position, Vector3.down, rayDistance, supportLayers);
     }
 
-    public void Held(bool held)
+    public void Held(bool held, Transform holder = null)
     {
         IsHeld = held;
+        if (held)
+        {
+            HeldBy = holder;
+            stoppedTimer = 0f;
+            rb.isKinematic = true;
+        }
+        else
+        {
+            HeldBy = null;
+        }
 
         if (held)
         {

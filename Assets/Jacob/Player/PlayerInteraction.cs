@@ -364,7 +364,7 @@ public class PlayerInteraction : MonoBehaviour
             UpdateInventoryUI();
 
             heldRigidbody.isKinematic = true;
-            item.Held(true);
+            item.Held(true, transform);
             heldObject.transform.SetParent(holdPoint, true);
 
             isPickingUp = true;
