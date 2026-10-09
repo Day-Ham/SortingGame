@@ -3,7 +3,12 @@ guid: 4705e54a1130d854db47f7fe995e12f2
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Black Meat
+    second: {fileID: 2800000, guid: 7d857d05de2ec4f409bb3219a7d57278, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
