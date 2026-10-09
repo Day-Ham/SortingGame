@@ -1,11 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Progress;
 
 public class RobotBuddy : MonoBehaviour
 {
     [Header("Movement")]
     [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Vector3 targetDestination;
 
     [Header("Cute Hover")]
     [SerializeField] private float hoverAmount;
@@ -17,28 +21,40 @@ public class RobotBuddy : MonoBehaviour
     [SerializeField] private Transform holdPoint;
     [SerializeField] private float pickupSpeed;
 
-    [Header("Target")]
-    [SerializeField] private Item targetItem;
-    [SerializeField] private GameObject heldObject;
+    [Header("Target Item")]
     [SerializeField] private List<Item> foundItems = new List<Item>();
-
-    private Item heldItem;
-
+    private Item targetItem;
+    [SerializeField] private GameObject heldObject;
     private Rigidbody heldRigidbody;
 
-    private bool isPickingUp;
+    [Header("Target Shelf")]
+    [SerializeField] private GameObject targetShelf;
+    private ItemChecker targetItemChecker;
+
+
+    //Checks
+    [SerializeField] private bool isPickingUp;
+    [SerializeField] private bool isPlacing;
+
+    ItemSpawner itemSpawner;
+
+    private void Awake()
+    {
+        itemSpawner = FindAnyObjectByType<ItemSpawner>();
+    }
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         baseOffset = agent.baseOffset;
-
     }
 
     private void Update()
     {
         float bounce = Mathf.Sin(Time.time * hoverSpeed) * hoverAmount;
         agent.baseOffset = baseOffset + bounce;
+
+        if (isPlacing) return;
 
         if (isPickingUp)
         {
@@ -76,11 +92,38 @@ public class RobotBuddy : MonoBehaviour
             return;
         }
 
-        agent.SetDestination(targetItem.transform.position);
+        MoveToDestination();
         if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
         {
-            TryPickup(targetItem);
-        }
+            if (targetItemChecker != null && !isPlacing)
+            {
+                Debug.Log($" Robot is trying to place {targetItem.name} on {targetShelf.name}.");
+                isPlacing = true;
+                StartCoroutine(PlaceItemOnShelf());
+            }
+            else
+            {
+                TryPickup(targetItem);
+            } 
+        }        
+    }
+
+    IEnumerator PlaceItemOnShelf()
+    {
+        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem);
+        Debug.Log("Calling ItemChecker to take the item from Robot Buddy");
+        targetItemChecker.PlaceItem(targetItem);
+
+        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem);
+        Debug.Log($" Robot placed {targetItem.name} on {targetShelf.name}.");
+        ResetTargetShelf();
+        FindItem();
+        isPlacing = false;
+    }
+
+    private void MoveToDestination()
+    {
+        agent.SetDestination(targetDestination);
     }
 
     private void FindItem()
@@ -103,7 +146,7 @@ public class RobotBuddy : MonoBehaviour
             if (item.IsHeld)
                 continue;
 
-            if (item.IsPlaced)
+            if (item.GetComponentInParent<ItemChecker>())
                 continue;
 
             ItemSpawner spawner = item.GetComponentInParent<ItemSpawner>();
@@ -118,6 +161,7 @@ public class RobotBuddy : MonoBehaviour
             return;
 
         targetItem = foundItems[Random.Range(0, foundItems.Count)];
+        targetDestination = targetItem.transform.position;
     }
 
     private void TryPickup(Item item)
@@ -178,6 +222,57 @@ public class RobotBuddy : MonoBehaviour
             isPickingUp = false;
 
             Debug.Log($"Robot is now holding {obj.name}");
+            FindShelf();
         }
+    }
+
+    private void FindShelf()
+    {
+        ItemChecker[] shelves = FindObjectsByType<ItemChecker>()
+            .OrderByDescending(shelf => shelf.heldItems.Count)
+            .ToArray();
+
+        if (shelves.Length == 0)
+        {
+            DropItem();
+            return;
+        }
+
+        foreach (ItemChecker shelf in shelves)
+        {
+            if (shelf.IsItemValid(targetItem))
+            {
+                targetItemChecker = shelf;
+                targetShelf = shelf.gameObject;
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
+
+        if (targetItemChecker == null)
+        {
+            DropItem();
+            return;
+        }
+
+        
+        targetDestination = targetItemChecker.transform.position;
+    }
+
+    private void DropItem()
+    {
+        heldObject.transform.SetParent(itemSpawner.transform);
+        heldRigidbody.isKinematic = false;
+        CancelPickup();
+        Debug.Log("There are no shelves available :(. Dropping the item.");
+    }
+
+    private void ResetTargetShelf()
+    {
+        targetShelf = null;
+        targetItemChecker = null;
     }
 }

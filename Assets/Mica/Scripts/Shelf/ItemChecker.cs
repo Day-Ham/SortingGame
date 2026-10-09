@@ -219,8 +219,10 @@ public class ItemChecker : MonoBehaviour
         {
             player.RemoveItemFromPlayer(currentItem.gameObject);
         }
-        currentItem.transform.SetParent(transform);
 
+        Debug.Log("Setting the new parent of the object to this shelf");
+        currentItem.transform.SetParent(transform);
+        Debug.Log("Item parented");
         heldItems.Add(currentItem);
 
         AddCoin(); //adds money if first time being placed on shelf
