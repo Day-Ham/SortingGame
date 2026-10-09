@@ -35,6 +35,8 @@ public class RobotBuddy : MonoBehaviour
     //Checks
     [SerializeField] private bool isPickingUp;
     [SerializeField] private bool isPlacing;
+    [SerializeField] private bool isMovingVertically;
+    [SerializeField] private bool isResetingVertically;
 
     ItemSpawner itemSpawner;
 
@@ -51,8 +53,17 @@ public class RobotBuddy : MonoBehaviour
 
     private void Update()
     {
-        float bounce = Mathf.Sin(Time.time * hoverSpeed) * hoverAmount;
-        agent.baseOffset = baseOffset + bounce;
+        if (isResetingVertically)
+        {
+            ResetBaseOffset();
+        }
+
+        if (!isMovingVertically && !isResetingVertically)
+        {
+            float bounce = Mathf.Sin(Time.time * hoverSpeed) * hoverAmount;
+            agent.baseOffset = baseOffset + bounce;
+        }
+        
 
         if (isPlacing) return;
 
@@ -92,12 +103,13 @@ public class RobotBuddy : MonoBehaviour
             return;
         }
 
-        MoveToDestination();
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+
+        //MoveToTargetDestonation();
+
+        if (MoveToTargetDestination())
         {
             if (targetItemChecker != null && !isPlacing)
             {
-                Debug.Log($" Robot is trying to place {targetItem.name} on {targetShelf.name}.");
                 isPlacing = true;
                 StartCoroutine(PlaceItemOnShelf());
             }
@@ -108,23 +120,41 @@ public class RobotBuddy : MonoBehaviour
         }        
     }
 
-    IEnumerator PlaceItemOnShelf()
+    private bool MoveToTargetDestination()
     {
-        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem);
-        Debug.Log("Calling ItemChecker to take the item from Robot Buddy");
-        targetItemChecker.PlaceItem(targetItem);
+        //moving vertically
+        if (isMovingVertically)
+        {
+            float direction = Mathf.Sign(targetItemChecker.transform.position.y - transform.position.y);
+            agent.baseOffset += direction * agent.speed * Time.deltaTime;
 
-        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem);
-        Debug.Log($" Robot placed {targetItem.name} on {targetShelf.name}.");
-        ResetTargetShelf();
-        CancelPickup();
-        FindItem();
-        isPlacing = false;
-    }
+            if (Mathf.Abs(targetItemChecker.transform.position.y - transform.position.y) < 0.01f)
+            {
+                isMovingVertically = false;
+                isResetingVertically = true;
+                return true;
+            }
+            return false;
+        }
 
-    private void MoveToDestination()
-    {
-        agent.SetDestination(targetDestination);
+        //moving horizontally
+        Vector3 targetDestinationXZ = new Vector3(targetDestination.x, transform.position.y, targetDestination.z);
+
+        agent.SetDestination(targetDestinationXZ);
+       
+        if (Vector3.Distance(targetDestinationXZ, transform.position) < 1f)
+        {
+            if (targetItemChecker == null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                return true;
+            }
+            else if (targetItemChecker != null)//try to move vertically
+            {
+                isMovingVertically = true;
+            }
+            return false;
+        }
+        return false;
     }
 
     private void FindItem()
@@ -227,6 +257,14 @@ public class RobotBuddy : MonoBehaviour
         }
     }
 
+    private void DropItem()
+    {
+        heldObject.transform.SetParent(itemSpawner.transform);
+        heldRigidbody.isKinematic = false;
+        CancelPickup();
+        Debug.Log("There are no shelves available :(. Dropping the item.");
+    }
+
     private void FindShelf()
     {
         ItemChecker[] shelves = FindObjectsByType<ItemChecker>()
@@ -263,17 +301,33 @@ public class RobotBuddy : MonoBehaviour
         targetDestination = targetItemChecker.transform.position;
     }
 
-    private void DropItem()
+    IEnumerator PlaceItemOnShelf()
     {
-        heldObject.transform.SetParent(itemSpawner.transform);
-        heldRigidbody.isKinematic = false;
+        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem);
+        targetItemChecker.PlaceItem(targetItem);
+
+        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem);
+        Debug.Log($" Robot placed {targetItem.name} on {targetShelf.name}.");
+        ResetTargetShelf();
         CancelPickup();
-        Debug.Log("There are no shelves available :(. Dropping the item.");
+        isPlacing = false;
     }
 
     private void ResetTargetShelf()
     {
         targetShelf = null;
         targetItemChecker = null;
+    }
+
+    private void ResetBaseOffset()
+    {
+        agent.baseOffset = Mathf.MoveTowards(agent.baseOffset,baseOffset,agent.speed * Time.deltaTime);
+        
+        if (Mathf.Abs(agent.baseOffset - baseOffset) <= 0.01f)
+        {
+            agent.baseOffset = baseOffset;
+            FindItem();
+            isResetingVertically = false;
+        }
     }
 }
