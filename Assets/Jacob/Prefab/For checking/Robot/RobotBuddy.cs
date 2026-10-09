@@ -117,6 +117,7 @@ public class RobotBuddy : MonoBehaviour
         yield return new WaitUntil(() => !targetItemChecker.isPlacingItem);
         Debug.Log($" Robot placed {targetItem.name} on {targetShelf.name}.");
         ResetTargetShelf();
+        CancelPickup();
         FindItem();
         isPlacing = false;
     }
