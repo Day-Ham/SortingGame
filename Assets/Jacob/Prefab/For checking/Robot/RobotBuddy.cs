@@ -3,23 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEditor.Progress;
 
 public class RobotBuddy : MonoBehaviour
 {
-    [Header("Movement")]
-    [SerializeField] private NavMeshAgent agent;
-    [SerializeField] private Vector3 targetDestination;
-
-    [Header("Cute Hover")]
-    [SerializeField] private float hoverAmount;
-    [SerializeField] private float hoverSpeed;
-
+    private NavMeshAgent agent;
     private float baseOffset;
 
-    [Header("Pickup")]
+    [Header("Pick Up")]
     [SerializeField] private Transform holdPoint;
     [SerializeField] private float pickupSpeed;
+
+    [Header("Put Down")]
+    [SerializeField] private float stoppingDistFromShelf;
+    [SerializeField] private float putDownSpeed;
+
+    private Vector3 targetDestination;
 
     [Header("Target Item")]
     [SerializeField] private List<Item> foundItems = new List<Item>();
@@ -30,9 +28,9 @@ public class RobotBuddy : MonoBehaviour
     [Header("Target Shelf")]
     [SerializeField] private GameObject targetShelf;
     private ItemChecker targetItemChecker;
+    private float initialShelfMoveSpeed;
 
-
-    //Checks
+    [Header("State")]
     [SerializeField] private bool isPickingUp;
     [SerializeField] private bool isPlacing;
     [SerializeField] private bool isMovingVertically;
@@ -52,18 +50,11 @@ public class RobotBuddy : MonoBehaviour
     }
 
     private void Update()
-    {
+    {   
         if (isResetingVertically)
         {
             ResetBaseOffset();
-        }
-
-        if (!isMovingVertically && !isResetingVertically)
-        {
-            float bounce = Mathf.Sin(Time.time * hoverSpeed) * hoverAmount;
-            agent.baseOffset = baseOffset + bounce;
-        }
-        
+        }    
 
         if (isPlacing) return;
 
@@ -103,9 +94,6 @@ public class RobotBuddy : MonoBehaviour
             return;
         }
 
-
-        //MoveToTargetDestonation();
-
         if (MoveToTargetDestination())
         {
             if (targetItemChecker != null && !isPlacing)
@@ -125,13 +113,12 @@ public class RobotBuddy : MonoBehaviour
         //moving vertically
         if (isMovingVertically)
         {
-            float direction = Mathf.Sign(targetItemChecker.transform.position.y - transform.position.y);
+            float direction = Mathf.Sign(targetItemChecker.transform.position.y - heldObject.transform.position.y);
             agent.baseOffset += direction * agent.speed * Time.deltaTime;
 
-            if (Mathf.Abs(targetItemChecker.transform.position.y - transform.position.y) < 0.01f)
+            if (Mathf.Abs(targetItemChecker.transform.position.y - heldObject.transform.position.y) < 0.01f)
             {
                 isMovingVertically = false;
-                isResetingVertically = true;
                 return true;
             }
             return false;
@@ -141,55 +128,40 @@ public class RobotBuddy : MonoBehaviour
         Vector3 targetDestinationXZ = new Vector3(targetDestination.x, transform.position.y, targetDestination.z);
 
         agent.SetDestination(targetDestinationXZ);
-       
-        if (Vector3.Distance(targetDestinationXZ, transform.position) < 1f)
+
+        if (targetItemChecker == null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance) // item found, go get it
         {
-            if (targetItemChecker == null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-            {
-                return true;
-            }
-            else if (targetItemChecker != null)//try to move vertically
-            {
-                isMovingVertically = true;
-            }
-            return false;
+            return true;
+        }
+        else if (targetItemChecker != null && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + stoppingDistFromShelf) //found shelf, try to move vertically
+        {
+            isMovingVertically = true;
         }
         return false;
     }
 
     private void FindItem()
     {
-        if (heldObject != null)
-            return;
+        if (heldObject != null) return;
 
-        if (targetItem != null)
-            return;
+        if (targetItem != null) return;
 
         foundItems.Clear();
 
         Item[] allItems = FindObjectsByType<Item>();
-
         foreach (Item item in allItems)
         {
-            if (item == null)
-                continue;
-
-            if (item.IsHeld)
-                continue;
-
-            if (item.GetComponentInParent<ItemChecker>())
-                continue;
+            if (item == null) continue;
+            if (item.IsHeld) continue;
+            if (item.GetComponentInParent<ItemChecker>()) continue;
 
             ItemSpawner spawner = item.GetComponentInParent<ItemSpawner>();
-
-            if (spawner == null)
-                continue;
+            if (spawner == null) continue;
 
             foundItems.Add(item);
         }
 
-        if (foundItems.Count == 0)
-            return;
+        if (foundItems.Count == 0) return;
 
         targetItem = foundItems[Random.Range(0, foundItems.Count)];
         targetDestination = targetItem.transform.position;
@@ -197,34 +169,19 @@ public class RobotBuddy : MonoBehaviour
 
     private void TryPickup(Item item)
     {
-        if (item == null)
-            return;
+        if (item == null) return;
 
         Rigidbody rb = item.GetComponent<Rigidbody>();
-
-        if (rb == null)
-            return;
+        if (rb == null) return;
 
         heldObject = item.gameObject;
         heldRigidbody = rb;
 
         item.Held(true, transform);
-
         Debug.Log($" Robot picked up {item.name}. HeldBy = {item.HeldBy.name}");
 
         isPickingUp = true;
-
         agent.ResetPath();
-    }
-
-    private void CancelPickup()
-    {
-        isPickingUp = false;
-
-        heldObject = null;
-        heldRigidbody = null;
-
-        targetItem = null;
     }
 
     private void PickupLerp()
@@ -267,6 +224,7 @@ public class RobotBuddy : MonoBehaviour
 
     private void FindShelf()
     {
+        //arrange shelves based on number of children, makes sure to choose shelf with the most same item 
         ItemChecker[] shelves = FindObjectsByType<ItemChecker>()
             .OrderByDescending(shelf => shelf.heldItems.Count)
             .ToArray();
@@ -297,20 +255,37 @@ public class RobotBuddy : MonoBehaviour
             return;
         }
 
-        
         targetDestination = targetItemChecker.transform.position;
     }
 
     IEnumerator PlaceItemOnShelf()
     {
-        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem);
+        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem); // makes sure the shelf is not busy doing anything
+        //change move speed of placing items of the shelf for slower effect;
+        initialShelfMoveSpeed = targetItemChecker.moveSpeed;
+        targetItemChecker.moveSpeed = putDownSpeed;
         targetItemChecker.PlaceItem(targetItem);
 
-        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem);
+        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem); // waits for the placing action to finish before doing anything else
+        //return initial move speed of placing items in shelf
+        targetItemChecker.moveSpeed = initialShelfMoveSpeed;
+
         Debug.Log($" Robot placed {targetItem.name} on {targetShelf.name}.");
+        isResetingVertically = true; //go back to initial hover height
+
         ResetTargetShelf();
         CancelPickup();
         isPlacing = false;
+    }
+
+    private void CancelPickup()
+    {
+        isPickingUp = false;
+
+        heldObject = null;
+        heldRigidbody = null;
+
+        targetItem = null;
     }
 
     private void ResetTargetShelf()

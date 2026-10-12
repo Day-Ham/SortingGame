@@ -36,7 +36,7 @@ public class ItemChecker : MonoBehaviour
     CurrencyManager currency;
 
     [Header("Placing Parameters")]
-    [SerializeField] private float moveSpeed = 30f;
+    public float moveSpeed = 30f;
     public bool isPlacingItem;
 
     private void Awake()
