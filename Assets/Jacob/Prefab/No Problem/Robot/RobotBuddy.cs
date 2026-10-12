@@ -8,6 +8,7 @@ public class RobotBuddy : MonoBehaviour
 {
     private NavMeshAgent agent;
     private float baseOffset;
+    private RobotAudio robotAudio;
 
     [Header("Pick Up")]
     [SerializeField] private Transform holdPoint;
@@ -47,6 +48,7 @@ public class RobotBuddy : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         baseOffset = agent.baseOffset;
+        robotAudio = GetComponent<RobotAudio>();
     }
 
     private void Update()
@@ -178,6 +180,7 @@ public class RobotBuddy : MonoBehaviour
         heldRigidbody = rb;
 
         item.Held(true, transform);
+        robotAudio.PlayPickupSound();
         Debug.Log($" Robot picked up {item.name}. HeldBy = {item.HeldBy.name}");
 
         isPickingUp = true;
