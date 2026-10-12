@@ -36,12 +36,15 @@ public class RobotBuddy : MonoBehaviour
     [SerializeField] private bool isPlacing;
     [SerializeField] private bool isMovingVertically;
     [SerializeField] private bool isResetingVertically;
+    [SerializeField] private bool isChasingStolenItem;
 
     ItemSpawner itemSpawner;
+    PlayerInteraction player;
 
     private void Awake()
     {
         itemSpawner = FindAnyObjectByType<ItemSpawner>();
+        player = FindAnyObjectByType<PlayerInteraction>();
     }
 
     private void Start()
@@ -52,13 +55,34 @@ public class RobotBuddy : MonoBehaviour
     }
 
     private void Update()
-    {   
-        if (isResetingVertically)
+    {
+        if (targetItem != null && targetItem.HeldBy == player.transform && !isChasingStolenItem)
         {
+            Debug.Log($"Robot lost {targetItem.name} to another holder. Initiating chase!");
+            isChasingStolenItem = true;
+            ResetToPickUp();
+        }
+
+        if (isResetingVertically)
             ResetBaseOffset();
-        }    
 
         if (isPlacing) return;
+
+        if (targetItem == null)
+        {
+            if (heldObject == null)
+            {
+                isChasingStolenItem = false;
+                FindItem();
+            }
+
+            return;
+        }
+
+        if (isChasingStolenItem)
+        {
+            targetDestination = targetItem.transform.position;
+        }
 
         if (isPickingUp)
         {
@@ -68,31 +92,7 @@ public class RobotBuddy : MonoBehaviour
                 return;
             }
 
-            Item item = heldObject.GetComponent<Item>();
-
-            if (item == null)
-            {
-                CancelPickup();
-                return;
-            }
-
-            if (item.HeldBy != transform)
-            {
-                Debug.Log($"Robot lost {item.name} to another holder.");
-
-                CancelPickup();
-                return;
-            }
-
             PickupLerp();
-            return;
-        }
-
-        if (targetItem == null)
-        {
-            if (heldObject == null)
-                FindItem();
-
             return;
         }
 
@@ -107,7 +107,7 @@ public class RobotBuddy : MonoBehaviour
             {
                 TryPickup(targetItem);
             } 
-        }        
+        }
     }
 
     private bool MoveToTargetDestination()
@@ -144,9 +144,7 @@ public class RobotBuddy : MonoBehaviour
 
     private void FindItem()
     {
-        if (heldObject != null) return;
-
-        if (targetItem != null) return;
+        if (heldObject != null || targetItem != null) return;
 
         foundItems.Clear();
 
@@ -176,6 +174,11 @@ public class RobotBuddy : MonoBehaviour
         Rigidbody rb = item.GetComponent<Rigidbody>();
         if (rb == null) return;
 
+        if (targetItem.HeldBy == player.transform)
+        {
+            player.RemoveItemFromPlayer(targetItem.gameObject);
+        }
+
         heldObject = item.gameObject;
         heldRigidbody = rb;
 
@@ -184,7 +187,10 @@ public class RobotBuddy : MonoBehaviour
         Debug.Log($" Robot picked up {item.name}. HeldBy = {item.HeldBy.name}");
 
         isPickingUp = true;
-        agent.ResetPath();
+        isChasingStolenItem = false;
+
+        if (agent.isOnNavMesh)
+            agent.ResetPath();
     }
 
     private void PickupLerp()
@@ -212,6 +218,7 @@ public class RobotBuddy : MonoBehaviour
 
             isPickingUp = false;
 
+            
             Debug.Log($"Robot is now holding {obj.name}");
             FindShelf();
         }
@@ -219,8 +226,13 @@ public class RobotBuddy : MonoBehaviour
 
     private void DropItem()
     {
-        heldObject.transform.SetParent(itemSpawner.transform);
-        heldRigidbody.isKinematic = false;
+        if (heldObject != null)
+        {
+            heldObject.transform.SetParent(itemSpawner != null ? itemSpawner.transform : null);
+            if (heldRigidbody != null)
+                heldRigidbody.isKinematic = false;
+        }
+
         CancelPickup();
         Debug.Log("There are no shelves available :(. Dropping the item.");
     }
@@ -246,10 +258,6 @@ public class RobotBuddy : MonoBehaviour
                 targetShelf = shelf.gameObject;
                 break;
             }
-            else
-            {
-                continue;
-            }
         }
 
         if (targetItemChecker == null)
@@ -264,12 +272,14 @@ public class RobotBuddy : MonoBehaviour
     IEnumerator PlaceItemOnShelf()
     {
         yield return new WaitUntil(() => !targetItemChecker.isPlacingItem); // makes sure the shelf is not busy doing anything
+       
         //change move speed of placing items of the shelf for slower effect;
         initialShelfMoveSpeed = targetItemChecker.moveSpeed;
         targetItemChecker.moveSpeed = putDownSpeed;
         targetItemChecker.PlaceItem(targetItem);
 
         yield return new WaitUntil(() => !targetItemChecker.isPlacingItem); // waits for the placing action to finish before doing anything else
+        
         //return initial move speed of placing items in shelf
         targetItemChecker.moveSpeed = initialShelfMoveSpeed;
 
@@ -279,10 +289,16 @@ public class RobotBuddy : MonoBehaviour
         ResetTargetShelf();
         CancelPickup();
         isPlacing = false;
+        isChasingStolenItem = false;
     }
 
     private void CancelPickup()
     {
+        if (targetItem != null)
+        {
+            targetItem.Held(false);
+        }
+
         isPickingUp = false;
 
         heldObject = null;
@@ -307,5 +323,32 @@ public class RobotBuddy : MonoBehaviour
             FindItem();
             isResetingVertically = false;
         }
+    }
+
+    private void ResetToPickUp()
+    {
+        if (targetItem == null) return;
+       
+        targetDestination = targetItem.transform.position;
+
+        if (heldObject != null)
+        {
+            heldObject.transform.SetParent(null);
+        }
+
+        heldObject = null;
+        heldRigidbody = null;
+
+        isMovingVertically = false;
+        isResetingVertically = true;
+        ResetTargetShelf();
+
+        isPlacing = false;
+        isPickingUp = false;
+        
+        if (agent != null && agent.isOnNavMesh)
+            agent.ResetPath();
+
+        Debug.Log("robot was reset to chase after item");
     }
 }

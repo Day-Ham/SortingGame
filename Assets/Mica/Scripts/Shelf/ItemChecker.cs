@@ -13,6 +13,7 @@ public class ItemChecker : MonoBehaviour
     [SerializeField] private ShelfType shelfType;
     [SerializeField] private BoxCollider shelfArea;
     private List<Vector3> shelfPositions = new List<Vector3>();
+    [SerializeField] private LayerMask pickUpLayer;
 
     [Header("Items")]
     public List<Item> heldItems = new List<Item>();
@@ -200,6 +201,8 @@ public class ItemChecker : MonoBehaviour
             currentItem = item;
         }
 
+        currentItem.gameObject.layer = 0; //can't be interacted with while being placed
+
         if (currentItem == null) return;
 
         if (heldItems.Contains(currentItem)) return; //make sure no duplicates
@@ -234,12 +237,8 @@ public class ItemChecker : MonoBehaviour
     {
         int itemIndex = heldItems.Count - 1;
 
-        Rigidbody rb = heldItems[itemIndex].GetComponent<Rigidbody>();
-
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-        }
+        Rigidbody rb = currentItem.GetComponent<Rigidbody>();
+        currentItem.Held(true, transform);
 
         Vector3 targetPosition = shelfPositions[itemIndex];
         Quaternion targetRotation = Quaternion.Euler(orientation);
@@ -257,18 +256,21 @@ public class ItemChecker : MonoBehaviour
             UpdateUI();
             CheckIfItemIsComplete();
 
-            isPlacingItem = false;
-            currentItem = null;
+            currentItem.gameObject.layer = Mathf.RoundToInt(Mathf.Log(pickUpLayer.value, 2)); //done placing, can be picked up again
 
-            Debug.Log("Placed " + heldItems[itemIndex].name + " on the shelf.");
+            isPlacingItem = false;
+            
+            Debug.Log("Placed " + currentItem.name + " on the shelf.");
             
             //play put down audio
-            AudioSource audioSource = heldItems[itemIndex].GetComponent<AudioSource>();
+            AudioSource audioSource = currentItem.GetComponent<AudioSource>();
             if (audioSource != null)
             {
-                audioSource.clip = heldItems[itemIndex].Data.putDownSFX;
+                audioSource.clip = currentItem.Data.putDownSFX;
                 audioSource.Play();
             }
+            
+            currentItem = null;
         }
     }
 

@@ -15,8 +15,8 @@ public class Item : MonoBehaviour
 
     private float stoppedTimer;
 
-    public bool IsHeld { get; private set; }
-    public Transform HeldBy { get; private set; }
+    public bool IsHeld /*{ get; private set; }*/;
+    public Transform HeldBy /*{ get; private set; }*/;
 
     public bool IsPlaced;
 
