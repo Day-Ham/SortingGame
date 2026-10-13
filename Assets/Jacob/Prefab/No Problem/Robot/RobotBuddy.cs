@@ -69,6 +69,11 @@ public class RobotBuddy : MonoBehaviour
             isChasingStolenItem = true;
             ResetToPickUp();
         }
+        else if (targetItem != null && targetItem.HeldBy != player.transform && targetItem.HeldBy != transform && isChasingStolenItem)
+        {
+            isChasingStolenItem = false;
+            CancelPickup();
+        }
 
         if (isResetingVertically)
             ResetBaseOffset();
