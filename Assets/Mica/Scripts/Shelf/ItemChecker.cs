@@ -280,6 +280,7 @@ public class ItemChecker : MonoBehaviour
 
         Item item = heldItems[heldItems.Count - 1];
         heldItems.RemoveAt(heldItems.Count - 1);
+        CheckIfItemIsComplete();
 
         if (heldItems.Count == 0)
         {
@@ -320,9 +321,16 @@ public class ItemChecker : MonoBehaviour
 
     private void CheckIfItemIsComplete()
     {
-        if (heldItems.Count != maxItems) return;
+        if (heldItems.Count != maxItems)
+        {
+            background.color = Color.white;
+            return;
+        }
+
+        background.color = Color.green;
 
         if (spawner.items.Count == 0) return;
+
         foreach (ItemSpawnEntry item in spawner.items)
         {
             Item itemInfo = item.item.GetComponent<Item>();
