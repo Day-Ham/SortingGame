@@ -38,6 +38,12 @@ public class RobotBuddy : MonoBehaviour
     [SerializeField] private bool isMovingVertically;
     [SerializeField] private bool isResetingVertically;
     [SerializeField] private bool isChasingStolenItem;
+    [SerializeField] private bool isRoaming;
+
+    [Header("Random Roaming")]
+    [SerializeField] private float roamRange = 25f;
+    [SerializeField] private float roamWaitTime = 1f;
+    [SerializeField] private float roamTimer;
 
     ItemSpawner itemSpawner;
     PlayerInteraction player;
@@ -75,9 +81,39 @@ public class RobotBuddy : MonoBehaviour
             {
                 isChasingStolenItem = false;
                 FindItem();
-            }
 
+                if (targetItem == null)
+                {
+                    StartRoaming();
+
+                    if (agent.isOnNavMesh)
+                    {
+                        roamTimer += Time.deltaTime;
+
+                        if (!agent.pathPending &&
+                            (!agent.hasPath ||
+                             agent.remainingDistance <= agent.stoppingDistance))
+                        {
+                            if (roamTimer >= roamWaitTime)
+                            {
+                                ChooseRandomDestination();
+                                roamTimer = 0f;
+                            }
+                        }
+                    }
+                    return;
+                }
+            }
             return;
+        }
+
+        if (isRoaming)
+        {
+            isRoaming = false;
+            roamTimer = 0f;
+
+            if (agent.isOnNavMesh)
+                agent.ResetPath();
         }
 
         if (isChasingStolenItem)
@@ -384,5 +420,40 @@ public class RobotBuddy : MonoBehaviour
             agent.ResetPath();
 
         Debug.Log("robot was reset to chase after item");
+    }
+
+    private void StartRoaming()
+    {
+        if (isRoaming)
+            return;
+
+        isRoaming = true;
+        roamTimer = 0f;
+
+        if (agent.isOnNavMesh)
+            agent.ResetPath();
+
+        ChooseRandomDestination();
+    }
+
+    private void ChooseRandomDestination()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            Vector2 randomPoint = Random.insideUnitCircle * roamRange;
+            Vector3 newPoint = transform.position + new Vector3(randomPoint.x, 0f, randomPoint.y);
+
+            if (NavMesh.SamplePosition(newPoint, out NavMeshHit hit, 5f, NavMesh.AllAreas))
+            {
+                agent.SetDestination(hit.position);
+                return;
+            }
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, roamRange);
     }
 }

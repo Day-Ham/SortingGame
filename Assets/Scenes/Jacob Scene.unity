@@ -1267,6 +1267,8 @@ MonoBehaviour:
   supportLayers:
     serializedVersion: 2
     m_Bits: 0
+  IsHeld: 0
+  HeldBy: {fileID: 0}
   IsPlaced: 0
 --- !u!54 &102206644
 Rigidbody:
@@ -2411,6 +2413,8 @@ MonoBehaviour:
   background: {fileID: 1040429599}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &257865429
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2567,6 +2571,8 @@ MonoBehaviour:
   background: {fileID: 528467123}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &267726654
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3951,6 +3957,8 @@ MonoBehaviour:
   background: {fileID: 2004055197}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &431372708
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7778,12 +7786,18 @@ MonoBehaviour:
   stoppingDistFromShelf: 1.5
   putDownSpeed: 1
   foundItems: []
+  targetItem: {fileID: 0}
   heldObject: {fileID: 0}
   targetShelf: {fileID: 0}
   isPickingUp: 0
   isPlacing: 0
   isMovingVertically: 0
   isResetingVertically: 0
+  isChasingStolenItem: 0
+  isRoaming: 0
+  roamRange: 5
+  roamWaitTime: 5
+  roamTimer: 0
 --- !u!136 &717341023
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -8398,7 +8412,7 @@ Transform:
   m_GameObject: {fileID: 748269496}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.70710677, z: -0.70710677, w: 0}
-  m_LocalPosition: {x: -0.008, y: -0.033, z: 0.207}
+  m_LocalPosition: {x: -0.008, y: -0.033, z: 0.199}
   m_LocalScale: {x: 0.2, y: 0.20000005, z: 0.20000005}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8429,6 +8443,8 @@ MonoBehaviour:
   background: {fileID: 2117796732}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &748269499
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9955,6 +9971,8 @@ MonoBehaviour:
   background: {fileID: 83426617}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &982424029
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12106,6 +12124,8 @@ MonoBehaviour:
   background: {fileID: 1403857248}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &1086313996
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13293,6 +13313,8 @@ MonoBehaviour:
   background: {fileID: 1532971557}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &1200792234
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15436,6 +15458,8 @@ MonoBehaviour:
   background: {fileID: 1352683003}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &1367708679
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15941,25 +15965,25 @@ MonoBehaviour:
     amount: 6
     isComplete: 0
   - item: {fileID: 6371781441441023062, guid: 32d1984ee53f1264b86bc770be8b42eb, type: 3}
-    amount: 6
+    amount: 0
     isComplete: 0
   - item: {fileID: 619444733790497576, guid: 78fb262a725b5164583b8462ce82f8b8, type: 3}
-    amount: 6
+    amount: 0
     isComplete: 0
   - item: {fileID: 7637277845575412764, guid: 27b0020ac4b4ef142a78bf6e99d79211, type: 3}
-    amount: 6
+    amount: 0
     isComplete: 0
   - item: {fileID: 917505756160874363, guid: 49cc3a349f79e3148b864214c202fe2f, type: 3}
-    amount: 6
+    amount: 0
     isComplete: 0
   - item: {fileID: 990166494042590028, guid: 12826f0a0856e104293613686bfbfb87, type: 3}
-    amount: 6
+    amount: 0
     isComplete: 0
   - item: {fileID: 9082466553116384340, guid: e3993dcd6ef66bf4d8a7b4ccab201b8b, type: 3}
-    amount: 6
+    amount: 0
     isComplete: 0
   - item: {fileID: 7388968406353462495, guid: 73949c881058b4e48893a274c8298a8c, type: 3}
-    amount: 6
+    amount: 0
     isComplete: 0
   itemsSpawned: 0
   spawnArea: {fileID: 1389070767}
@@ -17555,6 +17579,8 @@ MonoBehaviour:
   background: {fileID: 2105853632}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &1535262312
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22075,6 +22101,8 @@ MonoBehaviour:
   background: {fileID: 614779358}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &1832640699
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -22833,6 +22861,8 @@ MonoBehaviour:
   background: {fileID: 442493109}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &1907824751
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23025,6 +23055,8 @@ MonoBehaviour:
   background: {fileID: 1081661369}
   moveSpeed: 30
   isPlacingItem: 0
+  isAssignedToBuddy: 0
+  robotBuddy: {fileID: 0}
 --- !u!65 &1922206634
 BoxCollider:
   m_ObjectHideFlags: 0

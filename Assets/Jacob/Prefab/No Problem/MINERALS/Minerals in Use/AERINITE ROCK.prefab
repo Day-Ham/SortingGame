@@ -164,7 +164,9 @@ MonoBehaviour:
   supportCheckDistance: 0.1
   supportLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 513
+  IsHeld: 0
+  HeldBy: {fileID: 0}
   IsPlaced: 0
 --- !u!114 &-66132014029692459
 MonoBehaviour:

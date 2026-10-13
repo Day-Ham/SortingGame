@@ -38,6 +38,7 @@ MonoBehaviour:
     - Assembly-CSharp
     - Assembly-CSharp-firstpass
     - LineworkLite
+    - Unity.AI.Navigation.Samples
     - Unity.InputSystem.RebindingUI
     showAdvancedSettings: 0
   addMgrToSceneAutomatically: 0

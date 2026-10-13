@@ -281,7 +281,7 @@ CharacterController:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4
   m_LayerOverridePriority: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
@@ -357,6 +357,7 @@ MonoBehaviour:
   heldItems: []
   isSwitching: 0
   throwForce: 10
+  robotBuddyShelfPromp: {fileID: 0}
   throwTargetLayers:
     serializedVersion: 2
     m_Bits: 256
