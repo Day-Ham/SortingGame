@@ -27,7 +27,7 @@ public class Item : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsHeld || IsPlaced)
+        if (IsHeld)
         {
             stoppedTimer = 0f;
             return;

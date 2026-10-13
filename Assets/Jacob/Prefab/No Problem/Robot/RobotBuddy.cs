@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Progress;
 
 public class RobotBuddy : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class RobotBuddy : MonoBehaviour
 
     [Header("Target Item")]
     [SerializeField] private List<Item> foundItems = new List<Item>();
-    private Item targetItem;
+    public Item targetItem; /*{ get; private set; }*/
     [SerializeField] private GameObject heldObject;
     private Rigidbody heldRigidbody;
 
@@ -55,7 +56,7 @@ public class RobotBuddy : MonoBehaviour
     }
 
     private void Update()
-    {
+    {     
         if (targetItem != null && targetItem.HeldBy == player.transform && !isChasingStolenItem)
         {
             Debug.Log($"Robot lost {targetItem.name} to another holder. Initiating chase!");
@@ -149,11 +150,26 @@ public class RobotBuddy : MonoBehaviour
         foundItems.Clear();
 
         Item[] allItems = FindObjectsByType<Item>();
+        RobotBuddy[] allBuddies = FindObjectsByType<RobotBuddy>();
+
         foreach (Item item in allItems)
         {
             if (item == null) continue;
             if (item.IsHeld) continue;
+            if (!item.GetComponent<Rigidbody>().isKinematic) continue;
             if (item.GetComponentInParent<ItemChecker>()) continue;
+
+            bool isTargetedByAnotherRobot = false;
+            foreach (RobotBuddy buddy in allBuddies)
+            {
+                if (buddy != this && buddy.targetItem == item)
+                {
+                    isTargetedByAnotherRobot = true;
+                    break;
+                }
+            }
+
+            if (isTargetedByAnotherRobot) continue;
 
             ItemSpawner spawner = item.GetComponentInParent<ItemSpawner>();
             if (spawner == null) continue;
@@ -164,6 +180,7 @@ public class RobotBuddy : MonoBehaviour
         if (foundItems.Count == 0) return;
 
         targetItem = foundItems[Random.Range(0, foundItems.Count)];
+
         targetDestination = targetItem.transform.position;
     }
 
@@ -171,18 +188,19 @@ public class RobotBuddy : MonoBehaviour
     {
         if (item == null) return;
 
-        Rigidbody rb = item.GetComponent<Rigidbody>();
-        if (rb == null) return;
-
-        if (targetItem.HeldBy == player.transform)
+        if (targetItem != null && targetItem.HeldBy == player.transform)
         {
             player.RemoveItemFromPlayer(targetItem.gameObject);
         }
+
+        Rigidbody rb = item.GetComponent<Rigidbody>();
+        if (rb == null) return;
 
         heldObject = item.gameObject;
         heldRigidbody = rb;
 
         item.Held(true, transform);
+
         robotAudio.PlayPickupSound();
         Debug.Log($" Robot picked up {item.name}. HeldBy = {item.HeldBy.name}");
 
@@ -226,7 +244,7 @@ public class RobotBuddy : MonoBehaviour
 
     private void DropItem()
     {
-        if (heldObject != null)
+        if (heldObject != null /*&& targetItem.HeldBy == transform*/)
         {
             heldObject.transform.SetParent(itemSpawner != null ? itemSpawner.transform : null);
             if (heldRigidbody != null)
@@ -237,7 +255,7 @@ public class RobotBuddy : MonoBehaviour
         Debug.Log("There are no shelves available :(. Dropping the item.");
     }
 
-    private void FindShelf()
+    private bool FindShelf()
     {
         //arrange shelves based on number of children, makes sure to choose shelf with the most same item 
         ItemChecker[] shelves = FindObjectsByType<ItemChecker>()
@@ -247,16 +265,24 @@ public class RobotBuddy : MonoBehaviour
         if (shelves.Length == 0)
         {
             DropItem();
-            return;
+            return false;
         }
 
         foreach (ItemChecker shelf in shelves)
         {
             if (shelf.IsItemValid(targetItem))
             {
+                if (shelf.isAssignedToBuddy)
+                {
+                    if (shelf.robotBuddy.targetItem.Data.displayName != targetItem.Data.displayName)
+                    {
+                        continue;
+                    }
+                }
+
                 targetItemChecker = shelf;
                 targetShelf = shelf.gameObject;
-                targetItemChecker.AssignToBuddy(true);
+                targetItemChecker.AssignToBuddy(true, this);
                 break;
             }
         }
@@ -264,10 +290,11 @@ public class RobotBuddy : MonoBehaviour
         if (targetItemChecker == null)
         {
             DropItem();
-            return;
+            return false;
         }
 
         targetDestination = targetItemChecker.transform.position;
+        return true;
     }
 
     IEnumerator PlaceItemOnShelf()
@@ -297,20 +324,27 @@ public class RobotBuddy : MonoBehaviour
     {
         if (targetItem != null)
         {
-            targetItem.Held(false);
+            if (targetItem.HeldBy == transform)
+            {
+                targetItem.Held(false);
+                targetItem = null;
+            }
+            else if (targetItem.HeldBy != player.transform)
+            {
+                targetItem.Held(false);
+                targetItem = null;
+            }
         }
 
         isPickingUp = false;
 
         heldObject = null;
         heldRigidbody = null;
-
-        targetItem = null;
     }
 
     private void ResetTargetShelf()
     {
-        targetItemChecker.AssignToBuddy(false);
+        targetItemChecker.AssignToBuddy(false, null);
         targetShelf = null;
         targetItemChecker = null;
     }
@@ -333,21 +367,19 @@ public class RobotBuddy : MonoBehaviour
        
         targetDestination = targetItem.transform.position;
 
-        if (heldObject != null)
-        {
-            heldObject.transform.SetParent(null);
-        }
-
-        heldObject = null;
-        heldRigidbody = null;
-
+        isPlacing = false;
+        isPickingUp = false;
         isMovingVertically = false;
         isResetingVertically = true;
         ResetTargetShelf();
 
-        isPlacing = false;
-        isPickingUp = false;
-        
+        if (heldObject != null)
+        {
+            heldObject.transform.SetParent(null);
+            heldObject = null;
+            heldRigidbody = null;
+        }
+
         if (agent != null && agent.isOnNavMesh)
             agent.ResetPath();
 

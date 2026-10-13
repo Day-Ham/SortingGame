@@ -41,6 +41,7 @@ public class ItemChecker : MonoBehaviour
 
     [Header("Robot Buddy")]
     public bool isAssignedToBuddy;
+    public RobotBuddy robotBuddy;
 
     private void Awake()
     {
@@ -409,9 +410,10 @@ public class ItemChecker : MonoBehaviour
         }
     }
 
-    public void AssignToBuddy(bool assigned)
+    public void AssignToBuddy(bool assigned, RobotBuddy robot)
     {
         isAssignedToBuddy = assigned;
+        robotBuddy = robot;
     }
 
     private void OnDrawGizmos()
