@@ -44,8 +44,12 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Item Spawner")]
     ItemSpawner spawner;
 
+    [Header("Robot Buddy")]
+    [SerializeField] private GameObject robotBuddyShelfPromp;
+
     GameUIManager ui;
 
+    [Header("Target Layers")]
     [SerializeField] private LayerMask throwTargetLayers;
 
     private void Start()
@@ -492,7 +496,15 @@ public class PlayerInteraction : MonoBehaviour
         if (checker != null && heldObject != null)
         {
             Debug.Log("Trying to Place item");
-            if (checker.isPlacingItem) return;            
+            if (checker.isAssignedToBuddy)
+            {
+                robotBuddyShelfPromp.SetActive(true);
+                return;
+            }
+
+            if (checker.isPlacingItem) return;
+            
+            Debug.Log("NOW PLACING THE ITEM");
             checker.PlaceItem();
             return;
         }

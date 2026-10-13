@@ -256,6 +256,7 @@ public class RobotBuddy : MonoBehaviour
             {
                 targetItemChecker = shelf;
                 targetShelf = shelf.gameObject;
+                targetItemChecker.AssignToBuddy(true);
                 break;
             }
         }
@@ -309,6 +310,7 @@ public class RobotBuddy : MonoBehaviour
 
     private void ResetTargetShelf()
     {
+        targetItemChecker.AssignToBuddy(false);
         targetShelf = null;
         targetItemChecker = null;
     }

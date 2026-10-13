@@ -13,7 +13,6 @@ public class ItemChecker : MonoBehaviour
     [SerializeField] private ShelfType shelfType;
     [SerializeField] private BoxCollider shelfArea;
     private List<Vector3> shelfPositions = new List<Vector3>();
-    [SerializeField] private LayerMask pickUpLayer;
 
     [Header("Items")]
     public List<Item> heldItems = new List<Item>();
@@ -39,6 +38,9 @@ public class ItemChecker : MonoBehaviour
     [Header("Placing Parameters")]
     public float moveSpeed = 30f;
     public bool isPlacingItem;
+
+    [Header("Robot Buddy")]
+    public bool isAssignedToBuddy;
 
     private void Awake()
     {
@@ -83,11 +85,9 @@ public class ItemChecker : MonoBehaviour
             Debug.Log("Held item does not have the Item script attached");
             return false;
         }
-
-        currentItem = item;
-
+        
         //is the item type the same as the container type?
-        if (currentItem.Data.type != itemType)
+        if (item.Data.type != itemType)
         {
             Debug.Log("Held item not same type as container type");
             return false;
@@ -97,7 +97,7 @@ public class ItemChecker : MonoBehaviour
         if (heldItems.Count > 0)
         {
             //check if container display name is the same as held item display name
-            if (currentItem.Data.displayName == displayName)
+            if (item.Data.displayName == displayName)
             {
                 return true;
             }
@@ -106,7 +106,6 @@ public class ItemChecker : MonoBehaviour
         {
             return true;
         }
-
         return false;
     }
 
@@ -201,7 +200,7 @@ public class ItemChecker : MonoBehaviour
             currentItem = item;
         }
 
-        currentItem.gameObject.layer = 0; //can't be interacted with while being placed
+        currentItem.gameObject.layer = 2; //can't be interacted with while being placed
 
         if (currentItem == null) return;
 
@@ -256,7 +255,7 @@ public class ItemChecker : MonoBehaviour
             UpdateUI();
             CheckIfItemIsComplete();
 
-            currentItem.gameObject.layer = Mathf.RoundToInt(Mathf.Log(pickUpLayer.value, 2)); //done placing, can be picked up again
+            currentItem.gameObject.layer = LayerMask.NameToLayer("Pickup"); //done placing, can be picked up again
 
             isPlacingItem = false;
             
@@ -362,6 +361,9 @@ public class ItemChecker : MonoBehaviour
         if (!playerUpgrade.CanThrowToShelf)
             return;
 
+        if (isAssignedToBuddy)
+            return;
+
         Item item = other.GetComponentInParent<Item>();
 
         if (item == null)
@@ -405,6 +407,11 @@ public class ItemChecker : MonoBehaviour
                 UpdateUI();
             }
         }
+    }
+
+    public void AssignToBuddy(bool assigned)
+    {
+        isAssignedToBuddy = assigned;
     }
 
     private void OnDrawGizmos()
