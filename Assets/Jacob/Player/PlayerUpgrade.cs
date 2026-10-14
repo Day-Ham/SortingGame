@@ -11,6 +11,7 @@ public class PlayerUpgrade : MonoBehaviour
     [SerializeField] private int reachPrice = 50;
     [SerializeField] private int jumpPrice = 50;
     [SerializeField] private int throwToShelfPrice = 500;
+    [SerializeField] private int robotBuddyPrice = 1000;
     [SerializeField] private CurrencyManager currencyManager;
 
     [Header("Upgrade Values")]
@@ -21,11 +22,13 @@ public class PlayerUpgrade : MonoBehaviour
     [SerializeField] private bool upgradeThrowToShelf = false;
     [SerializeField] private bool canThrowToShelf = false;
     public bool CanThrowToShelf => canThrowToShelf;
+    [SerializeField] private float boughtRobotBuddy = 0f;
 
     //Upgrade References
     private PlayerMovement playerMovement;
     private PlayerLook playerLook;
     private PlayerInteraction playerInteraction;
+    private RobotBuddySpawner robotBuddySpawner;
 
     GameUIManager ui;
 
@@ -34,6 +37,7 @@ public class PlayerUpgrade : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         playerLook = GetComponent<PlayerLook>();
         playerInteraction = GetComponent<PlayerInteraction>();
+        robotBuddySpawner = FindAnyObjectByType<RobotBuddySpawner>();
     }
 
     private void Start()
@@ -125,6 +129,19 @@ public class PlayerUpgrade : MonoBehaviour
         canThrowToShelf = true;
 
         ui.FillSlider(ui.upgradeThrowSlider, 1);
+    }
+
+    public void BuyARobotBuddy()
+    {
+        if(boughtRobotBuddy >= 3) return;
+
+        if (!TryBuyUpgrade(ref robotBuddyPrice)) return;
+
+        boughtRobotBuddy++;
+
+        robotBuddySpawner.SpawnRobotBuddy();
+
+        ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
     }
     #endregion
 }
