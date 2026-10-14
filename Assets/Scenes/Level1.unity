@@ -2074,6 +2074,7 @@ MonoBehaviour:
   upgradeReachSlider: {fileID: 1772879523}
   upgradeJumpSlider: {fileID: 934313334}
   upgradeThrowSlider: {fileID: 1969212660}
+  upgradeRobotBuddySlider: {fileID: 0}
   skillsMenu: {fileID: 765212148}
   skill1Slider: {fileID: 2051834184}
   skill2Slider: {fileID: 1904335543}
@@ -19505,6 +19506,10 @@ PrefabInstance:
       propertyPath: maxHeldItemsText
       value: 
       objectReference: {fileID: 747018984}
+    - target: {fileID: 8331208016230216153, guid: a2dec38d25e677a498b00ff4ae8fd6d9, type: 3}
+      propertyPath: obstacleLayer.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8331208016230216153, guid: a2dec38d25e677a498b00ff4ae8fd6d9, type: 3}
       propertyPath: 'backpackItemNames.Array.data[0]'
       value: 
