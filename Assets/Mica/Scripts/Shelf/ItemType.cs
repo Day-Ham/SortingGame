@@ -8,6 +8,7 @@ public enum ItemType
     Creatures,
     Medical,
     Fuel,
-    Records
+    Records,
+    Tools
 }
 
