@@ -17,7 +17,7 @@ public class ItemChecker : MonoBehaviour
     [Header("Items")]
     public List<Item> heldItems = new List<Item>();
     [SerializeField] private string displayName;
-    [SerializeField] private Item currentItem;
+    public Item currentItem { get; private set; }
     [SerializeField] private int maxItems;
     [SerializeField] private Vector3 orientation;
 
@@ -41,7 +41,7 @@ public class ItemChecker : MonoBehaviour
 
     [Header("Robot Buddy")]
     public bool isAssignedToBuddy;
-    public RobotBuddy robotBuddy;
+    public List<RobotBuddy> robotList;
 
     private void Awake()
     {
@@ -223,14 +223,14 @@ public class ItemChecker : MonoBehaviour
             player.RemoveItemFromPlayer(currentItem.gameObject);
         }
 
-        Debug.Log("Setting the new parent of the object to this shelf");
         currentItem.transform.SetParent(transform);
-        Debug.Log("Item parented");
+
         heldItems.Add(currentItem);
 
         AddCoin(); //adds money if first time being placed on shelf
 
         isPlacingItem = true;
+        currentItem.isBeingPlaced = true;
     }
 
     void MoveToPlaceItem()
@@ -257,11 +257,7 @@ public class ItemChecker : MonoBehaviour
             CheckIfItemIsComplete();
 
             currentItem.gameObject.layer = LayerMask.NameToLayer("Pickup"); //done placing, can be picked up again
-
-            isPlacingItem = false;
-            
-            Debug.Log("Placed " + currentItem.name + " on the shelf.");
-            
+                        
             //play put down audio
             AudioSource audioSource = currentItem.GetComponent<AudioSource>();
             if (audioSource != null)
@@ -269,8 +265,11 @@ public class ItemChecker : MonoBehaviour
                 audioSource.clip = currentItem.Data.putDownSFX;
                 audioSource.Play();
             }
-            
+
+            isPlacingItem = false;
+            currentItem.isBeingPlaced = false;
             currentItem = null;
+            Debug.Log("Placed " + currentItem.name + " on the shelf.");
         }
     }
 
@@ -420,8 +419,12 @@ public class ItemChecker : MonoBehaviour
 
     public void AssignToBuddy(bool assigned, RobotBuddy robot)
     {
-        isAssignedToBuddy = assigned;
-        robotBuddy = robot;
+        if (assigned)
+            robotList.Add(robot);
+        else
+            robotList.Remove(robot);
+
+        isAssignedToBuddy = robotList.Count > 0;
     }
 
     private void OnDrawGizmos()

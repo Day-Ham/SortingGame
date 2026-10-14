@@ -30,7 +30,6 @@ public class RobotBuddy : MonoBehaviour
     [Header("Target Shelf")]
     [SerializeField] private GameObject targetShelf;
     private ItemChecker targetItemChecker;
-    private float initialShelfMoveSpeed;
 
     [Header("State")]
     [SerializeField] private bool isPickingUp;
@@ -69,7 +68,7 @@ public class RobotBuddy : MonoBehaviour
             isChasingStolenItem = true;
             ResetToPickUp();
         }
-        else if (targetItem != null && targetItem.HeldBy != player.transform && targetItem.HeldBy != transform && isChasingStolenItem)
+        else if (targetItem != null && targetItem.HeldBy != player.transform && targetItem.HeldBy != transform && targetItem.HeldBy != null && isChasingStolenItem)
         {
             isChasingStolenItem = false;
             CancelPickup();
@@ -260,6 +259,7 @@ public class RobotBuddy : MonoBehaviour
             return;
         }
 
+        heldObject.SetActive(true);
         Transform obj = heldObject.transform;
 
         obj.position = Vector3.Lerp(obj.position, holdPoint.position, pickupSpeed * Time.deltaTime);
@@ -315,7 +315,7 @@ public class RobotBuddy : MonoBehaviour
             {
                 if (shelf.isAssignedToBuddy)
                 {
-                    if (shelf.robotBuddy.targetItem.Data.displayName != targetItem.Data.displayName)
+                    if (shelf.robotList[0].targetItem.Data.displayName != targetItem.Data.displayName)
                     {
                         continue;
                     }
@@ -340,14 +340,15 @@ public class RobotBuddy : MonoBehaviour
 
     IEnumerator PlaceItemOnShelf()
     {
-        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem); // makes sure the shelf is not busy doing anything
+        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem && targetItemChecker.currentItem == null && targetItemChecker.robotList[0] == this); // makes sure the shelf is not busy doing anything
        
         //change move speed of placing items of the shelf for slower effect;
-        initialShelfMoveSpeed = targetItemChecker.moveSpeed;
+        float initialShelfMoveSpeed = targetItemChecker.moveSpeed;
         targetItemChecker.moveSpeed = putDownSpeed;
+        
         targetItemChecker.PlaceItem(targetItem);
 
-        yield return new WaitUntil(() => !targetItemChecker.isPlacingItem); // waits for the placing action to finish before doing anything else
+        yield return new WaitUntil(() => !targetItem.isBeingPlaced); // waits for the placing action to finish before doing anything else
         
         //return initial move speed of placing items in shelf
         targetItemChecker.moveSpeed = initialShelfMoveSpeed;
@@ -370,7 +371,7 @@ public class RobotBuddy : MonoBehaviour
                 targetItem.Held(false);
                 targetItem = null;
             }
-            else if (targetItem.HeldBy != player.transform)
+            else if (targetItem.HeldBy != player.transform && targetItem.HeldBy != null)
             {
                 targetItem.Held(false);
                 targetItem = null;
@@ -385,7 +386,7 @@ public class RobotBuddy : MonoBehaviour
 
     private void ResetTargetShelf()
     {
-        targetItemChecker.AssignToBuddy(false, null);
+        targetItemChecker.AssignToBuddy(false, this);
         targetShelf = null;
         targetItemChecker = null;
     }

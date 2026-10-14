@@ -18,6 +18,8 @@ public class Item : MonoBehaviour
     public bool IsHeld /*{ get; private set; }*/;
     public Transform HeldBy /*{ get; private set; }*/;
 
+    public bool isBeingPlaced;
+
     public bool IsPlaced;
 
     private void Awake()

@@ -3,12 +3,11 @@ using System;
 [Serializable]
 public enum ItemType
 {
-    Ore,
-    Canister,
-    Hardrive,
-    Medicine,
+    Minerals,
+    Meats,
+    Creatures,
+    Medical,
     Fuel,
-    Food,
-    Weapon
+    Records
 }
 
