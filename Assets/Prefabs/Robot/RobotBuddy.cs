@@ -40,9 +40,11 @@ public class RobotBuddy : MonoBehaviour
     [SerializeField] private bool isRoaming;
 
     [Header("Random Roaming")]
-    [SerializeField] private float roamRange = 25f;
+    //[SerializeField] private float roamRange = 25f;
     [SerializeField] private float roamWaitTime = 1f;
     [SerializeField] private float roamTimer;
+    public List<Transform> patrolPoints;
+    private int currentPatrolIndex = 0;
 
     ItemSpawner itemSpawner;
     PlayerInteraction player;
@@ -100,7 +102,7 @@ public class RobotBuddy : MonoBehaviour
                         {
                             if (roamTimer >= roamWaitTime)
                             {
-                                ChooseRandomDestination();
+                                ChooseNextPatrolPoint();
                                 roamTimer = 0f;
                             }
                         }
@@ -439,27 +441,23 @@ public class RobotBuddy : MonoBehaviour
         if (agent.isOnNavMesh)
             agent.ResetPath();
 
-        ChooseRandomDestination();
+        ChooseNextPatrolPoint();
     }
 
-    private void ChooseRandomDestination()
+    private void ChooseNextPatrolPoint()
     {
-        for (int i = 0; i < 10; i++)
+        if (patrolPoints == null || patrolPoints.Count == 0)
         {
-            Vector2 randomPoint = Random.insideUnitCircle * roamRange;
-            Vector3 newPoint = transform.position + new Vector3(randomPoint.x, 0f, randomPoint.y);
-
-            if (NavMesh.SamplePosition(newPoint, out NavMeshHit hit, 5f, NavMesh.AllAreas))
-            {
-                agent.SetDestination(hit.position);
-                return;
-            }
+            Debug.LogWarning("No patrol points assigned!");
+            return;
         }
+
+        agent.SetDestination(patrolPoints[currentPatrolIndex].position);
+        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count; //go back to zero at the end of the list  
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, roamRange);
     }
 }
