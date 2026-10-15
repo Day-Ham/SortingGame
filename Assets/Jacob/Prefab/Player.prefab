@@ -348,6 +348,9 @@ MonoBehaviour:
   pickUpLayer:
     serializedVersion: 2
     m_Bits: 3208
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 512
   pickupSpeed: 25
   heldObject: {fileID: 0}
   isPickingUp: 0
@@ -378,6 +381,7 @@ MonoBehaviour:
   reachPrice: 50
   jumpPrice: 50
   throwToShelfPrice: 500
+  robotBuddyPrice: 1000
   currencyManager: {fileID: 0}
   upgradeCapacity: 0
   upgradeSprint: 0
@@ -385,6 +389,7 @@ MonoBehaviour:
   upgradeJump: 0
   upgradeThrowToShelf: 0
   canThrowToShelf: 0
+  boughtRobotBuddy: 0
 --- !u!114 &7123180922432389386
 MonoBehaviour:
   m_ObjectHideFlags: 0

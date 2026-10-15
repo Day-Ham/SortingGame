@@ -18,6 +18,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private float pickupRange = 3f;
     [SerializeField] private LayerMask interactLayer;
     [SerializeField] private LayerMask pickUpLayer;
+    [SerializeField] private LayerMask obstacleLayer;
     [SerializeField] private float pickupSpeed = 12f;
     public GameObject heldObject;
     private Rigidbody heldRigidbody;
@@ -83,7 +84,7 @@ public class PlayerInteraction : MonoBehaviour
     void CheckLookedAtObject()
     {
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
-        RaycastHit[] hits = Physics.RaycastAll(ray, pickupRange, pickUpLayer | interactLayer);
+        RaycastHit[] hits = Physics.RaycastAll(ray, pickupRange, pickUpLayer | interactLayer | obstacleLayer);
         System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
         GameObject pickupObject = null;
@@ -92,6 +93,11 @@ public class PlayerInteraction : MonoBehaviour
         foreach (RaycastHit hit in hits)
         {
             GameObject obj = hit.collider.gameObject;
+
+            if (IsInLayerMask(obj, obstacleLayer))
+            {
+                break;
+            }
 
             if (pickupObject == null && IsInLayerMask(obj, pickUpLayer))
             {
