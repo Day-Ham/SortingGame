@@ -5930,7 +5930,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem.RebindingUI::ResetDeviceBindings
   _inputActions: {fileID: -944628639613478452, guid: 74cfc5181c326fe4d82ab306150ae392, type: 3}
-  resetAllButton: {fileID: 8049042385830335686}
+  resetToDefaultPromp: {fileID: 5997705361947274067}
+  defaultButton: {fileID: 8049042385830335686}
+  confirmResetButton: {fileID: 6654867318182974173}
+  cancelResetButton: {fileID: 187278051430222931}
   controlSchema:
   - schemaPanel: {fileID: 203043304403953989}
     schema: Keyboard
