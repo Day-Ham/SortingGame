@@ -8,7 +8,10 @@ using UnityEngine.UI;
 public class ResetDeviceBindings : MonoBehaviour
 {
     [SerializeField] private InputActionAsset _inputActions;
-    [SerializeField] private Button resetAllButton;
+    [SerializeField] private GameObject resetToDefaultPromp;
+    [SerializeField] private Button defaultButton;
+    [SerializeField] private Button confirmResetButton;
+    [SerializeField] private Button cancelResetButton;
 
     [Header("Control Schemas")]
     [SerializeField] private List<ControlSchema> controlSchema;
@@ -17,7 +20,9 @@ public class ResetDeviceBindings : MonoBehaviour
 
     private void Start()
     {
-        resetAllButton.onClick.AddListener(ResetControlsSchemeBinding);
+        defaultButton.onClick.AddListener(OpenDefaultPrompt);
+        confirmResetButton.onClick.AddListener(ResetControlsSchemeBinding);
+        cancelResetButton.onClick.AddListener(CloseDefaultPrompt);
     }
 
     public void ResetControlsSchemeBinding()
@@ -30,6 +35,7 @@ public class ResetDeviceBindings : MonoBehaviour
                 action.RemoveBindingOverride(InputBinding.MaskByGroup(_targetControlSchema));
             }
         }
+        CloseDefaultPrompt();
 
         //Save keybinds
         _targetRebindSaveLoad.Save();
@@ -50,6 +56,16 @@ public class ResetDeviceBindings : MonoBehaviour
                 return;
             }
         }
+    }
+
+    private void OpenDefaultPrompt()
+    {
+        resetToDefaultPromp.SetActive(true);
+    }
+
+    private void CloseDefaultPrompt()
+    {
+        resetToDefaultPromp.SetActive(false);
     }
 }
 
