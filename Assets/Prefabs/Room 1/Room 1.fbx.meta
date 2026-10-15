@@ -3,22 +3,7 @@ guid: a939bd043e986d84abe31844322830ae
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: ASIIMOV (2)
-    second: {fileID: 2800000, guid: ed2663c664e4e5c40a21a2f34ad0f875, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Door Texture v2
-    second: {fileID: 2800000, guid: dc65246e7ffe1824ab1ff49a05cab69e, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: WallDivider_BaseColor
-    second: {fileID: 2800000, guid: 28cc1607d8624364ea019a78dd26b4e7, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
