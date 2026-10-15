@@ -7,7 +7,11 @@ public class SettingsManager : MonoBehaviour
 {
     public static SettingsManager Instance;
 
+    [Header("Audio")]
     [SerializeField] private AudioMixer audioMixer;
+
+    [Header("Mouse Sensitivity")]
+    [SerializeField] private float mouseSensitivity = 5f;
 
     private float masterVolume = 1f;
     private float musicVolume = 1f;
@@ -60,5 +64,18 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
+    #region Mouse Sensitivity
+
+
+    public void SetMouseSensitivity(float value)
+    {
+        mouseSensitivity = value;
+    }
+
+    public float GetMouseSensitivity()
+    {
+        return mouseSensitivity;
+    }
+    #endregion
 
 }

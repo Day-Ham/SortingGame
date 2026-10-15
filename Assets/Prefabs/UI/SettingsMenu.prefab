@@ -7124,6 +7124,8 @@ MonoBehaviour:
   musicVolumeText: {fileID: 8000997056409787273}
   sfxVolumeSlider: {fileID: 1729306239955229378}
   sfxVolumeText: {fileID: 2195547666689076831}
+  sensitivitySlider: {fileID: 4019604879777524630}
+  sensitivityText: {fileID: 6660450291572426969}
   closeSettingsButton: {fileID: 4691855406579395332}
 --- !u!1 &7176370438722925370
 GameObject:

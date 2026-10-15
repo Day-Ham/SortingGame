@@ -17,6 +17,10 @@ public class SettingsPanel : MonoBehaviour
     [SerializeField] private Slider sfxVolumeSlider;
     [SerializeField] private TMP_Text sfxVolumeText;
 
+    [Header("Mouse Sensitivity")]
+    [SerializeField] private Slider sensitivitySlider;
+    [SerializeField] private TMP_Text sensitivityText;
+
     [Header("Other UI")]
     [SerializeField] private Button closeSettingsButton;
 
@@ -35,10 +39,12 @@ public class SettingsPanel : MonoBehaviour
         gameUI = GameUIManager.instance;
 
         InitializeAudioSettings();
+        InitializeSensitivitySettings();
 
         closeSettingsButton.onClick.AddListener(CloseSettingsMenu);
     }
 
+    #region Audio
     private void InitializeAudioSettings()
     {
         masterVolumeSlider.value = SettingsManager.Instance.GetMasterVolume();
@@ -75,13 +81,37 @@ public class SettingsPanel : MonoBehaviour
         musicVolumeText.text = $"{Mathf.RoundToInt(musicVolumeSlider.value * 100)}%";
         sfxVolumeText.text = $"{Mathf.RoundToInt(sfxVolumeSlider.value * 100)}%";
     }
+    #endregion
 
+    #region Mouse Sensitivity
+    private void InitializeSensitivitySettings()
+    {
+        sensitivitySlider.minValue = 1f;
+        sensitivitySlider.maxValue = 10f;
+
+        sensitivitySlider.value = SettingsManager.Instance.GetMouseSensitivity();
+        UpdateSensitivityText(sensitivitySlider.value);
+        sensitivitySlider.onValueChanged.AddListener(SetSensitivity);
+    }
+
+    private void SetSensitivity(float value)
+    {
+        SettingsManager.Instance.SetMouseSensitivity(value);
+        UpdateSensitivityText(value);
+    }
+
+    private void UpdateSensitivityText(float value)
+    {
+        sensitivityText.text = $"{value:F1}";
+    }
+    #endregion
 
     private void OnDestroy()
     {
         masterVolumeSlider.onValueChanged.RemoveListener(SetMasterVolume);
         musicVolumeSlider.onValueChanged.RemoveListener(SetMusicVolume);
         sfxVolumeSlider.onValueChanged.RemoveListener(SetSFXVolume);
+        sensitivitySlider.onValueChanged.RemoveListener(SetSensitivity);
     }
 
     public void CloseSettingsMenu()
