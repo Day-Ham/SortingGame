@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ItemSpawner : MonoBehaviour
 {
@@ -34,6 +35,11 @@ public class ItemSpawner : MonoBehaviour
                 for (int j = 0; j < maxAttempts; j++)
                 {
                     Vector3 spawnPoint = GetRandomSpawnPoint();
+                    if (float.IsInfinity(spawnPoint.x))
+                    {
+                        continue;
+                    }
+                        
                     if (IsPositionBlocked(spawnPoint))
                     {
                         continue;
@@ -53,10 +59,20 @@ public class ItemSpawner : MonoBehaviour
     {
         Bounds bounds = spawnArea.bounds;
 
-        float randomX = UnityEngine.Random.Range(bounds.min.x,bounds.max.x);
-        float randomZ = UnityEngine.Random.Range(bounds.min.z,bounds.max.z);
+        for (int i = 0; i < maxAttempts; i++)
+        {
+            float randomX = UnityEngine.Random.Range(bounds.min.x, bounds.max.x);
+            float randomZ = UnityEngine.Random.Range(bounds.min.z, bounds.max.z);
 
-        return new Vector3(randomX, bounds.min.y + spawnHeight,randomZ);
+            Vector3 randomPoint = new Vector3(randomX, bounds.center.y, randomZ);
+
+            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 2f, NavMesh.AllAreas))
+            {
+                return hit.position + Vector3.up * spawnHeight;
+            }
+        }
+
+        return Vector3.positiveInfinity;
     }
     Vector3 GetRandomRotation()
     {

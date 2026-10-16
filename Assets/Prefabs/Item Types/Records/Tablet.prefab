@@ -109,7 +109,7 @@ MonoBehaviour:
   supportCheckDistance: 0.1
   supportLayers:
     serializedVersion: 2
-    m_Bits: 8704
+    m_Bits: 8832
   IsHeld: 0
   HeldBy: {fileID: 0}
   isBeingPlaced: 0
