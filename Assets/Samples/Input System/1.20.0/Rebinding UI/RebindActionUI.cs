@@ -561,9 +561,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             if (m_RebindDuplicatePromp != null && m_RebindDuplicatePromp.activeInHierarchy)
             {
                 bool keyboardCancel = Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
-                bool gamepadCancel = Gamepad.current != null && (Gamepad.current.buttonEast.wasPressedThisFrame || Gamepad.current.selectButton.wasPressedThisFrame);
+                //bool gamepadCancel = Gamepad.current != null && (Gamepad.current.buttonEast.wasPressedThisFrame || Gamepad.current.selectButton.wasPressedThisFrame);
 
-                if (keyboardCancel || gamepadCancel)
+                if (keyboardCancel /*|| gamepadCancel*/)
                 {
                     CancelSwapBinding();
                 }

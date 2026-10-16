@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -36,11 +39,16 @@ public class TitleScreenManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private Button settingsBackButton;
+    [SerializeField] private List<GameObject> prompts = new List<GameObject>();
+
 
     private int stageIndex;
     [SerializeField] private bool stage1NewGameCreated;
     [SerializeField] private bool stage2NewGameCreated;
     [SerializeField] private bool stage3NewGameCreated;
+
+    UserInput input;
 
     private void Awake()
     {
@@ -53,12 +61,46 @@ public class TitleScreenManager : MonoBehaviour
         newGameBtn.onClick.AddListener(NewGame);
         resumeGameBtn.onClick.AddListener(LoadStage);
         playBackBtn.onClick.AddListener(OpenMainMenu);
+        settingsBackButton.onClick.AddListener(OpenMainMenu);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        input = UserInput.instance;
         OpenMainMenu();
         EventSystem.current.SetSelectedGameObject(playButton.gameObject);
+        AddPromptsToLists();
+    }
+
+    private void Update()
+    {
+        if (input.EscapeInput)
+        {
+            if (settingsMenu.activeInHierarchy)
+            {
+                foreach (GameObject prompt in prompts)
+                {
+                    if (prompt.activeInHierarchy)
+                    {
+                        prompt.SetActive(false);
+                        return;
+                    }
+                }
+            }
+            OpenMainMenu();
+        }
+    }
+
+    private void AddPromptsToLists()
+    {
+        int promptLayer = LayerMask.NameToLayer("Prompt");
+        GameObject[] promptUI = FindObjectsByType<GameObject>(FindObjectsInactive.Include)
+            .Where(obj => obj.layer == promptLayer)
+            .ToArray();
+        foreach (GameObject prompt in promptUI)
+        {
+            prompts.Add(prompt);
+        }
     }
 
     public void OpenMainMenu()

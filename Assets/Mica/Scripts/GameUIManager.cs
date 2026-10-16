@@ -27,6 +27,7 @@ public class GameUIManager : MonoBehaviour
 
     [Header("Upgrades")]
     [Header("Upgrades Menu")]
+    [SerializeField] private Button upgradesCloseButton;
     public GameObject upgradesMenu;
 
     [Header("Upgrades Buy Sliders")]
@@ -39,6 +40,8 @@ public class GameUIManager : MonoBehaviour
 
     [Header("Skills")]
     [Header("Skills Menu")]
+    [SerializeField] private Button skillsCloseButton;
+
     public GameObject skillsMenu;
 
     [Header("Skills Buy Sliders")]
@@ -68,6 +71,8 @@ public class GameUIManager : MonoBehaviour
 
     [Header("Settings Menu")]
     public GameObject settingsMenu;
+    [SerializeField] private Button settingsBackButton;
+
 
     //Checks
     [SerializeField] private List<GameObject> menus = new List<GameObject>();
@@ -97,13 +102,19 @@ public class GameUIManager : MonoBehaviour
         settingsButton.onClick.AddListener(SetSettingsMenuAsCurrent);
         returnToTitleScreenButton.onClick.AddListener(LoadTitleScreen);
         quitButton.onClick.AddListener(QuitGame);
+        settingsBackButton.onClick.AddListener(SetPauseMenuAsCurrent);
+        skillsCloseButton.onClick.AddListener(CloseSkills);
+        upgradesCloseButton.onClick.AddListener(CloseUpgrades);
 
         AddMenusAndPromptsToLists();
 
-        DisableUI(pauseMenu);
-        DisableUI(settingsMenu);
-        DisableUI(upgradesMenu);
-        DisableUI(skillsMenu);
+        foreach (GameObject menu in menus)
+        {
+            if (menu.activeInHierarchy)
+            {
+                DisableUI(menu);
+            }
+        }
     }
 
     private void Update()
@@ -261,6 +272,18 @@ public class GameUIManager : MonoBehaviour
     private void SetSettingsMenuAsCurrent()
     {
         SetAsCurrentOpenMenu(settingsMenu);
+    }
+    private void SetPauseMenuAsCurrent()
+    {
+        SetAsCurrentOpenMenu(pauseMenu);
+    }
+    private void CloseUpgrades()
+    {
+        DisableUI(upgradesMenu);
+    }
+    private void CloseSkills()
+    {
+        DisableUI(skillsMenu);
     }
     #endregion
 

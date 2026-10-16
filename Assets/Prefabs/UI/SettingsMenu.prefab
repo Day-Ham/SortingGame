@@ -2473,7 +2473,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5906677789933226524}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1317186422332846660}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2330343479436280116
 GameObject:
   m_ObjectHideFlags: 0
@@ -11516,7 +11528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 9d9db5e90d810794990275587583ec08, type: 3}
       propertyPath: m_text
-      value: Esc
+      value: W
       objectReference: {fileID: 0}
     - target: {fileID: 7555199470006480883, guid: 9d9db5e90d810794990275587583ec08, type: 3}
       propertyPath: m_Navigation.m_Mode
