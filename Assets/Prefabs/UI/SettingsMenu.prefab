@@ -3050,7 +3050,6 @@ GameObject:
   - component: {fileID: 7244466065981843030}
   - component: {fileID: 510935152961236221}
   - component: {fileID: 3404336521382669088}
-  - component: {fileID: 4785111819303160108}
   m_Layer: 5
   m_Name: YesBtn
   m_TagString: Untagged
@@ -3160,7 +3159,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4785111819303160108}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.InputSystem.Samples.RebindUI.RebindActionUI, Unity.InputSystem.RebindingUI
         m_MethodName: ResetToDefault
         m_Mode: 1
@@ -3172,40 +3171,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4785111819303160108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2934955090344554024}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc11d99b1a6682f4cbc4aba1fcd9ac5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem.RebindingUI::UnityEngine.InputSystem.Samples.RebindUI.RebindActionUI
-  m_Action: {fileID: 0}
-  m_BindingId: 
-  m_DisplayStringOptions: 0
-  m_ActionLabel: {fileID: 0}
-  m_BindingText: {fileID: 0}
-  m_RebindOverlay: {fileID: 0}
-  m_RebindText: {fileID: 0}
-  m_RebindDuplicatePromp: {fileID: 0}
-  m_ConfirmSwapButton: {fileID: 0}
-  m_CancelSwapButton: {fileID: 0}
-  m_RebindInfo: {fileID: 0}
-  m_RebindCancelButton: {fileID: 0}
-  m_RebindTimeout: 0
-  m_UpdateBindingUIEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_RebindStartEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_RebindStopEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &2957550630440065689
 GameObject:
   m_ObjectHideFlags: 0
@@ -5580,7 +5545,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1970165238118678837}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5997705361947274067}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5637043917684287632
 GameObject:
   m_ObjectHideFlags: 0
@@ -11539,7 +11516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 9d9db5e90d810794990275587583ec08, type: 3}
       propertyPath: m_text
-      value: W
+      value: Esc
       objectReference: {fileID: 0}
     - target: {fileID: 7555199470006480883, guid: 9d9db5e90d810794990275587583ec08, type: 3}
       propertyPath: m_Navigation.m_Mode

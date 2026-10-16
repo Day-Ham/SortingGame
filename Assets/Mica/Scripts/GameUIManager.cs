@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -70,12 +71,13 @@ public class GameUIManager : MonoBehaviour
 
     //Checks
     [SerializeField] private List<GameObject> menus = new List<GameObject>();
+    [SerializeField] private List<GameObject> prompts = new List<GameObject>();
+
     [SerializeField] private GameObject currentOpenMenu;
 
     UserInput input;
     PauseManager pause;
-    SceneLoader sceneLoader;
-    
+    SceneLoader sceneLoader;    
 
     private void Awake()
     {
@@ -96,7 +98,7 @@ public class GameUIManager : MonoBehaviour
         returnToTitleScreenButton.onClick.AddListener(LoadTitleScreen);
         quitButton.onClick.AddListener(QuitGame);
 
-        AddMenusToList();
+        AddMenusAndPromptsToLists();
 
         DisableUI(pauseMenu);
         DisableUI(settingsMenu);
@@ -140,6 +142,15 @@ public class GameUIManager : MonoBehaviour
 
             if (currentOpenMenu == settingsMenu)
             {
+                foreach (GameObject prompt in prompts)
+                {
+                    if (prompt.activeInHierarchy)
+                    {
+                        DisableUI(prompt);
+                        return;
+                    }
+                }
+
                 SetAsCurrentOpenMenu(pauseMenu);
                 DisableUI(settingsMenu);
                 return;
@@ -183,12 +194,25 @@ public class GameUIManager : MonoBehaviour
     #endregion
 
     #region Menus
-    private void AddMenusToList()
+    private void AddMenusAndPromptsToLists()
     {
-        menus.Add(pauseMenu);
-        menus.Add(settingsMenu);
-        menus.Add(upgradesMenu);
-        menus.Add(skillsMenu);
+        int menuLayer = LayerMask.NameToLayer("Menu");
+        GameObject[] menuUI = FindObjectsByType<GameObject>(FindObjectsInactive.Include)
+            .Where(obj => obj.layer == menuLayer)
+            .ToArray();
+        foreach(GameObject menu in menuUI)
+        {
+            menus.Add(menu);
+        }
+
+        int promptLayer = LayerMask.NameToLayer("Prompt");
+        GameObject[] promptUI = FindObjectsByType<GameObject>(FindObjectsInactive.Include)
+            .Where(obj => obj.layer == promptLayer)
+            .ToArray();  
+        foreach(GameObject prompt in promptUI)
+        {
+            prompts.Add(prompt);
+        }
     }
 
     private void DisableInactiveMenus()
@@ -260,5 +284,18 @@ public class GameUIManager : MonoBehaviour
         pause.DisablePlayerControl();
         pause.UnlockCursor();
         sceneLoader.QuitGame();
+    }
+
+    public bool DisablePrompt()
+    {
+        foreach (GameObject prompt in prompts)
+        {
+            if (prompt.activeInHierarchy)
+            {
+                DisableUI(prompt);
+                return true;
+            }
+        }
+        return false;
     }
 }

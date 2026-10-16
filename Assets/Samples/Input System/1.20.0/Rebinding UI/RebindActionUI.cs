@@ -290,14 +290,22 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         private void CancelSwapBinding()
         {
             m_PendingAction.RemoveBindingOverride(m_PendingBindingIndex);
-            m_RebindDuplicatePromp.SetActive(false);
 
             m_ConfirmSwapButton.onClick.RemoveListener(ConfirmSwapBinding);
             m_CancelSwapButton.onClick.RemoveListener(CancelSwapBinding);
 
-            m_RebindDuplicatePromp.SetActive(false);
+            StartCoroutine(RestartRebindAfterRelease());
+        }
 
-            PerformInteractiveRebind(m_PendingAction, m_PendingBindingIndex, m_PendingAllCompositeParts);
+        private System.Collections.IEnumerator RestartRebindAfterRelease()
+        {
+            // Wait until the key that canceled the prompt is released.
+            while (Keyboard.current != null && Keyboard.current.escapeKey.isPressed)
+            {
+                yield return null;
+            }
+
+            PerformInteractiveRebind(m_PendingAction,m_PendingBindingIndex,m_PendingAllCompositeParts);
         }
 
         /// <summary>
@@ -364,6 +372,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             // Configure the rebind.
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
                 .WithCancelingThrough("<Keyboard>/escape")
+                .WithControlsExcluding("<Keyboard>/escape")
+                .WithActionEventNotificationsBeingSuppressed()
+                .WithTimeout(m_RebindTimeout)
                 .OnCancel(
                     operation =>
                     {
@@ -545,6 +556,18 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             if (m_RebindInfo != null)
                 UpdateRebindInfo(Time.realtimeSinceStartupAsDouble);
+
+
+            if (m_RebindDuplicatePromp != null && m_RebindDuplicatePromp.activeInHierarchy)
+            {
+                bool keyboardCancel = Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
+                bool gamepadCancel = Gamepad.current != null && (Gamepad.current.buttonEast.wasPressedThisFrame || Gamepad.current.selectButton.wasPressedThisFrame);
+
+                if (keyboardCancel || gamepadCancel)
+                {
+                    CancelSwapBinding();
+                }
+            }
         }
 
         protected void OnEnable()
