@@ -12182,6 +12182,7 @@ MonoBehaviour:
   - {fileID: 1469338396}
   - {fileID: 1519371551}
   - {fileID: 1304546840}
+  upgradesCloseButton: {fileID: 1806900304}
   upgradesMenu: {fileID: 1675640716}
   upgradeCapacitySlider: {fileID: 490268879}
   upgradeSprintSlider: {fileID: 1961446309}
@@ -12189,6 +12190,7 @@ MonoBehaviour:
   upgradeJumpSlider: {fileID: 1738610565}
   upgradeThrowSlider: {fileID: 308070782}
   upgradeRobotBuddySlider: {fileID: 1758161291}
+  skillsCloseButton: {fileID: 1272095550}
   skillsMenu: {fileID: 1243901601}
   skill1Slider: {fileID: 1310860385}
   skill2Slider: {fileID: 1142733483}
@@ -12205,7 +12207,9 @@ MonoBehaviour:
   returnToTitleScreenButton: {fileID: 1128823632}
   quitButton: {fileID: 1410553985}
   settingsMenu: {fileID: 659174586}
+  settingsBackButton: {fileID: 2991552398908079281}
   menus: []
+  prompts: []
   currentOpenMenu: {fileID: 0}
 --- !u!4 &1186921715
 Transform:
@@ -23725,6 +23729,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 66b52f537be9dd0428a84a712c266499, type: 3}
+--- !u!114 &2991552398908079281 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 988156650417748526, guid: 66b52f537be9dd0428a84a712c266499, type: 3}
+  m_PrefabInstance: {fileID: 2991552398908079280}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
