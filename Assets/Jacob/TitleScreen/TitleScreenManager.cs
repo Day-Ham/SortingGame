@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -22,6 +23,9 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] private Button stage3Btn;
     [SerializeField] private Button resumeGameBtn;
     [SerializeField] private Button newGameBtn;
+    [SerializeField] private GameObject newGamePrompt;
+    [SerializeField] private Button confirmNewGameButton;
+    [SerializeField] private Button cancelNewGameButton;
     [SerializeField] private Button playBackBtn;
     [SerializeField] private Image stageImg;
     [SerializeField] private Sprite stage1Sprite;
@@ -59,6 +63,8 @@ public class TitleScreenManager : MonoBehaviour
         stage2Btn.onClick.AddListener(SetStage2);
         stage3Btn.onClick.AddListener(SetStage3);
         newGameBtn.onClick.AddListener(NewGame);
+        confirmNewGameButton.onClick.AddListener(StartNewGame);
+        cancelNewGameButton.onClick.AddListener(CancelNewGame);
         resumeGameBtn.onClick.AddListener(LoadStage);
         playBackBtn.onClick.AddListener(OpenMainMenu);
         settingsBackButton.onClick.AddListener(OpenMainMenu);
@@ -134,6 +140,7 @@ public class TitleScreenManager : MonoBehaviour
         stageNameTxt.text = stage1Name;
         stageDescriptionTxt.text = stage1Description;
         resumeGameBtn.gameObject.SetActive(stage1NewGameCreated);
+        newGamePrompt.gameObject.SetActive(false);
     }
 
     public void SetStage2()
@@ -143,6 +150,7 @@ public class TitleScreenManager : MonoBehaviour
         stageNameTxt.text = stage2Name;
         stageDescriptionTxt.text = stage2Description;
         resumeGameBtn.gameObject.SetActive(stage2NewGameCreated);
+        newGamePrompt.gameObject.SetActive(false);
     }
 
     public void SetStage3()
@@ -152,10 +160,17 @@ public class TitleScreenManager : MonoBehaviour
         stageNameTxt.text = stage3Name;
         stageDescriptionTxt.text = stage3Description;
         resumeGameBtn.gameObject.SetActive(stage3NewGameCreated);
+        newGamePrompt.gameObject.SetActive(false);
     }
 
     public void NewGame()
     {
+        if (resumeGameBtn.gameObject.activeInHierarchy)
+        {
+            newGamePrompt.SetActive(true);
+            return;
+        }
+
         switch (stageIndex)
         {
             case 1:
@@ -171,9 +186,18 @@ public class TitleScreenManager : MonoBehaviour
                 break;
         }
         
+        StartNewGame();
+    }
 
+    public void StartNewGame()
+    {
         SaveManager.instance.SaveGame();
         SceneLoader.Instance.LoadSceneByIndex(stageIndex);
+    }
+
+    public void CancelNewGame()
+    {
+        newGamePrompt.SetActive(false);
     }
 
     public void LoadStage()
