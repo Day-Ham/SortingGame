@@ -4,10 +4,11 @@ using System;
 public enum ItemType
 {
     Minerals,
-    Meats,
+    AnimalSamples,
+    AlienFruit,
     Creatures,
     Medical,
-    Fuel,
+    Components,
     Records,
     Tools
 }
