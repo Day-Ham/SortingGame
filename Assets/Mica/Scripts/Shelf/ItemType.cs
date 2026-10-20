@@ -10,6 +10,7 @@ public enum ItemType
     Medical,
     Components,
     Records,
-    Tools
+    Tools,
+    PlantSamples
 }
 

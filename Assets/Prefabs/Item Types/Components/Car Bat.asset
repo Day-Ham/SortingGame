@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   displayName: Car Battery
   description: 
-  type: 4
+  type: 5
   preferredOrientation: {x: 0, y: 0, z: 0}
   rows: 2
   columns: 3

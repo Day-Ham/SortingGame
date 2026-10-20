@@ -355,6 +355,13 @@ public class RobotBuddy : MonoBehaviour
         //return initial move speed of placing items in shelf
         targetItemChecker.moveSpeed = initialShelfMoveSpeed;
 
+        Rigidbody rb = targetItem.GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+        }
+
         Debug.Log($" Robot placed {targetItem.name} on {targetShelf.name}.");
         isResetingVertically = true; //go back to initial hover height
 

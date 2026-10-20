@@ -8,10 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 04aabc6008477aa4982014f43321b8fa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Jacob Scene.unity
     guid: 02067f69d8f2e6c4b815203102ee66c1
   - enabled: 1
+    path: Assets/Scenes/QA_Level1.unity
+    guid: aac3dbdb07b1fcd4596cbf7481f976a6
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:

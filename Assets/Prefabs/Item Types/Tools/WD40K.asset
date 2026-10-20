@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   displayName: WD40K
   description: 
-  type: 6
+  type: 7
   preferredOrientation: {x: 0, y: 0, z: 0}
   rows: 2
   columns: 3

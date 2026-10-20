@@ -85,6 +85,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 517b2e4c56dc0fd448fe5b9135dec034, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7363701458755045516}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 517b2e4c56dc0fd448fe5b9135dec034, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1673828521076829241}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 517b2e4c56dc0fd448fe5b9135dec034, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2945908430187945978}
   m_SourcePrefab: {fileID: 100100000, guid: 517b2e4c56dc0fd448fe5b9135dec034, type: 3}
 --- !u!1 &3933736813395061893 stripped
 GameObject:
@@ -163,3 +169,67 @@ MonoBehaviour:
   HeldBy: {fileID: 0}
   isBeingPlaced: 0
   IsPlaced: 0
+--- !u!114 &-1673828521076829241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933736813395061893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3Internal.ES3Prefab
+  prefabId: 8583333889497617132
+  localRefs:
+    _Keys:
+    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    - {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    - {fileID: 3285249183898242384, guid: 9c54225de3751ab4e873590588fb32b8, type: 3}
+    - {fileID: -5754084199372789682, guid: 517b2e4c56dc0fd448fe5b9135dec034, type: 3}
+    - {fileID: 753081850183121306, guid: 9c54225de3751ab4e873590588fb32b8, type: 3}
+    - {fileID: 11400000, guid: 2ce48df4e0d537a49bfe130721123615, type: 2}
+    - {fileID: -7511558181221131132, guid: 517b2e4c56dc0fd448fe5b9135dec034, type: 3}
+    - {fileID: 3933736813395061893, guid: 9c54225de3751ab4e873590588fb32b8, type: 3}
+    - {fileID: 919132149155446097, guid: 517b2e4c56dc0fd448fe5b9135dec034, type: 3}
+    - {fileID: -2945908430187945978, guid: 9c54225de3751ab4e873590588fb32b8, type: 3}
+    - {fileID: 7363701458755045516, guid: 9c54225de3751ab4e873590588fb32b8, type: 3}
+    - {fileID: -1673828521076829241, guid: 9c54225de3751ab4e873590588fb32b8, type: 3}
+    - {fileID: 2800000, guid: 9ead14fc1f6614041801d50ea86471bb, type: 3}
+    - {fileID: 2800000, guid: b0b47220f1057624d821f0fc67ef379b, type: 3}
+    - {fileID: -8772984851670358426, guid: 517b2e4c56dc0fd448fe5b9135dec034, type: 3}
+    - {fileID: 2644416685859617791, guid: 9c54225de3751ab4e873590588fb32b8, type: 3}
+    - {fileID: 7485431511423255167, guid: 9c54225de3751ab4e873590588fb32b8, type: 3}
+    - {fileID: 4457614093837825599, guid: 9c54225de3751ab4e873590588fb32b8, type: 3}
+    - {fileID: 1313173950017850061, guid: 517b2e4c56dc0fd448fe5b9135dec034, type: 3}
+    - {fileID: -8679921383154817045, guid: 517b2e4c56dc0fd448fe5b9135dec034, type: 3}
+    _Values: baec7da8caa1fc1d89319e30c5369209801351c6ccd8ce641f19460d2c35832502bccb7ffa209a7a53d6ae9fc2244b2cb22f4f28050fd3493f09b0c571e4441e0515cf5bcca7b233285b2e086a130f60f1faec1602f624029e438a3866af08430e780cee92101d7daecb149c88a65e5216d4f95cfe43d21d885362eb9957597c78ee6f418a040656bcf424002edf241a7397f05f55fe140d06b08cc2061e587878329d502f6adb68l
+--- !u!114 &-2945908430187945978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3933736813395061893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3AutoSave
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  saveDestroyed: 0
+  componentsToSave:
+  - {fileID: 4457614093837825599}
+  - {fileID: 7363701458755045516}
+--- !u!4 &4457614093837825599 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 517b2e4c56dc0fd448fe5b9135dec034, type: 3}
+  m_PrefabInstance: {fileID: 4203574909680947668}
+  m_PrefabAsset: {fileID: 0}

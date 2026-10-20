@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("itemData", "IsPlaced", "IsHeld", "enabled", "name")]
+	[ES3PropertiesAttribute("itemData", "IsHeld", "HeldBy", "IsPlaced", "enabled", "name")]
 	public class ES3UserType_Item : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -17,8 +17,9 @@ namespace ES3Types
 			var instance = (Item)obj;
 			
 			writer.WritePrivateFieldByRef("itemData", instance);
+			writer.WriteProperty("IsHeld", instance.IsHeld, ES3Type_bool.Instance);
+			writer.WritePropertyByRef("HeldBy", instance.HeldBy);
 			writer.WriteProperty("IsPlaced", instance.IsPlaced, ES3Type_bool.Instance);
-			writer.WritePrivateProperty("IsHeld", instance);
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 		}
 
@@ -33,12 +34,15 @@ namespace ES3Types
 					case "itemData":
 					instance = (Item)reader.SetPrivateField("itemData", reader.Read<ItemData>(), instance);
 					break;
+					case "IsHeld":
+						instance.IsHeld = reader.Read<System.Boolean>(ES3Type_bool.Instance);
+						break;
+					case "HeldBy":
+						instance.HeldBy = reader.Read<UnityEngine.Transform>(ES3Type_Transform.Instance);
+						break;
 					case "IsPlaced":
 						instance.IsPlaced = reader.Read<System.Boolean>(ES3Type_bool.Instance);
 						break;
-					case "IsHeld":
-					instance = (Item)reader.SetPrivateProperty("IsHeld", reader.Read<System.Boolean>(), instance);
-					break;
 					case "enabled":
 						instance.enabled = reader.Read<System.Boolean>(ES3Type_bool.Instance);
 						break;

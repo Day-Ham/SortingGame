@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: -8707497763843775288}
   - component: {fileID: 6774691388620738545}
   - component: {fileID: -505431635233331882}
+  - component: {fileID: 8273744324980667690}
+  - component: {fileID: 3602367748793939841}
   m_Layer: 7
   m_Name: Pineapple
   m_TagString: Untagged
@@ -165,3 +167,57 @@ MonoBehaviour:
   HeldBy: {fileID: 0}
   isBeingPlaced: 0
   IsPlaced: 0
+--- !u!114 &8273744324980667690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817572340405077623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3Internal.ES3Prefab
+  prefabId: 5439228590741001506
+  localRefs:
+    _Keys:
+    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    - {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    - {fileID: 11400000, guid: 59f1ba6270774e34c9d0abdb2523b6ca, type: 2}
+    - {fileID: 8927927956168133145, guid: 8a33e1a77c3e5df46b083a9a1e7e5c01, type: 3}
+    - {fileID: 817572340405077623, guid: 8a33e1a77c3e5df46b083a9a1e7e5c01, type: 3}
+    - {fileID: 4821920920504155963, guid: 8a33e1a77c3e5df46b083a9a1e7e5c01, type: 3}
+    - {fileID: 3602367748793939841, guid: 8a33e1a77c3e5df46b083a9a1e7e5c01, type: 3}
+    - {fileID: -505431635233331882, guid: 8a33e1a77c3e5df46b083a9a1e7e5c01, type: 3}
+    - {fileID: 8273744324980667690, guid: 8a33e1a77c3e5df46b083a9a1e7e5c01, type: 3}
+    - {fileID: 3530945768078225325, guid: 1057b9c7ab4b9cf46b69ac2f4b815a9c, type: 3}
+    - {fileID: -1729312183694254329, guid: 1057b9c7ab4b9cf46b69ac2f4b815a9c, type: 3}
+    - {fileID: 2800000, guid: d9a3950aa399f91499d23b31159731db, type: 3}
+    - {fileID: 6774691388620738545, guid: 8a33e1a77c3e5df46b083a9a1e7e5c01, type: 3}
+    - {fileID: -8707497763843775288, guid: 8a33e1a77c3e5df46b083a9a1e7e5c01, type: 3}
+    - {fileID: 6459151800661239076, guid: 8a33e1a77c3e5df46b083a9a1e7e5c01, type: 3}
+    _Values: 2d28bfc015a1321203e2b945d8d14a6f9eeb59c1d457390c0219a590ad6bf67f1ecd3f4db4c88d7e5350a3ab48ef2f4b0b265cf8e713a733a93e477f7ad0b1376ae82c4906da844d6cccbee5424fd877faccb6ccb70fe07a62cb562c74e80c28a293b80d8825e2323a2bf379c122f305269854dfef80092b75ab43d29151040el
+--- !u!114 &3602367748793939841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817572340405077623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3AutoSave
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  saveDestroyed: 0
+  componentsToSave:
+  - {fileID: 6459151800661239076}
+  - {fileID: -505431635233331882}

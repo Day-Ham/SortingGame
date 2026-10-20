@@ -17,7 +17,7 @@ public class ItemChecker : MonoBehaviour
     [Header("Items")]
     public List<Item> heldItems = new List<Item>();
     [SerializeField] private string displayName;
-    public Item currentItem { get; private set; }
+    public Item currentItem /*{ get; private set; }*/;
     [SerializeField] private int maxItems;
     [SerializeField] private Vector3 orientation;
 
@@ -201,9 +201,9 @@ public class ItemChecker : MonoBehaviour
             currentItem = item;
         }
 
-        currentItem.gameObject.layer = 2; //can't be interacted with while being placed
-
         if (currentItem == null) return;
+
+        currentItem.gameObject.layer = 2; //can't be interacted with while being placed        
 
         if (heldItems.Contains(currentItem)) return; //make sure no duplicates
 
@@ -252,6 +252,7 @@ public class ItemChecker : MonoBehaviour
         {
             //finalize position
             rb.Move(transform.TransformPoint(targetPosition), transform.rotation * targetRotation);
+            
 
             UpdateUI();
             CheckIfItemIsComplete();
@@ -266,6 +267,7 @@ public class ItemChecker : MonoBehaviour
                 audioSource.Play();
             }
 
+            rb.isKinematic = true;
             isPlacingItem = false;
             currentItem.isBeingPlaced = false;
             currentItem = null;
@@ -305,14 +307,14 @@ public class ItemChecker : MonoBehaviour
     {
         if (spawner.items.Count == 0) return;
 
-        foreach (ItemSpawnEntry item in spawner.items)
+        foreach (ItemSpawnEntry entry in spawner.items)
         {
-            Item itemInfo = item.item.GetComponent<Item>();
+            Item itemInfo = entry.item.GetComponent<Item>();
             if (itemInfo == null) continue;
 
             if (itemInfo.Data.displayName == displayName)
             {
-                maxItems = item.amount;
+                maxItems = entry.amount;
                 return;
             }
         }
