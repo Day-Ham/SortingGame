@@ -18,5 +18,6 @@ MonoBehaviour:
   preferredOrientation: {x: 0, y: 0, z: 0}
   rows: 2
   columns: 3
-  spacing: {x: 0.5, y: 0.5, z: 0.5}
-  audioSFX: {fileID: 0}
+  spacing: {x: 0.4, y: 0.5, z: 0.4}
+  pickUpSFX: {fileID: 0}
+  putDownSFX: {fileID: 0}

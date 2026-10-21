@@ -16,8 +16,8 @@ MonoBehaviour:
   description: 
   type: 4
   preferredOrientation: {x: 0, y: 0, z: 0}
-  rows: 2
-  columns: 3
-  spacing: {x: 0.5, y: 0.5, z: 0.5}
+  rows: 3
+  columns: 4
+  spacing: {x: 0.3, y: 0.5, z: 0.3}
   pickUpSFX: {fileID: 0}
   putDownSFX: {fileID: 0}

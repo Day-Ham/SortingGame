@@ -18,6 +18,6 @@ MonoBehaviour:
   preferredOrientation: {x: 0, y: 0, z: 0}
   rows: 2
   columns: 3
-  spacing: {x: 0.5, y: 0.5, z: 0.5}
+  spacing: {x: 0.4, y: 0.5, z: 0.4}
   pickUpSFX: {fileID: 8300000, guid: fc367bf535b89b84888bd7c911b43a4e, type: 3}
   putDownSFX: {fileID: 8300000, guid: a990fd8f3fd8e7f42b6d216f17fb3d76, type: 3}
