@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -43,8 +40,9 @@ public class TitleScreenManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject duplicatePrompt;
+    [SerializeField] private GameObject defaultPrompt;
     [SerializeField] private Button settingsBackButton;
-    [SerializeField] private List<GameObject> prompts = new List<GameObject>();
 
 
     private int stageIndex;
@@ -75,37 +73,20 @@ public class TitleScreenManager : MonoBehaviour
         input = UserInput.instance;
         OpenMainMenu();
         EventSystem.current.SetSelectedGameObject(playButton.gameObject);
-        AddPromptsToLists();
     }
 
     private void Update()
     {
         if (input.EscapeInput)
         {
-            if (settingsMenu.activeInHierarchy)
+            if (duplicatePrompt.activeInHierarchy) return;
+            if (defaultPrompt.activeInHierarchy)
             {
-                foreach (GameObject prompt in prompts)
-                {
-                    if (prompt.activeInHierarchy)
-                    {
-                        prompt.SetActive(false);
-                        return;
-                    }
-                }
+                defaultPrompt.SetActive(false);
+                return;
             }
-            OpenMainMenu();
-        }
-    }
 
-    private void AddPromptsToLists()
-    {
-        int promptLayer = LayerMask.NameToLayer("Prompt");
-        GameObject[] promptUI = FindObjectsByType<GameObject>(FindObjectsInactive.Include)
-            .Where(obj => obj.layer == promptLayer)
-            .ToArray();
-        foreach (GameObject prompt in promptUI)
-        {
-            prompts.Add(prompt);
+            OpenMainMenu();
         }
     }
 

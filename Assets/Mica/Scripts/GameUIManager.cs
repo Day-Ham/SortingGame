@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -71,12 +70,13 @@ public class GameUIManager : MonoBehaviour
 
     [Header("Settings Menu")]
     public GameObject settingsMenu;
+    [SerializeField] private GameObject duplicatePrompt;
+    [SerializeField] private GameObject defaultPrompt;
     [SerializeField] private Button settingsBackButton;
 
 
     //Checks
     [SerializeField] private List<GameObject> menus = new List<GameObject>();
-    [SerializeField] private List<GameObject> prompts = new List<GameObject>();
 
     [SerializeField] private GameObject currentOpenMenu;
 
@@ -153,13 +153,11 @@ public class GameUIManager : MonoBehaviour
 
             if (currentOpenMenu == settingsMenu)
             {
-                foreach (GameObject prompt in prompts)
+                if (duplicatePrompt.activeInHierarchy) return;
+                if (defaultPrompt.activeInHierarchy)
                 {
-                    if (prompt.activeInHierarchy)
-                    {
-                        DisableUI(prompt);
-                        return;
-                    }
+                    DisableUI(defaultPrompt);
+                    return;
                 }
 
                 SetAsCurrentOpenMenu(pauseMenu);
@@ -214,15 +212,6 @@ public class GameUIManager : MonoBehaviour
         foreach(GameObject menu in menuUI)
         {
             menus.Add(menu);
-        }
-
-        int promptLayer = LayerMask.NameToLayer("Prompt");
-        GameObject[] promptUI = FindObjectsByType<GameObject>(FindObjectsInactive.Include)
-            .Where(obj => obj.layer == promptLayer)
-            .ToArray();  
-        foreach(GameObject prompt in promptUI)
-        {
-            prompts.Add(prompt);
         }
     }
 
@@ -307,18 +296,5 @@ public class GameUIManager : MonoBehaviour
         pause.DisablePlayerControl();
         pause.UnlockCursor();
         sceneLoader.QuitGame();
-    }
-
-    public bool DisablePrompt()
-    {
-        foreach (GameObject prompt in prompts)
-        {
-            if (prompt.activeInHierarchy)
-            {
-                DisableUI(prompt);
-                return true;
-            }
-        }
-        return false;
     }
 }

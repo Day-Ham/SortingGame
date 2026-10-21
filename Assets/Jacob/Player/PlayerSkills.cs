@@ -1,9 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using static UnityEditor.Progress;
 using System.Linq;
 
 public class PlayerSkills : MonoBehaviour

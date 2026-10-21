@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("items", "currentItem", "itemsSpawned", "spawnArea", "spawnHeight", "maxAttempts")]
+	[ES3PropertiesAttribute("items", "itemsSpawned", "spawnArea", "spawnHeight", "maxAttempts", "obstacleLayer")]
 	public class ES3UserType_ItemSpawner : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -17,11 +17,11 @@ namespace ES3Types
 			var instance = (ItemSpawner)obj;
 			
 			writer.WriteProperty("items", instance.items, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<ItemSpawnEntry>)));
-			writer.WritePrivateFieldByRef("currentItem", instance);
 			writer.WritePrivateField("itemsSpawned", instance);
 			writer.WritePrivateFieldByRef("spawnArea", instance);
 			writer.WritePrivateField("spawnHeight", instance);
 			writer.WritePrivateField("maxAttempts", instance);
+			writer.WritePrivateField("obstacleLayer", instance);
 		}
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
@@ -35,9 +35,6 @@ namespace ES3Types
 					case "items":
 						instance.items = reader.Read<System.Collections.Generic.List<ItemSpawnEntry>>();
 						break;
-					case "currentItem":
-					instance = (ItemSpawner)reader.SetPrivateField("currentItem", reader.Read<UnityEngine.GameObject>(), instance);
-					break;
 					case "itemsSpawned":
 					instance = (ItemSpawner)reader.SetPrivateField("itemsSpawned", reader.Read<System.Boolean>(), instance);
 					break;
@@ -49,6 +46,9 @@ namespace ES3Types
 					break;
 					case "maxAttempts":
 					instance = (ItemSpawner)reader.SetPrivateField("maxAttempts", reader.Read<System.Int32>(), instance);
+					break;
+					case "obstacleLayer":
+					instance = (ItemSpawner)reader.SetPrivateField("obstacleLayer", reader.Read<UnityEngine.LayerMask>(), instance);
 					break;
 					default:
 						reader.Skip();

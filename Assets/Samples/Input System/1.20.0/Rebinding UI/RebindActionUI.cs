@@ -294,6 +294,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_ConfirmSwapButton.onClick.RemoveListener(ConfirmSwapBinding);
             m_CancelSwapButton.onClick.RemoveListener(CancelSwapBinding);
 
+            m_RebindDuplicatePromp.SetActive(false);
+
             StartCoroutine(RestartRebindAfterRelease());
         }
 
@@ -401,7 +403,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                         {
                             CleanUp();
 
-                            ShowDuplicatePromp(action, bindingIndex, duplicateBinding, originalPath, allCompositeParts);
+                            ShowDuplicatePrompt(action, bindingIndex, duplicateBinding, originalPath, allCompositeParts);
                             return;   
                         }
 
@@ -537,7 +539,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             return false;
         }
 
-        private void ShowDuplicatePromp(InputAction action, int bindingIndex, RebindActionUI duplicateBinding, string originalPath, bool allCompositeParts = false)
+        private void ShowDuplicatePrompt(InputAction action, int bindingIndex, RebindActionUI duplicateBinding, string originalPath, bool allCompositeParts = false)
         {
             m_PendingAction = action;
             m_PendingBindingIndex = bindingIndex;
@@ -560,12 +562,13 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             if (m_RebindDuplicatePromp != null && m_RebindDuplicatePromp.activeInHierarchy)
             {
-                bool keyboardCancel = Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
+                bool keyboardCancel = Keyboard.current != null && Keyboard.current.escapeKey.wasReleasedThisFrame;
                 //bool gamepadCancel = Gamepad.current != null && (Gamepad.current.buttonEast.wasPressedThisFrame || Gamepad.current.selectButton.wasPressedThisFrame);
 
                 if (keyboardCancel /*|| gamepadCancel*/)
                 {
                     CancelSwapBinding();
+                    return;
                 }
             }
         }
