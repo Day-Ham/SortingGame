@@ -7,7 +7,6 @@ public class ItemSpawner : MonoBehaviour
 {
     [Header("Item")]
     public List<ItemSpawnEntry> items;
-    private GameObject currentItem;
     [SerializeField] private bool itemsSpawned;
 
     [Header("Spawning")]
@@ -27,26 +26,24 @@ public class ItemSpawner : MonoBehaviour
 
     private void InstantiateItems()
     {
-        foreach (ItemSpawnEntry item in items)
+        foreach (ItemSpawnEntry entry in items)
         {
-            currentItem = item.item;
-            for (int i = 0; i < item.amount; i++) 
+            Item itemComponent = entry.item.GetComponent<Item>();
+            if (itemComponent == null) continue;
+
+            int numberOfItem = itemComponent.Data.rows * itemComponent.Data.columns;
+
+            for (int i = 0; i < numberOfItem; i++) 
             {
                 for (int j = 0; j < maxAttempts; j++)
                 {
                     Vector3 spawnPoint = GetRandomSpawnPoint();
-                    if (float.IsInfinity(spawnPoint.x))
-                    {
-                        continue;
-                    }
-                        
-                    if (IsPositionBlocked(spawnPoint))
-                    {
-                        continue;
-                    }
+                    if (float.IsInfinity(spawnPoint.x)) continue;
 
-                    GameObject newItem = Instantiate(item.item, spawnPoint, Quaternion.Euler(GetRandomRotation()));
-                    newItem.transform.SetParent(transform);
+                    if (IsPositionBlocked(spawnPoint, entry.item)) continue;
+
+                    GameObject newItem = Instantiate(entry.item, spawnPoint, Quaternion.Euler(GetRandomRotation()));
+                    newItem.transform.SetParent(transform);     
                     break;
                 }
             }
@@ -83,9 +80,9 @@ public class ItemSpawner : MonoBehaviour
         return new Vector3(randomX, randomY, randomZ);
     }
 
-    private bool IsPositionBlocked(Vector3 position)
+    private bool IsPositionBlocked(Vector3 position, GameObject itemPrefab)
     {
-        Collider col = currentItem.GetComponent<Collider>();
+        Collider col = itemPrefab.GetComponent<Collider>();
         if (col == null)
         {
             Debug.LogWarning("Item has no Collider.");
@@ -107,6 +104,5 @@ public class ItemSpawner : MonoBehaviour
 public class ItemSpawnEntry
 {
     public GameObject item;
-    public int amount;
     public bool isComplete;
 }

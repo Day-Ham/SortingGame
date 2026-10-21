@@ -314,7 +314,7 @@ public class ItemChecker : MonoBehaviour
 
             if (itemInfo.Data.displayName == displayName)
             {
-                maxItems = entry.amount;
+                maxItems = itemInfo.Data.rows * itemInfo.Data.columns;
                 return;
             }
         }
