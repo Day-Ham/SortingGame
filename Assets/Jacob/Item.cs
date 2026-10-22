@@ -21,6 +21,7 @@ public class Item : MonoBehaviour
     public bool isBeingPlaced;
 
     public bool IsPlaced;
+    public bool isInShelf;
 
     private void Awake()
     {
@@ -29,7 +30,20 @@ public class Item : MonoBehaviour
 
     private void FixedUpdate()
     {
+
+        if (isBeingPlaced)
+        {
+            stoppedTimer = 0f;
+            return;
+        }
+
         if (IsHeld)
+        {
+            stoppedTimer = 0f;
+            return;
+        }
+
+        if (isInShelf)
         {
             stoppedTimer = 0f;
             return;
@@ -86,6 +100,22 @@ public class Item : MonoBehaviour
         {
             stoppedTimer = 0f;
             rb.isKinematic = true;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Shelf") && gameObject.GetComponentInParent<ItemChecker>())
+        {
+            isInShelf = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Shelf"))
+        {
+            isInShelf = false;
         }
     }
 }

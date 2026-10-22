@@ -234,8 +234,6 @@ public class ItemChecker : MonoBehaviour
 
         heldItems.Add(currentItem);
 
-        AddCoin(); //adds money if first time being placed on shelf
-
         currentItem.isBeingPlaced = true;
     }
 
@@ -296,6 +294,7 @@ public class ItemChecker : MonoBehaviour
             isPlacingItem = false;
             currentItem.isBeingPlaced = false;
 
+            AddCoin(); //adds money if first time being placed on shelf
             Debug.Log("Placed " + currentItem.name + " on the shelf.");
             currentItem = null;
         }
