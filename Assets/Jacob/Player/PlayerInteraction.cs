@@ -702,6 +702,43 @@ public class PlayerInteraction : MonoBehaviour
     }
     #endregion
 
+    public void CleanAndReorganize()
+    {
+        Debug.Log($"{name} has {holdPoint.childCount} children before cleaning.");
+        heldItems.Clear();
+
+        for (int i = 0; i < holdPoint.childCount; i++)
+        {
+            Transform child = holdPoint.GetChild(i);
+            Item item = child.GetComponent<Item>();
+
+            if (item != null)
+            {
+                heldItems.Add(item.gameObject);
+
+                Rigidbody rb = item.GetComponent<Rigidbody>();
+
+                if (rb != null)
+                {
+                    rb.isKinematic = true;
+                }
+
+                item.transform.position = holdPoint.transform.position;
+                item.transform.rotation = holdPoint.transform.rotation;
+                item.Held(true, transform);
+                item.gameObject.SetActive(false);
+            }
+
+            if (i == holdPoint.childCount-1)
+            {
+                item.gameObject.SetActive(true);
+                heldObject = item.gameObject;
+            }
+        }
+
+        UpdateInventoryUI();
+    }
+
     private void OnDrawGizmos()
     {
         if (playerCamera == null)

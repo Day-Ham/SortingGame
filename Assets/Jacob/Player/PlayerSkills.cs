@@ -49,18 +49,11 @@ public class PlayerSkills : MonoBehaviour
     private void Start()
     {
         ui = GameUIManager.instance;
-
-        ui.DisableUI(ui.skill1Icon);
-        ui.DisableUI(ui.skill2Icon);
-        ui.DisableUI(ui.skill3Icon);
-
-        //skill1Icon.SetActive(skill1Level > 0);
-        //skill2Icon.SetActive(skill2Level > 0);
-        //skill3Icon.SetActive(skill3Level > 0);
-        
         ui.skill1CooldownSlider.value = 1f;
         ui.skill2CooldownSlider.value = 1f;
         ui.skill3CooldownSlider.value = 1f;
+
+        OnLoadingSaveUpdateSlider();
     }
 
     private void Update()
@@ -467,4 +460,32 @@ public class PlayerSkills : MonoBehaviour
         ui.FillSlider(ui.skill3Slider, 5);
     }
     #endregion
+
+    public void OnLoadingSaveUpdateSlider()
+    {
+        Debug.Log("Skill 1 Level = " + skill1Level);
+        if (skill1Level > 0) ui.EnableUI(ui.skill1Icon);
+        else ui.DisableUI(ui.skill1Icon);
+
+        if (skill2Level > 0) ui.EnableUI(ui.skill2Icon);
+        else ui.DisableUI(ui.skill2Icon);
+
+        if (skill3Level > 0) ui.EnableUI(ui.skill3Icon);
+        else ui.DisableUI(ui.skill3Icon);
+
+        for (int i = 0; i < skill1Level; i++)
+        {
+            ui.FillSlider(ui.skill1Slider, 5);
+        }
+
+        for (int i = 0; i < skill2Level; i++)
+        {
+            ui.FillSlider(ui.skill2Slider, 5);
+        }
+
+        for (int i = 0; i < skill3Level; i++)
+        {
+            ui.FillSlider(ui.skill3Slider, 5);
+        }
+    }
 }

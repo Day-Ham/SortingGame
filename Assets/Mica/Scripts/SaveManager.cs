@@ -44,5 +44,11 @@ public class SaveManager : MonoBehaviour
         {
             checker.CleanAndReorganize();
         }
+
+        PlayerInteraction playerInteraction = Object.FindAnyObjectByType<PlayerInteraction>();
+        playerInteraction.CleanAndReorganize();
+
+        PlayerSkills playerSkills = Object.FindAnyObjectByType<PlayerSkills>();
+        playerSkills.OnLoadingSaveUpdateSlider();
     }
 }

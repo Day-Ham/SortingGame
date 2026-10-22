@@ -6216,6 +6216,7 @@ MonoBehaviour:
   componentsToSave:
   - {fileID: 296813867}
   - {fileID: 296813866}
+  - {fileID: 296813877}
 --- !u!64 &303283114
 MeshCollider:
   m_ObjectHideFlags: 0
