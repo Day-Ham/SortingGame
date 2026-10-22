@@ -123,8 +123,10 @@ public class ItemChecker : MonoBehaviour
         Vector3 localBotCenter = new Vector3(localCenter.x, localCenter.y - (localSize.y / 2f), localCenter.z);
         Vector3 localBackCenter = new Vector3(localCenter.x, localCenter.y, localCenter.z - (localSize.z / 2f));
 
-        Bounds itemBounds = currentItem.GetComponent<Collider>().bounds;
-        float itemHeight = Mathf.Abs(itemBounds.max.y - itemBounds.min.y);
+        var offsets = GetMeshOffsets(currentItem);
+
+        float bottomOffset = offsets.bottomOffset;
+        float backOffset = offsets.backOffset;
 
         //Computation of placements
         for (int k = 0; k < maxItems; k++)
@@ -146,7 +148,7 @@ public class ItemChecker : MonoBehaviour
 
                 x = (localBotCenter.x - (width / 2)) + (spacing.x * c);
                 z = (localBotCenter.z - (length / 2)) + (spacing.z * r);
-                y = localBotCenter.y + (itemHeight / 2);
+                y = localBotCenter.y - bottomOffset;
             }
             else if (shelfType == ShelfType.Vertical)
             {
@@ -158,7 +160,7 @@ public class ItemChecker : MonoBehaviour
 
                 x = (localBackCenter.x - (width / 2)) + (spacing.x * c);
                 y = (localBackCenter.y + (height / 2)) - (spacing.z * r);
-                z = localBackCenter.z + (itemHeight / 2);
+                z = localBackCenter.z - backOffset;
             }
             else if (shelfType == ShelfType.Slanted)
             {
@@ -169,13 +171,46 @@ public class ItemChecker : MonoBehaviour
                 float length = (rows - 1) * spacing.z;
 
                 x = (localBotCenter.x - (width / 2)) + (spacing.x * c);
-                y = localBotCenter.y + (itemHeight / 2) + (spacing.y * r);
+                y = localBotCenter.y - bottomOffset + (spacing.y * r);
                 z = (localBotCenter.z + (length / 2)) - (spacing.z * r);
             }
 
             Vector3 localTargetPoint = new Vector3(x, y, z);
             shelfPositions.Add(localTargetPoint);
         }
+    }
+
+    private (float bottomOffset, float backOffset) GetMeshOffsets(Item item)
+    {
+        MeshCollider meshCollider = item.GetComponent<MeshCollider>();
+
+        if (meshCollider == null || meshCollider.sharedMesh == null)
+        {
+            Debug.LogWarning($"No MeshCollider or mesh found on {item.name}.");
+            return (item.GetComponent<Collider>().bounds.size.y, item.GetComponent<Collider>().bounds.size.z);
+        }
+
+        Bounds meshBounds = meshCollider.sharedMesh.bounds;
+
+        Vector3 scale = meshCollider.transform.lossyScale;
+        Vector3 center = Vector3.Scale(meshBounds.center, scale);
+        Vector3 size = Vector3.Scale(meshBounds.size, scale);
+
+        Quaternion rotation = Quaternion.Euler(item.Data.preferredOrientation);
+
+        Vector3 rotatedCenter = rotation * center;
+
+        Vector3 right = rotation * Vector3.right;
+        Vector3 up = rotation * Vector3.up;
+        Vector3 forward = rotation * Vector3.forward;
+
+        float halfHeight = (Mathf.Abs(right.y) * size.x + Mathf.Abs(up.y) * size.y + Mathf.Abs(forward.y) * size.z) * 0.5f;
+        float halfDepth = (Mathf.Abs(right.z) * size.x + Mathf.Abs(up.z) * size.y + Mathf.Abs(forward.z) * size.z) * 0.5f;
+
+        float bottomOffset = rotatedCenter.y - halfHeight;
+        float backOffset = rotatedCenter.z - halfDepth;
+
+        return (bottomOffset, backOffset);
     }
 
     public void PlaceItem(Item item = null)
