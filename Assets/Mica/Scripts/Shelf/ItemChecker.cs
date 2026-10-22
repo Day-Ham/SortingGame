@@ -200,6 +200,8 @@ public class ItemChecker : MonoBehaviour
 
         if (currentItem == null) return;
 
+        isPlacingItem = true;
+
         currentItem.gameObject.layer = 2; //can't be interacted with while being placed        
 
         if (heldItems.Contains(currentItem)) return; //make sure no duplicates
@@ -226,7 +228,6 @@ public class ItemChecker : MonoBehaviour
 
         AddCoin(); //adds money if first time being placed on shelf
 
-        isPlacingItem = true;
         currentItem.isBeingPlaced = true;
     }
 
@@ -267,8 +268,8 @@ public class ItemChecker : MonoBehaviour
             rb.isKinematic = true;
             isPlacingItem = false;
             currentItem.isBeingPlaced = false;
-            currentItem = null;
             Debug.Log("Placed " + currentItem.name + " on the shelf.");
+            currentItem = null;
         }
     }
 

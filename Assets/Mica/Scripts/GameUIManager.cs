@@ -269,10 +269,14 @@ public class GameUIManager : MonoBehaviour
     private void CloseUpgrades()
     {
         DisableUI(upgradesMenu);
+        pause.EnablePlayerControl();
+        pause.LockCursor();
     }
     private void CloseSkills()
     {
         DisableUI(skillsMenu);
+        pause.EnablePlayerControl();
+        pause.LockCursor();
     }
     #endregion
 

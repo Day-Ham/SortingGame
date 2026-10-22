@@ -12,6 +12,8 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Look At")]
     [SerializeField] private GameObject lookedAtObject;
     public GameObject LookedAtObject => lookedAtObject;
+    private GameObject lookAtPickUpObject;
+    private GameObject lookAtInteractObject;
 
     [Header("Pickup")]
     [SerializeField] private float pickupRange = 3f;
@@ -67,7 +69,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void Update()
     {
-        CheckLookedAtObject();
+        LookAtObjects();
         OnScrollUp();
         OnScrollDown();
         OnInteract();
@@ -80,30 +82,39 @@ public class PlayerInteraction : MonoBehaviour
     }
 
     #region General
-    void CheckLookedAtObject()
+    void LookAtObjects()
     {
+        //Look at all objects in a straight line belonging to pick up, interact, and obstacle layers
         Ray ray = new Ray(playerCamera.transform.position, playerCamera.transform.forward);
         RaycastHit[] hits = Physics.RaycastAll(ray, pickupRange, pickUpLayer | interactLayer | obstacleLayer);
+        
+        //Arrange from nearest to farthest
         System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
-        GameObject pickupObject = null;
+        GameObject pickUpObject = null;
         GameObject interactObject = null;
 
         foreach (RaycastHit hit in hits)
         {
             GameObject obj = hit.collider.gameObject;
 
+            //Don't detect anything if nearest object is an obstacle
             if (IsInLayerMask(obj, obstacleLayer))
             {
                 break;
             }
 
-            if (pickupObject == null && IsInLayerMask(obj, pickUpLayer))
+            //Nearest pick upable and interactable objects found, stop checking other hits
+            if (pickUpObject != null && interactObject != null) break;
+
+            //Detect the nearest pick upable object
+            if (pickUpObject == null && IsInLayerMask(obj, pickUpLayer))
             {
-                pickupObject = obj;
+                pickUpObject = obj;
                 Debug.Log("Pickup object: " + obj.name);
             }
 
+            //Detect the nearest interactable object
             if (interactObject == null && IsInLayerMask(obj, interactLayer))
             {
                 interactObject = obj;
@@ -111,97 +122,88 @@ public class PlayerInteraction : MonoBehaviour
             }
         }
 
-        // prio pickup layer over interact layer, find last object put on the shelf
-        if (pickupObject != null && interactObject != null)
+        //refresh lookAtPickUpObject and lookAtInteractObject
+        if (pickUpObject != null)
         {
-            ItemChecker shelfParent = pickupObject.GetComponentInParent<ItemChecker>();
-            if (shelfParent == null)
-            {
-                lookedAtObject = pickupObject;
-            }
-            else
-            {
-                lookedAtObject = interactObject;
-                ItemChecker shelf = lookedAtObject.GetComponent<ItemChecker>();
-                if (shelf != null)
-                {
-                    Item lastItem = shelf.GetLastObject();
-                    if (lastItem != null)
-                    {
-                        lookedAtObject = lastItem.gameObject;
-                        Debug.Log("Looking at " + lookedAtObject.name);
-                    }
-                }
-            }   
-        }
-        else if (pickupObject != null)
-        {
-            lookedAtObject = pickupObject;
-        }
-        else if (interactObject != null)
-        {
-            lookedAtObject = interactObject;
+            lookAtPickUpObject = pickUpObject;
         }
         else
+        {
+            lookAtPickUpObject = null;
+        }
+
+        if (interactObject != null)
+        {
+            lookAtInteractObject = interactObject;
+        }
+        else
+        {
+            lookAtInteractObject = null;
+        }
+
+        if (lookAtPickUpObject == null && lookAtInteractObject == null)
         {
             lookedAtObject = null;
+        }
 
-            ui.SetCrosshair(ui.normalCrosshair);
+        SetCrosshair();
+        OutlinePickUpObject();
+        DisplayNameOfPickUpObject();
+    }
 
+    void DisplayNameOfPickUpObject()
+    {
+        if (lookAtPickUpObject == null)
+        {
             ui.SetUIText(ui.lookedAtItemNameText, "");
             ui.DisableUI(ui.lookedAtItemNameText.gameObject);
-
-            UpdateOutlineTarget(null);
             return;
         }
 
-        //apply outline only to pickupable items that are not on a shelf
-        Item item = lookedAtObject.GetComponent<Item>();
-
-        if (item != null && item.GetComponentInParent<ItemChecker>() == null)
-        {
-            UpdateOutlineTarget(lookedAtObject);
-        }
-        else
-        {
-            UpdateOutlineTarget(null);
-        }
-
-        //check the shelf in ItemChecker
-        ItemChecker checker = lookedAtObject.GetComponent<ItemChecker>();
-
-        if (checker != null)
-        {
-            Debug.Log("Looking at a shelf");
-            
-            //check if item is viable to be put on the shelf and change crosshairs to match
-            if (checker.IsItemValid())
-            {
-                ui.SetCrosshair(ui.oCrosshair);
-            }
-            else
-            {
-                ui.SetCrosshair(ui.xCrosshair);
-            }
-
-            ui.SetUIText(ui.lookedAtItemNameText, "");
-            ui.DisableUI(ui.lookedAtItemNameText.gameObject);
-
-            return;
-        }
-
-        // Check Item UI
+        // display item name
+        Item item = lookAtPickUpObject.GetComponent<Item>();
         if (item != null && item.Data != null)
         {
             ui.SetUIText(ui.lookedAtItemNameText, item.Data.displayName);
             ui.EnableUI(ui.lookedAtItemNameText.gameObject);
             return;
         }
+    }
 
-        ui.SetCrosshair(ui.normalCrosshair);
+    void SetCrosshair()
+    {
+        // no object found
+        if (lookAtPickUpObject == null && lookAtInteractObject == null)
+        {
+            ui.SetCrosshair(ui.normalCrosshair);
 
-        ui.SetUIText(ui.lookedAtItemNameText, "");
-        ui.DisableUI(ui.lookedAtItemNameText.gameObject);
+            UpdateOutlineTarget(null);
+            return;
+        }
+
+        //check the shelf in ItemChecker
+        if (lookAtInteractObject != null)
+        {
+            ItemChecker checker = lookAtInteractObject.GetComponent<ItemChecker>();
+            if (checker != null)
+            {
+                Debug.Log("Looking at a shelf");
+
+                //check if item is viable to be put on the shelf and change crosshairs to match
+                if (checker.IsItemValid())
+                {
+                    ui.SetCrosshair(ui.oCrosshair);
+                }
+                else
+                {
+                    ui.SetCrosshair(ui.xCrosshair);
+                }
+            }
+        }
+        else
+        {
+            ui.SetCrosshair(ui.normalCrosshair);
+        }
     }
 
     void UpdateInventoryUI()
@@ -268,6 +270,23 @@ public class PlayerInteraction : MonoBehaviour
     #endregion
 
     #region Outline
+    void OutlinePickUpObject()
+    {
+        //apply outline only to pickupable items that are not on a shelf
+        if (lookAtPickUpObject == null) return;
+
+        Item item = lookAtPickUpObject.GetComponent<Item>();
+
+        if (item != null && item.GetComponentInParent<ItemChecker>() == null)
+        {
+            UpdateOutlineTarget(lookAtPickUpObject);
+        }
+        else
+        {
+            UpdateOutlineTarget(null);
+        }
+    }
+
     private void UpdateOutlineTarget(GameObject newTarget)
     {
         if (previousLookedAtObject == newTarget)
@@ -327,58 +346,97 @@ public class PlayerInteraction : MonoBehaviour
     #endregion
 
     #region Pick Up
+    void LookAtPickUp()
+    {
+        // prioritize pickup layer over interact layer, find last object put on the shelf
+        if (lookAtPickUpObject != null && lookAtInteractObject != null)
+        {
+            ItemChecker shelfParent = lookAtPickUpObject.GetComponentInParent<ItemChecker>();
+            if (shelfParent == null)
+            {
+                lookedAtObject = lookAtPickUpObject;
+            }
+            else //if the item has a shelf parent, set pick up object as the last object placed on the shelf
+            {
+                ItemChecker shelf = lookAtInteractObject.GetComponent<ItemChecker>();
+                if (shelf != null)
+                {
+                    Item lastItem = shelf.GetLastObject();
+                    if (lastItem != null)
+                    {
+                        lookedAtObject = lastItem.gameObject;
+                        Debug.Log("Looking at " + lookedAtObject.name);
+                    }
+                }
+            }
+        }
+        else if (lookAtPickUpObject != null)
+        {
+            lookedAtObject = lookAtPickUpObject;
+        }
+    }
+
     public void OnInteract()
     {
         if (!UserInput.instance.InteractionInput)
             return;
 
-        if (lookedAtObject == null)
-            return;
+        if (isPickingUp || isSwitching) return;
+
+        LookAtPickUp();
+
+        if (lookedAtObject == null) return;
 
         if (heldItems.Count >= maxHeldItems) return;
 
         Item item = lookedAtObject.GetComponent<Item>();
-        if (item != null)
-        {
-            ItemChecker shelf = item.GetComponentInParent<ItemChecker>();
-            if (shelf != null)
-            {
-                shelf.RemoveItem();
-            }
 
-            TryPickup(item);
-            return;
+        if (item == null) return;
+        if (heldItems.Contains(item.gameObject)) return;
+
+        ItemChecker shelf = item.GetComponentInParent<ItemChecker>();
+        if (shelf != null)
+        {
+            if (shelf.isPlacingItem) return;
+            shelf.RemoveItem();
         }
+
+        TryPickup(item);
     }
 
     public void TryPickup(Item item)
     {
+        if (item == null || isPickingUp || isSwitching) return;
+        
         GameObject obj = item.gameObject;
+        if (heldItems.Contains(obj)) return;
+        
         Rigidbody rb = obj.GetComponent<Rigidbody>();
+        if (rb == null) return;
 
-        if (rb != null && item != null)
+        isPickingUp = true;
+        
+        UpdateOutlineTarget(null);
+
+        if (heldObject != null)
         {
-            UpdateOutlineTarget(null);
-
-            if (heldObject != null)
-            {
-                heldObject.SetActive(false);
-            }
-
-            heldObject = rb.gameObject;
-            heldRigidbody = rb;
-
-            heldItems.Add(heldObject);
-            activeItemIndex = heldItems.Count - 1;
-            UpdateInventoryUI();
-
-            heldRigidbody.isKinematic = true;
-            item.Held(true, transform);
-            heldObject.transform.SetParent(holdPoint, true);
-
-            isPickingUp = true;
-            playPickUpSFX = true;
+            heldObject.SetActive(false);
         }
+
+        heldObject = obj;
+        heldRigidbody = rb;
+
+        heldItems.Add(obj);
+        activeItemIndex = heldItems.Count - 1;
+        
+        UpdateInventoryUI();
+
+        heldRigidbody.isKinematic = true;
+        
+        item.Held(true, transform);
+        heldObject.transform.SetParent(holdPoint, true);
+
+        playPickUpSFX = true;
     }
 
     void PickupLerp()
@@ -490,11 +548,22 @@ public class PlayerInteraction : MonoBehaviour
     #endregion
 
     #region Throw
+    void LookAtInteract()
+    {
+        // prioritize interact layer over pick up layer
+        if (lookAtInteractObject != null)
+        {
+            lookedAtObject = lookAtInteractObject;
+        }
+    }
+
     public void OnThrow()
     {
         if (!UserInput.instance.ThrowInput) return;
 
         if (isPickingUp || isSwitching) return;
+
+        LookAtInteract();
 
         ItemChecker checker = lookedAtObject != null ? lookedAtObject.GetComponent<ItemChecker>() : null;
 
