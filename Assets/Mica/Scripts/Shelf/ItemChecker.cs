@@ -200,11 +200,19 @@ public class ItemChecker : MonoBehaviour
 
         if (currentItem == null) return;
 
+        if (heldItems.Contains(currentItem)) return; //make sure no duplicates
+
         isPlacingItem = true;
 
-        currentItem.gameObject.layer = 2; //can't be interacted with while being placed        
+        currentItem.gameObject.layer = 2; //can't be interacted with while being placed
 
-        if (heldItems.Contains(currentItem)) return; //make sure no duplicates
+        Rigidbody rb = currentItem.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
 
         currentItem.gameObject.SetActive(true);
 
@@ -215,7 +223,7 @@ public class ItemChecker : MonoBehaviour
             SetMaxItems();
             ComputeItemPlacements();
         }
-        
+
         //take ownership from player
         if (item == null)
         {
@@ -233,9 +241,22 @@ public class ItemChecker : MonoBehaviour
 
     void MoveToPlaceItem()
     {
+        if (currentItem == null)
+        {
+            isPlacingItem = false;
+            return;
+        }
+
         int itemIndex = heldItems.Count - 1;
+        if (itemIndex < 0 || itemIndex >= shelfPositions.Count)
+        {
+            isPlacingItem = false;
+            return;
+        }
 
         Rigidbody rb = currentItem.GetComponent<Rigidbody>();
+        rb.isKinematic = true;
+
         currentItem.Held(true, transform);
 
         Vector3 targetPosition = shelfPositions[itemIndex];
@@ -250,7 +271,12 @@ public class ItemChecker : MonoBehaviour
         {
             //finalize position
             rb.Move(transform.TransformPoint(targetPosition), transform.rotation * targetRotation);
-            
+
+            Collider[] colliders = currentItem.GetComponentsInChildren<Collider>();
+            foreach (Collider col in colliders)
+            {
+                col.enabled = true;
+            }
 
             UpdateUI();
             CheckIfItemIsComplete();
@@ -266,8 +292,10 @@ public class ItemChecker : MonoBehaviour
             }
 
             rb.isKinematic = true;
+
             isPlacingItem = false;
             currentItem.isBeingPlaced = false;
+
             Debug.Log("Placed " + currentItem.name + " on the shelf.");
             currentItem = null;
         }

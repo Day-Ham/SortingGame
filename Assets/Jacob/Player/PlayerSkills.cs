@@ -301,18 +301,20 @@ public class PlayerSkills : MonoBehaviour
 
         Item[] allItems = FindObjectsByType<Item>();
 
+        StartCoroutine(PickUpMatchingItems(displayName, allItems));              
+    }
+
+    private IEnumerator PickUpMatchingItems(string displayName, Item[] allItems)
+    {
         foreach (Item item in allItems)
         {
             if (playerInteraction.heldItems.Count >= playerInteraction.MaxHeldItems)
                 break;
 
-            if (item.Data == null)
+            if (item == null || item.Data == null)
                 continue;
 
             if (item.Data.displayName != displayName)
-                continue;
-
-            if (item.gameObject == playerInteraction.heldObject)
                 continue;
 
             if (playerInteraction.heldItems.Contains(item.gameObject))
@@ -320,18 +322,33 @@ public class PlayerSkills : MonoBehaviour
 
             ItemChecker shelf = item.GetComponentInParent<ItemChecker>();
 
-            if (shelf == null)
-            {
-                RestoreLayer(item.gameObject);
+            // Only pick up items that are not on a shelf.
+            if (shelf != null) continue;
 
-                highlightedObjects.Remove(item.gameObject);
+            // Wait picking up or switching actin to finish.
+            yield return new WaitUntil(() => !playerInteraction.isPickingUp && !playerInteraction.isSwitching);
 
-                playerInteraction.TryPickup(item);
-            }
+            // Recheck inventory after waiting.
+            if (playerInteraction.heldItems.Count >= playerInteraction.MaxHeldItems)
+                break;
+
+            if (item == null || playerInteraction.heldItems.Contains(item.gameObject))
+                continue;
+
+            // Restore the item's original layer and remove its highlight.
+            RestoreLayer(item.gameObject);
+            highlightedObjects.Remove(item.gameObject);
+
+            // Attempt to pick up the item.
+            playerInteraction.TryPickup(item);
+
+            // Wait until the item has actually finished moving into the player's hand.
+            yield return new WaitUntil(() => !playerInteraction.isPickingUp);
         }
 
         skill2CooldownTimer = skill2Cooldown;
     }
+
     public void BuySkill2()
     {
         if (skill2Level >= 5)
@@ -420,7 +437,7 @@ public class PlayerSkills : MonoBehaviour
             if (skill3Used)
                 skill3CooldownTimer = skill3Cooldown;
 
-            //yield return new WaitUntil(() => !matchingShelf.isPlacingItem && !playerInteraction.isPickingUp && !playerInteraction.isSwitching);
+            yield return new WaitUntil(() => !matchingShelf.isPlacingItem && !playerInteraction.isPickingUp && !playerInteraction.isSwitching);
         }
     }
 
