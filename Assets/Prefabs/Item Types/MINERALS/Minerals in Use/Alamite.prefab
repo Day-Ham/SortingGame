@@ -169,6 +169,7 @@ MonoBehaviour:
   HeldBy: {fileID: 0}
   isBeingPlaced: 0
   IsPlaced: 0
+  isInShelf: 0
 --- !u!114 &-7477945099063860955
 MonoBehaviour:
   m_ObjectHideFlags: 0
