@@ -33,12 +33,6 @@ namespace ES3Types
 					
 					case "itemData":
 					instance = (Item)reader.SetPrivateField("itemData", reader.Read<ItemData>(), instance);
-					break;
-					case "IsHeld":
-						instance.IsHeld = reader.Read<System.Boolean>(ES3Type_bool.Instance);
-						break;
-					case "HeldBy":
-						instance.HeldBy = reader.Read<UnityEngine.Transform>(ES3Type_Transform.Instance);
 						break;
 					case "IsPlaced":
 						instance.IsPlaced = reader.Read<System.Boolean>(ES3Type_bool.Instance);
