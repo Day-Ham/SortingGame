@@ -6,6 +6,12 @@ using UnityEngine.UI;
 public class SettingsPanel : MonoBehaviour
 {
     public static SettingsPanel instance;
+    
+    //For player prefs
+    private const string MasterVolumeKey = "MasterVolume";
+    private const string MusicVolumeKey = "MusicVolume";
+    private const string SFXVolumeKey = "SFXVolume";
+    private const string MouseSensitivityKey = "MouseSensitivity";
 
     [Header("Audio")]
     [SerializeField] private Slider masterVolumeSlider;
@@ -24,7 +30,7 @@ public class SettingsPanel : MonoBehaviour
     [Header("Other UI")]
     [SerializeField] private Button closeSettingsButton;
 
-    GameUIManager gameUI;
+    private GameUIManager gameUI;
 
     private void Awake()
     {
@@ -47,12 +53,26 @@ public class SettingsPanel : MonoBehaviour
     #region Audio
     private void InitializeAudioSettings()
     {
-        masterVolumeSlider.value = SettingsManager.Instance.GetMasterVolume();
-        musicVolumeSlider.value = SettingsManager.Instance.GetMusicVolume();
-        sfxVolumeSlider.value = SettingsManager.Instance.GetSFXVolume();
+        SettingsManager settings = SettingsManager.Instance;
+
+        // Load saved values, using SettingsManager values as defaults.
+        float masterVolume = PlayerPrefs.GetFloat(MasterVolumeKey, settings.GetMasterVolume());
+        float musicVolume = PlayerPrefs.GetFloat(MusicVolumeKey, settings.GetMusicVolume());
+        float sfxVolume = PlayerPrefs.GetFloat(SFXVolumeKey, settings.GetSFXVolume());
+
+        //Update sliders
+        masterVolumeSlider.value = masterVolume;
+        musicVolumeSlider.value = musicVolume;
+        sfxVolumeSlider.value = sfxVolume;
+
+        //Apply to settings
+        settings.SetMasterVolume(masterVolume);
+        settings.SetMusicVolume(musicVolume);
+        settings.SetSFXVolume(sfxVolume);
 
         UpdateVolumeTexts();
 
+        // Add listeners
         masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
         musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
         sfxVolumeSlider.onValueChanged.AddListener(SetSFXVolume);
@@ -62,18 +82,21 @@ public class SettingsPanel : MonoBehaviour
     {
         masterVolumeText.text = $"{Mathf.RoundToInt(value * 100)}%";
         SettingsManager.Instance.SetMasterVolume(value);
+        PlayerPrefs.SetFloat(MasterVolumeKey, value);
     }
 
     private void SetMusicVolume(float value)
     {
         musicVolumeText.text = $"{Mathf.RoundToInt(value * 100)}%";
         SettingsManager.Instance.SetMusicVolume(value);
+        PlayerPrefs.SetFloat(MusicVolumeKey, value);
     }
 
     private void SetSFXVolume(float value)
     {
         sfxVolumeText.text = $"{Mathf.RoundToInt(value * 100)}%";
         SettingsManager.Instance.SetSFXVolume(value);
+        PlayerPrefs.SetFloat(SFXVolumeKey, value);
     }
     private void UpdateVolumeTexts()
     {
@@ -89,7 +112,12 @@ public class SettingsPanel : MonoBehaviour
         sensitivitySlider.minValue = 1f;
         sensitivitySlider.maxValue = 10f;
 
-        sensitivitySlider.value = SettingsManager.Instance.GetMouseSensitivity();
+        float sensitivity = PlayerPrefs.GetFloat(MouseSensitivityKey,SettingsManager.Instance.GetMouseSensitivity());
+
+        sensitivitySlider.value = sensitivity;
+
+        //Apply to settings
+        SettingsManager.Instance.SetMouseSensitivity(sensitivitySlider.value);
         UpdateSensitivityText(sensitivitySlider.value);
         sensitivitySlider.onValueChanged.AddListener(SetSensitivity);
     }
@@ -97,6 +125,7 @@ public class SettingsPanel : MonoBehaviour
     private void SetSensitivity(float value)
     {
         SettingsManager.Instance.SetMouseSensitivity(value);
+        PlayerPrefs.SetFloat(MouseSensitivityKey, value);
         UpdateSensitivityText(value);
     }
 
@@ -108,10 +137,25 @@ public class SettingsPanel : MonoBehaviour
 
     private void OnDestroy()
     {
-        masterVolumeSlider.onValueChanged.RemoveListener(SetMasterVolume);
-        musicVolumeSlider.onValueChanged.RemoveListener(SetMusicVolume);
-        sfxVolumeSlider.onValueChanged.RemoveListener(SetSFXVolume);
-        sensitivitySlider.onValueChanged.RemoveListener(SetSensitivity);
+        if (masterVolumeSlider != null)
+            masterVolumeSlider.onValueChanged.RemoveListener(SetMasterVolume);
+
+        if (musicVolumeSlider != null)
+            musicVolumeSlider.onValueChanged.RemoveListener(SetMusicVolume);
+
+        if (sfxVolumeSlider != null)
+            sfxVolumeSlider.onValueChanged.RemoveListener(SetSFXVolume);
+
+        if (sensitivitySlider != null)
+            sensitivitySlider.onValueChanged.RemoveListener(SetSensitivity);
+
+        if (closeSettingsButton != null)
+            closeSettingsButton.onClick.RemoveListener(CloseSettingsMenu);
+
+        PlayerPrefs.Save();
+
+        if (instance == this)
+            instance = null;
     }
 
     public void CloseSettingsMenu()
