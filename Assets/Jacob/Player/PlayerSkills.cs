@@ -256,10 +256,10 @@ public class PlayerSkills : MonoBehaviour
         if (skill1Level >= 5)
             return;
 
-        if (currencyManager.coin < skill1Price)
+        if (currencyManager.skillPoints < skill1Price)
             return;
 
-        currencyManager.ChangeCoin(-skill1Price);
+        currencyManager.ChangeSkillPoints(-skill1Price);
 
         skill1Level++;
 
@@ -357,10 +357,10 @@ public class PlayerSkills : MonoBehaviour
         if (skill2Level >= 5)
             return;
 
-        if (currencyManager.coin < skill2Price)
+        if (currencyManager.skillPoints < skill2Price)
             return;
 
-        currencyManager.ChangeCoin(-skill2Price);
+        currencyManager.ChangeSkillPoints(-skill2Price);
 
         skill2Level++;
 
@@ -452,10 +452,10 @@ public class PlayerSkills : MonoBehaviour
         if (skill3Level >= 5)
             return;
 
-        if (currencyManager.coin < skill3Price)
+        if (currencyManager.skillPoints < skill3Price)
             return;
 
-        currencyManager.ChangeCoin(-skill3Price);
+        currencyManager.ChangeSkillPoints(-skill3Price);
 
         skill3Level++;
 

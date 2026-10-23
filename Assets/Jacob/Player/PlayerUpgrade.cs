@@ -49,10 +49,10 @@ public class PlayerUpgrade : MonoBehaviour
     #region GeneralUse
     private bool TryBuyUpgrade(ref int price)
     {
-        if (currencyManager.coin < price)
+        if (currencyManager.upgradePoints < price)
             return false;
 
-        currencyManager.ChangeCoin(-price);
+        currencyManager.ChangeUpgradePoints(-price);
 
         price += 50;
 

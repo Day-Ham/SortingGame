@@ -4,33 +4,33 @@ using UnityEngine;
 public class CurrencyManager : MonoBehaviour
 {
     [Header("Currency")]
-    public int coin;
-    public int mana;
+    public int skillPoints;
+    public int upgradePoints;
 
     [Header("UI")]
-    [SerializeField] private TMP_Text coinTxt;
-    [SerializeField] private TMP_Text manaTxt;
+    [SerializeField] private TMP_Text skillTxt;
+    [SerializeField] private TMP_Text upgradeTxt;
 
     private void Start()
     {
         UpdateUI();
     }
 
-    public void ChangeCoin(int value)
+    public void ChangeSkillPoints(int value)
     {
-        coin += value;
+        skillPoints += value;
         UpdateUI();
     }
 
-    public void ChangeMana(int value)
+    public void ChangeUpgradePoints(int value)
     {
-        mana += value;
+        upgradePoints += value;
         UpdateUI();
     }
 
     private void UpdateUI()
     {
-        coinTxt.text = coin.ToString("F0");
-        manaTxt.text = mana.ToString("F0");
+        skillTxt.text = skillPoints.ToString("F0");
+        upgradeTxt.text = upgradePoints.ToString("F0");
     }
 }

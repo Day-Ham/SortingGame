@@ -8,6 +8,7 @@ public class ItemSpawner : MonoBehaviour
     [Header("Item")]
     public List<ItemSpawnEntry> items;
     [SerializeField] private bool itemsSpawned;
+    private int maxItems;
 
     [Header("Spawning")]
     [SerializeField] private BoxCollider spawnArea;
@@ -17,9 +18,13 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private int maxAttempts = 30;
     [SerializeField] private LayerMask obstacleLayer;
 
+    private GameUIManager ui;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        ui = GameUIManager.instance;
+        UpdateUICount();
+
         if (itemsSpawned) return;
         InstantiateItems();
     }
@@ -43,13 +48,22 @@ public class ItemSpawner : MonoBehaviour
                     if (IsPositionBlocked(spawnPoint, entry.item)) continue;
 
                     GameObject newItem = Instantiate(entry.item, spawnPoint, Quaternion.Euler(GetRandomRotation()));
-                    newItem.transform.SetParent(transform);     
+                    newItem.transform.SetParent(transform);
+                    
+                    maxItems++;
                     break;
                 }
             }
         }
-
         itemsSpawned = true;
+        UpdateUICount();
+    }
+
+    private void UpdateUICount()
+    {
+        if (ui == null) return;
+
+        ui.SetMaxNumberItems(maxItems);
     }
 
     Vector3 GetRandomSpawnPoint()

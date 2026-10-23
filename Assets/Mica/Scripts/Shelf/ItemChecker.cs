@@ -41,6 +41,8 @@ public class ItemChecker : MonoBehaviour
     public bool isAssignedToBuddy;
     public List<RobotBuddy> robotList;
 
+    private GameUIManager ui;
+
     private void Awake()
     {
         player = FindAnyObjectByType<PlayerInteraction>();
@@ -56,6 +58,11 @@ public class ItemChecker : MonoBehaviour
         currency = FindAnyObjectByType<CurrencyManager>();
         if (currency == null)
             Debug.Log("Currency Manager is not found");
+    }
+
+    private void Start()
+    {
+        ui = GameUIManager.instance;
     }
 
     private void Update()
@@ -326,7 +333,8 @@ public class ItemChecker : MonoBehaviour
             isPlacingItem = false;
             currentItem.isBeingPlaced = false;
 
-            AddCoin(); //adds money if first time being placed on shelf
+            AddUpgradePoints(); //adds money if first time being placed on shelf
+            ui.UpdateShelvedCount(1);
             Debug.Log("Placed " + currentItem.name + " on the shelf.");
             currentItem = null;
         }
@@ -338,6 +346,8 @@ public class ItemChecker : MonoBehaviour
 
         Item item = heldItems[heldItems.Count - 1];
         heldItems.RemoveAt(heldItems.Count - 1);
+        ui.UpdateShelvedCount(-1);
+
         CheckIfItemIsComplete();
 
         if (heldItems.Count == 0)
@@ -396,26 +406,26 @@ public class ItemChecker : MonoBehaviour
 
             if (itemInfo.Data.displayName == displayName)
             {
-                AddMana(item);
+                AddSkillPoints(item);
                 return;
             }
         }
     }
 
-    private void AddCoin()
+    private void AddUpgradePoints()
     {
         if (currentItem.IsPlaced) return;
         
         currentItem.IsPlaced = true;
-        currency.ChangeCoin(1);
+        currency.ChangeUpgradePoints(1);
     }
 
-    private void AddMana(ItemSpawnEntry item)
+    private void AddSkillPoints(ItemSpawnEntry item)
     {
         if (item.isComplete) return;
 
         item.isComplete = true;
-        currency.ChangeMana(1);
+        currency.ChangeSkillPoints(1);
     }
 
     private void UpdateUI()

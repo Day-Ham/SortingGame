@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("items", "itemsSpawned", "spawnArea", "spawnHeight", "maxAttempts", "obstacleLayer")]
+	[ES3PropertiesAttribute("items", "itemsSpawned", "maxItems", "spawnArea", "spawnHeight", "maxAttempts", "obstacleLayer")]
 	public class ES3UserType_ItemSpawner : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -18,6 +18,7 @@ namespace ES3Types
 			
 			writer.WriteProperty("items", instance.items, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<ItemSpawnEntry>)));
 			writer.WritePrivateField("itemsSpawned", instance);
+			writer.WritePrivateField("maxItems", instance);
 			writer.WritePrivateFieldByRef("spawnArea", instance);
 			writer.WritePrivateField("spawnHeight", instance);
 			writer.WritePrivateField("maxAttempts", instance);
@@ -37,6 +38,9 @@ namespace ES3Types
 						break;
 					case "itemsSpawned":
 					instance = (ItemSpawner)reader.SetPrivateField("itemsSpawned", reader.Read<System.Boolean>(), instance);
+					break;
+					case "maxItems":
+					instance = (ItemSpawner)reader.SetPrivateField("maxItems", reader.Read<System.Int32>(), instance);
 					break;
 					case "spawnArea":
 					instance = (ItemSpawner)reader.SetPrivateField("spawnArea", reader.Read<UnityEngine.BoxCollider>(), instance);

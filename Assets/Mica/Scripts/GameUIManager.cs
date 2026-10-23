@@ -29,6 +29,12 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private Button upgradesCloseButton;
     public GameObject upgradesMenu;
 
+    [Header("Shelved Count")]
+    [SerializeField] private TMP_Text shelvedItemText;
+    private int shelvedItemCount;
+    [SerializeField] private TMP_Text maxItemText;
+    private int maxItemCount;
+
     [Header("Upgrades Buy Sliders")]
     public Slider upgradeCapacitySlider;
     public Slider upgradeSprintSlider;
@@ -301,5 +307,17 @@ public class GameUIManager : MonoBehaviour
         pause.UnlockCursor();
         SaveManager.instance.SaveGame();
         sceneLoader.QuitGame();
+    }
+
+    public void UpdateShelvedCount(int count)
+    {
+        shelvedItemCount += count;
+        shelvedItemText.text = shelvedItemCount.ToString("F0"); 
+    }
+
+    public void SetMaxNumberItems(int maxCount)
+    {
+        maxItemCount = maxCount;
+        maxItemText.text = maxItemCount.ToString("F0");
     }
 }
