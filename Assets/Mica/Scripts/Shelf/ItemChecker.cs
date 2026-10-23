@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class ItemChecker : MonoBehaviour
@@ -448,6 +449,7 @@ public class ItemChecker : MonoBehaviour
     {
         Debug.Log($"{name} has {transform.childCount} children before cleaning.");
         heldItems.Clear();
+        shelfPositions.Clear();
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -456,24 +458,35 @@ public class ItemChecker : MonoBehaviour
             if (item != null)
             {
                 heldItems.Add(item);
-                item.Held(true, transform);
-
-                int itemIndex = heldItems.Count - 1;
-
-                Rigidbody rb = heldItems[itemIndex].GetComponent<Rigidbody>();
-
-                if (rb != null)
-                {
-                    rb.isKinematic = true;
-                }
-
-                Vector3 targetPosition = shelfPositions[itemIndex];
-                Quaternion targetRotation = Quaternion.Euler(orientation);
-                rb.Move(transform.TransformPoint(targetPosition), transform.rotation * targetRotation);
-
-                UpdateUI();
             }
         }
+
+        if (heldItems.Count == 0) return;
+
+        currentItem = heldItems[0];
+        displayName = currentItem.Data.displayName;
+
+        SetMaxItems();
+        ComputeItemPlacements();
+
+        for (int i = 0; i<heldItems.Count; i++)
+        {
+            Item item = heldItems[i];
+            item.Held(true, transform);
+
+            Rigidbody rb = item.GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
+
+            item.transform.position = transform.TransformPoint(shelfPositions[i]);
+            item.transform.rotation = transform.rotation * Quaternion.Euler(item.Data.preferredOrientation);
+        }
+
+        currentItem = null;
+        UpdateUI();
     }
 
     public void AssignToBuddy(bool assigned, RobotBuddy robot)

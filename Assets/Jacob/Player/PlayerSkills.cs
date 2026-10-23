@@ -38,7 +38,9 @@ public class PlayerSkills : MonoBehaviour
 
     private List<GameObject> highlightedObjects = new List<GameObject>();
     private Dictionary<GameObject, int> originalLayers = new Dictionary<GameObject, int>();
-    GameUIManager ui;
+    private GameUIManager ui;
+
+    private SaveManager saveManager;
 
     private void Awake()
     {
@@ -48,7 +50,9 @@ public class PlayerSkills : MonoBehaviour
 
     private void Start()
     {
+        saveManager = SaveManager.instance;
         ui = GameUIManager.instance;
+
         ui.skill1CooldownSlider.value = 1f;
         ui.skill2CooldownSlider.value = 1f;
         ui.skill3CooldownSlider.value = 1f;
@@ -270,6 +274,9 @@ public class PlayerSkills : MonoBehaviour
 
         skill1Price += 50;
         ui.FillSlider(ui.skill1Slider, 5);
+
+        if (saveManager != null)
+            saveManager.SaveGame();
     }
     #endregion
 
@@ -368,6 +375,9 @@ public class PlayerSkills : MonoBehaviour
 
         skill2Price += 50;
         ui.FillSlider(ui.skill2Slider, 5);
+
+        if (saveManager != null)
+            saveManager.SaveGame();
     }
     #endregion
 
@@ -461,6 +471,9 @@ public class PlayerSkills : MonoBehaviour
         skill3Price += 50;
 
         ui.FillSlider(ui.skill3Slider, 5);
+
+        if (saveManager != null)
+            saveManager.SaveGame();
     }
     #endregion
 

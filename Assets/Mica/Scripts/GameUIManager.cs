@@ -299,6 +299,7 @@ public class GameUIManager : MonoBehaviour
         ResumeButtonAction();
         pause.DisablePlayerControl();
         pause.UnlockCursor();
+        SaveManager.instance.SaveGame();
         sceneLoader.QuitGame();
     }
 }

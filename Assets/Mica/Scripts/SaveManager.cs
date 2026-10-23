@@ -39,10 +39,15 @@ public class SaveManager : MonoBehaviour
         ES3AutoSaveMgr.Current.Load();
 
         ItemChecker[] checkers = FindObjectsByType<ItemChecker>();
-
         foreach (ItemChecker checker in checkers)
         {
             checker.CleanAndReorganize();
+        }
+
+        RobotBuddy[] robots = FindObjectsByType<RobotBuddy>();
+        foreach (RobotBuddy robot in robots)
+        {
+            robot.CleanAndReorganize();
         }
 
         PlayerInteraction playerInteraction = Object.FindAnyObjectByType<PlayerInteraction>();
@@ -52,6 +57,6 @@ public class SaveManager : MonoBehaviour
         playerSkills.OnLoading();
 
         PlayerUpgrade playerUpgrades = Object.FindAnyObjectByType<PlayerUpgrade>();
-        playerUpgrades.OnLoadingSaveUpdateSlider();
+        playerUpgrades.OnLoading();
     }
 }

@@ -26,7 +26,9 @@ public class PlayerUpgrade : MonoBehaviour
     private PlayerInteraction playerInteraction;
     private RobotBuddySpawner robotBuddySpawner;
 
-    GameUIManager ui;
+    private SaveManager saveManager;
+
+    private GameUIManager ui;
 
     private void Awake()
     {
@@ -38,8 +40,10 @@ public class PlayerUpgrade : MonoBehaviour
 
     private void Start()
     {
+        saveManager = SaveManager.instance;
         ui = GameUIManager.instance;
-        OnLoadingSaveUpdateSlider();
+
+        OnLoading();
     }
 
     #region GeneralUse
@@ -70,6 +74,9 @@ public class PlayerUpgrade : MonoBehaviour
         playerInteraction.UpgradeCapacity(2);
 
         ui.FillSlider(ui.upgradeCapacitySlider, 5);
+
+        if(saveManager != null)
+            saveManager.SaveGame();
     }
 
     public void BuyUpgradeSprint()
@@ -85,6 +92,9 @@ public class PlayerUpgrade : MonoBehaviour
         playerMovement.UpgradeSprint(2f);
 
         ui.FillSlider(ui.upgradeSprintSlider, 5);
+
+        if (saveManager != null)
+            saveManager.SaveGame();
     }
 
     public void BuyUpgradeReach()
@@ -100,6 +110,9 @@ public class PlayerUpgrade : MonoBehaviour
         playerInteraction.UpgradeReach(2);
 
         ui.FillSlider(ui.upgradeReachSlider, 5);
+
+        if (saveManager != null)
+            saveManager.SaveGame();
     }
 
     public void BuyUpgradeJump()
@@ -115,6 +128,9 @@ public class PlayerUpgrade : MonoBehaviour
         playerMovement.UpgradeJump();
 
         ui.FillSlider(ui.upgradeJumpSlider, 3);
+
+        if (saveManager != null)
+            saveManager.SaveGame();
     }
 
     public void BuyUpgradeThrowToShelf()
@@ -126,6 +142,9 @@ public class PlayerUpgrade : MonoBehaviour
         canThrowToShelf = true;
 
         ui.FillSlider(ui.upgradeThrowSlider, 1);
+
+        if (saveManager != null)
+            saveManager.SaveGame();
     }
 
     public void BuyARobotBuddy()
@@ -139,10 +158,13 @@ public class PlayerUpgrade : MonoBehaviour
         robotBuddySpawner.SpawnRobotBuddy();
 
         ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
+
+        if (saveManager != null)
+            saveManager.SaveGame();
     }
     #endregion
 
-    public void OnLoadingSaveUpdateSlider()
+    public void OnLoading()
     {
         if (ui == null) return;
 

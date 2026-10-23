@@ -40,8 +40,10 @@ public class RobotBuddy : MonoBehaviour
 
     [Header("Random Roaming")]
     //[SerializeField] private float roamRange = 25f;
-    [SerializeField] private float roamWaitTime = 1f;
-    [SerializeField] private float roamTimer;
+    [SerializeField] private float roamWaitTimeMax = 5f;
+    [SerializeField] private float roamWaitTimeMin = 2f;
+    private float roamWaitTime;
+    private float roamTimer;
     public List<Transform> patrolPoints;
     private int currentPatrolIndex = 0;
 
@@ -89,21 +91,20 @@ public class RobotBuddy : MonoBehaviour
 
                 if (targetItem == null)
                 {
-                    StartRoaming();
-
-                    if (agent.isOnNavMesh)
+                    if (!isRoaming)
+                    {
+                        StartRoaming();
+                    }
+                    
+                    if (agent.isOnNavMesh && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
                     {
                         roamTimer += Time.deltaTime;
-
-                        if (!agent.pathPending &&
-                            (!agent.hasPath ||
-                             agent.remainingDistance <= agent.stoppingDistance))
+                        
+                        if (roamTimer >= roamWaitTime)
                         {
-                            if (roamTimer >= roamWaitTime)
-                            {
-                                ChooseNextPatrolPoint();
-                                roamTimer = 0f;
-                            }
+                            ChooseNextPatrolPoint();
+                            roamTimer = 0f;
+                            roamWaitTime = Random.Range(roamWaitTimeMin, roamWaitTimeMax);
                         }
                     }
                     return;
@@ -116,6 +117,7 @@ public class RobotBuddy : MonoBehaviour
         {
             isRoaming = false;
             roamTimer = 0f;
+            roamWaitTime = 0;
 
             if (agent.isOnNavMesh)
                 agent.ResetPath();
@@ -438,11 +440,11 @@ public class RobotBuddy : MonoBehaviour
 
     private void StartRoaming()
     {
-        if (isRoaming)
-            return;
+        if (isRoaming) return;
 
         isRoaming = true;
         roamTimer = 0f;
+        roamWaitTime = Random.Range(roamWaitTimeMin, roamWaitTimeMax);
 
         if (agent.isOnNavMesh)
             agent.ResetPath();
@@ -457,13 +459,44 @@ public class RobotBuddy : MonoBehaviour
             Debug.LogWarning("No patrol points assigned!");
             return;
         }
-
-        agent.SetDestination(patrolPoints[currentPatrolIndex].position);
-        currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count; //go back to zero at the end of the list  
+        int patrolIndex = Random.Range(0, patrolPoints.Count);
+        agent.SetDestination(patrolPoints[patrolIndex].position);
+        //currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Count; //go back to zero at the end of the list  
     }
 
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
+    }
+
+    public void CleanAndReorganize()
+    {
+        Debug.Log($"{name} has {transform.childCount} children before cleaning.");
+        heldObject = null;
+        targetItem = null;
+
+        if (holdPoint.childCount == 0) return;
+
+        Item item = holdPoint.GetChild(0).GetComponent<Item>();
+
+        if (item != null)
+        {
+            targetItem = item;
+            heldObject = targetItem.gameObject;
+            item.Held(true, transform);
+
+            Rigidbody rb = targetItem.GetComponent<Rigidbody>();
+
+            if (rb != null)
+            {
+                rb.isKinematic = true;
+            }
+
+            heldObject.transform.position = holdPoint.position;
+            heldObject.transform.rotation = holdPoint.rotation;
+
+            heldObject.transform.localPosition = Vector3.zero;
+            heldObject.transform.localRotation = Quaternion.identity;
+        }
     }
 }
