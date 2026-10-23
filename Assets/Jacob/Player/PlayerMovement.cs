@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnMove()
     {
+        if (UserInput.instance == null) return;
         moveInput = UserInput.instance.MoveInput;
         Vector3 moveDirection = transform.right * moveInput.x + transform.forward * moveInput.y;
 
@@ -61,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump()
     {
+        if (UserInput.instance == null) return;
+
         if (!UserInput.instance.JumpInput)
             return;
 

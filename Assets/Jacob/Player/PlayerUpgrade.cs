@@ -10,21 +10,19 @@ public class PlayerUpgrade : MonoBehaviour
     [SerializeField] private int jumpPrice = 50;
     [SerializeField] private int throwToShelfPrice = 500;
     [SerializeField] private int robotBuddyPrice = 1000;
-    [SerializeField] private CurrencyManager currencyManager;
+    CurrencyManager currencyManager;
 
     [Header("Upgrade Values")]
     [SerializeField] private int upgradeCapacity = 0;
     [SerializeField] private float upgradeSprint = 0f;
     [SerializeField] private float upgradeReach = 0f;
     [SerializeField] private int upgradeJump = 0;
-    [SerializeField] private bool upgradeThrowToShelf = false;
     [SerializeField] private bool canThrowToShelf = false;
     public bool CanThrowToShelf => canThrowToShelf;
     [SerializeField] private float boughtRobotBuddy = 0f;
 
     //Upgrade References
     private PlayerMovement playerMovement;
-    private PlayerLook playerLook;
     private PlayerInteraction playerInteraction;
     private RobotBuddySpawner robotBuddySpawner;
 
@@ -33,14 +31,15 @@ public class PlayerUpgrade : MonoBehaviour
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
-        playerLook = GetComponent<PlayerLook>();
         playerInteraction = GetComponent<PlayerInteraction>();
         robotBuddySpawner = FindAnyObjectByType<RobotBuddySpawner>();
+        currencyManager = FindAnyObjectByType<CurrencyManager>();
     }
 
     private void Start()
     {
         ui = GameUIManager.instance;
+        OnLoadingSaveUpdateSlider();
     }
 
     #region GeneralUse
@@ -142,4 +141,37 @@ public class PlayerUpgrade : MonoBehaviour
         ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
     }
     #endregion
+
+    public void OnLoadingSaveUpdateSlider()
+    {
+        if (ui == null) return;
+
+        for (int i = 0; i < upgradeCapacity; i += 2)
+        {
+            ui.FillSlider(ui.upgradeCapacitySlider, 5);
+        }
+
+        for (int i = 0; i < upgradeSprint; i += 2)
+        {
+            ui.FillSlider(ui.upgradeSprintSlider, 5);
+        }
+
+        for (int i = 0; i < upgradeReach; i += 2)
+        {
+            ui.FillSlider(ui.upgradeReachSlider, 5);
+        }
+
+        for (int i = 0; i < upgradeJump; i++)
+        {
+            ui.FillSlider(ui.upgradeJumpSlider, 3);
+        }
+
+        if (canThrowToShelf)
+            ui.FillSlider(ui.upgradeThrowSlider, 1);
+
+        for (int i = 0; i < boughtRobotBuddy; i++)
+        {
+            ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
+        }
+    }
 }

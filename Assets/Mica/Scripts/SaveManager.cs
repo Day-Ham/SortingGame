@@ -49,6 +49,9 @@ public class SaveManager : MonoBehaviour
         playerInteraction.CleanAndReorganize();
 
         PlayerSkills playerSkills = Object.FindAnyObjectByType<PlayerSkills>();
-        playerSkills.OnLoadingSaveUpdateSlider();
+        playerSkills.OnLoading();
+
+        PlayerUpgrade playerUpgrades = Object.FindAnyObjectByType<PlayerUpgrade>();
+        playerUpgrades.OnLoadingSaveUpdateSlider();
     }
 }

@@ -53,26 +53,29 @@ public class PlayerSkills : MonoBehaviour
         ui.skill2CooldownSlider.value = 1f;
         ui.skill3CooldownSlider.value = 1f;
 
-        OnLoadingSaveUpdateSlider();
+        OnLoading();
     }
 
     private void Update()
     {
-        if (UserInput.instance.Skill1Input)
+        if (UserInput.instance != null)
         {
-            ActivateSkill1();
-        }
+            if (UserInput.instance.Skill1Input)
+            {
+                ActivateSkill1();
+            }
 
-        if (UserInput.instance.Skill2Input)
-        {
-            ActivateSkill2();
-        }
+            if (UserInput.instance.Skill2Input)
+            {
+                ActivateSkill2();
+            }
 
-        if (UserInput.instance.Skill3Input)
-        {
-            ActivateSkill3();
+            if (UserInput.instance.Skill3Input)
+            {
+                ActivateSkill3();
+            }
         }
-
+        
         for (int i = highlightedObjects.Count - 1; i >= 0; i--)
         {
             GameObject obj = highlightedObjects[i];
@@ -461,9 +464,10 @@ public class PlayerSkills : MonoBehaviour
     }
     #endregion
 
-    public void OnLoadingSaveUpdateSlider()
+    public void OnLoading()
     {
-        Debug.Log("Skill 1 Level = " + skill1Level);
+        if (ui == null) return;
+
         if (skill1Level > 0) ui.EnableUI(ui.skill1Icon);
         else ui.DisableUI(ui.skill1Icon);
 

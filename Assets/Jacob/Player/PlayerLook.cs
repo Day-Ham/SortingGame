@@ -24,8 +24,10 @@ public class PlayerLook : MonoBehaviour
 
     private void Look()
     {
-        lookInput = UserInput.instance.LookInput;
+        if (UserInput.instance == null || SettingsManager.Instance == null) return;
 
+        lookInput = UserInput.instance.LookInput;
+        
         float sensitivity = SettingsManager.Instance.GetMouseSensitivity();
 
         float mouseX = lookInput.x * sensitivity * 0.01f;

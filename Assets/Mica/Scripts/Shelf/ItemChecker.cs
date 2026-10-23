@@ -243,11 +243,7 @@ public class ItemChecker : MonoBehaviour
 
         Rigidbody rb = currentItem.GetComponent<Rigidbody>();
         if (rb != null)
-        {
             rb.isKinematic = true;
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
 
         currentItem.gameObject.SetActive(true);
 
@@ -460,6 +456,7 @@ public class ItemChecker : MonoBehaviour
             if (item != null)
             {
                 heldItems.Add(item);
+                item.Held(true, transform);
 
                 int itemIndex = heldItems.Count - 1;
 

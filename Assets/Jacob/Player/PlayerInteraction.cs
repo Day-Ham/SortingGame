@@ -208,6 +208,7 @@ public class PlayerInteraction : MonoBehaviour
 
     void UpdateInventoryUI()
     {
+        if (ui == null) return;
         ui.SetUIText(ui.amountHeldText, heldItems.Count.ToString());
         ui.SetUIText(ui.maxHeldItemsText, "/ " + maxHeldItems.ToString());
 
@@ -378,6 +379,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnInteract()
     {
+        if (UserInput.instance == null) return;
+
         if (!UserInput.instance.InteractionInput)
             return;
 
@@ -481,6 +484,8 @@ public class PlayerInteraction : MonoBehaviour
     #region Backpack
     public void OnScrollUp()
     {
+        if (UserInput.instance == null) return;
+
         if (!UserInput.instance.ScrollUpInput)
             return;
 
@@ -492,6 +497,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnScrollDown()
     {
+        if (UserInput.instance == null) return;
+
         if (!UserInput.instance.ScrollDownInput)
             return;
 
@@ -559,6 +566,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public void OnThrow()
     {
+        if (UserInput.instance == null) return;
+
         if (!UserInput.instance.ThrowInput) return;
 
         if (isPickingUp || isSwitching) return;
