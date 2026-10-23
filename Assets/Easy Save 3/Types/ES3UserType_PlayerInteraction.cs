@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("playerCamera", "holdPoint", "backpackPoint", "pickupRange", "interactLayer", "pickUpLayer", "obstacleLayer", "pickupSpeed", "heldObject", "outlineLayerName", "maxHeldItems", "switchDelay", "heldItems", "throwForce", "robotBuddyShelfPromp", "throwTargetLayers")]
+	[ES3PropertiesAttribute("playerCamera", "holdPoint", "backpackPoint", "pickupRange", "interactLayer", "pickUpLayer", "obstacleLayer", "pickupSpeed", "outlineLayerName", "maxHeldItems", "switchDelay", "throwForce", "robotBuddyShelfPromp", "throwTargetLayers")]
 	public class ES3UserType_PlayerInteraction : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -24,11 +24,9 @@ namespace ES3Types
 			writer.WritePrivateField("pickUpLayer", instance);
 			writer.WritePrivateField("obstacleLayer", instance);
 			writer.WritePrivateField("pickupSpeed", instance);
-			writer.WritePropertyByRef("heldObject", instance.heldObject);
 			writer.WritePrivateField("outlineLayerName", instance);
 			writer.WritePrivateField("maxHeldItems", instance);
 			writer.WritePrivateField("switchDelay", instance);
-			writer.WriteProperty("heldItems", instance.heldItems, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<UnityEngine.GameObject>)));
 			writer.WritePrivateField("throwForce", instance);
 			writer.WritePrivateFieldByRef("robotBuddyShelfPromp", instance);
 			writer.WritePrivateField("throwTargetLayers", instance);
@@ -66,9 +64,6 @@ namespace ES3Types
 					case "pickupSpeed":
 					instance = (PlayerInteraction)reader.SetPrivateField("pickupSpeed", reader.Read<System.Single>(), instance);
 					break;
-					case "heldObject":
-						instance.heldObject = reader.Read<UnityEngine.GameObject>(ES3Type_GameObject.Instance);
-						break;
 					case "outlineLayerName":
 					instance = (PlayerInteraction)reader.SetPrivateField("outlineLayerName", reader.Read<System.String>(), instance);
 					break;
@@ -78,9 +73,6 @@ namespace ES3Types
 					case "switchDelay":
 					instance = (PlayerInteraction)reader.SetPrivateField("switchDelay", reader.Read<System.Single>(), instance);
 					break;
-					case "heldItems":
-						instance.heldItems = reader.Read<System.Collections.Generic.List<UnityEngine.GameObject>>();
-						break;
 					case "throwForce":
 					instance = (PlayerInteraction)reader.SetPrivateField("throwForce", reader.Read<System.Single>(), instance);
 					break;

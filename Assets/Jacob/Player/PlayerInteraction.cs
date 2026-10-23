@@ -723,7 +723,10 @@ public class PlayerInteraction : MonoBehaviour
 
             if (item != null)
             {
-                heldItems.Add(item.gameObject);
+                if (!heldItems.Contains(item.gameObject))
+                {
+                    heldItems.Add(item.gameObject);
+                }
 
                 Rigidbody rb = item.GetComponent<Rigidbody>();
 
@@ -742,6 +745,7 @@ public class PlayerInteraction : MonoBehaviour
             {
                 item.gameObject.SetActive(true);
                 heldObject = item.gameObject;
+                heldRigidbody = item.GetComponent<Rigidbody>();
             }
         }
 
