@@ -23,7 +23,7 @@ MonoBehaviour:
   renderQueue: 0
   occlusion: 2
   maskingStrategy: 0
-  color: {r: 0, g: 0, b: 0, a: 1}
+  color: {r: 1, g: 0.9957261, b: 0, a: 1}
   enableOcclusion: 0
   occludedColor: {r: 1, g: 0, b: 0, a: 1}
   blendMode: 0
