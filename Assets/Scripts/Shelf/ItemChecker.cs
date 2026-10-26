@@ -317,9 +317,17 @@ public class ItemChecker : MonoBehaviour
             }
 
             UpdateUI();
-            CheckIfItemIsComplete();
 
-            currentItem.gameObject.layer = LayerMask.NameToLayer("Pickup"); //done placing, can be picked up again
+            bool shelfComplete = heldItems.Count == maxItems;
+            if (shelfComplete)
+            {
+                OnShelfComple();
+            }
+            else
+            {
+                background.color = Color.white;
+                currentItem.gameObject.layer = LayerMask.NameToLayer("Pickup");
+            }
                         
             //play put down audio
             AudioSource audioSource = currentItem.GetComponent<AudioSource>();
@@ -349,7 +357,7 @@ public class ItemChecker : MonoBehaviour
         heldItems.RemoveAt(heldItems.Count - 1);
         ui.UpdateShelvedCount(-1);
 
-        CheckIfItemIsComplete();
+        background.color = Color.white;
 
         if (heldItems.Count == 0)
         {
@@ -388,14 +396,8 @@ public class ItemChecker : MonoBehaviour
         }
     }
 
-    private void CheckIfItemIsComplete()
+    private void OnShelfComple()
     {
-        if (heldItems.Count != maxItems)
-        {
-            background.color = Color.white;
-            return;
-        }
-
         background.color = Color.green;
         PulseCompletedItems();
 
@@ -416,14 +418,32 @@ public class ItemChecker : MonoBehaviour
 
     private void PulseCompletedItems()
     {
+        int numItems = heldItems.Count;
         foreach (Item item in heldItems)
         {
             if (item == null) continue;
-
+            item.gameObject.layer = 2; //can't be interacted with while being placed
+            
             Transform itemTransform = item.transform;
             itemTransform.DOKill();
+            Vector3 originalScale = itemTransform.localScale;
             itemTransform.DOPunchScale(itemTransform.localScale * 0.2f, 0.35f, 1, 0f)
-                .SetLink(item.gameObject);
+                .SetLink(item.gameObject)
+                .OnComplete(() =>
+                 {
+                     itemTransform.localScale = originalScale;
+
+                     numItems--;
+                     if(numItems == 0)
+                     {
+                         foreach (Item heldItem in heldItems)
+                         {
+                             if (heldItem == null) continue;
+
+                             heldItem.gameObject.layer = LayerMask.NameToLayer("Pickup");// done tweening, can now pickup
+                         }
+                     }
+                 });
         }
     }
 
