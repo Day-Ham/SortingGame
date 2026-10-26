@@ -90,7 +90,10 @@ PrefabInstance:
       addedObject: {fileID: -8428807931253956231}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -521267212223456718}
+      addedObject: {fileID: 6700668585775286460}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 757809023253909994}
   m_SourcePrefab: {fileID: 100100000, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
 --- !u!4 &1280177147828316404 stripped
 Transform:
@@ -112,7 +115,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -210,8 +213,8 @@ MonoBehaviour:
   componentsToSave:
   - {fileID: 1280177147828316404}
   - {fileID: 4638363005630519446}
---- !u!64 &-521267212223456718
-MeshCollider:
+--- !u!135 &6700668585775286460
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -228,7 +231,29 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2043104335521378529, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
+  serializedVersion: 3
+  m_Radius: 0.0074714706
+  m_Center: {x: 0.014413306, y: -0.011791622, z: 0.0054228143}
+--- !u!136 &757809023253909994
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913971540862530126}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.009734095
+  m_Height: 0.03281959
+  m_Direction: 1
+  m_Center: {x: 0.0019647118, y: 0.001581635, z: 0.0014418184}

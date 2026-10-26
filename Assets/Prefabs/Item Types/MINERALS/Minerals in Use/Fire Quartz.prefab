@@ -112,7 +112,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 5
+  m_AngularDamping: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -185,7 +185,7 @@ MonoBehaviour:
     - {fileID: -8679921383154817045, guid: eacf6eab2a42e77479f8165394a6b7ca, type: 3}
     - {fileID: 3845116937356930818, guid: fc60b00efee5ce3489130ebbf63b0ab4, type: 3}
     - {fileID: 3481726597731392673, guid: fc60b00efee5ce3489130ebbf63b0ab4, type: 3}
-    - {fileID: 2443557602282400777, guid: fc60b00efee5ce3489130ebbf63b0ab4, type: 3}
+    - {fileID: 0}
     _Values: 084e5fe19c0fec1d6db43a6b3724e91ae18ea19fb63cce709efac1dd04ea6204b00de46703f3200a1f6185d7c07cd3649d35bc62936d1152609441b8d255de0cf10797758df580161dd0328f2b851a789ec76af5e0082c09a2d09915cbe7f6446ccfb22961eea55eecf1c5325a0b3e376c40baf04a44391aaeba4c02a2b4ab7077f778d125183f323f587340c99b595ff2156a5d5669575991d25cc54018e177l
 --- !u!114 &8129188628783453056
 MonoBehaviour:

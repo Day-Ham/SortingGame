@@ -105,8 +105,8 @@ Rigidbody:
   m_GameObject: {fileID: 8203511284200565866}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 1
+  m_AngularDamping: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -170,7 +170,7 @@ MonoBehaviour:
     - {fileID: 6557317506332465117, guid: 3e3a44f7abe0188438fea015bf3e3915, type: 3}
     - {fileID: -468998583662660350, guid: 3e3a44f7abe0188438fea015bf3e3915, type: 3}
     - {fileID: -2477534184312734126, guid: 3e3a44f7abe0188438fea015bf3e3915, type: 3}
-    - {fileID: -6012102105479727744, guid: 3e3a44f7abe0188438fea015bf3e3915, type: 3}
+    - {fileID: 0}
     - {fileID: 2388932461786806864, guid: 3e3a44f7abe0188438fea015bf3e3915, type: 3}
     - {fileID: 11400000, guid: eec89c200e33371418aeb1b2c965508b, type: 2}
     - {fileID: -341432028807443549, guid: 1057b9c7ab4b9cf46b69ac2f4b815a9c, type: 3}

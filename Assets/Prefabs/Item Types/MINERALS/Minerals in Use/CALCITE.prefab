@@ -90,7 +90,7 @@ PrefabInstance:
       addedObject: {fileID: -4436456432185513111}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 253a55a3ce825164cb90ab83ecb3576e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 982939635950240854}
+      addedObject: {fileID: 3665310159794094508}
   m_SourcePrefab: {fileID: 100100000, guid: 253a55a3ce825164cb90ab83ecb3576e, type: 3}
 --- !u!4 &8615827351690685036 stripped
 Transform:
@@ -112,7 +112,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 5
+  m_AngularDamping: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -209,8 +209,8 @@ MonoBehaviour:
   componentsToSave:
   - {fileID: 8615827351690685036}
   - {fileID: 6016591106679855885}
---- !u!136 &982939635950240854
-CapsuleCollider:
+--- !u!65 &3665310159794094508
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -227,8 +227,6 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.9489541
-  m_Height: 2.4803343
-  m_Direction: 1
-  m_Center: {x: 0.005560398, y: 0.1565504, z: -0.001131773}
+  serializedVersion: 3
+  m_Size: {x: 1.7751627, y: 2.4803343, z: 1.8671327}
+  m_Center: {x: 0.0055603683, y: 0.1565504, z: -0.01651965}

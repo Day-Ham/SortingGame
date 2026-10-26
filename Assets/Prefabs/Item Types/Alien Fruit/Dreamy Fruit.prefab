@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 3130800358776494695}
   - component: {fileID: 5017410756402147863}
   - component: {fileID: -7155263226213454858}
-  - component: {fileID: 471345136698164626}
   - component: {fileID: 7515140574752761080}
   - component: {fileID: -6506092296685947021}
   - component: {fileID: 1573473907528127308}
+  - component: {fileID: 6447762507672640965}
   m_Layer: 7
   m_Name: Dreamy Fruit
   m_TagString: Untagged
@@ -105,7 +105,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -122,28 +122,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!64 &471345136698164626
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9169805794584702649}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2534964839176971238, guid: 1057b9c7ab4b9cf46b69ac2f4b815a9c, type: 3}
 --- !u!114 &7515140574752761080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,10 +141,9 @@ MonoBehaviour:
   supportLayers:
     serializedVersion: 2
     m_Bits: 8832
-  IsHeld: 0
-  HeldBy: {fileID: 0}
   isBeingPlaced: 0
   IsPlaced: 0
+  isInShelf: 0
 --- !u!114 &-6506092296685947021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,7 +166,7 @@ MonoBehaviour:
     - {fileID: 5017410756402147863, guid: 946b8baf197618449acc17f6fc8e5498, type: 3}
     - {fileID: 3130800358776494695, guid: 946b8baf197618449acc17f6fc8e5498, type: 3}
     - {fileID: -7155263226213454858, guid: 946b8baf197618449acc17f6fc8e5498, type: 3}
-    - {fileID: 471345136698164626, guid: 946b8baf197618449acc17f6fc8e5498, type: 3}
+    - {fileID: 0}
     - {fileID: 4560634629896268623, guid: 946b8baf197618449acc17f6fc8e5498, type: 3}
     - {fileID: 9169805794584702649, guid: 946b8baf197618449acc17f6fc8e5498, type: 3}
     - {fileID: -6506092296685947021, guid: 946b8baf197618449acc17f6fc8e5498, type: 3}
@@ -221,3 +198,24 @@ MonoBehaviour:
   componentsToSave:
   - {fileID: 4560634629896268623}
   - {fileID: 7515140574752761080}
+--- !u!135 &6447762507672640965
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9169805794584702649}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.016225193
+  m_Center: {x: 0, y: -0.015801022, z: -0.000071273746}
