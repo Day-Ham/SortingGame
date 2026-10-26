@@ -53723,7 +53723,7 @@ MonoBehaviour:
   maxLevelUpgrades: {fileID: 410302934282567625}
   resetLevelUpgrades: {fileID: 7452644330355400316}
   includeRobotBuddy: {fileID: 3879432473684674346}
-  includeThrowUpgrade: {fileID: 0}
+  includeThrowUpgrade: {fileID: 789329141}
   newGameButton: {fileID: 1943824383793146970}
   loadSaveGameButton: {fileID: 4274734135007999058}
   player: {fileID: 296813885}
