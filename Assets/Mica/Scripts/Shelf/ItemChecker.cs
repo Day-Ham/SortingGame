@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -396,6 +397,7 @@ public class ItemChecker : MonoBehaviour
         }
 
         background.color = Color.green;
+        PulseCompletedItems();
 
         if (spawner.items.Count == 0) return;
 
@@ -409,6 +411,19 @@ public class ItemChecker : MonoBehaviour
                 AddSkillPoints(item);
                 return;
             }
+        }
+    }
+
+    private void PulseCompletedItems()
+    {
+        foreach (Item item in heldItems)
+        {
+            if (item == null) continue;
+
+            Transform itemTransform = item.transform;
+            itemTransform.DOKill();
+            itemTransform.DOPunchScale(itemTransform.localScale * 0.2f, 0.35f, 1, 0f)
+                .SetLink(item.gameObject);
         }
     }
 
