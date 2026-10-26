@@ -249,13 +249,6 @@ public class PlayerUpgrade : MonoBehaviour
 
             ui.FillSlider(ui.upgradeJumpSlider, 3);
         }
-
-        //Throw Shelf
-        if (canThrowToShelf) return;
-
-        canThrowToShelf = true;
-
-        ui.FillSlider(ui.upgradeThrowSlider, 1);
     }
 
     public void BuyAllRobotBuddies()
@@ -270,6 +263,16 @@ public class PlayerUpgrade : MonoBehaviour
 
             ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
         }
+    }
+
+    public void MaxThrow()
+    {
+        //Throw Shelf
+        if (canThrowToShelf) return;
+
+        canThrowToShelf = true;
+
+        ui.FillSlider(ui.upgradeThrowSlider, 1);
     }
 
     public void ResetUpgrades()
