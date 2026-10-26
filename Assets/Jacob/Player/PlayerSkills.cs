@@ -505,4 +505,96 @@ public class PlayerSkills : MonoBehaviour
             ui.FillSlider(ui.skill3Slider, 5);
         }
     }
+
+    //QA EDITOR
+    public void BuyMaxSkills()
+    {
+        //Skill 1
+        for (int i = 0; i<5; i++)
+        {
+            if (skill1Level >= 5) break;
+
+            skill1Level++;
+
+            if (skill1Level == 1)
+            {
+                ui.EnableUI(ui.skill1Icon);
+            }
+            else
+            {
+                highlightDuration += 2f;
+            }
+
+            skill1Price += 50;
+            ui.FillSlider(ui.skill1Slider, 5);
+        }
+
+        //Skill 2
+        for (int i = 0; i<5; i++)
+        {
+            if (skill2Level >= 5) break;
+
+            skill2Level++;
+
+            if (skill2Level == 1)
+            {
+                ui.EnableUI(ui.skill2Icon);
+            }
+            else
+            {
+                skill2Cooldown -= 2f;
+            }
+
+            skill2Price += 50;
+            ui.FillSlider(ui.skill2Slider, 5);
+        }
+
+        //Skill 3
+        for (int i = 0; i<5; i++)
+        {
+            if (skill3Level >= 5) break;
+
+            skill3Level++;
+
+            if (skill3Level == 1)
+            {
+                ui.EnableUI(ui.skill3Icon);
+            }
+            else
+            {
+                skill3Cooldown -= 2f;
+            }
+
+            skill3Price += 50;
+
+            ui.FillSlider(ui.skill3Slider, 5);
+        }
+    }
+
+    public void ResetSkills()
+    {
+        //Skill 1
+        skill1Level = 0;
+        ui.DisableUI(ui.skill1Icon);
+        highlightDuration = 10f;
+
+        skill1Price = 50;
+        ui.skill1Slider.value = ui.skill1Slider.minValue;
+
+
+        //Skill 2
+        skill2Level = 0;
+        ui.DisableUI(ui.skill2Icon);
+        skill2Cooldown = 20f;
+
+        skill2Price = 50;
+        ui.skill2Slider.value = ui.skill2Slider.minValue;
+
+        //Skill 3
+        skill3Level = 0;
+        ui.DisableUI(ui.skill3Icon);
+        skill3Cooldown = 30f;
+        skill3Price = 50;
+        ui.skill3Slider.value = ui.skill3Slider.minValue;
+    }
 }

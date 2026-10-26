@@ -767,4 +767,12 @@ public class PlayerInteraction : MonoBehaviour
             Gizmos.DrawLine(playerCamera.transform.position, holdPoint.position);
         }
     }
+
+    public void ResetCapacityAndReach()
+    {
+        maxHeldItems = 5;
+        UpdateInventoryUI();
+
+        pickupRange = 3;
+    }
 }

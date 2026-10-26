@@ -28,7 +28,7 @@ public class CurrencyManager : MonoBehaviour
         UpdateUI();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         skillTxt.text = skillPoints.ToString("F0");
         upgradeTxt.text = upgradePoints.ToString("F0");

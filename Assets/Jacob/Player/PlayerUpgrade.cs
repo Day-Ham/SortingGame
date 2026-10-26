@@ -196,4 +196,125 @@ public class PlayerUpgrade : MonoBehaviour
             ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
         }
     }
+
+    public void BuyMaxUpgradess()
+    {
+        //Capacity
+        for (int i = 0; i<5; i++)
+        {
+            if (upgradeCapacity >= 10)
+                break;
+
+            upgradeCapacity += 2;
+
+            playerInteraction.UpgradeCapacity(2);
+
+            ui.FillSlider(ui.upgradeCapacitySlider, 5);  
+        }
+
+        //Sprint
+        for (int i = 0; i < 5; i++)
+        {
+            if (upgradeSprint >= 10f)
+                break;
+
+            upgradeSprint += 2f;
+
+            playerMovement.UpgradeSprint(2f);
+
+            ui.FillSlider(ui.upgradeSprintSlider, 5);
+        }
+
+        //Reach
+        for (int i = 0; i < 5; i++)
+        {
+            if (upgradeReach >= 10f)
+                break;
+
+            upgradeReach += 2f;
+
+            playerInteraction.UpgradeReach(2);
+
+            ui.FillSlider(ui.upgradeReachSlider, 5);
+        }
+
+        //Jump
+        for (int i = 0; i < 3; i++)
+        {
+            if (upgradeJump >= 3) break;
+
+            upgradeJump++;
+
+            playerMovement.UpgradeJump();
+
+            ui.FillSlider(ui.upgradeJumpSlider, 3);
+        }
+
+        //Throw Shelf
+        if (canThrowToShelf) return;
+
+        canThrowToShelf = true;
+
+        ui.FillSlider(ui.upgradeThrowSlider, 1);
+    }
+
+    public void BuyAllRobotBuddies()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (boughtRobotBuddy >= 3) return;
+
+            boughtRobotBuddy++;
+
+            robotBuddySpawner.SpawnRobotBuddy();
+
+            ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
+        }
+    }
+
+    public void ResetUpgrades()
+    {
+        //Capacity & Reach
+        upgradeCapacity = 0;
+        upgradeReach = 0;
+        playerInteraction.ResetCapacityAndReach();
+        ui.upgradeCapacitySlider.value = ui.upgradeCapacitySlider.minValue;
+        ui.upgradeReachSlider.value = ui.upgradeReachSlider.minValue;
+
+        //Sprint & Jump
+        upgradeSprint = 0;
+        upgradeJump = 0;
+        playerMovement.ResetSprintAndJump();
+        ui.upgradeSprintSlider.value = ui.upgradeSprintSlider.minValue;
+        ui.upgradeJumpSlider.value = ui.upgradeJumpSlider.minValue;
+
+        //Throw Shelf
+        canThrowToShelf = false;
+        ui.upgradeThrowSlider.value = ui.upgradeThrowSlider.minValue;
+    }
+
+    public void ResetRobotBuddy()
+    {
+        RobotBuddy[] robots = Object.FindObjectsByType<RobotBuddy>();
+
+        if (robots.Length == 0) return;
+
+        foreach (RobotBuddy robot in robots)
+        {
+            Item item = robot.targetItem;
+            if (item != null)
+            {
+                robot.targetItem = null;
+
+                if (item.HeldBy == robot.transform)
+                {
+                    item.Held(false);
+                    item.transform.SetParent(FindAnyObjectByType<ItemSpawner>().transform);
+                }
+            }
+            Destroy(robot.gameObject);
+        }
+
+        ui.upgradeRobotBuddySlider.value = ui.upgradeRobotBuddySlider.minValue;
+    }
 }

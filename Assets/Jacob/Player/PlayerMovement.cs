@@ -93,4 +93,10 @@ public class PlayerMovement : MonoBehaviour
 
         maxJumps++;
     }
+
+    public void ResetSprintAndJump()
+    {
+        sprintSpeed = 10;
+        maxJumps = 1;
+    }
 }
