@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 941111174449078231}
   - component: {fileID: 7459330125138561696}
   - component: {fileID: -2477534184312734126}
-  - component: {fileID: -6012102105479727744}
   - component: {fileID: -468998583662660350}
   - component: {fileID: 8521413437996671080}
   - component: {fileID: 6557317506332465117}
+  - component: {fileID: 5788488532136727884}
   m_Layer: 7
   m_Name: Berry
   m_TagString: Untagged
@@ -123,28 +123,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!64 &-6012102105479727744
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8203511284200565866}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -7551733326587499687, guid: 1057b9c7ab4b9cf46b69ac2f4b815a9c, type: 3}
 --- !u!114 &-468998583662660350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,10 +142,9 @@ MonoBehaviour:
   supportLayers:
     serializedVersion: 2
     m_Bits: 8832
-  IsHeld: 0
-  HeldBy: {fileID: 0}
   isBeingPlaced: 0
   IsPlaced: 0
+  isInShelf: 0
 --- !u!114 &8521413437996671080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,3 +200,24 @@ MonoBehaviour:
   componentsToSave:
   - {fileID: -468998583662660350}
   - {fileID: 2388932461786806864}
+--- !u!135 &5788488532136727884
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8203511284200565866}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.014699403
+  m_Center: {x: 0.0013346742, y: 0.002873045, z: -0.000023656525}

@@ -191,17 +191,17 @@ public class ItemChecker : MonoBehaviour
 
     private (float bottomOffset, float backOffset) GetMeshOffsets(Item item)
     {
-        MeshCollider meshCollider = item.GetComponent<MeshCollider>();
+        MeshFilter meshFilter = item.GetComponent<MeshFilter>();
 
-        if (meshCollider == null || meshCollider.sharedMesh == null)
+        if (meshFilter == null || meshFilter.sharedMesh == null)
         {
             Debug.LogWarning($"No MeshCollider or mesh found on {item.name}.");
             return (item.GetComponent<Collider>().bounds.size.y, item.GetComponent<Collider>().bounds.size.z);
         }
 
-        Bounds meshBounds = meshCollider.sharedMesh.bounds;
+        Bounds meshBounds = meshFilter.sharedMesh.bounds;
 
-        Vector3 scale = meshCollider.transform.lossyScale;
+        Vector3 scale = meshFilter.transform.lossyScale;
         Vector3 center = Vector3.Scale(meshBounds.center, scale);
         Vector3 size = Vector3.Scale(meshBounds.size, scale);
 
