@@ -8485,6 +8485,13 @@ MonoBehaviour:
     loop: 0
     mixerGroup: {fileID: -970905016975704210, guid: 3b77bf1abdd2be546a5e976e323d78b6, type: 2}
     source: {fileID: 0}
+  - name: Put Down
+    clip: {fileID: 8300000, guid: ef48e7c1f5ec91f4cb9bc6c2abc416e4, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    mixerGroup: {fileID: -970905016975704210, guid: 3b77bf1abdd2be546a5e976e323d78b6, type: 2}
+    source: {fileID: 0}
 --- !u!1 &471109578
 GameObject:
   m_ObjectHideFlags: 0

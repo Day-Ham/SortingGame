@@ -386,6 +386,29 @@ public class PlayerInteraction : MonoBehaviour
 
         if (isPickingUp || isSwitching) return;
 
+        if (heldItems.Count < maxHeldItems && lookAtInteractObject != null)
+        {
+            bool aimingAtLooseItem = lookAtPickUpObject != null
+                && lookAtPickUpObject != heldObject
+                && !heldItems.Contains(lookAtPickUpObject)
+                && lookAtPickUpObject.GetComponentInParent<ItemChecker>() == null;
+
+            ItemChecker checker = lookAtInteractObject.GetComponent<ItemChecker>();
+            if (checker == null)
+                checker = lookAtInteractObject.GetComponentInParent<ItemChecker>();
+
+            if (!aimingAtLooseItem && checker != null && !checker.isPlacingItem)
+            {
+                Item shelfItem = checker.GetLastObject();
+                if (shelfItem != null && !heldItems.Contains(shelfItem.gameObject))
+                {
+                    checker.RemoveItem();
+                    TryPickup(shelfItem);
+                    return;
+                }
+            }
+        }
+
         LookAtPickUp();
 
         if (lookedAtObject == null) return;
