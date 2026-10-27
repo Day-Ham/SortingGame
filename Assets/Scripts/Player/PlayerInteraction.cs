@@ -384,6 +384,9 @@ public class PlayerInteraction : MonoBehaviour
         if (!UserInput.instance.InteractionInput)
             return;
 
+        if (TryPlaceHeldItem())
+            return;
+
         if (isPickingUp || isSwitching) return;
 
         LookAtPickUp();
@@ -555,47 +558,45 @@ public class PlayerInteraction : MonoBehaviour
     #endregion
 
     #region Throw
-    void LookAtInteract()
-    {
-        // prioritize interact layer over pick up layer
-        if (lookAtInteractObject != null)
-        {
-            lookedAtObject = lookAtInteractObject;
-        }
-    }
-
     public void OnThrow()
     {
         if (UserInput.instance == null) return;
 
         if (!UserInput.instance.ThrowInput) return;
 
-        if (isPickingUp || isSwitching) return;
-
-        LookAtInteract();
-
-        ItemChecker checker = lookedAtObject != null ? lookedAtObject.GetComponent<ItemChecker>() : null;
-
-        if (checker != null && heldObject != null)
-        {
-            Debug.Log("Trying to Place item");
-            if (checker.isAssignedToBuddy)
-            {
-                robotBuddyShelfPromp.SetActive(true);
-                return;
-            }
-
-            if (checker.isPlacingItem) return;
-            
-            Debug.Log("NOW PLACING THE ITEM");
-            checker.PlaceItem();
+        if (TryPlaceHeldItem())
             return;
-        }
+
+        if (isPickingUp || isSwitching) return;
 
         if (heldObject != null)
         {
             ThrowObject();
         }
+    }
+
+    bool TryPlaceHeldItem()
+    {
+        if (heldObject == null || lookAtInteractObject == null)
+            return false;
+
+        ItemChecker checker = lookAtInteractObject.GetComponentInParent<ItemChecker>();
+        if (checker == null || !checker.IsItemValid())
+            return false;
+
+        if (checker.isAssignedToBuddy)
+        {
+            if (robotBuddyShelfPromp != null)
+                robotBuddyShelfPromp.SetActive(true);
+            return true;
+        }
+
+        if (checker.isPlacingItem)
+            return true;
+
+        isPickingUp = false;
+        checker.PlaceItem();
+        return true;
     }
 
     void ThrowObject()
