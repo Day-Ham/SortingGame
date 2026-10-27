@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 5305841322806996349}
   - component: {fileID: 7123180922432389386}
   - component: {fileID: 2761665255294648470}
+  - component: {fileID: 7031729535945416639}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -305,11 +306,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e28b09fa30c0824c9890f3df51eff3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  camera: {fileID: 1279575692314155912}
   moveSpeed: 5
   sprintSpeed: 10
   jumpHeight: 2
   gravity: -9.81
   maxJumps: 1
+  crouchHeight: 0.3
+  crouchSpeed: 10
 --- !u!114 &240337299482149312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +327,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLook
   cameraTransform: {fileID: 2174637397969621097}
-  lookSensitivity: 5
   maxLookAngle: 80
 --- !u!114 &8331208016230216153
 MonoBehaviour:
@@ -382,12 +385,10 @@ MonoBehaviour:
   jumpPrice: 50
   throwToShelfPrice: 500
   robotBuddyPrice: 1000
-  currencyManager: {fileID: 0}
   upgradeCapacity: 0
   upgradeSprint: 0
   upgradeReach: 0
   upgradeJump: 0
-  upgradeThrowToShelf: 0
   canThrowToShelf: 0
   boughtRobotBuddy: 0
 --- !u!114 &7123180922432389386
@@ -431,6 +432,29 @@ MonoBehaviour:
   tutorialText: {fileID: 0}
   tutorialPanel: {fileID: 0}
   tutorialCount: 1
+--- !u!114 &7031729535945416639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7123355942709442893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3AutoSave
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  saveDestroyed: 0
+  componentsToSave:
+  - {fileID: 5305841322806996349}
+  - {fileID: 7123180922432389386}
+  - {fileID: 8331208016230216153}
 --- !u!1 &8256299471216784434
 GameObject:
   m_ObjectHideFlags: 0

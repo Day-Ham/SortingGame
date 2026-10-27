@@ -14,8 +14,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private int maxJumps = 1;
     [SerializeField] private float crouchHeight;
+    [SerializeField] private float crouchSpeed;
 
-    [SerializeField] private bool isCrouching;
+    private Vector3 targetCameraPosition;
+    private bool isCrouching;
     private Vector2 moveInput;
     private int jumpsRemaining;
     private Vector3 velocity;
@@ -24,16 +26,19 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        isCrouching = false;
+        targetCameraPosition = new Vector3(0f, 1f, 0f);
+        camera.transform.localPosition = targetCameraPosition;
     }
 
     // Update is called once per frame
-    
-
     void Update()
     {
         OnMove();
         OnJump();
         OnCrouch();
+
+        camera.transform.localPosition = Vector3.Lerp( camera.transform.localPosition, targetCameraPosition, crouchSpeed * Time.deltaTime);
     }
 
     void OnMove()
@@ -95,13 +100,14 @@ public class PlayerMovement : MonoBehaviour
 
         isCrouching = !isCrouching;
 
-        if (UserInput.instance.CrouchInput && !isCrouching)
+        if (isCrouching)
         {
-            camera.transform.localPosition = new Vector3(0f, crouchHeight, 0f);
+            targetCameraPosition = new Vector3(0f, crouchHeight, 0f);
         }
         else
-            camera.transform.localPosition = new Vector3(0f, 1f, 0f);
-
+        {
+            targetCameraPosition = new Vector3(0f, 1f, 0f);
+        }
     }
 
     public void UpgradeSprint(float amount)
