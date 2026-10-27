@@ -329,13 +329,8 @@ public class ItemChecker : MonoBehaviour
                 currentItem.gameObject.layer = LayerMask.NameToLayer("Pickup");
             }
                         
-            //play put down audio
-            AudioSource audioSource = currentItem.GetComponent<AudioSource>();
-            if (audioSource != null)
-            {
-                audioSource.clip = currentItem.Data.putDownSFX;
-                audioSource.Play();
-            }
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.Play("Put Down");
 
             rb.isKinematic = true;
 
@@ -401,6 +396,9 @@ public class ItemChecker : MonoBehaviour
         background.color = Color.green;
         PulseCompletedItems();
 
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.Play("Complete");
+
         if (spawner.items.Count == 0) return;
 
         foreach (ItemSpawnEntry item in spawner.items)
@@ -418,32 +416,30 @@ public class ItemChecker : MonoBehaviour
 
     private void PulseCompletedItems()
     {
-        int numItems = heldItems.Count;
+        int pickupLayer = LayerMask.NameToLayer("Pickup");
+
         foreach (Item item in heldItems)
         {
-            if (item == null) continue;
-            item.gameObject.layer = 2; //can't be interacted with while being placed
-            
-            Transform itemTransform = item.transform;
+            if (item == null)
+                continue;
+
+            GameObject obj = item.gameObject;
+            Transform itemTransform = obj.transform;
             itemTransform.DOKill();
+
+            obj.layer = 2; // can't be picked up during the punch
+
             Vector3 originalScale = itemTransform.localScale;
-            itemTransform.DOPunchScale(itemTransform.localScale * 0.2f, 0.35f, 1, 0f)
-                .SetLink(item.gameObject)
-                .OnComplete(() =>
-                 {
-                     itemTransform.localScale = originalScale;
+            itemTransform.DOPunchScale(originalScale * 0.2f, 0.35f, 1, 0f)
+                .SetLink(obj)
+                .OnKill(() =>
+                {
+                    if (obj == null)
+                        return;
 
-                     numItems--;
-                     if(numItems == 0)
-                     {
-                         foreach (Item heldItem in heldItems)
-                         {
-                             if (heldItem == null) continue;
-
-                             heldItem.gameObject.layer = LayerMask.NameToLayer("Pickup");// done tweening, can now pickup
-                         }
-                     }
-                 });
+                    itemTransform.localScale = originalScale;
+                    obj.layer = pickupLayer;
+                });
         }
     }
 
