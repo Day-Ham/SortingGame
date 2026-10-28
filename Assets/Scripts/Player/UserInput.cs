@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class UserInput : MonoBehaviour
 {
     public static UserInput instance;
-
+    
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
     public bool SprintInput { get; private set; }

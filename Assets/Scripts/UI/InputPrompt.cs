@@ -3,30 +3,28 @@ using UnityEngine.UI;
 
 public class InputPrompt : MonoBehaviour
 {
+    [SerializeField] private string actionName;
     [SerializeField] private Image promptImage;
-    [SerializeField] private Sprite keyboardMouseSprite;
-    [SerializeField] private Sprite gamepadSprite;
+
+    public string ActionName => actionName;
 
     private void OnEnable()
     {
-        if (InputDeviceDetector.Instance == null)
-            return;
-
-        InputDeviceDetector.Instance.OnInputModeChanged += UpdateSprite;
-        UpdateSprite(InputDeviceDetector.Instance.CurrentMode);
+        if (InputIconManager.Instance != null)
+            InputIconManager.Instance.Register(this);
     }
 
     private void OnDisable()
     {
-        if (InputDeviceDetector.Instance != null)
-            InputDeviceDetector.Instance.OnInputModeChanged -= UpdateSprite;
+        if (InputIconManager.Instance != null)
+            InputIconManager.Instance.Unregister(this);
     }
 
-    private void UpdateSprite(InputDeviceDetector.InputMode mode)
+    public void SetIcon(Sprite sprite)
     {
-        promptImage.sprite = mode ==
-            InputDeviceDetector.InputMode.Gamepad
-            ? gamepadSprite
-            : keyboardMouseSprite;
+        if (promptImage == null) return;
+
+        promptImage.sprite = sprite;
+        promptImage.enabled = sprite != null;
     }
 }
