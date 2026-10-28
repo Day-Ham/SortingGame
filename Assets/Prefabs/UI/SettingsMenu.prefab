@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7223094290372208451}
+  - component: {fileID: 2873979203955987904}
   m_Layer: 0
   m_Name: MNK
   m_TagString: Untagged
@@ -36,6 +37,192 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2873979203955987904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203043304403953989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f8d5f2abdefa946b57c45d1462ec44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem.RebindingUI::UnityEngine.InputSystem.Samples.RebindUI.InputIconsExample
+  keyboardMouse:
+    a: {fileID: 21300000, guid: 84336ead2bc884a4389f3d4e11093845, type: 3}
+    b: {fileID: 21300000, guid: 31d880e2b24a86d458af7b338339a60d, type: 3}
+    c: {fileID: 21300000, guid: 7a23fd879f96118438b7c8fed607fa8e, type: 3}
+    d: {fileID: 21300000, guid: f88a3bde663a377419f80eeae083d5b7, type: 3}
+    e: {fileID: 21300000, guid: 69da02ec34c73624b91727759ad616df, type: 3}
+    f: {fileID: 21300000, guid: 2de94e7d51b53144ebf574a7637a9233, type: 3}
+    g: {fileID: 21300000, guid: 77cbac9189a57f74c93a614ab10ac7e5, type: 3}
+    h: {fileID: 21300000, guid: 4e32f7f30f0410849a3cb543daa3ff4f, type: 3}
+    i: {fileID: 21300000, guid: 679102cd603104746b5f8735f7e8e4e7, type: 3}
+    j: {fileID: 21300000, guid: 39a4446b0e96ca748880e8afa0627271, type: 3}
+    k: {fileID: 21300000, guid: f8b4257d754da64479638c7f1b1a0541, type: 3}
+    l: {fileID: 21300000, guid: 0157bc6414b67f74c9ec6b08f9cfe0ec, type: 3}
+    m: {fileID: 21300000, guid: 48c1ee20d02026a4bbd29a925b5ae4c0, type: 3}
+    n: {fileID: 21300000, guid: 0f1ed367c5bf11640b95c6d00a574339, type: 3}
+    o: {fileID: 21300000, guid: 067e5ba24f7ea3540b631c535b39d4be, type: 3}
+    p: {fileID: 21300000, guid: bee210a13ef25584a8f1b6f60614a60d, type: 3}
+    q: {fileID: 21300000, guid: 35ecb234d30b9cb42b07f10511a850cb, type: 3}
+    r: {fileID: 21300000, guid: ef04bf5a69063ed459dee8c038b66107, type: 3}
+    s: {fileID: 21300000, guid: 39c87eb429428fe49a2621871ade9193, type: 3}
+    t: {fileID: 21300000, guid: 4123523831d1b6a4791d4d870df66fb9, type: 3}
+    u: {fileID: 21300000, guid: bd4e675c1a069194daeb7a212665b44e, type: 3}
+    v: {fileID: 21300000, guid: c9fdd63a94fa0804a8b51a9557fecd33, type: 3}
+    w: {fileID: 21300000, guid: c48a9e623f57a964bb290afc4c88ec5e, type: 3}
+    x: {fileID: 21300000, guid: 9d7cf1d7019dac540ba1630b9f701dc4, type: 3}
+    y: {fileID: 21300000, guid: df05019a90b93de49b95ae1eefd15329, type: 3}
+    z: {fileID: 21300000, guid: 56814b4309a3e77458d0e2fe3c633abc, type: 3}
+    digit0: {fileID: 21300000, guid: 3528386aba1939f4e871f1d94c609bd2, type: 3}
+    digit1: {fileID: 21300000, guid: 6afb4906456b94d47b629085a57a2c3c, type: 3}
+    digit2: {fileID: 21300000, guid: 2cd54d96e66949742980626a60c9be53, type: 3}
+    digit3: {fileID: 21300000, guid: e92609fe7f3992946a8eb14eabfa6d0a, type: 3}
+    digit4: {fileID: 21300000, guid: 47191139a40018145b53f46f5d22f0bd, type: 3}
+    digit5: {fileID: 21300000, guid: be800f6b5d316ec42b360a630d94534b, type: 3}
+    digit6: {fileID: 21300000, guid: 55b469da41b768f4b8d2a4965811131f, type: 3}
+    digit7: {fileID: 21300000, guid: fa3935b477d384742ab7b6b5efa638c7, type: 3}
+    digit8: {fileID: 21300000, guid: 8691dd1c83f203242864feaa396ffb11, type: 3}
+    digit9: {fileID: 21300000, guid: 8e8bb1ddadf68aa42816b1291c7325b6, type: 3}
+    f1: {fileID: 21300000, guid: 63b5c8c59c02fae4babc0af4a1010dd2, type: 3}
+    f2: {fileID: 21300000, guid: eda0cf5d765bbd740b7c0d8c23f257e4, type: 3}
+    f3: {fileID: 21300000, guid: f17619cce6c41c749b269df2ae8ae08d, type: 3}
+    f4: {fileID: 21300000, guid: 535b8d87946c0db4a8b8a16acbef3981, type: 3}
+    f5: {fileID: 21300000, guid: 41ceb5eed1c658c40b7761b144b0bf43, type: 3}
+    f6: {fileID: 21300000, guid: 3a3a527366b029248a0f9133e8e553bd, type: 3}
+    f7: {fileID: 21300000, guid: 2ddf008c8ece0874a8802be843fa2bc6, type: 3}
+    f8: {fileID: 21300000, guid: 7efe30f710d1f4a44b6a7f57193fb446, type: 3}
+    f9: {fileID: 21300000, guid: cd553725486c9824f9ed44cf79482031, type: 3}
+    f10: {fileID: 21300000, guid: 0d0d4fd0b5b88594e84e73f59701b3d3, type: 3}
+    f11: {fileID: 21300000, guid: fdfe7c277cf6e124b815d95e85776f19, type: 3}
+    f12: {fileID: 21300000, guid: fada063d091e7ed418dcb2543936aa55, type: 3}
+    f13: {fileID: 0}
+    f14: {fileID: 0}
+    f15: {fileID: 0}
+    f16: {fileID: 0}
+    f17: {fileID: 0}
+    f18: {fileID: 0}
+    f19: {fileID: 0}
+    f20: {fileID: 0}
+    f21: {fileID: 0}
+    f22: {fileID: 0}
+    f23: {fileID: 0}
+    f24: {fileID: 0}
+    space: {fileID: 21300000, guid: 0ed2882c805bc5441a0b4f0f5b3e2f6f, type: 3}
+    enter: {fileID: 21300000, guid: 4ca1c19ae5051cf44a202109968cd5f0, type: 3}
+    tab: {fileID: 21300000, guid: a2c89c67a31574b4eaf56799a7760024, type: 3}
+    escape: {fileID: 21300000, guid: a51aac4521ec79b4f99279d63e8c4d78, type: 3}
+    backspace: {fileID: 21300000, guid: 62b88c043d776d5478a1d87427ad921a, type: 3}
+    insert: {fileID: 21300000, guid: 9a498c4e2ef38fb49a1924d6a1c08c71, type: 3}
+    delete: {fileID: 21300000, guid: c74d853e5c6e8ac4481489b73d821029, type: 3}
+    home: {fileID: 21300000, guid: 16f475b5b05b58e43a27aaea9ad58f7c, type: 3}
+    end: {fileID: 21300000, guid: 679074283b364d047a38623e065131e1, type: 3}
+    pageUp: {fileID: 21300000, guid: 08bb3c9f50740704d8575d79162cfcde, type: 3}
+    pageDown: {fileID: 21300000, guid: 78f19d40a4d74da47815d2fa7a25375d, type: 3}
+    printScreen: {fileID: 21300000, guid: e9d74f51a733e03459452f7aae310121, type: 3}
+    pause: {fileID: 21300000, guid: 5df1d21f2a980ae4b88576f3527e2b0a, type: 3}
+    contextMenu: {fileID: 21300000, guid: 2c9c1625914ce6546a8181be2458766d, type: 3}
+    anyKey: {fileID: 0}
+    backquote: {fileID: 21300000, guid: 6d106e344f3feab42940d378bf7cf6c2, type: 3}
+    minus: {fileID: 21300000, guid: a908b1e4871201b4489e5fab946c86bf, type: 3}
+    equals: {fileID: 21300000, guid: b7933ca9bcaebec408f1dbb5531953cb, type: 3}
+    leftBracket: {fileID: 21300000, guid: dda5f07ee813fbc4fae756e7f4ef42ee, type: 3}
+    rightBracket: {fileID: 21300000, guid: ea991d50d6449ff459be123345bbb38f, type: 3}
+    backslash: {fileID: 21300000, guid: 2b129f0edc1f2f54e87c70e234dd5beb, type: 3}
+    semicolon: {fileID: 21300000, guid: 559657048ecff414393a4080480dd4d7, type: 3}
+    quote: {fileID: 21300000, guid: dea18fe5ebdf2b24dab2bc57690f33cf, type: 3}
+    comma: {fileID: 21300000, guid: ff47748dd7d797f44b22b91535adb29a, type: 3}
+    period: {fileID: 21300000, guid: 3ba6f79fa5d41be40b2687b0fa9fc081, type: 3}
+    slash: {fileID: 21300000, guid: 4719e96bee1737842bdb79f148deb5e8, type: 3}
+    leftShift: {fileID: 21300000, guid: 185cf49fca2ff1f4c8fd8e3b993f700e, type: 3}
+    rightShift: {fileID: 21300000, guid: 185cf49fca2ff1f4c8fd8e3b993f700e, type: 3}
+    leftCtrl: {fileID: 21300000, guid: 890a5e2564740ab459586c1121fee81e, type: 3}
+    rightCtrl: {fileID: 21300000, guid: 890a5e2564740ab459586c1121fee81e, type: 3}
+    leftAlt: {fileID: 21300000, guid: f39bfa447c10b6848ac2186d892cd9f5, type: 3}
+    rightAlt: {fileID: 21300000, guid: f39bfa447c10b6848ac2186d892cd9f5, type: 3}
+    leftMeta: {fileID: 0}
+    rightMeta: {fileID: 0}
+    shift: {fileID: 21300000, guid: 185cf49fca2ff1f4c8fd8e3b993f700e, type: 3}
+    ctrl: {fileID: 21300000, guid: 890a5e2564740ab459586c1121fee81e, type: 3}
+    alt: {fileID: 21300000, guid: f39bfa447c10b6848ac2186d892cd9f5, type: 3}
+    meta: {fileID: 0}
+    upArrow: {fileID: 21300000, guid: 07145c0103ef96446b5ed870b658c435, type: 3}
+    downArrow: {fileID: 21300000, guid: 64148b9864b014647b61264db046a72b, type: 3}
+    leftArrow: {fileID: 21300000, guid: a4d1d9c25272c604a97affb623fd448a, type: 3}
+    rightArrow: {fileID: 21300000, guid: 520efa830df9bc2468d474f3b17fc19c, type: 3}
+    capsLock: {fileID: 21300000, guid: eef2dbfe99c7a2d42a3efcac7e4049bd, type: 3}
+    numLock: {fileID: 0}
+    scrollLock: {fileID: 0}
+    numpad0: {fileID: 21300000, guid: 3528386aba1939f4e871f1d94c609bd2, type: 3}
+    numpad1: {fileID: 21300000, guid: 6afb4906456b94d47b629085a57a2c3c, type: 3}
+    numpad2: {fileID: 21300000, guid: 2cd54d96e66949742980626a60c9be53, type: 3}
+    numpad3: {fileID: 21300000, guid: e92609fe7f3992946a8eb14eabfa6d0a, type: 3}
+    numpad4: {fileID: 21300000, guid: 47191139a40018145b53f46f5d22f0bd, type: 3}
+    numpad5: {fileID: 21300000, guid: be800f6b5d316ec42b360a630d94534b, type: 3}
+    numpad6: {fileID: 21300000, guid: 55b469da41b768f4b8d2a4965811131f, type: 3}
+    numpad7: {fileID: 21300000, guid: fa3935b477d384742ab7b6b5efa638c7, type: 3}
+    numpad8: {fileID: 21300000, guid: 8691dd1c83f203242864feaa396ffb11, type: 3}
+    numpad9: {fileID: 21300000, guid: 8e8bb1ddadf68aa42816b1291c7325b6, type: 3}
+    numpadEnter: {fileID: 21300000, guid: 4ca1c19ae5051cf44a202109968cd5f0, type: 3}
+    numpadDivide: {fileID: 21300000, guid: 4719e96bee1737842bdb79f148deb5e8, type: 3}
+    numpadMultiply: {fileID: 0}
+    numpadPlus: {fileID: 0}
+    numpadMinus: {fileID: 21300000, guid: a908b1e4871201b4489e5fab946c86bf, type: 3}
+    numpadPeriod: {fileID: 21300000, guid: 3ba6f79fa5d41be40b2687b0fa9fc081, type: 3}
+    numpadEquals: {fileID: 21300000, guid: b7933ca9bcaebec408f1dbb5531953cb, type: 3}
+    numpadComma: {fileID: 21300000, guid: ff47748dd7d797f44b22b91535adb29a, type: 3}
+    leftMouse: {fileID: 21300000, guid: bffdf8cbd8232a14c9e2eb0ebe93c6c4, type: 3}
+    rightMouse: {fileID: 21300000, guid: 3c477db1ce513e54c828b3ceeb5caf46, type: 3}
+    middleMouse: {fileID: 21300000, guid: 75d38e34a5887f3439d5351f8493e77b, type: 3}
+    forwardMouse: {fileID: 21300000, guid: d6c213c65751dc44f96262d3ea9cc0fb, type: 3}
+    backMouse: {fileID: 21300000, guid: 4d13b7133ac17aa47a8f32f25c6ec8a3, type: 3}
+    mousePosition: {fileID: 0}
+    mouseDelta: {fileID: 0}
+    scrollWheel: {fileID: 21300000, guid: 75d38e34a5887f3439d5351f8493e77b, type: 3}
+    scrollUp: {fileID: 0}
+    scrollDown: {fileID: 0}
+  xbox:
+    buttonSouth: {fileID: 21300000, guid: 3fabb41ef8768f649b64314906becee5, type: 3}
+    buttonNorth: {fileID: 21300000, guid: a0193431052c12f4c9d81e98aa80668c, type: 3}
+    buttonEast: {fileID: 21300000, guid: ab149aacb42911b478bda51a066268cf, type: 3}
+    buttonWest: {fileID: 21300000, guid: 18c7fdb5fa1bb074c83360ee7be45330, type: 3}
+    startButton: {fileID: 21300000, guid: d315ebeaaf5b4684b93beb5ddd04616a, type: 3}
+    selectButton: {fileID: 21300000, guid: 63c8cd88a26e48a4f930c0f9ab24f4d6, type: 3}
+    leftTrigger: {fileID: 21300000, guid: f58307ee9608d30429ee91cfe855dfd2, type: 3}
+    rightTrigger: {fileID: 21300000, guid: 0df347092028dd340a2ea6a075219f5a, type: 3}
+    leftShoulder: {fileID: 21300000, guid: 55ac52703be2118419b5e52ef6745fe1, type: 3}
+    rightShoulder: {fileID: 21300000, guid: a82b6d04ed7fead4381438c4f658a0f2, type: 3}
+    dpad: {fileID: 21300000, guid: 16e0f566ce7ee8f4ca8fc4beb06f8feb, type: 3}
+    dpadUp: {fileID: 21300000, guid: 4cc6aa9aa8107734da22c80d289cff98, type: 3}
+    dpadDown: {fileID: 21300000, guid: d544feb63b186dd45b32d12cfc6762bf, type: 3}
+    dpadLeft: {fileID: 21300000, guid: 42c85040f5779dd4d9c9a327e284a863, type: 3}
+    dpadRight: {fileID: 21300000, guid: d39f17c4c46528a4aabf8c5a11193a61, type: 3}
+    leftStick: {fileID: 21300000, guid: 773b0476b6416914a9a5aa04f49af2dc, type: 3}
+    rightStick: {fileID: 21300000, guid: 1c5dc9891b990844f862b3ae0f831c41, type: 3}
+    leftStickPress: {fileID: 21300000, guid: e910640b82197534eaa18210b5007348, type: 3}
+    rightStickPress: {fileID: 21300000, guid: 32b31090cadd55f43942101f2dbdffb9, type: 3}
+  ps4:
+    buttonSouth: {fileID: 21300000, guid: 2da2d15ce082e12448ac493c55a33f0f, type: 3}
+    buttonNorth: {fileID: 21300000, guid: 47b0c8cbcd450124abdb1b62fb7f5806, type: 3}
+    buttonEast: {fileID: 21300000, guid: c7f381483fb41f14e935b2d6d9fec62f, type: 3}
+    buttonWest: {fileID: 21300000, guid: 428de70370df69d45bd4c0025b7ba36e, type: 3}
+    startButton: {fileID: 21300000, guid: 3e20a6306ae08e34f970de090c3a1cd1, type: 3}
+    selectButton: {fileID: 21300000, guid: a521d4effb3d3c64b9329370383eb640, type: 3}
+    leftTrigger: {fileID: 21300000, guid: f920addac480add4c99e64df920b61a3, type: 3}
+    rightTrigger: {fileID: 21300000, guid: 87dce22414624c74d90f8bfc4bf3582f, type: 3}
+    leftShoulder: {fileID: 21300000, guid: 7eaab648006558044a9680311037b8f9, type: 3}
+    rightShoulder: {fileID: 21300000, guid: 22b97dfa5af0d1947a62312c31e633e5, type: 3}
+    dpad: {fileID: 21300000, guid: bff5253ebc5a14f43b4bd8aa1d207855, type: 3}
+    dpadUp: {fileID: 21300000, guid: f375a935d0c38f84d94844236012f26c, type: 3}
+    dpadDown: {fileID: 21300000, guid: 5fc2490d4f2941f4ca46f33e329cf3d7, type: 3}
+    dpadLeft: {fileID: 21300000, guid: 4cb9b89846007d142a4a78a190c2d6fe, type: 3}
+    dpadRight: {fileID: 21300000, guid: be71706bc979d5240bf156bfdfee0ae6, type: 3}
+    leftStick: {fileID: 21300000, guid: 7e177675a5fc16248b6e164ef7a7f2a6, type: 3}
+    rightStick: {fileID: 21300000, guid: 04f2711270cd5b64099d2ca2f99529de, type: 3}
+    leftStickPress: {fileID: 21300000, guid: 139b83464b859cd429d0370dc816028c, type: 3}
+    rightStickPress: {fileID: 21300000, guid: 9c61f7c9d0b7b8b4f9d2350b73289e23, type: 3}
 --- !u!1 &242014658400391850
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,7 +344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7815260985957605718}
-  - component: {fileID: 4228023750982324577}
+  - component: {fileID: 2924847055393945086}
   m_Layer: 0
   m_Name: Gamepad
   m_TagString: Untagged
@@ -185,7 +372,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4228023750982324577
+--- !u!114 &2924847055393945086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,9 +381,143 @@ MonoBehaviour:
   m_GameObject: {fileID: 449255211500273298}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84cd9b84e0604a9abafb77712f1df90a, type: 3}
+  m_Script: {fileID: 11500000, guid: e3f8d5f2abdefa946b57c45d1462ec44, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem.RebindingUI::UnityEngine.InputSystem.Samples.RebindUI.GamepadIconsExample
+  m_EditorClassIdentifier: Unity.InputSystem.RebindingUI::UnityEngine.InputSystem.Samples.RebindUI.InputIconsExample
+  keyboardMouse:
+    a: {fileID: 21300000, guid: 84336ead2bc884a4389f3d4e11093845, type: 3}
+    b: {fileID: 21300000, guid: 31d880e2b24a86d458af7b338339a60d, type: 3}
+    c: {fileID: 21300000, guid: 7a23fd879f96118438b7c8fed607fa8e, type: 3}
+    d: {fileID: 21300000, guid: f88a3bde663a377419f80eeae083d5b7, type: 3}
+    e: {fileID: 21300000, guid: 69da02ec34c73624b91727759ad616df, type: 3}
+    f: {fileID: 21300000, guid: 2de94e7d51b53144ebf574a7637a9233, type: 3}
+    g: {fileID: 21300000, guid: 77cbac9189a57f74c93a614ab10ac7e5, type: 3}
+    h: {fileID: 21300000, guid: 4e32f7f30f0410849a3cb543daa3ff4f, type: 3}
+    i: {fileID: 21300000, guid: 679102cd603104746b5f8735f7e8e4e7, type: 3}
+    j: {fileID: 21300000, guid: 39a4446b0e96ca748880e8afa0627271, type: 3}
+    k: {fileID: 21300000, guid: f8b4257d754da64479638c7f1b1a0541, type: 3}
+    l: {fileID: 21300000, guid: 0157bc6414b67f74c9ec6b08f9cfe0ec, type: 3}
+    m: {fileID: 21300000, guid: 48c1ee20d02026a4bbd29a925b5ae4c0, type: 3}
+    n: {fileID: 21300000, guid: 0f1ed367c5bf11640b95c6d00a574339, type: 3}
+    o: {fileID: 21300000, guid: 067e5ba24f7ea3540b631c535b39d4be, type: 3}
+    p: {fileID: 21300000, guid: bee210a13ef25584a8f1b6f60614a60d, type: 3}
+    q: {fileID: 21300000, guid: 35ecb234d30b9cb42b07f10511a850cb, type: 3}
+    r: {fileID: 21300000, guid: ef04bf5a69063ed459dee8c038b66107, type: 3}
+    s: {fileID: 21300000, guid: 39c87eb429428fe49a2621871ade9193, type: 3}
+    t: {fileID: 21300000, guid: 4123523831d1b6a4791d4d870df66fb9, type: 3}
+    u: {fileID: 21300000, guid: bd4e675c1a069194daeb7a212665b44e, type: 3}
+    v: {fileID: 21300000, guid: c9fdd63a94fa0804a8b51a9557fecd33, type: 3}
+    w: {fileID: 21300000, guid: c48a9e623f57a964bb290afc4c88ec5e, type: 3}
+    x: {fileID: 21300000, guid: 9d7cf1d7019dac540ba1630b9f701dc4, type: 3}
+    y: {fileID: 21300000, guid: df05019a90b93de49b95ae1eefd15329, type: 3}
+    z: {fileID: 21300000, guid: 56814b4309a3e77458d0e2fe3c633abc, type: 3}
+    digit0: {fileID: 21300000, guid: 3528386aba1939f4e871f1d94c609bd2, type: 3}
+    digit1: {fileID: 21300000, guid: 6afb4906456b94d47b629085a57a2c3c, type: 3}
+    digit2: {fileID: 21300000, guid: 2cd54d96e66949742980626a60c9be53, type: 3}
+    digit3: {fileID: 21300000, guid: e92609fe7f3992946a8eb14eabfa6d0a, type: 3}
+    digit4: {fileID: 21300000, guid: 47191139a40018145b53f46f5d22f0bd, type: 3}
+    digit5: {fileID: 21300000, guid: be800f6b5d316ec42b360a630d94534b, type: 3}
+    digit6: {fileID: 21300000, guid: 55b469da41b768f4b8d2a4965811131f, type: 3}
+    digit7: {fileID: 21300000, guid: fa3935b477d384742ab7b6b5efa638c7, type: 3}
+    digit8: {fileID: 21300000, guid: 8691dd1c83f203242864feaa396ffb11, type: 3}
+    digit9: {fileID: 21300000, guid: 8e8bb1ddadf68aa42816b1291c7325b6, type: 3}
+    f1: {fileID: 21300000, guid: 63b5c8c59c02fae4babc0af4a1010dd2, type: 3}
+    f2: {fileID: 21300000, guid: eda0cf5d765bbd740b7c0d8c23f257e4, type: 3}
+    f3: {fileID: 21300000, guid: f17619cce6c41c749b269df2ae8ae08d, type: 3}
+    f4: {fileID: 21300000, guid: 535b8d87946c0db4a8b8a16acbef3981, type: 3}
+    f5: {fileID: 21300000, guid: 41ceb5eed1c658c40b7761b144b0bf43, type: 3}
+    f6: {fileID: 21300000, guid: 3a3a527366b029248a0f9133e8e553bd, type: 3}
+    f7: {fileID: 21300000, guid: 2ddf008c8ece0874a8802be843fa2bc6, type: 3}
+    f8: {fileID: 21300000, guid: 7efe30f710d1f4a44b6a7f57193fb446, type: 3}
+    f9: {fileID: 21300000, guid: cd553725486c9824f9ed44cf79482031, type: 3}
+    f10: {fileID: 21300000, guid: 0d0d4fd0b5b88594e84e73f59701b3d3, type: 3}
+    f11: {fileID: 21300000, guid: fdfe7c277cf6e124b815d95e85776f19, type: 3}
+    f12: {fileID: 21300000, guid: fada063d091e7ed418dcb2543936aa55, type: 3}
+    f13: {fileID: 0}
+    f14: {fileID: 0}
+    f15: {fileID: 0}
+    f16: {fileID: 0}
+    f17: {fileID: 0}
+    f18: {fileID: 0}
+    f19: {fileID: 0}
+    f20: {fileID: 0}
+    f21: {fileID: 0}
+    f22: {fileID: 0}
+    f23: {fileID: 0}
+    f24: {fileID: 0}
+    space: {fileID: 21300000, guid: 0ed2882c805bc5441a0b4f0f5b3e2f6f, type: 3}
+    enter: {fileID: 21300000, guid: 4ca1c19ae5051cf44a202109968cd5f0, type: 3}
+    tab: {fileID: 21300000, guid: a2c89c67a31574b4eaf56799a7760024, type: 3}
+    escape: {fileID: 21300000, guid: a51aac4521ec79b4f99279d63e8c4d78, type: 3}
+    backspace: {fileID: 21300000, guid: 62b88c043d776d5478a1d87427ad921a, type: 3}
+    insert: {fileID: 21300000, guid: 9a498c4e2ef38fb49a1924d6a1c08c71, type: 3}
+    delete: {fileID: 21300000, guid: c74d853e5c6e8ac4481489b73d821029, type: 3}
+    home: {fileID: 21300000, guid: 16f475b5b05b58e43a27aaea9ad58f7c, type: 3}
+    end: {fileID: 21300000, guid: 679074283b364d047a38623e065131e1, type: 3}
+    pageUp: {fileID: 21300000, guid: 08bb3c9f50740704d8575d79162cfcde, type: 3}
+    pageDown: {fileID: 21300000, guid: 78f19d40a4d74da47815d2fa7a25375d, type: 3}
+    printScreen: {fileID: 21300000, guid: e9d74f51a733e03459452f7aae310121, type: 3}
+    pause: {fileID: 21300000, guid: 5df1d21f2a980ae4b88576f3527e2b0a, type: 3}
+    contextMenu: {fileID: 21300000, guid: 2c9c1625914ce6546a8181be2458766d, type: 3}
+    anyKey: {fileID: 0}
+    backquote: {fileID: 21300000, guid: 6d106e344f3feab42940d378bf7cf6c2, type: 3}
+    minus: {fileID: 21300000, guid: a908b1e4871201b4489e5fab946c86bf, type: 3}
+    equals: {fileID: 21300000, guid: b7933ca9bcaebec408f1dbb5531953cb, type: 3}
+    leftBracket: {fileID: 21300000, guid: dda5f07ee813fbc4fae756e7f4ef42ee, type: 3}
+    rightBracket: {fileID: 21300000, guid: ea991d50d6449ff459be123345bbb38f, type: 3}
+    backslash: {fileID: 21300000, guid: 2b129f0edc1f2f54e87c70e234dd5beb, type: 3}
+    semicolon: {fileID: 21300000, guid: 559657048ecff414393a4080480dd4d7, type: 3}
+    quote: {fileID: 21300000, guid: dea18fe5ebdf2b24dab2bc57690f33cf, type: 3}
+    comma: {fileID: 21300000, guid: ff47748dd7d797f44b22b91535adb29a, type: 3}
+    period: {fileID: 21300000, guid: 3ba6f79fa5d41be40b2687b0fa9fc081, type: 3}
+    slash: {fileID: 21300000, guid: 4719e96bee1737842bdb79f148deb5e8, type: 3}
+    leftShift: {fileID: 21300000, guid: 185cf49fca2ff1f4c8fd8e3b993f700e, type: 3}
+    rightShift: {fileID: 21300000, guid: 185cf49fca2ff1f4c8fd8e3b993f700e, type: 3}
+    leftCtrl: {fileID: 21300000, guid: 890a5e2564740ab459586c1121fee81e, type: 3}
+    rightCtrl: {fileID: 21300000, guid: 890a5e2564740ab459586c1121fee81e, type: 3}
+    leftAlt: {fileID: 21300000, guid: f39bfa447c10b6848ac2186d892cd9f5, type: 3}
+    rightAlt: {fileID: 21300000, guid: f39bfa447c10b6848ac2186d892cd9f5, type: 3}
+    leftMeta: {fileID: 0}
+    rightMeta: {fileID: 0}
+    shift: {fileID: 21300000, guid: 185cf49fca2ff1f4c8fd8e3b993f700e, type: 3}
+    ctrl: {fileID: 21300000, guid: 890a5e2564740ab459586c1121fee81e, type: 3}
+    alt: {fileID: 21300000, guid: f39bfa447c10b6848ac2186d892cd9f5, type: 3}
+    meta: {fileID: 0}
+    upArrow: {fileID: 21300000, guid: 07145c0103ef96446b5ed870b658c435, type: 3}
+    downArrow: {fileID: 21300000, guid: 64148b9864b014647b61264db046a72b, type: 3}
+    leftArrow: {fileID: 21300000, guid: a4d1d9c25272c604a97affb623fd448a, type: 3}
+    rightArrow: {fileID: 21300000, guid: 520efa830df9bc2468d474f3b17fc19c, type: 3}
+    capsLock: {fileID: 21300000, guid: eef2dbfe99c7a2d42a3efcac7e4049bd, type: 3}
+    numLock: {fileID: 0}
+    scrollLock: {fileID: 0}
+    numpad0: {fileID: 21300000, guid: 3528386aba1939f4e871f1d94c609bd2, type: 3}
+    numpad1: {fileID: 21300000, guid: 6afb4906456b94d47b629085a57a2c3c, type: 3}
+    numpad2: {fileID: 21300000, guid: 2cd54d96e66949742980626a60c9be53, type: 3}
+    numpad3: {fileID: 21300000, guid: e92609fe7f3992946a8eb14eabfa6d0a, type: 3}
+    numpad4: {fileID: 21300000, guid: 47191139a40018145b53f46f5d22f0bd, type: 3}
+    numpad5: {fileID: 21300000, guid: be800f6b5d316ec42b360a630d94534b, type: 3}
+    numpad6: {fileID: 21300000, guid: 55b469da41b768f4b8d2a4965811131f, type: 3}
+    numpad7: {fileID: 21300000, guid: fa3935b477d384742ab7b6b5efa638c7, type: 3}
+    numpad8: {fileID: 21300000, guid: 8691dd1c83f203242864feaa396ffb11, type: 3}
+    numpad9: {fileID: 21300000, guid: 8e8bb1ddadf68aa42816b1291c7325b6, type: 3}
+    numpadEnter: {fileID: 21300000, guid: 4ca1c19ae5051cf44a202109968cd5f0, type: 3}
+    numpadDivide: {fileID: 21300000, guid: 4719e96bee1737842bdb79f148deb5e8, type: 3}
+    numpadMultiply: {fileID: 0}
+    numpadPlus: {fileID: 0}
+    numpadMinus: {fileID: 21300000, guid: a908b1e4871201b4489e5fab946c86bf, type: 3}
+    numpadPeriod: {fileID: 21300000, guid: 3ba6f79fa5d41be40b2687b0fa9fc081, type: 3}
+    numpadEquals: {fileID: 21300000, guid: b7933ca9bcaebec408f1dbb5531953cb, type: 3}
+    numpadComma: {fileID: 21300000, guid: ff47748dd7d797f44b22b91535adb29a, type: 3}
+    leftMouse: {fileID: 21300000, guid: bffdf8cbd8232a14c9e2eb0ebe93c6c4, type: 3}
+    rightMouse: {fileID: 21300000, guid: 3c477db1ce513e54c828b3ceeb5caf46, type: 3}
+    middleMouse: {fileID: 21300000, guid: 75d38e34a5887f3439d5351f8493e77b, type: 3}
+    forwardMouse: {fileID: 21300000, guid: d6c213c65751dc44f96262d3ea9cc0fb, type: 3}
+    backMouse: {fileID: 21300000, guid: 4d13b7133ac17aa47a8f32f25c6ec8a3, type: 3}
+    mousePosition: {fileID: 0}
+    mouseDelta: {fileID: 0}
+    scrollWheel: {fileID: 21300000, guid: 75d38e34a5887f3439d5351f8493e77b, type: 3}
+    scrollUp: {fileID: 0}
+    scrollDown: {fileID: 0}
   xbox:
     buttonSouth: {fileID: 21300000, guid: 3fabb41ef8768f649b64314906becee5, type: 3}
     buttonNorth: {fileID: 21300000, guid: a0193431052c12f4c9d81e98aa80668c, type: 3}
@@ -213,7 +534,7 @@ MonoBehaviour:
     dpadDown: {fileID: 21300000, guid: d544feb63b186dd45b32d12cfc6762bf, type: 3}
     dpadLeft: {fileID: 21300000, guid: 42c85040f5779dd4d9c9a327e284a863, type: 3}
     dpadRight: {fileID: 21300000, guid: d39f17c4c46528a4aabf8c5a11193a61, type: 3}
-    leftStick: {fileID: 21300000, guid: 8fe9cff000066a641b0ab660e703f191, type: 3}
+    leftStick: {fileID: 21300000, guid: 773b0476b6416914a9a5aa04f49af2dc, type: 3}
     rightStick: {fileID: 21300000, guid: 1c5dc9891b990844f862b3ae0f831c41, type: 3}
     leftStickPress: {fileID: 21300000, guid: e910640b82197534eaa18210b5007348, type: 3}
     rightStickPress: {fileID: 21300000, guid: 32b31090cadd55f43942101f2dbdffb9, type: 3}
@@ -235,8 +556,8 @@ MonoBehaviour:
     dpadRight: {fileID: 21300000, guid: be71706bc979d5240bf156bfdfee0ae6, type: 3}
     leftStick: {fileID: 21300000, guid: 7e177675a5fc16248b6e164ef7a7f2a6, type: 3}
     rightStick: {fileID: 21300000, guid: 04f2711270cd5b64099d2ca2f99529de, type: 3}
-    leftStickPress: {fileID: 21300000, guid: 7e177675a5fc16248b6e164ef7a7f2a6, type: 3}
-    rightStickPress: {fileID: 21300000, guid: 04f2711270cd5b64099d2ca2f99529de, type: 3}
+    leftStickPress: {fileID: 21300000, guid: 139b83464b859cd429d0370dc816028c, type: 3}
+    rightStickPress: {fileID: 21300000, guid: 9c61f7c9d0b7b8b4f9d2350b73289e23, type: 3}
 --- !u!1 &484556984211446200
 GameObject:
   m_ObjectHideFlags: 0
@@ -7842,7 +8163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: X
+      value: Square
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7992,7 +8313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad/Right
+      value: D-Pad Right
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8146,7 +8467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: B
+      value: Circle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8300,7 +8621,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad/Up
+      value: D-Pad Up
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8454,7 +8775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: E
+      value: P
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8762,7 +9083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: LB
+      value: L1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9070,7 +9391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: LB
+      value: L1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9528,7 +9849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: Y
+      value: Triangle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9986,7 +10307,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: LT
+      value: L2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10140,7 +10461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: A
+      value: Cross
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10448,7 +10769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad/Down
+      value: D-Pad Down
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10602,7 +10923,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad/Left
+      value: D-Pad Left
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10756,7 +11077,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: Q
+      value: O
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
