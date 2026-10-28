@@ -14,7 +14,8 @@ public class PlayerUpgrade : MonoBehaviour
 
     [Header("Upgrade Values")]
     [SerializeField] private int upgradeCapacity = 0;
-    [SerializeField] private float upgradeSprint = 0f;
+    [SerializeField] private bool canSprint = false;
+    public bool CanSprint => canSprint;
     [SerializeField] private float upgradeReach = 0f;
     [SerializeField] private int upgradeJump = 0;
     [SerializeField] private bool canThrowToShelf = false;
@@ -81,17 +82,16 @@ public class PlayerUpgrade : MonoBehaviour
 
     public void BuyUpgradeSprint()
     {
-        if (upgradeSprint >= 10f)
+        if (canSprint)
             return;
 
         if (!TryBuyUpgrade(ref sprintPrice))
             return;
 
-        upgradeSprint += 2f;
+        canSprint = true;
+        playerMovement.UnlockSprint();
 
-        playerMovement.UpgradeSprint(2f);
-
-        ui.FillSlider(ui.upgradeSprintSlider, 5);
+        ui.FillSlider(ui.upgradeSprintSlider, 1);
 
         if (saveManager != null)
             saveManager.SaveGame();
@@ -173,9 +173,10 @@ public class PlayerUpgrade : MonoBehaviour
             ui.FillSlider(ui.upgradeCapacitySlider, 5);
         }
 
-        for (int i = 0; i < upgradeSprint; i += 2)
+        if (canSprint)
         {
-            ui.FillSlider(ui.upgradeSprintSlider, 5);
+            playerMovement.UnlockSprint();
+            ui.FillSlider(ui.upgradeSprintSlider, 1);
         }
 
         for (int i = 0; i < upgradeReach; i += 2)
@@ -213,16 +214,11 @@ public class PlayerUpgrade : MonoBehaviour
         }
 
         //Sprint
-        for (int i = 0; i < 5; i++)
+        if (!canSprint)
         {
-            if (upgradeSprint >= 10f)
-                break;
-
-            upgradeSprint += 2f;
-
-            playerMovement.UpgradeSprint(2f);
-
-            ui.FillSlider(ui.upgradeSprintSlider, 5);
+            canSprint = true;
+            playerMovement.UnlockSprint();
+            ui.FillSlider(ui.upgradeSprintSlider, 1);
         }
 
         //Reach
@@ -285,7 +281,7 @@ public class PlayerUpgrade : MonoBehaviour
         ui.upgradeReachSlider.value = ui.upgradeReachSlider.minValue;
 
         //Sprint & Jump
-        upgradeSprint = 0;
+        canSprint = false;
         upgradeJump = 0;
         playerMovement.ResetSprintAndJump();
         ui.upgradeSprintSlider.value = ui.upgradeSprintSlider.minValue;

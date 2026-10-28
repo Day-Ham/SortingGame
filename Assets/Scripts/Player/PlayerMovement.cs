@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Settings")]
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float sprintSpeed = 10f;
+    [SerializeField] private bool canSprint = false;
     [SerializeField] private float jumpHeight = 2f;
     [SerializeField] private float gravity = -9.81f;
     [SerializeField] private int maxJumps = 1;
@@ -49,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
         float currentSpeed = moveSpeed;
 
-        if (UserInput.instance.SprintInput && moveInput.y > 0)
+        if (canSprint && UserInput.instance.SprintInput && moveInput.y > 0)
         {
             currentSpeed = sprintSpeed;
         }
@@ -110,9 +111,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void UpgradeSprint(float amount)
+    public void UnlockSprint()
     {
-        sprintSpeed += amount;
+        canSprint = true;
     }
 
     public void UpgradeJump()
@@ -125,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ResetSprintAndJump()
     {
-        sprintSpeed = 10;
+        canSprint = false;
         maxJumps = 1;
     }
 }
