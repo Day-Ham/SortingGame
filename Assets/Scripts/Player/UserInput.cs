@@ -5,6 +5,7 @@ public class UserInput : MonoBehaviour
 {
     public static UserInput instance;
     
+    // Game
     public Vector2 MoveInput { get; private set; }
     public Vector2 LookInput { get; private set; }
     public bool SprintInput { get; private set; }
@@ -22,8 +23,16 @@ public class UserInput : MonoBehaviour
     public bool ScrollDownInput { get; private set; }
     public bool PlayerInputEnabled { get; private set; } = true;
 
+    //UI
+    public bool ResetBindingsInput { get; private set; }
+    public bool PrimaryTabLeftInput { get; private set; }
+    public bool PrimaryTabRightInput { get; private set; }
+    public bool SecondaryTabLeftInput { get; private set; }
+    public bool SecondaryTabRightInput { get; private set; }
 
     private PlayerInput playerInput;
+
+    //Game
     private InputAction moveAction;
     private InputAction lookAction;
     private InputAction sprintAction;
@@ -33,12 +42,20 @@ public class UserInput : MonoBehaviour
     private InputAction throwAction;
     private InputAction upgradeAction;
     private InputAction skillsAction;
-    private InputAction escapeAction;
+    private InputAction playerEscapeAction;
     private InputAction skill1Action;
     private InputAction skill2Action;
     private InputAction skill3Action;
     private InputAction scrollUpAction;
     private InputAction scrollDownAction;
+
+    //UI
+    private InputAction uiEscapeAction;
+    private InputAction resetBindingsAction;
+    private InputAction primaryTabLeftAction;
+    private InputAction primaryTabRightAction;
+    private InputAction secondaryTabLeftAction;
+    private InputAction secondaryTabRightAction;
 
     private void Awake()
     {
@@ -59,6 +76,7 @@ public class UserInput : MonoBehaviour
 
     private void SetUpInputAction()
     {
+        // Game
         moveAction = playerInput.actions.FindAction("Move");
         lookAction = playerInput.actions.FindAction("Look");
         sprintAction = playerInput.actions.FindAction("Sprint");
@@ -68,16 +86,25 @@ public class UserInput : MonoBehaviour
         throwAction = playerInput.actions.FindAction("Throw");
         upgradeAction = playerInput.actions.FindAction("UpgradeMenu");
         skillsAction = playerInput.actions.FindAction("SkillsMenu");
-        escapeAction = playerInput.actions.FindAction("Escape");
+        playerEscapeAction = playerInput.actions.FindAction("Player/Escape");
         skill1Action = playerInput.actions.FindAction("Skill1");
         skill2Action = playerInput.actions.FindAction("Skill2");
         skill3Action = playerInput.actions.FindAction("Skill3");
         scrollUpAction = playerInput.actions.FindAction("ScrollUp");
         scrollDownAction = playerInput.actions.FindAction("ScrollDown");
+
+        // UI
+        uiEscapeAction = playerInput.actions.FindAction("UI/Escape");
+        resetBindingsAction = playerInput.actions.FindAction("ResetBindings");
+        primaryTabLeftAction = playerInput.actions.FindAction("PrimaryTabLeft");
+        primaryTabRightAction = playerInput.actions.FindAction("PrimaryTabRight");
+        secondaryTabLeftAction = playerInput.actions.FindAction("SecondaryTabLeft");
+        secondaryTabRightAction = playerInput.actions.FindAction("SecondaryTabRight");
     }
 
     private void UpdateInputs()
     {
+        // Game
         MoveInput = PlayerInputEnabled ? moveAction.ReadValue<Vector2>() : Vector2.zero;
         LookInput = PlayerInputEnabled ? lookAction.ReadValue<Vector2>() : Vector2.zero;
         SprintInput = PlayerInputEnabled && sprintAction.IsPressed();
@@ -87,12 +114,22 @@ public class UserInput : MonoBehaviour
         ThrowInput = PlayerInputEnabled && throwAction.WasPressedThisFrame();
         UpgradeInput = upgradeAction.WasPressedThisFrame();
         SkillInput = skillsAction.WasPressedThisFrame();
-        EscapeInput = escapeAction.WasPressedThisFrame();
         Skill1Input = PlayerInputEnabled && skill1Action.WasPressedThisFrame();
         Skill2Input = PlayerInputEnabled && skill2Action.WasPressedThisFrame();
         Skill3Input = PlayerInputEnabled && skill3Action.WasPressedThisFrame();
         ScrollUpInput = PlayerInputEnabled && scrollUpAction.WasPressedThisFrame();
         ScrollDownInput = PlayerInputEnabled && scrollDownAction.WasPressedThisFrame();
+
+        // UI
+        ResetBindingsInput = resetBindingsAction.WasPressedThisFrame();
+        PrimaryTabLeftInput = primaryTabLeftAction.WasPressedThisFrame();
+        PrimaryTabRightInput = primaryTabRightAction.WasPressedThisFrame();
+        SecondaryTabLeftInput = secondaryTabLeftAction.WasPressedThisFrame();
+        SecondaryTabRightInput = secondaryTabRightAction.WasPressedThisFrame();
+
+        // Game & UI
+        EscapeInput = playerEscapeAction.WasPressedThisFrame() || uiEscapeAction.WasPressedThisFrame();
+
     }
 
     public void SetPlayerInput(bool enabled)

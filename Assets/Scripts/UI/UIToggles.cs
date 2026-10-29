@@ -1,50 +1,134 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class UIToggles : MonoBehaviour
 {
-    [Header("Options")]
-    [SerializeField] private List<Toggle> toggles = new List<Toggle>();
-    [SerializeField] private List<GameObject> panels = new List<GameObject>();
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private void OnEnable()
+    public enum TabType
     {
-        ResetToFirstToggle();
+        Primary,
+        Secondary
     }
 
-    void Start()
+    [Header("Tab Settings")]
+    [SerializeField] private TabType tabType;
+
+    [Header("Options")]
+    [SerializeField] private List<Toggle> toggles = new List<Toggle>();
+    [SerializeField] private List<Sprite> normalSprites = new List<Sprite>();
+    [SerializeField] private List<GameObject> panels = new List<GameObject>();
+
+    private int currentIndex;
+    private float tabCooldownTimer;
+    private const float tabCooldown = 0.2f;
+
+    private void Awake()
     {
         for (int i = 0; i < toggles.Count; i++)
         {
             int index = i;
 
+            normalSprites.Add(toggles[i].targetGraphic.GetComponent<Image>().sprite);
+
             toggles[i].onValueChanged.AddListener(state =>
             {
                 if (state)
                 {
+                    currentIndex = index;
                     ShowPanel(index);
                 }
             });
         }
+    }
 
+    private void OnEnable()
+    {
+        tabCooldownTimer = 0f;
+        StartCoroutine(DelayedResetRoutine());
+    }
+
+    private IEnumerator DelayedResetRoutine()
+    {
+        yield return null;
         ResetToFirstToggle();
+    }
+
+    private void LateUpdate()
+    {
+        if (UserInput.instance == null) return;
+
+        if (tabCooldownTimer > 0f)
+        {
+            tabCooldownTimer -= Time.unscaledDeltaTime;
+            return;
+        }
+
+        bool next = false;
+        bool previous = false;
+
+        if (tabType == TabType.Primary)
+        {
+            next = UserInput.instance.PrimaryTabRightInput;
+            previous = UserInput.instance.PrimaryTabLeftInput;
+        }
+        else
+        {
+            next = UserInput.instance.SecondaryTabRightInput;
+            previous = UserInput.instance.SecondaryTabLeftInput;
+        }
+
+        if (next)
+        {
+            SelectToggle(1);
+            tabCooldownTimer = tabCooldown;
+        }
+        else if (previous)
+        {
+            SelectToggle(-1);
+            tabCooldownTimer = tabCooldown;
+        }
+    }
+
+    private void SelectToggle(int direction)
+    {
+        if (toggles.Count == 0)
+            return;
+
+        currentIndex = (currentIndex + direction + toggles.Count) % toggles.Count;
+
+        toggles[currentIndex].isOn = true;
+        EventSystem.current?.SetSelectedGameObject(toggles[currentIndex].gameObject);
+        ShowPanel(currentIndex);
     }
 
     private void ShowPanel(int index)
     {
         for (int i = 0; i < panels.Count; i++)
         {
-            panels[i].SetActive(i == index);
+            bool isActive = i == index;
+            panels[i].SetActive(isActive);
+
+            Image image = toggles[i].targetGraphic as Image;
+
+            if (image != null)
+            {
+                SpriteState state = toggles[i].spriteState;
+                image.sprite = isActive ? state.pressedSprite : normalSprites[i];
+            }
+
+            toggles[i].transform.GetChild(0).gameObject.SetActive(isActive);
         }
     }
 
     public void ResetToFirstToggle()
     {
-        toggles[0].isOn = true;
-    }
+        if (toggles.Count == 0) return;
 
-    
+        currentIndex = 0;
+        toggles[0].isOn = true;
+        EventSystem.current?.SetSelectedGameObject(toggles[0].gameObject);
+        ShowPanel(0);
+    }
 }

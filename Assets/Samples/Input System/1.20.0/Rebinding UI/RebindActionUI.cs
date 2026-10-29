@@ -142,6 +142,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 !other.ResolveActionAndBinding(out InputAction otherAction, out int otherIndex))
                 throw new Exception("Failed to resolve action and binding index");
 
+            if (m_Action.action.actionMap.name != "Player" || other.actionReference.action.actionMap.name != "Player")
+                return;
+
             string otherPath = otherAction.bindings[otherIndex].effectivePath;
             action.ApplyBindingOverride(index, otherPath);
             otherAction.ApplyBindingOverride(otherIndex, originalPath);
@@ -199,6 +202,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         public void StartInteractiveRebind()
         {
             if (!ResolveActionAndBinding(out InputAction action, out int index)) return;
+
+            if (action.actionMap.name != "Player") return;
 
             if (action.bindings[index].isComposite)
             {
@@ -340,20 +345,22 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             }
         }
 
-        private bool CheckDuplicateBindings(InputAction action, int bindingIndex, InputControl candidateControl,
-            out RebindActionUI duplicateBinding)
+        private bool CheckDuplicateBindings(InputAction action, int bindingIndex, InputControl candidateControl, out RebindActionUI duplicateBinding)
         {
             duplicateBinding = null;
             if (candidateControl == null || action?.actionMap?.asset == null) return false;
 
+            if (action.actionMap.name != "Player") return false;
+
             string targetBindingId = action.bindings[bindingIndex].id.ToString();
             InputActionAsset asset = action.actionMap.asset;
 
-            foreach (InputActionMap map in asset.actionMaps)
+            InputActionMap playerMap = asset.FindActionMap("Player", true);
+            
+
+            foreach (InputAction otherAction in playerMap.actions)
             {
-                foreach (InputAction otherAction in map.actions)
-                {
-                    for (int i = 0; i < otherAction.bindings.Count; i++)
+                for (int i = 0; i < otherAction.bindings.Count; i++)
                     {
                         InputBinding otherBinding = otherAction.bindings[i];
                         if (otherAction == action && otherBinding.id.ToString() == targetBindingId)
@@ -378,7 +385,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                         return true;
                     }
                 }
-            }
+            
 
             return false;
         }

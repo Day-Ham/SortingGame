@@ -13,7 +13,6 @@ public class InputIconManager : MonoBehaviour
     [Header("Gamepad")]
     [SerializeField] private GamepadIcons xbox;
     [SerializeField] private GamepadIcons ps4;
-
     private readonly HashSet<InputPrompt> prompts = new();
 
     private void Awake()

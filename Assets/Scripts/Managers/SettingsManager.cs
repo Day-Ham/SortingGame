@@ -1,7 +1,5 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
-using static UnityEngine.Rendering.DebugUI;
 
 public class SettingsManager : MonoBehaviour
 {

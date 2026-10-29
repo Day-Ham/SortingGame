@@ -20,6 +20,7 @@ public class ResetDeviceBindings : MonoBehaviour
 
     private void Start()
     {
+
         defaultButton.onClick.AddListener(OpenDefaultPrompt);
         confirmResetButton.onClick.AddListener(ResetControlsSchemeBinding);
         cancelResetButton.onClick.AddListener(CloseDefaultPrompt);
@@ -28,13 +29,13 @@ public class ResetDeviceBindings : MonoBehaviour
     public void ResetControlsSchemeBinding()
     {
         CheckSchema();
-        foreach (InputActionMap map in _inputActions.actionMaps)
+        
+        InputActionMap playerMap = _inputActions.FindActionMap("Player", true);
+        foreach (InputAction action in playerMap.actions)
         {
-            foreach (InputAction action in map.actions)
-            {
-                action.RemoveBindingOverride(InputBinding.MaskByGroup(_targetControlSchema));
-            }
+            action.RemoveBindingOverride(InputBinding.MaskByGroup(_targetControlSchema));
         }
+
         CloseDefaultPrompt();
 
         //Save keybinds

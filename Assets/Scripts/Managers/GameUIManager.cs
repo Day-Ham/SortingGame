@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
@@ -86,6 +87,7 @@ public class GameUIManager : MonoBehaviour
 
     [SerializeField] private GameObject currentOpenMenu;
 
+    PlayerInput playerInput;
     UserInput input;
     PauseManager pause;
     SceneLoader sceneLoader;    
@@ -100,6 +102,7 @@ public class GameUIManager : MonoBehaviour
 
     private void Start()
     {
+        playerInput = FindAnyObjectByType<PlayerInput>();
         input = UserInput.instance;
         pause = PauseManager.instance;
         sceneLoader = SceneLoader.Instance;
@@ -236,6 +239,8 @@ public class GameUIManager : MonoBehaviour
 
     public void SetAsCurrentOpenMenu(GameObject menu)
     {
+        playerInput.SwitchCurrentActionMap("UI");
+
         currentOpenMenu = menu;
         EnableUI(currentOpenMenu);
 
@@ -256,10 +261,12 @@ public class GameUIManager : MonoBehaviour
 
         if (menu == pauseMenu || menu == settingsMenu)
         {
+            playerInput.SwitchCurrentActionMap("Player");
             pause.ResumeGame();
             return;
         }
 
+        playerInput.SwitchCurrentActionMap("Player");
         pause.EnablePlayerControl();
         pause.LockCursor();
     }
@@ -268,19 +275,20 @@ public class GameUIManager : MonoBehaviour
     {
         SetAsCurrentOpenMenu(settingsMenu);
     }
+
     private void SetPauseMenuAsCurrent()
     {
         SetAsCurrentOpenMenu(pauseMenu);
     }
     private void CloseUpgrades()
     {
-        DisableUI(upgradesMenu);
+        CloseMenu(upgradesMenu);
         pause.EnablePlayerControl();
         pause.LockCursor();
     }
     private void CloseSkills()
     {
-        DisableUI(skillsMenu);
+        CloseMenu(skillsMenu);
         pause.EnablePlayerControl();
         pause.LockCursor();
     }
