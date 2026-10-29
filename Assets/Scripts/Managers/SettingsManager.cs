@@ -64,7 +64,7 @@ public class SettingsManager : MonoBehaviour
     }
     #endregion
 
-    #region Mouse Sensitivity
+    #region Sensitivity
 
 
     public void SetMouseSensitivity(float value)
