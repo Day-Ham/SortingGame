@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class SetsUIElementToSelectOnInteraction : MonoBehaviour
@@ -44,5 +46,58 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
             Debug.Log("This should jump where?", this);
 
         eventSystem.SetSelectedGameObject(elemtentToSelect.gameObject);
+    }
+
+    public GameObject GetHoveredUI()
+    {
+        PointerEventData pointerData = new PointerEventData(EventSystem.current)
+        {
+            position = Mouse.current.position.ReadValue()
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerData, results);
+
+        foreach (RaycastResult result in results)
+        {
+            Transform current = result.gameObject.transform;
+
+            while (current != null)
+            {
+                if (current.CompareTag("MainUIElement"))
+                {
+                    Selectable selectable = current.GetComponent<Selectable>();
+
+                    if (selectable != null &&
+                        selectable.navigation.mode != Navigation.Mode.None)
+                    {
+                        return current.gameObject;
+                    }
+                }
+
+                current = current.parent;
+            }
+        }
+
+        return null;
+    }
+
+    public GameObject GetSelectedUI()
+    {
+        GameObject selected = EventSystem.current.currentSelectedGameObject;
+
+        if (selected == null || !selected.activeInHierarchy)
+            return null;
+
+        if (!selected.CompareTag("MainUIElement"))
+            return null;
+
+        Selectable selectable = selected.GetComponent<Selectable>();
+
+        if (selectable == null ||
+            selectable.navigation.mode == Navigation.Mode.None)
+            return null;
+
+        return selected;
     }
 }

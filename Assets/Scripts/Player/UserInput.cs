@@ -15,7 +15,6 @@ public class UserInput : MonoBehaviour
     public bool ThrowInput { get; private set; }
     public bool UpgradeInput { get; private set; }
     public bool SkillInput { get; private set; }
-    public bool EscapeInput { get; private set; }
     public bool Skill1Input { get; private set; }
     public bool Skill2Input { get; private set; }
     public bool Skill3Input { get; private set; }
@@ -29,6 +28,9 @@ public class UserInput : MonoBehaviour
     public bool PrimaryTabRightInput { get; private set; }
     public bool SecondaryTabLeftInput { get; private set; }
     public bool SecondaryTabRightInput { get; private set; }
+
+    //Player and UI
+    public bool EscapeInput { get; private set; }
 
     private PlayerInput playerInput;
 

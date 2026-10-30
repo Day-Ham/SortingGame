@@ -1,11 +1,9 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ControllerRestKeybindingToDefault : MonoBehaviour
+public class ControllerResetKeybindingToDefault : MonoBehaviour
 {
     [SerializeField] private GameObject resetToDefaultPrompt;
-
+    [SerializeField] private SetsUIElementToSelectOnInteraction selectable;
     // Update is called once per frame
     void Update()
     {
@@ -20,5 +18,9 @@ public class ControllerRestKeybindingToDefault : MonoBehaviour
     private void OpenDefaultPrompt()
     {
         resetToDefaultPrompt.SetActive(true);
+
+        if (selectable == null) return;
+
+        selectable.JumpToElement();
     }
 }

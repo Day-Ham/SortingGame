@@ -12,6 +12,8 @@ public class InputDeviceDetector : MonoBehaviour
         Gamepad
     }
 
+    private PauseManager pause;
+
     public InputMode CurrentMode { get; private set; }
         = InputMode.KeyboardMouse;
 
@@ -26,6 +28,8 @@ public class InputDeviceDetector : MonoBehaviour
         }
 
         Instance = this;
+
+        pause = PauseManager.instance;
     }
 
     private void OnEnable()
@@ -91,5 +95,14 @@ public class InputDeviceDetector : MonoBehaviour
         Debug.Log("Input mode changed to: " + CurrentMode);
 
         OnInputModeChanged?.Invoke(mode);
+
+        if (mode == InputMode.Gamepad)
+        {
+            Cursor.visible = false;
+        }
+        else if (mode == InputMode.KeyboardMouse)
+        {
+            Cursor.visible = true;
+        }
     }
 }

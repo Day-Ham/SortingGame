@@ -234,7 +234,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
                 .WithCancelingThrough("<Keyboard>/escape")
+                //.WithCancelingThrough("<Gamepad>/startButton")
                 .WithControlsExcluding("<Keyboard>/escape")
+                //.WithControlsExcluding("<Gamepad>/startButton")
                 .WithActionEventNotificationsBeingSuppressed()
                 .WithTimeout(m_RebindTimeout)
                 .OnPotentialMatch(operation =>
@@ -395,7 +397,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             if (m_RebindInfo != null) UpdateRebindInfo(Time.realtimeSinceStartupAsDouble);
 
             if (m_RebindDuplicatePromp != null && m_RebindDuplicatePromp.activeInHierarchy &&
-                Keyboard.current != null && Keyboard.current.escapeKey.wasReleasedThisFrame)
+                Keyboard.current != null && (Keyboard.current.escapeKey.wasReleasedThisFrame /*|| Gamepad.current.startButton.wasReleasedThisFrame*/))
                 CancelSwapBinding();
         }
 

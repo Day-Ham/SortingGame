@@ -24,6 +24,10 @@ public class UIToggles : MonoBehaviour
     private float tabCooldownTimer;
     private const float tabCooldown = 0.2f;
 
+    private InputDeviceDetector inputDetector;
+    private InputDeviceDetector.InputMode mode;
+    private GameObject hoveredElement;
+
     private void Awake()
     {
         for (int i = 0; i < toggles.Count; i++)
@@ -41,6 +45,8 @@ public class UIToggles : MonoBehaviour
                 }
             });
         }
+
+        inputDetector = InputDeviceDetector.Instance;
     }
 
     private void OnEnable()
@@ -88,6 +94,42 @@ public class UIToggles : MonoBehaviour
         {
             SelectToggle(-1);
             tabCooldownTimer = tabCooldown;
+        }
+
+        if (inputDetector == null || EventSystem.current == null) return;
+
+        if (toggles.Count == 0 || currentIndex >= toggles.Count) return;
+
+        SetsUIElementToSelectOnInteraction selectable = toggles[currentIndex].GetComponent<SetsUIElementToSelectOnInteraction>();
+        if (selectable == null) return;
+
+        if (Cursor.visible)
+        {
+            hoveredElement = selectable.GetHoveredUI();
+        }
+        
+        mode = inputDetector.CurrentMode;
+
+        if (mode == InputDeviceDetector.InputMode.Gamepad)
+        {
+            GameObject selected = selectable.GetSelectedUI();
+            if (hoveredElement == null && selected == null)
+            {
+                selectable.JumpToElement();
+            }
+            else if (hoveredElement == null)
+            {
+                return;
+            }
+            else
+            {
+                EventSystem.current.SetSelectedGameObject(hoveredElement);
+                hoveredElement = null;
+            }
+        }
+        else
+        {
+            EventSystem.current.SetSelectedGameObject(null);
         }
     }
 
