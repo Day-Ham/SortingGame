@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -86,6 +87,7 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private List<GameObject> menus = new List<GameObject>();
 
     [SerializeField] private GameObject currentOpenMenu;
+    private GameObject closingMenu;
 
     PlayerInput playerInput;
     UserInput input;
@@ -169,8 +171,7 @@ public class GameUIManager : MonoBehaviour
                     return;
                 }
 
-                SetAsCurrentOpenMenu(pauseMenu);
-                DisableUI(settingsMenu);
+                ReturnFromSettingsToPause();
                 return;
             }
 
@@ -230,7 +231,7 @@ public class GameUIManager : MonoBehaviour
 
         foreach (GameObject menu in menus)
         {
-            if(menu != currentOpenMenu)
+            if(menu != currentOpenMenu && menu != closingMenu)
             {
                 DisableUI(menu);
             }
@@ -239,10 +240,20 @@ public class GameUIManager : MonoBehaviour
 
     public void SetAsCurrentOpenMenu(GameObject menu)
     {
+        if (closingMenu != null)
+        {
+            closingMenu.transform.DOKill();
+            closingMenu.transform.localScale = Vector3.one;
+            if (closingMenu != menu)
+                DisableUI(closingMenu);
+            closingMenu = null;
+        }
+
         playerInput.SwitchCurrentActionMap("UI");
 
         currentOpenMenu = menu;
         EnableUI(currentOpenMenu);
+        TweenMenuOpen(currentOpenMenu);
 
         if (currentOpenMenu == pauseMenu || currentOpenMenu == settingsMenu)
         {
@@ -254,19 +265,61 @@ public class GameUIManager : MonoBehaviour
         pause.UnlockCursor();
     }
 
+    private void TweenMenuOpen(GameObject menu)
+    {
+        if (menu != pauseMenu && menu != upgradesMenu && menu != skillsMenu && menu != settingsMenu)
+            return;
+
+        Transform menuTransform = menu.transform;
+        menuTransform.DOKill();
+        menuTransform.localScale = Vector3.zero;
+        menuTransform.DOScale(Vector3.one, 0.25f)
+            .SetEase(Ease.OutBack)
+            .SetUpdate(true);
+    }
+
     private void CloseMenu(GameObject menu)
     {
-        currentOpenMenu = null;
-        DisableUI(menu);
+        if (menu == null || menu == closingMenu)
+            return;
+
+        bool tweenClose = menu == pauseMenu || menu == upgradesMenu || menu == skillsMenu || menu == settingsMenu;
+        if (!tweenClose)
+        {
+            currentOpenMenu = null;
+            DisableUI(menu);
+            FinishCloseMenu(menu);
+            return;
+        }
+
+        closingMenu = menu;
+        menu.transform.DOKill();
+        menu.transform.DOScale(Vector3.zero, 0.25f)
+            .SetEase(Ease.InBack)
+            .SetUpdate(true)
+            .OnComplete(() =>
+            {
+                if (closingMenu != menu)
+                    return;
+
+                closingMenu = null;
+                currentOpenMenu = null;
+                menu.transform.localScale = Vector3.one;
+                DisableUI(menu);
+                FinishCloseMenu(menu);
+            });
+    }
+
+    private void FinishCloseMenu(GameObject menu)
+    {
+        playerInput.SwitchCurrentActionMap("Player");
 
         if (menu == pauseMenu || menu == settingsMenu)
         {
-            playerInput.SwitchCurrentActionMap("Player");
             pause.ResumeGame();
             return;
         }
 
-        playerInput.SwitchCurrentActionMap("Player");
         pause.EnablePlayerControl();
         pause.LockCursor();
     }
@@ -278,19 +331,42 @@ public class GameUIManager : MonoBehaviour
 
     private void SetPauseMenuAsCurrent()
     {
+        ReturnFromSettingsToPause();
+    }
+
+    public void ReturnFromSettingsToPause()
+    {
         SetAsCurrentOpenMenu(pauseMenu);
+        ShrinkAway(settingsMenu);
+    }
+
+    private void ShrinkAway(GameObject menu)
+    {
+        if (menu == null)
+            return;
+
+        closingMenu = menu;
+        menu.transform.DOKill();
+        menu.transform.DOScale(Vector3.zero, 0.25f)
+            .SetEase(Ease.InBack)
+            .SetUpdate(true)
+            .OnComplete(() =>
+            {
+                if (closingMenu != menu)
+                    return;
+
+                closingMenu = null;
+                menu.transform.localScale = Vector3.one;
+                DisableUI(menu);
+            });
     }
     private void CloseUpgrades()
     {
         CloseMenu(upgradesMenu);
-        pause.EnablePlayerControl();
-        pause.LockCursor();
     }
     private void CloseSkills()
     {
         CloseMenu(skillsMenu);
-        pause.EnablePlayerControl();
-        pause.LockCursor();
     }
     #endregion
 

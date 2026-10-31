@@ -44,6 +44,8 @@ public class UserInput : MonoBehaviour
     private InputAction throwAction;
     private InputAction upgradeAction;
     private InputAction skillsAction;
+    private InputAction uiUpgradeAction;
+    private InputAction uiSkillsAction;
     private InputAction playerEscapeAction;
     private InputAction skill1Action;
     private InputAction skill2Action;
@@ -86,8 +88,10 @@ public class UserInput : MonoBehaviour
         crouchAction = playerInput.actions.FindAction("Crouch");
         interactAction = playerInput.actions.FindAction("Interact");
         throwAction = playerInput.actions.FindAction("Throw");
-        upgradeAction = playerInput.actions.FindAction("UpgradeMenu");
-        skillsAction = playerInput.actions.FindAction("SkillsMenu");
+        upgradeAction = playerInput.actions.FindAction("Player/UpgradeMenu");
+        skillsAction = playerInput.actions.FindAction("Player/SkillsMenu");
+        uiUpgradeAction = playerInput.actions.FindAction("UI/UpgradeMenu");
+        uiSkillsAction = playerInput.actions.FindAction("UI/SkillsMenu");
         playerEscapeAction = playerInput.actions.FindAction("Player/Escape");
         skill1Action = playerInput.actions.FindAction("Skill1");
         skill2Action = playerInput.actions.FindAction("Skill2");
@@ -114,8 +118,8 @@ public class UserInput : MonoBehaviour
         CrouchInput = PlayerInputEnabled && crouchAction.WasPressedThisFrame();
         InteractionInput = PlayerInputEnabled && interactAction.WasPressedThisFrame();
         ThrowInput = PlayerInputEnabled && throwAction.WasPressedThisFrame();
-        UpgradeInput = upgradeAction.WasPressedThisFrame();
-        SkillInput = skillsAction.WasPressedThisFrame();
+        UpgradeInput = upgradeAction.WasPressedThisFrame() || uiUpgradeAction.WasPressedThisFrame();
+        SkillInput = skillsAction.WasPressedThisFrame() || uiSkillsAction.WasPressedThisFrame();
         Skill1Input = PlayerInputEnabled && skill1Action.WasPressedThisFrame();
         Skill2Input = PlayerInputEnabled && skill2Action.WasPressedThisFrame();
         Skill3Input = PlayerInputEnabled && skill3Action.WasPressedThisFrame();

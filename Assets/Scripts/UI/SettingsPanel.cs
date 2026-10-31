@@ -174,8 +174,7 @@ public class SettingsPanel : MonoBehaviour
         }
         else
         {
-            gameUI.SetAsCurrentOpenMenu(gameUI.pauseMenu);
-            gameUI.DisableUI(gameUI.settingsMenu);
+            gameUI.ReturnFromSettingsToPause();
         }
     }
 }

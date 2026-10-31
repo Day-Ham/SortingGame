@@ -637,6 +637,26 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "UpgradeMenu",
+                    "type": "Button",
+                    "id": "a7c3e91b-4d2f-4e6a-8b0c-1d5e7f908162",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "SkillsMenu",
+                    "type": "Button",
+                    "id": "b8d4f02c-5e30-4f7b-9c1d-2e6f80917273",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -769,6 +789,28 @@
                     "processors": "",
                     "groups": ";Keyboard",
                     "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c9e5013d-6f41-408c-ad2e-3f7081928374",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "UpgradeMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e107235f-8163-42ae-cf40-519203948576",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "SkillsMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
