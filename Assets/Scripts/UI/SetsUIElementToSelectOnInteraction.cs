@@ -16,8 +16,13 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
 
     private InputDeviceDetector inputDetector;
     private InputDeviceDetector.InputMode mode;
+    private UserInput userInput;
+
     private GameObject hoveredElement;
     private GameObject currentSelected;
+    private bool isSecondarySelected;
+
+
 
     private void OnDrawGizmos()
     {
@@ -38,18 +43,24 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
     private void Start()
     {
         inputDetector = InputDeviceDetector.Instance;
+        userInput = UserInput.instance;
+    }
+
+    private void OnDisable()
+    {
+        isSecondarySelected = false;
+        GameUIManager.instance.isSecondarySelected = isSecondarySelected;
     }
 
     private void Reset()
     {
         eventSystem = FindAnyObjectByType<EventSystem>();
-        if (eventSystem == null)
-            Debug.Log("Did not find an Event System in your Scene", this);
     }
 
     private void Update()
     {
         if (inputDetector == null || EventSystem.current == null) return;
+        
         mode = inputDetector.CurrentMode;
 
         if (Cursor.visible && mode == InputDeviceDetector.InputMode.KeyboardMouse)
@@ -59,7 +70,20 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
 
         if (mode == InputDeviceDetector.InputMode.Gamepad)
         {
+            if (userInput.SubmitInput)
+            {
+                SelectSecondaryElement();
+            }
+
+            if (userInput.EscapeInput && isSecondarySelected)
+            {
+                ReturnToParent();
+            }
+
+            if (isSecondarySelected) return;
+
             GameObject selected = GetSelectedUI();
+            
             if (hoveredElement == null && selected == null)
             {
                 JumpToElement();
@@ -74,8 +98,6 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
                 currentSelected = hoveredElement;
                 hoveredElement = null;
             }
-
-            //SelectSecondaryElement();
         }
         else
         {
@@ -85,11 +107,7 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
 
     public void JumpToElement()
     {
-        if (eventSystem == null)
-            Debug.Log("This item has no event system referenced yet.", this);
-
-        if (elementToSelect == null)
-            Debug.Log("This should jump where?", this);
+        if (eventSystem == null || elementToSelect == null) return;
 
         eventSystem.SetSelectedGameObject(elementToSelect.gameObject);
         currentSelected = elementToSelect.gameObject;
@@ -97,6 +115,8 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
 
     public GameObject GetHoveredUI()
     {
+        if (Mouse.current == null) return null;
+
         PointerEventData pointerData = new PointerEventData(EventSystem.current)
         {
             position = Mouse.current.position.ReadValue()
@@ -151,27 +171,48 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
     //WIP
     public void SelectSecondaryElement()
     {
-        GameObject secondaryUI = FindChildWithTag(currentSelected.transform, "SecondaryUIElement");
+        if (isSecondarySelected || currentSelected == null) return;
+
+        GameObject secondaryUI = FindChildWithTag(currentSelected.transform,"SecondaryUIElement");
 
         if (secondaryUI == null) return;
-        
-        if (currentSelected.transform.GetChild(0).gameObject != null)
+
+        // Keep the parent selected visually.
+        Button btn = currentSelected.GetComponent<Button>();
+
+        if (btn != null)
         {
-            Button btn = currentSelected.GetComponent<Button>();
-
-            if (btn == null) return;
-
             Image image = btn.targetGraphic as Image;
 
             if (image != null)
-            {
-                SpriteState state = btn.spriteState;
-                image.sprite = state.pressedSprite;
-            }
-            currentSelected.transform.GetChild(0).gameObject.SetActive(true);
+                image.sprite = btn.spriteState.pressedSprite;
         }
 
+        // Select the secondary element.
         eventSystem.SetSelectedGameObject(secondaryUI);
+
+        isSecondarySelected = true;
+        GameUIManager.instance.isSecondarySelected = isSecondarySelected;
+    }
+
+    public void ReturnToParent()
+    {
+        if (!isSecondarySelected || currentSelected == null) return;
+
+        Button btn = currentSelected.GetComponent<Button>();
+
+        if (btn != null)
+        {
+            Image image = btn.targetGraphic as Image;
+
+            if (image != null)
+                image.sprite = btn.spriteState.highlightedSprite;
+        }
+
+        eventSystem.SetSelectedGameObject(currentSelected);
+
+        isSecondarySelected = false;
+        GameUIManager.instance.isSecondarySelected = isSecondarySelected;
     }
 
     public GameObject FindChildWithTag(Transform parent, string tag)

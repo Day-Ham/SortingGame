@@ -2482,7 +2482,7 @@ GameObject:
   - component: {fileID: 4019604879777524630}
   m_Layer: 0
   m_Name: Slider
-  m_TagString: Untagged
+  m_TagString: SecondaryUIElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2502,11 +2502,11 @@ RectTransform:
   - {fileID: 6689423480980113249}
   - {fileID: 3727018920980206370}
   - {fileID: 6598046004943892424}
-  m_Father: {fileID: 4880381192008509903}
+  m_Father: {fileID: 2393692446322209026}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 464.00015, y: 264.00003}
+  m_AnchoredPosition: {x: 445.0001, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4019604879777524630
@@ -4477,11 +4477,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1.042857}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4880381192008509903}
+  m_Father: {fileID: 2393692446322209026}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 766.0001, y: 264.00003}
+  m_AnchoredPosition: {x: 747.0002, y: 0}
   m_SizeDelta: {x: 238.8, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3647751308571448169
@@ -5172,9 +5172,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2393692446322209026}
-  - {fileID: 4071539239836328403}
-  - {fileID: 5959346304256472818}
-  - {fileID: 8608324074298503223}
   m_Father: {fileID: 351615842598837410}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5665,7 +5662,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 4071539239836328403}
+  - {fileID: 5959346304256472818}
+  - {fileID: 8608324074298503223}
   m_Father: {fileID: 4880381192008509903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5803,7 +5803,7 @@ GameObject:
   - component: {fileID: 1729306239955229378}
   m_Layer: 0
   m_Name: Sfx Slider
-  m_TagString: Untagged
+  m_TagString: SecondaryUIElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6674,7 +6674,7 @@ GameObject:
   - component: {fileID: 1611676045301248884}
   m_Layer: 0
   m_Name: Master Slider
-  m_TagString: Untagged
+  m_TagString: SecondaryUIElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7862,7 +7862,7 @@ GameObject:
   - component: {fileID: 1352683965673747036}
   m_Layer: 0
   m_Name: Music Slider
-  m_TagString: Untagged
+  m_TagString: SecondaryUIElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8132,11 +8132,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1.042857}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4880381192008509903}
+  m_Father: {fileID: 2393692446322209026}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -728.4, y: 264.00003}
+  m_AnchoredPosition: {x: 62.599915, y: 0}
   m_SizeDelta: {x: -819.4, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &834265144033197092
@@ -10267,7 +10267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: R1
+      value: L1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

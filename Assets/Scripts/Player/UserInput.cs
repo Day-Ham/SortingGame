@@ -23,6 +23,7 @@ public class UserInput : MonoBehaviour
     public bool PlayerInputEnabled { get; private set; } = true;
 
     //UI
+    public bool SubmitInput { get; private set; }
     public bool ResetBindingsInput { get; private set; }
     public bool PrimaryTabLeftInput { get; private set; }
     public bool PrimaryTabRightInput { get; private set; }
@@ -54,6 +55,7 @@ public class UserInput : MonoBehaviour
     private InputAction scrollDownAction;
 
     //UI
+    private InputAction submitAction;
     private InputAction uiEscapeAction;
     private InputAction resetBindingsAction;
     private InputAction primaryTabLeftAction;
@@ -100,6 +102,7 @@ public class UserInput : MonoBehaviour
         scrollDownAction = playerInput.actions.FindAction("ScrollDown");
 
         // UI
+        submitAction = playerInput.actions.FindAction("Submit");
         uiEscapeAction = playerInput.actions.FindAction("UI/Escape");
         resetBindingsAction = playerInput.actions.FindAction("ResetBindings");
         primaryTabLeftAction = playerInput.actions.FindAction("PrimaryTabLeft");
@@ -127,6 +130,7 @@ public class UserInput : MonoBehaviour
         ScrollDownInput = PlayerInputEnabled && scrollDownAction.WasPressedThisFrame();
 
         // UI
+        SubmitInput = submitAction.WasPressedThisFrame();
         ResetBindingsInput = resetBindingsAction.WasPressedThisFrame();
         PrimaryTabLeftInput = primaryTabLeftAction.WasPressedThisFrame();
         PrimaryTabRightInput = primaryTabRightAction.WasPressedThisFrame();

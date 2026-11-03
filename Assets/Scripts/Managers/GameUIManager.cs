@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using Cursor = UnityEngine.Cursor;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -90,6 +88,7 @@ public class GameUIManager : MonoBehaviour
 
     [SerializeField] private GameObject currentOpenMenu;
     private GameObject closingMenu;
+    public bool isSecondarySelected;
 
     PlayerInput playerInput;
     UserInput input;
@@ -128,6 +127,8 @@ public class GameUIManager : MonoBehaviour
                 DisableUI(menu);
             }
         }
+
+        isSecondarySelected = false;
     }
 
     private void Update()
@@ -156,7 +157,7 @@ public class GameUIManager : MonoBehaviour
             SetAsCurrentOpenMenu(skillsMenu);
         }
 
-        if (input.EscapeInput)
+        if (input.EscapeInput && !isSecondarySelected)
         {
             if (currentOpenMenu == null)
             {
