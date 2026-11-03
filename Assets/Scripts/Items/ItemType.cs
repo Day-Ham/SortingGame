@@ -11,6 +11,7 @@ public enum ItemType
     Components,
     Records,
     Tools,
+    Glassware,
     PlantSamples
 }
 
