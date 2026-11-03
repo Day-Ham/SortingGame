@@ -52,6 +52,6 @@ public class PauseManager : MonoBehaviour
     public void UnlockCursor()
     {
         Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        //Cursor.visible = true;
     }
 }

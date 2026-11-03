@@ -8,6 +8,7 @@ TagManager:
   - Buddy
   - DuplicatePrompt
   - MainUIElement
+  - SecondaryUIElement
   layers:
   - Default
   - TransparentFX

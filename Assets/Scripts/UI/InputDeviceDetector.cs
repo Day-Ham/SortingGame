@@ -19,6 +19,8 @@ public class InputDeviceDetector : MonoBehaviour
 
     public event Action<InputMode> OnInputModeChanged;
 
+    private bool initialized;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -40,6 +42,12 @@ public class InputDeviceDetector : MonoBehaviour
     private void OnDisable()
     {
         InputSystem.onEvent -= OnInputEvent;
+    }
+
+    private void Start()
+    {
+        initialized = false;
+        SetInputMode(InputMode.KeyboardMouse);
     }
 
     private void OnInputEvent(
@@ -88,7 +96,14 @@ public class InputDeviceDetector : MonoBehaviour
 
     private void SetInputMode(InputMode mode)
     {
-        if (CurrentMode == mode) return;
+        if (initialized)
+        {
+            if (CurrentMode == mode) return;
+        }
+        else
+        {
+            initialized = true;
+        }
 
         CurrentMode = mode;
         

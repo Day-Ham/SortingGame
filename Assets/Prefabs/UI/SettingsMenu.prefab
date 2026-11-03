@@ -645,6 +645,7 @@ GameObject:
   - component: {fileID: 8118308379619768881}
   - component: {fileID: 7520602933507191379}
   - component: {fileID: 922622224574575132}
+  - component: {fileID: 3383426601940011581}
   m_Layer: 0
   m_Name: Music
   m_TagString: MainUIElement
@@ -755,7 +756,35 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7520602933507191379}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3383426601940011581}
+        m_TargetAssemblyTypeName: SetsUIElementToSelectOnInteraction, Assembly-CSharp
+        m_MethodName: JumpToElement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3383426601940011581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500701704684492929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 952f6b1f3da84444391e1791f967ab9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
+  eventSystem: {fileID: 0}
+  elementToSelect: {fileID: 0}
+  showVisualization: 0
+  navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &533514415081555459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1155,7 +1184,6 @@ GameObject:
   - component: {fileID: 6544723153825544774}
   - component: {fileID: 7225919347082119173}
   - component: {fileID: 6115596394975444947}
-  - component: {fileID: 2027492370301694438}
   m_Layer: 0
   m_Name: GameToggle
   m_TagString: Untagged
@@ -1268,22 +1296,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &2027492370301694438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 827599895603535169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 952f6b1f3da84444391e1791f967ab9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
-  eventSystem: {fileID: 0}
-  elemtentToSelect: {fileID: 3152178394351156098}
-  showVisualization: 0
-  navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &838306244436806940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1739,8 +1751,9 @@ GameObject:
   - component: {fileID: 7764948254852600051}
   - component: {fileID: 6803234427704673928}
   - component: {fileID: 5020821334084164328}
+  - component: {fileID: 4316573299033868873}
   m_Layer: 0
-  m_Name: Master
+  m_Name: MasterBtn
   m_TagString: MainUIElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1849,7 +1862,35 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6803234427704673928}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4316573299033868873}
+        m_TargetAssemblyTypeName: SetsUIElementToSelectOnInteraction, Assembly-CSharp
+        m_MethodName: JumpToElement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4316573299033868873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458069661250346314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 952f6b1f3da84444391e1791f967ab9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
+  eventSystem: {fileID: 0}
+  elementToSelect: {fileID: 0}
+  showVisualization: 0
+  navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &1482143190805264573
 GameObject:
   m_ObjectHideFlags: 0
@@ -2461,11 +2502,11 @@ RectTransform:
   - {fileID: 6689423480980113249}
   - {fileID: 3727018920980206370}
   - {fileID: 6598046004943892424}
-  m_Father: {fileID: 2393692446322209026}
+  m_Father: {fileID: 4880381192008509903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 445.0001, y: 0}
+  m_AnchoredPosition: {x: 464.00015, y: 264.00003}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4019604879777524630
@@ -3369,6 +3410,7 @@ GameObject:
   - component: {fileID: 28101167711250478}
   - component: {fileID: 3846640354113043785}
   - component: {fileID: 1388467763128708300}
+  - component: {fileID: 315910626390516473}
   m_Layer: 0
   m_Name: SFX
   m_TagString: MainUIElement
@@ -3479,7 +3521,35 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3846640354113043785}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 315910626390516473}
+        m_TargetAssemblyTypeName: SetsUIElementToSelectOnInteraction, Assembly-CSharp
+        m_MethodName: JumpToElement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &315910626390516473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946430540912573028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 952f6b1f3da84444391e1791f967ab9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
+  eventSystem: {fileID: 0}
+  elementToSelect: {fileID: 0}
+  showVisualization: 0
+  navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &3059351518295008845
 GameObject:
   m_ObjectHideFlags: 0
@@ -4407,11 +4477,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1.042857}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2393692446322209026}
+  m_Father: {fileID: 4880381192008509903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 747.0002, y: 0}
+  m_AnchoredPosition: {x: 766.0001, y: 264.00003}
   m_SizeDelta: {x: 238.8, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3647751308571448169
@@ -5102,6 +5172,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2393692446322209026}
+  - {fileID: 4071539239836328403}
+  - {fileID: 5959346304256472818}
+  - {fileID: 8608324074298503223}
   m_Father: {fileID: 351615842598837410}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5575,7 +5648,7 @@ GameObject:
   - component: {fileID: 8936556083920646858}
   - component: {fileID: 3152178394351156098}
   m_Layer: 0
-  m_Name: Sensitivity
+  m_Name: SensitivityBtn
   m_TagString: MainUIElement
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5592,10 +5665,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4071539239836328403}
-  - {fileID: 8608324074298503223}
-  - {fileID: 5959346304256472818}
+  m_Children: []
   m_Father: {fileID: 4880381192008509903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -6029,7 +6099,6 @@ GameObject:
   - component: {fileID: 6915345346073611357}
   - component: {fileID: 2353337342290088385}
   - component: {fileID: 4419543970453409920}
-  - component: {fileID: 1068971687747214831}
   m_Layer: 0
   m_Name: AudioToggle
   m_TagString: Untagged
@@ -6142,22 +6211,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &1068971687747214831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5966826452907765846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 952f6b1f3da84444391e1791f967ab9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
-  eventSystem: {fileID: 0}
-  elemtentToSelect: {fileID: 5020821334084164328}
-  showVisualization: 0
-  navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &5997705361947274067
 GameObject:
   m_ObjectHideFlags: 0
@@ -6251,7 +6304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 0}
-  elemtentToSelect: {fileID: 187278051430222931}
+  elementToSelect: {fileID: 0}
   showVisualization: 0
   navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &6068754571153291365
@@ -6392,7 +6445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 0}
-  elemtentToSelect: {fileID: 6550720843026240471}
+  elementToSelect: {fileID: 0}
   showVisualization: 0
   navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &6100224331354196638
@@ -6645,7 +6698,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 444.99982, y: -0.00012207031}
+  m_AnchoredPosition: {x: 444.99982, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1611676045301248884
@@ -6745,7 +6798,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -678.0001, y: -0.000030517578}
+  m_AnchoredPosition: {x: -678.0001, y: -0.000091552734}
   m_SizeDelta: {x: 227.1, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6782999383532252204
@@ -6986,7 +7039,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 0}
-  elemtentToSelect: {fileID: 8279303913730637577}
+  elementToSelect: {fileID: 0}
   showVisualization: 0
   navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &7081546914215915408
@@ -8079,11 +8132,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1.042857}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2393692446322209026}
+  m_Father: {fileID: 4880381192008509903}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 62.599915, y: 0}
+  m_AnchoredPosition: {x: -728.4, y: 264.00003}
   m_SizeDelta: {x: -819.4, y: 50}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &834265144033197092
@@ -9112,7 +9165,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: Up
+      value: W
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9124,17 +9177,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 1890538675672895738}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8279303913730637577 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
-  m_PrefabInstance: {fileID: 1890538675672895738}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &2050098373276623861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10237,17 +10279,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 3616847922574343204}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6550720843026240471 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
-  m_PrefabInstance: {fileID: 3616847922574343204}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &4380763017166826052
 PrefabInstance:
   m_ObjectHideFlags: 0

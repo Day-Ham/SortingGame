@@ -1,10 +1,12 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Cursor = UnityEngine.Cursor;
 
 public class GameUIManager : MonoBehaviour
 {
@@ -92,7 +94,7 @@ public class GameUIManager : MonoBehaviour
     PlayerInput playerInput;
     UserInput input;
     PauseManager pause;
-    SceneLoader sceneLoader;    
+    SceneLoader sceneLoader;
 
     private void Awake()
     {
