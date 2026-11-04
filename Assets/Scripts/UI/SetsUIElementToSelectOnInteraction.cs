@@ -9,21 +9,23 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
     [Header("Setup")]
     [SerializeField] private EventSystem eventSystem;
     [SerializeField] private Selectable elementToSelect;
+    public Dictionary<Button, Sprite> normalSprites = new();
+
+    [Header("Custom Secondary Element")]
+    [SerializeField] private GameObject secondaryOption;
 
     [Header("Visualization")]
-    [SerializeField] private Sprite normalSprite;
     [SerializeField] private bool showVisualization;
     [SerializeField] private Color navigationColor = Color.cyan;
 
     private InputDeviceDetector inputDetector;
     private InputDeviceDetector.InputMode mode;
     private UserInput userInput;
+    private TitleScreenManager titleManager;
 
     private GameObject hoveredElement;
     private GameObject currentSelected;
     private bool isSecondarySelected;
-
-
 
     private void OnDrawGizmos()
     {
@@ -39,19 +41,31 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
         eventSystem = FindAnyObjectByType<EventSystem>();
         if (eventSystem == null)
             Debug.Log("Did not find an Event System in your Scene", this);
+
+        StoreNormalSprites();
     }
 
     private void Start()
     {
         inputDetector = InputDeviceDetector.Instance;
         userInput = UserInput.instance;
+        titleManager = FindAnyObjectByType<TitleScreenManager>();
     }
 
     private void OnDisable()
     {
         ReturnToParent();
         isSecondarySelected = false;
-        GameUIManager.instance.isSecondarySelected = isSecondarySelected;
+
+        if (GameUIManager.instance != null)
+        {
+            GameUIManager.instance.isSecondarySelected = isSecondarySelected;
+        }
+
+        if (titleManager != null)
+        {
+            titleManager.isSecondarySelected = isSecondarySelected;
+        }
     }
 
     private void Reset()
@@ -170,12 +184,19 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
         return selected;
     }
 
-    //WIP
     public void SelectSecondaryElement()
     {
         if (isSecondarySelected || currentSelected == null) return;
 
-        GameObject secondaryUI = FindChildWithTag(currentSelected.transform,"SecondaryUIElement");
+        GameObject secondaryUI = null;
+        if (secondaryOption != null)
+        {
+            secondaryUI = FindChildWithTag(secondaryOption.transform, "SecondaryUIElement"); ;
+        }
+        else
+        {
+            secondaryUI = FindChildWithTag(currentSelected.transform, "SecondaryUIElement");
+        }
 
         if (secondaryUI == null) return;
 
@@ -194,7 +215,16 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
         eventSystem.SetSelectedGameObject(secondaryUI);
 
         isSecondarySelected = true;
-        GameUIManager.instance.isSecondarySelected = isSecondarySelected;
+
+        if (GameUIManager.instance != null)
+        {
+            GameUIManager.instance.isSecondarySelected = isSecondarySelected;
+        }
+
+        if (titleManager != null)
+        {
+            titleManager.isSecondarySelected = isSecondarySelected;
+        }
     }
 
     public void ReturnToParent()
@@ -208,28 +238,52 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
             Image image = btn.targetGraphic as Image;
 
             if (image != null)
+            {
+                Sprite normalSprite = normalSprites[btn];
                 image.sprite = normalSprite;
+            }
+                
         }
 
         eventSystem.SetSelectedGameObject(currentSelected);
 
         isSecondarySelected = false;
-        GameUIManager.instance.isSecondarySelected = isSecondarySelected;
+
+        if (GameUIManager.instance != null)
+        {
+            GameUIManager.instance.isSecondarySelected = isSecondarySelected;
+        }
+
+        if (titleManager != null)
+        {
+            titleManager.isSecondarySelected = isSecondarySelected;
+        }
     }
 
     public GameObject FindChildWithTag(Transform parent, string tag)
     {
         foreach (Transform child in parent)
         {
-            if (child.CompareTag(tag))
+            if (child.CompareTag(tag) && child.gameObject.activeInHierarchy)
                 return child.gameObject;
 
             GameObject result = FindChildWithTag(child, tag);
 
-            if (result != null)
+            if (result != null && result.activeInHierarchy)
                 return result;
         }
 
         return null;
+    }
+
+    private void StoreNormalSprites()
+    {
+        foreach (Button button in GetComponentsInChildren<Button>(true))
+        {
+            Image image = button.targetGraphic as Image;
+
+            if (image != null)
+                normalSprites[button] = image.sprite;
+        }
     }
 }

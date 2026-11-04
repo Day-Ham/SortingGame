@@ -6162,7 +6162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895ed9dedd7968841ba9c51c93cc55b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIToggles
-  tabType: 0
+  tabType: 1
   toggles:
   - {fileID: 5345627886380496389}
   - {fileID: 510568051381840871}
@@ -6590,9 +6590,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 2a16bd204865dbc4bb77978d6bb53f21, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 2a16bd204865dbc4bb77978d6bb53f21, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 2a16bd204865dbc4bb77978d6bb53f21, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: c1d92a0d1fe5eea44839f29b5f7a90f1, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: c1d92a0d1fe5eea44839f29b5f7a90f1, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: c1d92a0d1fe5eea44839f29b5f7a90f1, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -6660,7 +6660,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 0}
-  elementToSelect: {fileID: 0}
+  elementToSelect: {fileID: 6550720843026240471}
   normalSprite: {fileID: 0}
   showVisualization: 0
   navigationColor: {r: 0, g: 1, b: 1, a: 1}
@@ -7336,9 +7336,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 991a217a9ee3a734f8eead121f4f5ce9, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 991a217a9ee3a734f8eead121f4f5ce9, type: 3}
-    m_SelectedSprite: {fileID: 21300000, guid: 991a217a9ee3a734f8eead121f4f5ce9, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: 8dac8fa6bf12b024fa5716643fa21039, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: 8dac8fa6bf12b024fa5716643fa21039, type: 3}
+    m_SelectedSprite: {fileID: 21300000, guid: 8dac8fa6bf12b024fa5716643fa21039, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -7406,7 +7406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 0}
-  elementToSelect: {fileID: 0}
+  elementToSelect: {fileID: 8279303913730637577}
   normalSprite: {fileID: 0}
   showVisualization: 0
   navigationColor: {r: 0, g: 1, b: 1, a: 1}
@@ -9621,6 +9621,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 1890538675672895738}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8279303913730637577 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 1890538675672895738}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &2050098373276623861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10723,6 +10734,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 3616847922574343204}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6550720843026240471 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 3616847922574343204}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &4380763017166826052
 PrefabInstance:
   m_ObjectHideFlags: 0

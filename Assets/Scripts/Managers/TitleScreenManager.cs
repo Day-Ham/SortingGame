@@ -3,6 +3,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class TitleScreenManager : MonoBehaviour
@@ -51,6 +52,13 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] private bool stage3NewGameCreated;
 
     UserInput input;
+    PlayerInput playerInput;
+    InputDeviceDetector inputDetector;
+
+    SetsUIElementToSelectOnInteraction playMenuSelectUI;
+
+    public bool isSecondarySelected;
+
 
     private void Awake()
     {
@@ -67,12 +75,21 @@ public class TitleScreenManager : MonoBehaviour
         playBackBtn.onClick.AddListener(OpenMainMenu);
         settingsBackButton.onClick.AddListener(OpenMainMenu);
     }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        inputDetector = InputDeviceDetector.Instance;
         input = UserInput.instance;
         OpenMainMenu();
         EventSystem.current.SetSelectedGameObject(playButton.gameObject);
+
+        playerInput = FindAnyObjectByType<PlayerInput>();
+        playerInput.SwitchCurrentActionMap("UI");
+
+        isSecondarySelected = false;
+
+        playMenuSelectUI = playMenu.GetComponent<SetsUIElementToSelectOnInteraction>();
     }
 
     private void Update()
@@ -86,12 +103,20 @@ public class TitleScreenManager : MonoBehaviour
                 return;
             }
 
+            if (newGamePrompt.activeInHierarchy)
+            {
+                CancelNewGame();
+                return;
+            }
+
             OpenMainMenu();
         }
     }
 
     public void OpenMainMenu()
     {
+        if (isSecondarySelected) return;
+
         mainMenu.SetActive(true);
         playMenu.SetActive(false);
         settingsMenu.SetActive(false);       
@@ -99,6 +124,8 @@ public class TitleScreenManager : MonoBehaviour
 
     public void OpenPlayMenu()
     {
+        if (isSecondarySelected) return;
+
         mainMenu.SetActive(false);
         playMenu.SetActive(true);
         settingsMenu.SetActive(false);
@@ -109,6 +136,8 @@ public class TitleScreenManager : MonoBehaviour
 
     public void OpenSettingsMenu()
     {
+        if (isSecondarySelected) return;
+
         mainMenu.SetActive(false);
         playMenu.SetActive(false);
         settingsMenu.SetActive(true);
@@ -122,6 +151,31 @@ public class TitleScreenManager : MonoBehaviour
         stageDescriptionTxt.text = stage1Description;
         resumeGameBtn.gameObject.SetActive(stage1NewGameCreated);
         newGamePrompt.gameObject.SetActive(false);
+
+        Image image1 = stage1Btn.targetGraphic as Image;
+        if (image1 != null)
+        {
+            SpriteState state = stage1Btn.spriteState;
+            image1.sprite = state.pressedSprite;
+        }
+
+        Image image2 = stage2Btn.targetGraphic as Image;
+        if (image2 != null)
+        {
+            SpriteState state = stage2Btn.spriteState;
+            image2.sprite = playMenuSelectUI.normalSprites[stage2Btn];
+        }
+
+        Image image3 = stage3Btn.targetGraphic as Image;
+        if (image3 != null)
+        {
+            SpriteState state = stage3Btn.spriteState;
+            image3.sprite = playMenuSelectUI.normalSprites[stage3Btn];
+        }
+
+        stage1Btn.transform.GetChild(0).gameObject.SetActive(true);
+        stage2Btn.transform.GetChild(0).gameObject.SetActive(false);
+        stage3Btn.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void SetStage2()
@@ -132,6 +186,31 @@ public class TitleScreenManager : MonoBehaviour
         stageDescriptionTxt.text = stage2Description;
         resumeGameBtn.gameObject.SetActive(stage2NewGameCreated);
         newGamePrompt.gameObject.SetActive(false);
+
+        Image image1 = stage1Btn.targetGraphic as Image;
+        if (image1 != null)
+        {
+            SpriteState state = stage1Btn.spriteState;
+            image1.sprite = playMenuSelectUI.normalSprites[stage1Btn];
+        }
+
+        Image image2 = stage2Btn.targetGraphic as Image;
+        if (image2 != null)
+        {
+            SpriteState state = stage2Btn.spriteState;
+            image2.sprite = state.pressedSprite;
+        }
+
+        Image image3 = stage3Btn.targetGraphic as Image;
+        if (image3 != null)
+        {
+            SpriteState state = stage3Btn.spriteState;
+            image3.sprite = playMenuSelectUI.normalSprites[stage3Btn];
+        }
+
+        stage1Btn.transform.GetChild(0).gameObject.SetActive(false);
+        stage2Btn.transform.GetChild(0).gameObject.SetActive(true);
+        stage3Btn.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void SetStage3()
@@ -142,6 +221,31 @@ public class TitleScreenManager : MonoBehaviour
         stageDescriptionTxt.text = stage3Description;
         resumeGameBtn.gameObject.SetActive(stage3NewGameCreated);
         newGamePrompt.gameObject.SetActive(false);
+
+        Image image1 = stage1Btn.targetGraphic as Image;
+        if (image1 != null)
+        {
+            SpriteState state = stage1Btn.spriteState;
+            image1.sprite = playMenuSelectUI.normalSprites[stage1Btn];
+        }
+
+        Image image2 = stage2Btn.targetGraphic as Image;
+        if (image2 != null)
+        {
+            SpriteState state = stage2Btn.spriteState;
+            image2.sprite = playMenuSelectUI.normalSprites[stage2Btn];
+        }
+
+        Image image3 = stage3Btn.targetGraphic as Image;
+        if (image3 != null)
+        {
+            SpriteState state = stage3Btn.spriteState;
+            image3.sprite = state.pressedSprite;
+        }
+
+        stage1Btn.transform.GetChild(0).gameObject.SetActive(false);
+        stage2Btn.transform.GetChild(0).gameObject.SetActive(false);
+        stage3Btn.transform.GetChild(0).gameObject.SetActive(true);
     }
 
     public void NewGame()
@@ -166,7 +270,16 @@ public class TitleScreenManager : MonoBehaviour
                 stage3NewGameCreated = true;
                 break;
         }
+
+        if (inputDetector.CurrentMode == InputDeviceDetector.InputMode.Gamepad)
+        {
+            if (playMenuSelectUI != null)
+            {
+                playMenuSelectUI.ReturnToParent();
+            }
+        }
         
+
         StartNewGame();
     }
 
@@ -179,6 +292,13 @@ public class TitleScreenManager : MonoBehaviour
     public void CancelNewGame()
     {
         newGamePrompt.SetActive(false);
+
+        if (inputDetector.CurrentMode == InputDeviceDetector.InputMode.Gamepad)
+        {
+            if (playMenuSelectUI == null) return;
+
+            playMenuSelectUI.SelectSecondaryElement();
+        }
     }
 
     public void LoadStage()

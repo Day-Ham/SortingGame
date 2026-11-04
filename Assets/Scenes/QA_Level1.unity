@@ -1997,7 +1997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 1421037128}
   elementToSelect: {fileID: 1786492430}
-  normalSprite: {fileID: 21300000, guid: 5b5da8827428a634e9c08d04ee84a332, type: 3}
+  secondaryOption: {fileID: 0}
   showVisualization: 0
   navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &64156334 stripped
@@ -8061,6 +8061,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 240
       objectReference: {fileID: 0}
+    - target: {fileID: 7031729535945416639, guid: a2dec38d25e677a498b00ff4ae8fd6d9, type: 3}
+      propertyPath: componentsToSave.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7031729535945416639, guid: a2dec38d25e677a498b00ff4ae8fd6d9, type: 3}
+      propertyPath: 'componentsToSave.Array.data[3]'
+      value: 
+      objectReference: {fileID: 296813870}
     - target: {fileID: 7123180922432389386, guid: a2dec38d25e677a498b00ff4ae8fd6d9, type: 3}
       propertyPath: skill1Icon
       value: 
@@ -31091,7 +31099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 1421037128}
   elementToSelect: {fileID: 233200400}
-  normalSprite: {fileID: 21300000, guid: 5b5da8827428a634e9c08d04ee84a332, type: 3}
+  secondaryOption: {fileID: 0}
   showVisualization: 0
   navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!114 &1418762022 stripped

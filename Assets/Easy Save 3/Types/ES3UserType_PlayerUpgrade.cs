@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("capacityPrice", "sprintPrice", "reachPrice", "jumpPrice", "throwToShelfPrice", "robotBuddyPrice", "upgradeCapacity", "upgradeSprint", "upgradeReach", "upgradeJump", "canThrowToShelf", "boughtRobotBuddy")]
+	[ES3PropertiesAttribute("capacityPrice", "sprintPrice", "reachPrice", "jumpPrice", "throwToShelfPrice", "robotBuddyPrice", "upgradeCapacity", "canSprint", "upgradeReach", "upgradeJump", "canThrowToShelf", "boughtRobotBuddy")]
 	public class ES3UserType_PlayerUpgrade : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -23,7 +23,7 @@ namespace ES3Types
 			writer.WritePrivateField("throwToShelfPrice", instance);
 			writer.WritePrivateField("robotBuddyPrice", instance);
 			writer.WritePrivateField("upgradeCapacity", instance);
-			writer.WritePrivateField("upgradeSprint", instance);
+			writer.WritePrivateField("canSprint", instance);
 			writer.WritePrivateField("upgradeReach", instance);
 			writer.WritePrivateField("upgradeJump", instance);
 			writer.WritePrivateField("canThrowToShelf", instance);
@@ -59,8 +59,8 @@ namespace ES3Types
 					case "upgradeCapacity":
 					instance = (PlayerUpgrade)reader.SetPrivateField("upgradeCapacity", reader.Read<System.Int32>(), instance);
 					break;
-					case "upgradeSprint":
-					instance = (PlayerUpgrade)reader.SetPrivateField("upgradeSprint", reader.Read<System.Single>(), instance);
+					case "canSprint":
+					instance = (PlayerUpgrade)reader.SetPrivateField("canSprint", reader.Read<System.Boolean>(), instance);
 					break;
 					case "upgradeReach":
 					instance = (PlayerUpgrade)reader.SetPrivateField("upgradeReach", reader.Read<System.Single>(), instance);

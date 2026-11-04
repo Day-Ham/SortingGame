@@ -19,7 +19,7 @@ public class PauseManager : MonoBehaviour
     {
         inputDetector = InputDeviceDetector.Instance;
 
-        isPaused = false;
+        ResumeGame();
     }
     public void PauseGame()
     {
