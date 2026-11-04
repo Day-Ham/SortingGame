@@ -3,7 +3,12 @@ guid: 9f21d61d93245ce4d9cc561c415d9208
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Table island texture
+    second: {fileID: 2800000, guid: 10b372b986ee55d4e847daf6f3ec5bbd, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
