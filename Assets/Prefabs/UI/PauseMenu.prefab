@@ -665,6 +665,7 @@ GameObject:
   - component: {fileID: 3254383722920963019}
   - component: {fileID: 5117205005386105339}
   - component: {fileID: 9187853471052056935}
+  - component: {fileID: 7840741995544096455}
   m_Layer: 5
   m_Name: SettingsBtn
   m_TagString: Untagged
@@ -774,6 +775,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7840741995544096455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4873023598526164457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 952f6b1f3da84444391e1791f967ab9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
+  eventSystem: {fileID: 0}
+  elementToSelect: {fileID: 0}
+  showVisualization: 0
+  navigationColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &4926720759836538474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,6 +1197,7 @@ GameObject:
   - component: {fileID: 3224593162015752624}
   - component: {fileID: 7359983048470050169}
   - component: {fileID: 6441370030271919573}
+  - component: {fileID: 1005528241775097448}
   m_Layer: 14
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -1249,3 +1267,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1005528241775097448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7344713937609977092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 952f6b1f3da84444391e1791f967ab9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
+  eventSystem: {fileID: 0}
+  elementToSelect: {fileID: 5985525313512537204}
+  showVisualization: 0
+  navigationColor: {r: 0, g: 1, b: 1, a: 1}

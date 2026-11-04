@@ -5,6 +5,8 @@ public class PauseManager : MonoBehaviour
     public static PauseManager instance;
     public bool isPaused;
 
+    InputDeviceDetector inputDetector;
+
     private void Awake()
     {
         if (instance == null)
@@ -15,6 +17,8 @@ public class PauseManager : MonoBehaviour
 
     private void Start()
     {
+        inputDetector = InputDeviceDetector.Instance;
+
         isPaused = false;
     }
     public void PauseGame()
@@ -52,6 +56,14 @@ public class PauseManager : MonoBehaviour
     public void UnlockCursor()
     {
         Cursor.lockState = CursorLockMode.None;
-        //Cursor.visible = true;
+
+        if (inputDetector.CurrentMode == InputDeviceDetector.InputMode.Gamepad)
+        {
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.visible = true;
+        }
     }
 }

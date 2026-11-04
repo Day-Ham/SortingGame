@@ -11,6 +11,7 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
     [SerializeField] private Selectable elementToSelect;
 
     [Header("Visualization")]
+    [SerializeField] private Sprite normalSprite;
     [SerializeField] private bool showVisualization;
     [SerializeField] private Color navigationColor = Color.cyan;
 
@@ -48,6 +49,7 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
 
     private void OnDisable()
     {
+        ReturnToParent();
         isSecondarySelected = false;
         GameUIManager.instance.isSecondarySelected = isSecondarySelected;
     }
@@ -206,7 +208,7 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
             Image image = btn.targetGraphic as Image;
 
             if (image != null)
-                image.sprite = btn.spriteState.highlightedSprite;
+                image.sprite = normalSprite;
         }
 
         eventSystem.SetSelectedGameObject(currentSelected);
