@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   displayName: Hammer
   description: 
-  type: 7
+  type: 8
   preferredOrientation: {x: 0, y: -90, z: 0}
   rows: 1
   columns: 4

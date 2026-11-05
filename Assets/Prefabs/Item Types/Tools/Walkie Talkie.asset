@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   displayName: Walkie Talkie
   description: 
-  type: 7
+  type: 11
   preferredOrientation: {x: 0, y: 45, z: 0}
   rows: 2
   columns: 4

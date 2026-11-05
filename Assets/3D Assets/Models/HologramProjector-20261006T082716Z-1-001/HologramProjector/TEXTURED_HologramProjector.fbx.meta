@@ -3,7 +3,52 @@ guid: c9ea38ea2d241e844bcc492db01196fa
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: HP_InteriorTriangle_Low_Material_BaseColor
+    second: {fileID: 2800000, guid: 9639845ad1c6a93469b2fed2af792957, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: HP_InteriorTriangle_Low_Material_Normal
+    second: {fileID: 2800000, guid: 2df9c4e0c3ae77740a0c63bae6105f79, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: HP_InteriorTriangle_Low_Material_OcclusionRoughnessMetallic
+    second: {fileID: 2800000, guid: edbfd252a94fb0d44b8ad6680346a0b4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: HP_MiddleTriangle_Low_Material_BaseColor
+    second: {fileID: 2800000, guid: 97d847ebda3275d4fb58f77078c7dbe6, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: HP_MiddleTriangle_Low_Material_Normal
+    second: {fileID: 2800000, guid: 6d498cf2744e11741beddf26c56dfb4b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: HP_MiddleTriangle_Low_Material_OcclusionRoughnessMetallic
+    second: {fileID: 2800000, guid: fd36cd692c3ccc040a9b2783479fe52c, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: HP_TriangleBase_Low_Material_BaseColor
+    second: {fileID: 2800000, guid: bb3995b790c602149b3b30f0e6b63b11, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: HP_TriangleBase_Low_Material_Normal
+    second: {fileID: 2800000, guid: e598dafcbaee10a4a8ab71f97faa4c8b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: HP_TriangleBase_Low_Material_OcclusionRoughnessMetallic
+    second: {fileID: 2800000, guid: 6798ca5537c1aca40a2436ceee03269f, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc1e2227c3afc94497cfd3d58242979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemChecker
-  itemType: 7
+  itemType: 8
   shelfType: 0
   shelfArea: {fileID: 3692788717715585194}
   heldItems: []
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc1e2227c3afc94497cfd3d58242979, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ItemChecker
-  itemType: 7
+  itemType: 8
   shelfType: 0
   shelfArea: {fileID: 7939304497310003550}
   heldItems: []
