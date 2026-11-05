@@ -21,6 +21,6 @@ public class ControllerResetKeybindingToDefault : MonoBehaviour
 
         if (selectable == null) return;
 
-        selectable.JumpToElement();
+        selectable.JumpToElement(selectable.elementToSelect.gameObject);
     }
 }

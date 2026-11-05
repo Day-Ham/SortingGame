@@ -41,7 +41,6 @@ public class UIToggles : MonoBehaviour
                 }
             });
         }
-
     }
 
     private void OnEnable()

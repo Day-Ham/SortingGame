@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("stage1NewGameCreated", "stage2NewGameCreated", "stage3NewGameCreated")]
+	[ES3PropertiesAttribute("resumeGameBtn", "stageData")]
 	public class ES3UserType_TitleScreenManager : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -16,9 +16,8 @@ namespace ES3Types
 		{
 			var instance = (TitleScreenManager)obj;
 			
-			writer.WritePrivateField("stage1NewGameCreated", instance);
-			writer.WritePrivateField("stage2NewGameCreated", instance);
-			writer.WritePrivateField("stage3NewGameCreated", instance);
+			writer.WritePrivateFieldByRef("resumeGameBtn", instance);
+			writer.WritePrivateField("stageData", instance);
 		}
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
@@ -29,14 +28,11 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					
-					case "stage1NewGameCreated":
-					instance = (TitleScreenManager)reader.SetPrivateField("stage1NewGameCreated", reader.Read<System.Boolean>(), instance);
+					case "resumeGameBtn":
+					instance = (TitleScreenManager)reader.SetPrivateField("resumeGameBtn", reader.Read<UnityEngine.UI.Button>(), instance);
 					break;
-					case "stage2NewGameCreated":
-					instance = (TitleScreenManager)reader.SetPrivateField("stage2NewGameCreated", reader.Read<System.Boolean>(), instance);
-					break;
-					case "stage3NewGameCreated":
-					instance = (TitleScreenManager)reader.SetPrivateField("stage3NewGameCreated", reader.Read<System.Boolean>(), instance);
+					case "stageData":
+					instance = (TitleScreenManager)reader.SetPrivateField("stageData", reader.Read<System.Collections.Generic.List<StageData>>(), instance);
 					break;
 					default:
 						reader.Skip();

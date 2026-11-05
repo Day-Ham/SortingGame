@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TitleScreenManager : MonoBehaviour
@@ -16,28 +18,20 @@ public class TitleScreenManager : MonoBehaviour
 
     [Header("Play")]
     [SerializeField] private GameObject playMenu;
-    [SerializeField] private Button stage1Btn;
-    [SerializeField] private Button stage2Btn;
-    [SerializeField] private Button stage3Btn;
     [SerializeField] private Button resumeGameBtn;
     [SerializeField] private Button newGameBtn;
+    [SerializeField] private Button playBackBtn;
+    [SerializeField] private Image stageImg;
+    [SerializeField] private TMP_Text stageNameTxt;
+    [SerializeField] private TMP_Text stageDescriptionTxt;
+
+    [Header("New Game Prompt")]
     [SerializeField] private GameObject newGamePrompt;
     [SerializeField] private Button confirmNewGameButton;
     [SerializeField] private Button cancelNewGameButton;
-    [SerializeField] private Button playBackBtn;
-    [SerializeField] private Image stageImg;
-    [SerializeField] private Sprite stage1Sprite;
-    [SerializeField] private Sprite stage2Sprite;
-    [SerializeField] private Sprite stage3Sprite;
-    [SerializeField] private TMP_Text stageNameTxt;
-    [SerializeField] private string stage1Name;
-    [SerializeField] private string stage2Name;
-    [SerializeField] private string stage3Name;
-    [SerializeField] private TMP_Text stageDescriptionTxt;
 
-    [SerializeField] private string stage1Description;
-    [SerializeField] private string stage2Description;
-    [SerializeField] private string stage3Description;
+    [Header("Stage Data")]
+    [SerializeField] private List<StageData> stageData;
 
     [Header("Settings")]
     [SerializeField] private GameObject settingsMenu;
@@ -45,29 +39,20 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] private GameObject defaultPrompt;
     [SerializeField] private Button settingsBackButton;
 
-
     private int stageIndex;
-    [SerializeField] private bool stage1NewGameCreated;
-    [SerializeField] private bool stage2NewGameCreated;
-    [SerializeField] private bool stage3NewGameCreated;
 
     UserInput input;
     PlayerInput playerInput;
     InputDeviceDetector inputDetector;
 
     SetsUIElementToSelectOnInteraction playMenuSelectUI;
-
     public bool isSecondarySelected;
-
 
     private void Awake()
     {
         playButton.onClick.AddListener(OpenPlayMenu);
         settingsButton.onClick.AddListener(OpenSettingsMenu);
         quitButton.onClick.AddListener(Quit); 
-        stage1Btn.onClick.AddListener(SetStage1);
-        stage2Btn.onClick.AddListener(SetStage2);
-        stage3Btn.onClick.AddListener(SetStage3);
         newGameBtn.onClick.AddListener(NewGame);
         confirmNewGameButton.onClick.AddListener(StartNewGame);
         cancelNewGameButton.onClick.AddListener(CancelNewGame);
@@ -81,15 +66,14 @@ public class TitleScreenManager : MonoBehaviour
     {
         inputDetector = InputDeviceDetector.Instance;
         input = UserInput.instance;
-        OpenMainMenu();
-        EventSystem.current.SetSelectedGameObject(playButton.gameObject);
+        playMenuSelectUI = playMenu.GetComponent<SetsUIElementToSelectOnInteraction>();
 
         playerInput = FindAnyObjectByType<PlayerInput>();
         playerInput.SwitchCurrentActionMap("UI");
 
         isSecondarySelected = false;
 
-        playMenuSelectUI = playMenu.GetComponent<SetsUIElementToSelectOnInteraction>();
+        OpenMainMenu();
     }
 
     private void Update()
@@ -106,6 +90,12 @@ public class TitleScreenManager : MonoBehaviour
             if (newGamePrompt.activeInHierarchy)
             {
                 CancelNewGame();
+                return;
+            }
+
+            if (playMenuSelectUI.GetSelectedUI() == resumeGameBtn.gameObject || playMenuSelectUI.GetSelectedUI() == newGameBtn.gameObject)
+            {
+                playMenuSelectUI.ReturnToPreviousSelection();
                 return;
             }
 
@@ -131,7 +121,7 @@ public class TitleScreenManager : MonoBehaviour
         settingsMenu.SetActive(false);
 
         //default stage is 1;
-        SetStage1();
+        InitializeStage();
     }
 
     public void OpenSettingsMenu()
@@ -143,109 +133,29 @@ public class TitleScreenManager : MonoBehaviour
         settingsMenu.SetActive(true);
     }
 
-    public void SetStage1()
+    private void InitializeStage()
     {
         stageIndex = 1;
-        stageImg.sprite = stage1Sprite;
-        stageNameTxt.text = stage1Name;
-        stageDescriptionTxt.text = stage1Description;
-        resumeGameBtn.gameObject.SetActive(stage1NewGameCreated);
-        newGamePrompt.gameObject.SetActive(false);
+        stageImg.sprite = stageData[0].stageSprite;
+        stageNameTxt.text = stageData[0].stageName;
+        stageDescriptionTxt.text = stageData[0].stageDescription;
 
-        Image image1 = stage1Btn.targetGraphic as Image;
-        if (image1 != null)
-        {
-            SpriteState state = stage1Btn.spriteState;
-            image1.sprite = state.pressedSprite;
-        }
-
-        Image image2 = stage2Btn.targetGraphic as Image;
-        if (image2 != null)
-        {
-            SpriteState state = stage2Btn.spriteState;
-            image2.sprite = playMenuSelectUI.normalSprites[stage2Btn];
-        }
-
-        Image image3 = stage3Btn.targetGraphic as Image;
-        if (image3 != null)
-        {
-            SpriteState state = stage3Btn.spriteState;
-            image3.sprite = playMenuSelectUI.normalSprites[stage3Btn];
-        }
-
-        stage1Btn.transform.GetChild(0).gameObject.SetActive(true);
-        stage2Btn.transform.GetChild(0).gameObject.SetActive(false);
-        stage3Btn.transform.GetChild(0).gameObject.SetActive(false);
+        resumeGameBtn.gameObject.SetActive(stageData[0].hasSavedData);
     }
 
-    public void SetStage2()
+    public void SetStage(int index)
     {
-        stageIndex = 2;
-        stageImg.sprite = stage2Sprite;
-        stageNameTxt.text = stage2Name;
-        stageDescriptionTxt.text = stage2Description;
-        resumeGameBtn.gameObject.SetActive(stage2NewGameCreated);
-        newGamePrompt.gameObject.SetActive(false);
+        // Stage information
+        stageIndex = index;
+        stageImg.sprite = stageData[index - 1].stageSprite;
+        stageNameTxt.text = stageData[index - 1].stageName;
+        stageDescriptionTxt.text = stageData[index - 1].stageDescription;
 
-        Image image1 = stage1Btn.targetGraphic as Image;
-        if (image1 != null)
-        {
-            SpriteState state = stage1Btn.spriteState;
-            image1.sprite = playMenuSelectUI.normalSprites[stage1Btn];
-        }
+        resumeGameBtn.gameObject.SetActive(stageData[index - 1].hasSavedData);
 
-        Image image2 = stage2Btn.targetGraphic as Image;
-        if (image2 != null)
-        {
-            SpriteState state = stage2Btn.spriteState;
-            image2.sprite = state.pressedSprite;
-        }
-
-        Image image3 = stage3Btn.targetGraphic as Image;
-        if (image3 != null)
-        {
-            SpriteState state = stage3Btn.spriteState;
-            image3.sprite = playMenuSelectUI.normalSprites[stage3Btn];
-        }
-
-        stage1Btn.transform.GetChild(0).gameObject.SetActive(false);
-        stage2Btn.transform.GetChild(0).gameObject.SetActive(true);
-        stage3Btn.transform.GetChild(0).gameObject.SetActive(false);
-    }
-
-    public void SetStage3()
-    {
-        stageIndex = 3;
-        stageImg.sprite = stage3Sprite;
-        stageNameTxt.text = stage3Name;
-        stageDescriptionTxt.text = stage3Description;
-        resumeGameBtn.gameObject.SetActive(stage3NewGameCreated);
-        newGamePrompt.gameObject.SetActive(false);
-
-        Image image1 = stage1Btn.targetGraphic as Image;
-        if (image1 != null)
-        {
-            SpriteState state = stage1Btn.spriteState;
-            image1.sprite = playMenuSelectUI.normalSprites[stage1Btn];
-        }
-
-        Image image2 = stage2Btn.targetGraphic as Image;
-        if (image2 != null)
-        {
-            SpriteState state = stage2Btn.spriteState;
-            image2.sprite = playMenuSelectUI.normalSprites[stage2Btn];
-        }
-
-        Image image3 = stage3Btn.targetGraphic as Image;
-        if (image3 != null)
-        {
-            SpriteState state = stage3Btn.spriteState;
-            image3.sprite = state.pressedSprite;
-        }
-
-        stage1Btn.transform.GetChild(0).gameObject.SetActive(false);
-        stage2Btn.transform.GetChild(0).gameObject.SetActive(false);
-        stage3Btn.transform.GetChild(0).gameObject.SetActive(true);
+        Button nextButton = stageData[index - 1].hasSavedData ? resumeGameBtn : newGameBtn;
+        playMenuSelectUI.ClearSelectionHistory();
+        playMenuSelectUI.SelectAndRemember(nextButton.gameObject);
     }
 
     public void NewGame()
@@ -253,52 +163,38 @@ public class TitleScreenManager : MonoBehaviour
         if (resumeGameBtn.gameObject.activeInHierarchy)
         {
             newGamePrompt.SetActive(true);
+            if (inputDetector.CurrentMode == InputDeviceDetector.InputMode.Gamepad)
+            {
+                playMenuSelectUI.SelectAndRemember(cancelNewGameButton.gameObject);
+            }
             return;
         }
 
-        switch (stageIndex)
+        if (string.IsNullOrEmpty(SceneUtility.GetScenePathByBuildIndex(stageIndex)))
         {
-            case 1:
-                stage1NewGameCreated = true;
-                break;
-
-            case 2:
-                stage2NewGameCreated = true;
-                break;
-
-            case 3:
-                stage3NewGameCreated = true;
-                break;
+            return;
         }
 
-        if (inputDetector.CurrentMode == InputDeviceDetector.InputMode.Gamepad)
-        {
-            if (playMenuSelectUI != null)
-            {
-                playMenuSelectUI.ReturnToParent();
-            }
-        }
-        
-
+        stageData[stageIndex - 1].hasSavedData = true;
         StartNewGame();
     }
 
     public void StartNewGame()
     {
+        playMenuSelectUI.ClearSelectionHistory();
+        playerInput.SwitchCurrentActionMap("Player");
         SaveManager.instance.SaveGame();
         SceneLoader.Instance.LoadSceneByIndex(stageIndex);
     }
 
     public void CancelNewGame()
     {
-        newGamePrompt.SetActive(false);
-
         if (inputDetector.CurrentMode == InputDeviceDetector.InputMode.Gamepad)
         {
-            if (playMenuSelectUI == null) return;
-
-            playMenuSelectUI.SelectSecondaryElement();
+            playMenuSelectUI.ReturnToPreviousSelection();
         }
+
+        newGamePrompt.SetActive(false);
     }
 
     public void LoadStage()
@@ -309,6 +205,7 @@ public class TitleScreenManager : MonoBehaviour
             return;
         }
 
+        playerInput.SwitchCurrentActionMap("Player");
         SaveManager.instance.LoadGame(stageIndex);
     }
 
@@ -316,4 +213,14 @@ public class TitleScreenManager : MonoBehaviour
     {
         SceneLoader.Instance.QuitGame();
     }
+}
+
+[Serializable]
+public class StageData
+{
+    public Button stageButton;
+    public Sprite stageSprite;
+    public string stageName;
+    public string stageDescription;
+    public bool hasSavedData;
 }

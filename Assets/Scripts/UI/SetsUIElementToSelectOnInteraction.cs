@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,15 +9,13 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
 {
     [Header("Setup")]
     [SerializeField] private EventSystem eventSystem;
-    [SerializeField] private Selectable elementToSelect;
-    public Dictionary<Button, Sprite> normalSprites = new();
+    public Selectable elementToSelect;
+    private Stack<GameObject> selectionHistory = new Stack<GameObject>();
+
+    public Dictionary<Button, Sprite> normalSprites { get; private set; } = new();
 
     [Header("Custom Secondary Element")]
     [SerializeField] private GameObject secondaryOption;
-
-    [Header("Visualization")]
-    [SerializeField] private bool showVisualization;
-    [SerializeField] private Color navigationColor = Color.cyan;
 
     private InputDeviceDetector inputDetector;
     private InputDeviceDetector.InputMode mode;
@@ -27,22 +26,15 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
     private GameObject currentSelected;
     private bool isSecondarySelected;
 
-    private void OnDrawGizmos()
-    {
-        if (!showVisualization) return;
-        if (elementToSelect == null) return;
-
-        Gizmos.color = navigationColor;
-        Gizmos.DrawLine(gameObject.transform.position, elementToSelect.gameObject.transform.position);
-    }
-
     private void Awake()
     {
         eventSystem = FindAnyObjectByType<EventSystem>();
         if (eventSystem == null)
             Debug.Log("Did not find an Event System in your Scene", this);
 
+        normalSprites.Clear();
         StoreNormalSprites();
+        ClearSelectionHistory();
     }
 
     private void Start()
@@ -56,6 +48,8 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
     {
         ReturnToParent();
         isSecondarySelected = false;
+
+        ClearSelectionHistory();
 
         if (GameUIManager.instance != null)
         {
@@ -102,7 +96,7 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
             
             if (hoveredElement == null && selected == null)
             {
-                JumpToElement();
+                JumpToElement(elementToSelect.gameObject);
             }
             else if (hoveredElement == null)
             {
@@ -121,12 +115,23 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
         }
     }
 
-    public void JumpToElement()
+    private void StoreNormalSprites()
     {
-        if (eventSystem == null || elementToSelect == null) return;
+        foreach (Button button in GetComponentsInChildren<Button>(true))
+        {
+            Image image = button.targetGraphic as Image;
 
-        eventSystem.SetSelectedGameObject(elementToSelect.gameObject);
-        currentSelected = elementToSelect.gameObject;
+            if (image != null)
+                normalSprites[button] = image.sprite;
+        }
+    }
+
+    public void JumpToElement(GameObject element)
+    {
+        if (eventSystem == null || element == null) return;
+
+        eventSystem.SetSelectedGameObject(element);
+        currentSelected = element;
     }
 
     public GameObject GetHoveredUI()
@@ -191,7 +196,14 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
         GameObject secondaryUI = null;
         if (secondaryOption != null)
         {
-            secondaryUI = FindChildWithTag(secondaryOption.transform, "SecondaryUIElement"); ;
+            if (secondaryOption.CompareTag("SecondaryUIElement"))
+            {
+                secondaryUI = secondaryOption;
+            }
+            else
+            {
+                secondaryUI = FindChildWithTag(secondaryOption.transform, "SecondaryUIElement");
+            }
         }
         else
         {
@@ -276,14 +288,55 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
         return null;
     }
 
-    private void StoreNormalSprites()
+    public void SelectAndRemember(GameObject nextElement)
     {
-        foreach (Button button in GetComponentsInChildren<Button>(true))
+        if (eventSystem == null || nextElement == null) return;
+
+        GameObject previous = eventSystem.currentSelectedGameObject;
+
+        if (previous != null)
+        {
+            selectionHistory.Push(previous);
+
+            Button button = previous.GetComponent<Button>();
+            if (button != null)
+            {
+                Image image = button.targetGraphic as Image;
+                if (image != null)
+                {
+                    image.sprite = button.spriteState.pressedSprite;
+                }
+            }
+        }
+
+        eventSystem.SetSelectedGameObject(nextElement);
+        currentSelected = nextElement;
+    }
+
+    public void ReturnToPreviousSelection()
+    {
+        if (eventSystem == null || selectionHistory.Count == 0) return;
+
+        GameObject previous = selectionHistory.Pop();
+
+        if (previous == null || !previous.activeInHierarchy) return;
+
+        Button button = previous.GetComponent<Button>();
+        if (button != null)
         {
             Image image = button.targetGraphic as Image;
-
             if (image != null)
-                normalSprites[button] = image.sprite;
+            {
+                image.sprite = normalSprites[button];
+            }
         }
+
+        eventSystem.SetSelectedGameObject(previous);
+        currentSelected = previous;
+    }
+
+    public void ClearSelectionHistory()
+    {
+        selectionHistory.Clear();
     }
 }
