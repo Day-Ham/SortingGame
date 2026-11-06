@@ -91,7 +91,12 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
             if (isSecondarySelected) return;
 
             GameObject selected = GetSelectedUI();
-            
+
+            if (selected != null)
+            {
+                Debug.Log("Currently Selected: " + selected.name);
+            }
+
             if (hoveredElement == null && selected == null)
             {
                 JumpToElement(elementToSelect.gameObject);

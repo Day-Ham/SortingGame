@@ -26,16 +26,16 @@ public class GameUIManager : MonoBehaviour
     public TMP_Text heldItemNameText;
     public TMP_Text[] backpackItemNames;
 
-    [Header("Upgrades")]
-    [Header("Upgrades Menu")]
-    [SerializeField] private Button upgradesCloseButton;
-    public GameObject upgradesMenu;
-
     [Header("Shelved Count")]
     [SerializeField] private TMP_Text shelvedItemText;
     private int shelvedItemCount;
     [SerializeField] private TMP_Text maxItemText;
     private int maxItemCount;
+
+    [Header("Upgrades")]
+    [Header("Upgrades Menu")]
+    [SerializeField] private Button upgradesCloseButton;
+    public GameObject upgradesMenu;
 
     [Header("Upgrades Buy Sliders")]
     public Slider upgradeCapacitySlider;

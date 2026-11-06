@@ -275,6 +275,143 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &263685908058893354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 570154017680688068}
+  - component: {fileID: 3320531698455977256}
+  - component: {fileID: 6090642625647998661}
+  m_Layer: 0
+  m_Name: Instructions (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &570154017680688068
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263685908058893354}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3448234328780245732}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -46, y: -95}
+  m_SizeDelta: {x: 1120.6, y: 314.9}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &3320531698455977256
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263685908058893354}
+  m_CullTransparentMesh: 1
+--- !u!114 &6090642625647998661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 263685908058893354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: To cancel keybinding, press
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 39.3
+  m_fontSizeBase: 39.3
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656bu
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &310225187056436847
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +444,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2904355757068188077}
+  - {fileID: 570154017680688068}
+  - {fileID: 8045530180389433381}
   m_Father: {fileID: 1162831553634285240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1776,6 +1915,8 @@ GameObject:
   - component: {fileID: 7327645894293504092}
   - component: {fileID: 2841543142363724053}
   - component: {fileID: 2552729742896143932}
+  - component: {fileID: 3252319171789308984}
+  - component: {fileID: 2586114687561111774}
   m_Layer: 15
   m_Name: DuplicatePrompt
   m_TagString: Untagged
@@ -1844,6 +1985,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3252319171789308984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317186422332846660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bd4c87ceda15124aabb4312c31dbb2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeybindingOverlayManager
+  inputModule: {fileID: 0}
+--- !u!114 &2586114687561111774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317186422332846660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 952f6b1f3da84444391e1791f967ab9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
+  eventSystem: {fileID: 0}
+  elementToSelect: {fileID: 6448486817688979007}
+  secondaryOption: {fileID: 0}
 --- !u!1 &1458069661250346314
 GameObject:
   m_ObjectHideFlags: 0
@@ -4910,6 +5079,8 @@ GameObject:
   - component: {fileID: 6594170781914284852}
   - component: {fileID: 8638251604747339650}
   - component: {fileID: 8049042385830335686}
+  - component: {fileID: 1742138842606995535}
+  - component: {fileID: 7586342084329525824}
   m_Layer: 0
   m_Name: DefaultBtn
   m_TagString: Untagged
@@ -5019,6 +5190,44 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1742138842606995535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538395704228635986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a122b85e1af85e146a39c123949d08f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ControllerRestKeybindingToDefault
+  resetToDefaultPrompt: {fileID: 5997705361947274067}
+  selectable: {fileID: 0}
+--- !u!114 &7586342084329525824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538395704228635986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cceb4c94933218478cb1c2c974cb04c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem.RebindingUI::ResetDeviceBindings
+  _inputActions: {fileID: -944628639613478452, guid: 74cfc5181c326fe4d82ab306150ae392, type: 3}
+  resetToDefaultPromp: {fileID: 5997705361947274067}
+  defaultButton: {fileID: 8049042385830335686}
+  confirmResetButton: {fileID: 6654867318182974173}
+  cancelResetButton: {fileID: 187278051430222931}
+  controlSchema:
+  - schemaPanel: {fileID: 203043304403953989}
+    schema: Keyboard
+    rebindSaveLoad: {fileID: 0}
+  - schemaPanel: {fileID: 449255211500273298}
+    schema: Gamepad
+    rebindSaveLoad: {fileID: 0}
 --- !u!1 &4587654134846745565
 GameObject:
   m_ObjectHideFlags: 0
@@ -6157,9 +6366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1162831553634285240}
   - component: {fileID: 9204383140844279734}
-  - component: {fileID: 1665684713192721990}
   - component: {fileID: 4423568760777038647}
-  - component: {fileID: 7215543496621829237}
   m_Layer: 0
   m_Name: Input
   m_TagString: Untagged
@@ -6212,30 +6419,6 @@ MonoBehaviour:
   panels:
   - {fileID: 203043304403953989}
   - {fileID: 449255211500273298}
---- !u!114 &1665684713192721990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5820653899762291232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3cceb4c94933218478cb1c2c974cb04c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem.RebindingUI::ResetDeviceBindings
-  _inputActions: {fileID: -944628639613478452, guid: 74cfc5181c326fe4d82ab306150ae392, type: 3}
-  resetToDefaultPromp: {fileID: 5997705361947274067}
-  defaultButton: {fileID: 8049042385830335686}
-  confirmResetButton: {fileID: 6654867318182974173}
-  cancelResetButton: {fileID: 187278051430222931}
-  controlSchema:
-  - schemaPanel: {fileID: 203043304403953989}
-    schema: Keyboard
-    rebindSaveLoad: {fileID: 0}
-  - schemaPanel: {fileID: 449255211500273298}
-    schema: Gamepad
-    rebindSaveLoad: {fileID: 0}
 --- !u!114 &4423568760777038647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6252,20 +6435,6 @@ MonoBehaviour:
   playerPreferenceKey: input_bindings
   loadOnEnable: 1
   saveOnDisable: 1
---- !u!114 &7215543496621829237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5820653899762291232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a122b85e1af85e146a39c123949d08f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ControllerRestKeybindingToDefault
-  resetToDefaultPrompt: {fileID: 5997705361947274067}
-  selectable: {fileID: 0}
 --- !u!1 &5956241457613099429
 GameObject:
   m_ObjectHideFlags: 0
@@ -6477,6 +6646,8 @@ GameObject:
   - component: {fileID: 6064376762293818067}
   - component: {fileID: 6822922239339184917}
   - component: {fileID: 442394680314894083}
+  - component: {fileID: 811019978094178568}
+  - component: {fileID: 9071293909918756415}
   m_Layer: 15
   m_Name: DefaultPrompt
   m_TagString: Untagged
@@ -6545,6 +6716,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &811019978094178568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997705361947274067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bd4c87ceda15124aabb4312c31dbb2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeybindingOverlayManager
+  inputModule: {fileID: 0}
+--- !u!114 &9071293909918756415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997705361947274067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 952f6b1f3da84444391e1791f967ab9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
+  eventSystem: {fileID: 0}
+  elementToSelect: {fileID: 187278051430222931}
+  secondaryOption: {fileID: 0}
 --- !u!1 &6068754571153291365
 GameObject:
   m_ObjectHideFlags: 0
@@ -8878,6 +9077,81 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &9055060198615328387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8045530180389433381}
+  - component: {fileID: 4757530342781851870}
+  - component: {fileID: 4426050106115418191}
+  m_Layer: 0
+  m_Name: Skill1ControlImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8045530180389433381
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055060198615328387}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3448234328780245732}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 245, y: -94}
+  m_SizeDelta: {x: 70, y: 70}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4757530342781851870
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055060198615328387}
+  m_CullTransparentMesh: 1
+--- !u!114 &4426050106115418191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055060198615328387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &9136803434366892440
 GameObject:
   m_ObjectHideFlags: 0
