@@ -14,6 +14,7 @@ public enum ItemType
     RackTools,
     PlantSamples,
     Glassware,
-    Gadgets
+    Gadgets,
+    AlienMeats
 }
 
