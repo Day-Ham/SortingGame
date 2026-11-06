@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.Events;
+using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
 namespace UnityEngine.InputSystem.Samples.RebindUI
@@ -174,8 +175,17 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
         private void CloseDuplicatePrompt()
         {
-            if (m_RebindDuplicatePromp != null) m_RebindDuplicatePromp.SetActive(false);
-            if (m_RebindOverlay != null) m_RebindOverlay.SetActive(false);
+            if (m_RebindDuplicatePromp != null)
+            {
+                m_RebindDuplicatePromp.SetActive(false);
+                Debug.Log("RebindActionUI closed duplicate prompt: CloseDuplicatePrompt()");
+            }
+            if (m_RebindOverlay != null)
+            {
+                m_RebindOverlay.SetActive(false);
+                Debug.Log("RebindActionUI closed overlay: CloseDuplicatePrompt()");
+            }
+
             if (m_ConfirmSwapButton != null) m_ConfirmSwapButton.onClick.RemoveListener(ConfirmSwapBinding);
             if (m_CancelSwapButton != null) m_CancelSwapButton.onClick.RemoveListener(CancelSwapBinding);
         }
@@ -221,6 +231,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             if (wasEnabled) action.actionMap.Disable();
 
             string originalPath = action.bindings[bindingIndex].effectivePath;
+
+            bool isGamepadBinding = IsBindingForGamepad(action, bindingIndex);
+
             m_DuplicateRejected = false;
 
             void CleanUp()
@@ -229,23 +242,44 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 m_RebindOperation?.Dispose();
                 m_RebindOperation = null;
                 if (wasEnabled) action.actionMap.Enable();
-                if (m_RebindOverlay != null) m_RebindOverlay.SetActive(false);
+                if (m_RebindOverlay != null)
+                {
+                    m_RebindOverlay.SetActive(false);
+                    Debug.Log("RebindActionUI closed overlay: CleanUp()");
+                }
             }
 
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
-                .WithCancelingThrough("<Keyboard>/escape")
-                //.WithCancelingThrough("<Gamepad>/startButton")
-                .WithControlsExcluding("<Keyboard>/escape")
-                //.WithControlsExcluding("<Gamepad>/startButton")
                 .WithActionEventNotificationsBeingSuppressed()
                 .WithTimeout(m_RebindTimeout)
                 .OnPotentialMatch(operation =>
                 {
                     InputControl candidateControl = operation.selectedControl;
                     if (candidateControl == null)
+                        return;
+
+                    if (candidateControl == Keyboard.current?.escapeKey)
                     {
-                        Debug.LogWarning("Rebind matched, but selectedControl was null.", this);
+                        Debug.Log("Operation Cancelled");
                         operation.Cancel();
+                        return;
+                    }
+
+                    if (candidateControl is ButtonControl button && button.name == "start" && button.device is Gamepad)
+                    {
+                        Debug.Log("Operation Cancelled");
+                        operation.Cancel();
+                        return;
+                    }
+
+                    bool isCorrectDevice = isGamepadBinding
+                        ? candidateControl.device is Gamepad
+                        : candidateControl.device is Keyboard ||
+                          candidateControl.device is Mouse;
+
+                    if (!isCorrectDevice)
+                    {
+                        operation.RemoveCandidate(candidateControl);
                         return;
                     }
 
@@ -268,6 +302,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 .OnCancel(operation =>
                 {
                     bool showDuplicate = m_DuplicateRejected;
+                    
                     m_RebindStopEvent?.Invoke(this, operation);
                     UpdateBindingDisplay();
                     CleanUp();
@@ -275,8 +310,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                     if (showDuplicate)
                     {
                         m_DuplicateRejected = false;
-                        ShowDuplicatePrompt(m_PendingAction, m_PendingBindingIndex, m_DuplicateBinding,
-                            m_PendingOriginalPath, m_PendingAllCompositeParts);
+                        ShowDuplicatePrompt(m_PendingAction, m_PendingBindingIndex, m_DuplicateBinding, m_PendingOriginalPath, m_PendingAllCompositeParts);
                     }
                 })
                 .OnComplete(operation =>
@@ -297,7 +331,11 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 ? $"Binding '{action.bindings[bindingIndex].name}'. "
                 : string.Empty;
 
-            if (m_RebindOverlay != null) m_RebindOverlay.SetActive(true);
+            if (m_RebindOverlay != null)
+            {
+                m_RebindOverlay.SetActive(true);
+                Debug.Log("RebindActionUI opened overlay: PerformInteractiveRebind()");
+            }
             if (m_RebindText != null)
             {
                 string expected = !string.IsNullOrEmpty(m_RebindOperation.expectedControlType)
@@ -325,6 +363,13 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_RebindOperation.Start();
         }
 
+        private bool IsBindingForGamepad(InputAction action, int bindingIndex)
+        {
+            string groups = action.bindings[bindingIndex].groups;
+
+            return groups.Contains("Gamepad");
+        }
+
         private void ShowDuplicatePrompt(InputAction action, int bindingIndex, RebindActionUI duplicateBinding,
             string originalPath, bool allCompositeParts = false)
         {
@@ -334,7 +379,12 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_PendingAllCompositeParts = allCompositeParts;
             m_DuplicateBinding = duplicateBinding;
 
-            if (m_RebindDuplicatePromp != null) m_RebindDuplicatePromp.SetActive(true);
+            if (m_RebindDuplicatePromp != null)
+            {
+                m_RebindDuplicatePromp.SetActive(true);
+                Debug.Log("Duplicate prompt opened: ShowDuplicatePrompt()");
+            }
+
             if (m_ConfirmSwapButton != null)
             {
                 m_ConfirmSwapButton.onClick.RemoveListener(ConfirmSwapBinding);
@@ -394,11 +444,42 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
         private void Update()
         {
-            if (m_RebindInfo != null) UpdateRebindInfo(Time.realtimeSinceStartupAsDouble);
+            if (m_RebindOperation != null)
+            {
+                bool escapePressed = Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame;
 
-            if (m_RebindDuplicatePromp != null && m_RebindDuplicatePromp.activeInHierarchy &&
-                Keyboard.current != null && (Keyboard.current.escapeKey.wasReleasedThisFrame /*|| Gamepad.current.startButton.wasReleasedThisFrame*/))
-                CancelSwapBinding();
+                bool startPressed = false;
+
+                foreach (Gamepad gamepad in Gamepad.all)
+                {
+                    if (gamepad.startButton.wasPressedThisFrame)
+                    {
+                        startPressed = true;
+                        break;
+                    }
+                }
+
+                if (escapePressed || startPressed)
+                {
+                    Debug.Log("Operation Cancelled: " + (escapePressed ? "Escape" : "Gamepad Start"));
+                    CancelRebind();
+                }
+            }
+
+            if (m_RebindInfo != null)
+                UpdateRebindInfo(Time.realtimeSinceStartupAsDouble);
+
+            if (m_RebindDuplicatePromp != null && m_RebindDuplicatePromp.activeInHierarchy)
+            {
+                bool keyboardCancel = Keyboard.current != null &&
+                    Keyboard.current.escapeKey.wasReleasedThisFrame;
+
+                bool gamepadCancel = Gamepad.current != null &&
+                    Gamepad.current.buttonEast.wasReleasedThisFrame;
+
+                if (keyboardCancel || gamepadCancel)
+                    CancelSwapBinding();
+            }
         }
 
         private void UpdateRebindInfo(double now)
@@ -413,7 +494,10 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_LastRemainingTimeoutSeconds = remaining;
         }
 
-        private void CancelRebind() => m_RebindOperation?.Cancel();
+        private void CancelRebind()
+        {
+            m_RebindOperation?.Cancel();
+        }
 
         private void OnEnable()
         {

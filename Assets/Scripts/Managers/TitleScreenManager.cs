@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -35,8 +33,10 @@ public class TitleScreenManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] private GameObject settingsMenu;
+    [SerializeField] private GameObject keybindingOverlay;
     [SerializeField] private GameObject duplicatePrompt;
     [SerializeField] private GameObject defaultPrompt;
+    [SerializeField] private Button cancelDefaultButton;
     [SerializeField] private Button settingsBackButton;
 
     private int stageIndex;
@@ -59,6 +59,7 @@ public class TitleScreenManager : MonoBehaviour
         resumeGameBtn.onClick.AddListener(LoadStage);
         playBackBtn.onClick.AddListener(OpenMainMenu);
         settingsBackButton.onClick.AddListener(OpenMainMenu);
+        cancelDefaultButton.onClick.AddListener(CancelDefault);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -67,7 +68,7 @@ public class TitleScreenManager : MonoBehaviour
         inputDetector = InputDeviceDetector.Instance;
         input = UserInput.instance;
         playMenuSelectUI = playMenu.GetComponent<SetsUIElementToSelectOnInteraction>();
-
+        
         playerInput = FindAnyObjectByType<PlayerInput>();
         playerInput.SwitchCurrentActionMap("UI");
 
@@ -80,10 +81,17 @@ public class TitleScreenManager : MonoBehaviour
     {
         if (input.EscapeInput)
         {
-            if (duplicatePrompt.activeInHierarchy) return;
+            if (keybindingOverlay.activeInHierarchy) return;
+            if (duplicatePrompt.activeInHierarchy)
+            {
+                Debug.Log("TitleScreenManager: Duplicate prompt is open, do nothing");
+                return;
+            }
+
             if (defaultPrompt.activeInHierarchy)
             {
                 defaultPrompt.SetActive(false);
+                Debug.Log("TitleScreenManager closed default prompt: Update");
                 return;
             }
 
@@ -109,7 +117,8 @@ public class TitleScreenManager : MonoBehaviour
 
         mainMenu.SetActive(true);
         playMenu.SetActive(false);
-        settingsMenu.SetActive(false);       
+        settingsMenu.SetActive(false);
+        Debug.Log("TitleScreenManager: Opened Main Menu");
     }
 
     public void OpenPlayMenu()
@@ -195,6 +204,12 @@ public class TitleScreenManager : MonoBehaviour
         }
 
         newGamePrompt.SetActive(false);
+    }
+
+    public void CancelDefault()
+    {
+        defaultPrompt.SetActive(false);
+        Debug.Log("TitleScreenManager closed default prompt: CancelDefault");
     }
 
     public void LoadStage()

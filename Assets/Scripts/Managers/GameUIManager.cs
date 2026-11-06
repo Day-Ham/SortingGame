@@ -78,8 +78,10 @@ public class GameUIManager : MonoBehaviour
 
     [Header("Settings Menu")]
     public GameObject settingsMenu;
+    [SerializeField] private GameObject keybindingOverlay;
     [SerializeField] private GameObject duplicatePrompt;
     [SerializeField] private GameObject defaultPrompt;
+    [SerializeField] private Button cancelDefaultButton;
     [SerializeField] private Button settingsBackButton;
 
 
@@ -117,6 +119,7 @@ public class GameUIManager : MonoBehaviour
         settingsBackButton.onClick.AddListener(SetPauseMenuAsCurrent);
         skillsCloseButton.onClick.AddListener(CloseSkills);
         upgradesCloseButton.onClick.AddListener(CloseUpgrades);
+        cancelDefaultButton.onClick.AddListener(CancelDefault);
 
         AddMenusAndPromptsToLists();
 
@@ -159,6 +162,8 @@ public class GameUIManager : MonoBehaviour
 
         if (input.EscapeInput && !isSecondarySelected)
         {
+            if (keybindingOverlay.activeInHierarchy) return;
+
             if (currentOpenMenu == null)
             {
                 SetAsCurrentOpenMenu(pauseMenu);
@@ -376,6 +381,11 @@ public class GameUIManager : MonoBehaviour
     private void ResumeButtonAction()
     {
         CloseMenu(pauseMenu);
+    }
+
+    public void CancelDefault()
+    {
+        defaultPrompt.SetActive(false);
     }
 
     private void LoadTitleScreen()

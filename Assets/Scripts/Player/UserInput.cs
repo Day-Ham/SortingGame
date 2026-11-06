@@ -13,8 +13,6 @@ public class UserInput : MonoBehaviour
     public bool CrouchInput { get; private set; }
     public bool InteractionInput { get; private set; }
     public bool ThrowInput { get; private set; }
-    public bool UpgradeInput { get; private set; }
-    public bool SkillInput { get; private set; }
     public bool Skill1Input { get; private set; }
     public bool Skill2Input { get; private set; }
     public bool Skill3Input { get; private set; }
@@ -23,15 +21,19 @@ public class UserInput : MonoBehaviour
     public bool PlayerInputEnabled { get; private set; } = true;
 
     //UI
+    public Vector2 NavigateInput { get; private set; }
     public bool SubmitInput { get; private set; }
     public bool ResetBindingsInput { get; private set; }
     public bool PrimaryTabLeftInput { get; private set; }
     public bool PrimaryTabRightInput { get; private set; }
     public bool SecondaryTabLeftInput { get; private set; }
     public bool SecondaryTabRightInput { get; private set; }
+    public bool UIInputEnabled { get; private set; } = true;
 
     //Player and UI
     public bool EscapeInput { get; private set; }
+    public bool UpgradeInput { get; private set; }
+    public bool SkillInput { get; private set; }
 
     private PlayerInput playerInput;
 
@@ -55,6 +57,7 @@ public class UserInput : MonoBehaviour
     private InputAction scrollDownAction;
 
     //UI
+    private InputAction navigateAction;
     private InputAction submitAction;
     private InputAction uiEscapeAction;
     private InputAction resetBindingsAction;
@@ -102,6 +105,7 @@ public class UserInput : MonoBehaviour
         scrollDownAction = playerInput.actions.FindAction("ScrollDown");
 
         // UI
+        navigateAction = playerInput.actions.FindAction("Navigate");
         submitAction = playerInput.actions.FindAction("Submit");
         uiEscapeAction = playerInput.actions.FindAction("UI/Escape");
         resetBindingsAction = playerInput.actions.FindAction("ResetBindings");
@@ -130,12 +134,13 @@ public class UserInput : MonoBehaviour
         ScrollDownInput = PlayerInputEnabled && scrollDownAction.WasPressedThisFrame();
 
         // UI
-        SubmitInput = submitAction.WasPressedThisFrame();
-        ResetBindingsInput = resetBindingsAction.WasPressedThisFrame();
-        PrimaryTabLeftInput = primaryTabLeftAction.WasPressedThisFrame();
-        PrimaryTabRightInput = primaryTabRightAction.WasPressedThisFrame();
-        SecondaryTabLeftInput = secondaryTabLeftAction.WasPressedThisFrame();
-        SecondaryTabRightInput = secondaryTabRightAction.WasPressedThisFrame();
+        NavigateInput = UIInputEnabled ? navigateAction.ReadValue<Vector2>() : Vector2.zero;
+        SubmitInput = UIInputEnabled && submitAction.WasPressedThisFrame();
+        ResetBindingsInput = UIInputEnabled && resetBindingsAction.WasPressedThisFrame();
+        PrimaryTabLeftInput = UIInputEnabled && primaryTabLeftAction.WasPressedThisFrame();
+        PrimaryTabRightInput = UIInputEnabled && primaryTabRightAction.WasPressedThisFrame();
+        SecondaryTabLeftInput = UIInputEnabled && secondaryTabLeftAction.WasPressedThisFrame();
+        SecondaryTabRightInput = UIInputEnabled && secondaryTabRightAction.WasPressedThisFrame();
 
         // Game & UI
         EscapeInput = playerEscapeAction.WasPressedThisFrame() || uiEscapeAction.WasPressedThisFrame();
@@ -145,5 +150,10 @@ public class UserInput : MonoBehaviour
     public void SetPlayerInput(bool enabled)
     {
         PlayerInputEnabled = enabled;
+    }
+
+    public void SetUIInput(bool enabled)
+    {
+        UIInputEnabled = enabled;
     }
 }

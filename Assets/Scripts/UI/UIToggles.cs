@@ -59,6 +59,8 @@ public class UIToggles : MonoBehaviour
     {
         if (UserInput.instance == null) return;
 
+        Debug.Log("PlayerInputEnabled: " + UserInput.instance.PlayerInputEnabled);
+
         if (tabCooldownTimer > 0f)
         {
             tabCooldownTimer -= Time.unscaledDeltaTime;
@@ -109,6 +111,15 @@ public class UIToggles : MonoBehaviour
         {
             bool isActive = i == index;
             panels[i].SetActive(isActive);
+
+            if (panels[i].activeInHierarchy)
+            {
+                SetsUIElementToSelectOnInteraction uiNav = panels[i].GetComponent<SetsUIElementToSelectOnInteraction>();
+                if(uiNav != null)
+                {
+                    uiNav.ClearSelectionHistory();
+                }
+            }
 
             Image image = toggles[i].targetGraphic as Image;
 

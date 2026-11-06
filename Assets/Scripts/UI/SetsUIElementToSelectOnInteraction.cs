@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,7 +10,6 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
     [SerializeField] private EventSystem eventSystem;
     public Selectable elementToSelect;
     private Stack<GameObject> selectionHistory = new Stack<GameObject>();
-
     public Dictionary<Button, Sprite> normalSprites { get; private set; } = new();
 
     [Header("Custom Secondary Element")]

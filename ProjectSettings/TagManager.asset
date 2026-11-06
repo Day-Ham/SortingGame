@@ -9,6 +9,7 @@ TagManager:
   - DuplicatePrompt
   - MainUIElement
   - SecondaryUIElement
+  - KeyBindingOverlay
   layers:
   - Default
   - TransparentFX
