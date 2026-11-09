@@ -15,9 +15,11 @@ MonoBehaviour:
   displayName: Blue Tentacle
   description: 
   type: 12
-  preferredOrientation: {x: 0, y: 0, z: 0}
+  preferredOrientation: {x: 25, y: 0, z: 90}
+  useRandomRotation: 0
+  randomRotationOffset: {x: 0, y: 0, z: 0}
   rows: 3
-  columns: 2
-  spacing: {x: 0.5, y: 0.1, z: 0.3}
+  columns: 3
+  spacing: {x: 0.4, y: 0.1, z: 0.3}
   pickUpSFX: {fileID: 0}
   putDownSFX: {fileID: 0}

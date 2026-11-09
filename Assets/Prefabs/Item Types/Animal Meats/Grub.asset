@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: Grub
   description: 
   type: 12
-  preferredOrientation: {x: 15, y: 0, z: 0}
+  preferredOrientation: {x: 105, y: 0, z: 45}
   rows: 2
   columns: 2
   spacing: {x: 0.5, y: 0.1, z: 0.4}

@@ -3,7 +3,17 @@ guid: b7cf415af1b997542847d04da998a3c3
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Laughing Gas
+    second: {fileID: 2800000, guid: bffdc8ba8a145a548a4b062ffefe7af1, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: PSI
+    second: {fileID: 2800000, guid: 3f3993b3446385541841429ba2a5dfc1, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

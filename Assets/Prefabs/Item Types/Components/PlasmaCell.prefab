@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0423dbe23b1988343af22e89d09e740f, type: 3}
       propertyPath: m_LocalScale.x
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0423dbe23b1988343af22e89d09e740f, type: 3}
       propertyPath: m_LocalScale.y
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0423dbe23b1988343af22e89d09e740f, type: 3}
       propertyPath: m_LocalScale.z
-      value: 18
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0423dbe23b1988343af22e89d09e740f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -152,6 +152,7 @@ MonoBehaviour:
   isBeingPlaced: 0
   IsPlaced: 0
   isInShelf: 0
+  placementRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &4773205759147823177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +188,7 @@ MonoBehaviour:
     - {fileID: -8679921383154817045, guid: 0423dbe23b1988343af22e89d09e740f, type: 3}
     - {fileID: 925352049015314667, guid: 4a54cc13f117625419410f5075183f42, type: 3}
     - {fileID: 6976716297640767838, guid: 4a54cc13f117625419410f5075183f42, type: 3}
-    - {fileID: 6390479076906872484, guid: 4a54cc13f117625419410f5075183f42, type: 3}
+    - {fileID: 0}
     _Values: 749dc09c098fc9051936ff60ec0a8d10c3daef72d5c8a23ec7b1897274b05b6ef6d56243e798945d471726c8beea8078b6deb0e8c28d3f2d58843f9ddab1063765b646064f63247a926e56c16dd0f85bb6865f1c1d6111173afa1abed10cef6ce0bf1f47c9ea5312704d5294e8e907235d76bb950073ac689634ea6359f7832ed60b570fe0d416421bbf58a1bb5bb4660acb410be363773d2f7eb12f3dc09b481ea8d7f6b71f3848l
 --- !u!114 &-5402679060200604230
 MonoBehaviour:
