@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
@@ -409,7 +410,12 @@ public class GameUIManager : MonoBehaviour
     public void UpdateShelvedCount(int count)
     {
         shelvedItemCount += count;
-        shelvedItemText.text = shelvedItemCount.ToString("F0"); 
+        shelvedItemText.text = shelvedItemCount.ToString("F0");
+
+        if (shelvedItemCount == maxItemCount)
+        {
+            SteamManager.instance.CompleteStage(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     public void SetMaxNumberItems(int maxCount)

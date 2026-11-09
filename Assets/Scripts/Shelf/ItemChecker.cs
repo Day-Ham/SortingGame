@@ -322,7 +322,7 @@ public class ItemChecker : MonoBehaviour
             bool shelfComplete = heldItems.Count == maxItems;
             if (shelfComplete)
             {
-                OnShelfComple();
+                OnShelfComplete();
             }
             else
             {
@@ -340,6 +340,7 @@ public class ItemChecker : MonoBehaviour
 
             AddUpgradePoints(); //adds money if first time being placed on shelf
             ui.UpdateShelvedCount(1);
+
             Debug.Log("Placed " + currentItem.name + " on the shelf.");
             currentItem = null;
         }
@@ -392,7 +393,7 @@ public class ItemChecker : MonoBehaviour
         }
     }
 
-    private void OnShelfComple()
+    private void OnShelfComplete()
     {
         background.color = Color.green;
         PulseCompletedItems();
@@ -450,6 +451,8 @@ public class ItemChecker : MonoBehaviour
         
         currentItem.IsPlaced = true;
         currency.ChangeUpgradePoints(1);
+
+        SteamManager.instance.ItemShelvedCounter();
     }
 
     private void AddSkillPoints(ItemSpawnEntry item)
@@ -458,6 +461,8 @@ public class ItemChecker : MonoBehaviour
 
         item.isComplete = true;
         currency.ChangeSkillPoints(1);
+
+        SteamManager.instance.CompletedShelvesCounter();
     }
 
     private void UpdateUI()

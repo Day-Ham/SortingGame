@@ -155,6 +155,8 @@ public class PlayerUpgrade : MonoBehaviour
 
         boughtRobotBuddy++;
 
+        SteamManager.instance.UnlockAchievement(eAchievement.LittleBuddy);
+
         robotBuddySpawner.SpawnRobotBuddy();
 
         ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
