@@ -23,6 +23,8 @@ public class Item : MonoBehaviour
     public bool IsPlaced;
     public bool isInShelf;
 
+    public Vector3 placementRotationOffset;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -80,6 +82,33 @@ public class Item : MonoBehaviour
     {
         float rayDistance = GetComponent<Collider>().bounds.extents.y + supportCheckDistance;
         return Physics.Raycast(transform.position, Vector3.down, rayDistance, supportLayers);
+    }
+
+    public void RollPlacementRotation()
+    {
+        if (itemData == null || !itemData.useRandomRotation)
+        {
+            placementRotationOffset = Vector3.zero;
+            return;
+        }
+
+        Vector3 range = itemData.randomRotationOffset;
+        placementRotationOffset = new Vector3(
+            Random.Range(-Mathf.Abs(range.x), Mathf.Abs(range.x)),
+            Random.Range(-Mathf.Abs(range.y), Mathf.Abs(range.y)),
+            Random.Range(-Mathf.Abs(range.z), Mathf.Abs(range.z)));
+    }
+
+    public Quaternion PlacementRotation
+    {
+        get
+        {
+            Vector3 euler = itemData.preferredOrientation;
+            if (itemData.useRandomRotation)
+                euler += placementRotationOffset;
+
+            return Quaternion.Euler(euler);
+        }
     }
 
     public void Held(bool held, Transform holder = null)

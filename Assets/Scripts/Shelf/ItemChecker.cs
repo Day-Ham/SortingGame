@@ -274,6 +274,7 @@ public class ItemChecker : MonoBehaviour
 
         heldItems.Add(currentItem);
 
+        currentItem.RollPlacementRotation();
         currentItem.isBeingPlaced = true;
     }
 
@@ -298,7 +299,7 @@ public class ItemChecker : MonoBehaviour
         currentItem.Held(true, transform);
 
         Vector3 targetPosition = shelfPositions[itemIndex];
-        Quaternion targetRotation = Quaternion.Euler(orientation);
+        Quaternion targetRotation = currentItem.PlacementRotation;
 
         Vector3 newPosition = Vector3.Lerp(rb.position, transform.TransformPoint(targetPosition), moveSpeed * Time.fixedDeltaTime);
         Quaternion newRotation = Quaternion.Lerp(rb.rotation, transform.rotation * targetRotation, moveSpeed * Time.fixedDeltaTime);
@@ -523,7 +524,7 @@ public class ItemChecker : MonoBehaviour
             }
 
             item.transform.position = transform.TransformPoint(shelfPositions[i]);
-            item.transform.rotation = transform.rotation * Quaternion.Euler(item.Data.preferredOrientation);
+            item.transform.rotation = transform.rotation * item.PlacementRotation;
         }
 
         currentItem = null;
