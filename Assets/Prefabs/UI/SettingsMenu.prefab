@@ -184,11 +184,11 @@ MonoBehaviour:
     numpadEnter: {fileID: 21300000, guid: 8a86d531f20a3f7408a3ca82b106d876, type: 3}
     numpadDivide: {fileID: 21300000, guid: 3d99af60584fef745a0c2fce7466f5bc, type: 3}
     numpadMultiply: {fileID: 21300000, guid: b278b0143d2df4a45ba424dc888a64d5, type: 3}
-    numpadPlus: {fileID: 21300000, guid: 49293ce42be40cf46961331c7b444c20, type: 3}
+    numpadPlus: {fileID: 21300000, guid: a5efa2de7762e5b4e96d551c9641fb00, type: 3}
     numpadMinus: {fileID: 21300000, guid: 5bf672a3ef4978640b6ed759708f228a, type: 3}
     numpadPeriod: {fileID: 21300000, guid: 7d3d041e427a5064aa64dc9879cb53d0, type: 3}
-    numpadEquals: {fileID: 0}
-    numpadComma: {fileID: 0}
+    numpadEquals: {fileID: 21300000, guid: 032b056fdaf44b243ae0c9a1d7577b05, type: 3}
+    numpadComma: {fileID: 21300000, guid: 31eb83b63a69a9342bbee6e6e300849e, type: 3}
     leftMouse: {fileID: 21300000, guid: bffdf8cbd8232a14c9e2eb0ebe93c6c4, type: 3}
     rightMouse: {fileID: 21300000, guid: 3c477db1ce513e54c828b3ceeb5caf46, type: 3}
     middleMouse: {fileID: 21300000, guid: 75d38e34a5887f3439d5351f8493e77b, type: 3}
@@ -688,11 +688,11 @@ MonoBehaviour:
     numpadEnter: {fileID: 21300000, guid: 8a86d531f20a3f7408a3ca82b106d876, type: 3}
     numpadDivide: {fileID: 21300000, guid: 3d99af60584fef745a0c2fce7466f5bc, type: 3}
     numpadMultiply: {fileID: 21300000, guid: b278b0143d2df4a45ba424dc888a64d5, type: 3}
-    numpadPlus: {fileID: 21300000, guid: 49293ce42be40cf46961331c7b444c20, type: 3}
+    numpadPlus: {fileID: 21300000, guid: a5efa2de7762e5b4e96d551c9641fb00, type: 3}
     numpadMinus: {fileID: 21300000, guid: 5bf672a3ef4978640b6ed759708f228a, type: 3}
     numpadPeriod: {fileID: 21300000, guid: 7d3d041e427a5064aa64dc9879cb53d0, type: 3}
-    numpadEquals: {fileID: 0}
-    numpadComma: {fileID: 0}
+    numpadEquals: {fileID: 21300000, guid: 032b056fdaf44b243ae0c9a1d7577b05, type: 3}
+    numpadComma: {fileID: 21300000, guid: 31eb83b63a69a9342bbee6e6e300849e, type: 3}
     leftMouse: {fileID: 21300000, guid: bffdf8cbd8232a14c9e2eb0ebe93c6c4, type: 3}
     rightMouse: {fileID: 21300000, guid: 3c477db1ce513e54c828b3ceeb5caf46, type: 3}
     middleMouse: {fileID: 21300000, guid: 75d38e34a5887f3439d5351f8493e77b, type: 3}
