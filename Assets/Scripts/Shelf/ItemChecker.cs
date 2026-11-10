@@ -430,6 +430,11 @@ public class ItemChecker : MonoBehaviour
             itemTransform.DOKill();
 
             obj.layer = 2; // can't be picked up during the punch
+            item.isFinishPulsing = true;
+
+            Collider[] colliders = obj.GetComponentsInChildren<Collider>();
+            foreach (Collider col in colliders)
+                col.enabled = false;
 
             Vector3 originalScale = itemTransform.localScale;
             itemTransform.DOPunchScale(originalScale * 0.2f, 0.35f, 1, 0f)
@@ -441,6 +446,13 @@ public class ItemChecker : MonoBehaviour
 
                     itemTransform.localScale = originalScale;
                     obj.layer = pickupLayer;
+                    item.isFinishPulsing = false;
+
+                    foreach (Collider col in colliders)
+                    {
+                        if (col != null)
+                            col.enabled = true;
+                    }
                 });
         }
     }

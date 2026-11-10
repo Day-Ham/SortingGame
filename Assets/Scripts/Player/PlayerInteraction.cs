@@ -402,6 +402,9 @@ public class PlayerInteraction : MonoBehaviour
                 Item shelfItem = checker.GetLastObject();
                 if (shelfItem != null && !heldItems.Contains(shelfItem.gameObject))
                 {
+                    if (shelfItem.isFinishPulsing)
+                        return;
+
                     checker.RemoveItem();
                     TryPickup(shelfItem);
                     return;
@@ -418,6 +421,7 @@ public class PlayerInteraction : MonoBehaviour
         Item item = lookedAtObject.GetComponent<Item>();
 
         if (item == null) return;
+        if (item.isFinishPulsing) return;
         if (heldItems.Contains(item.gameObject)) return;
 
         ItemChecker shelf = item.GetComponentInParent<ItemChecker>();
@@ -432,7 +436,7 @@ public class PlayerInteraction : MonoBehaviour
 
     public void TryPickup(Item item)
     {
-        if (item == null || isPickingUp || isSwitching) return;
+        if (item == null || item.isFinishPulsing || isPickingUp || isSwitching) return;
         
         GameObject obj = item.gameObject;
         if (heldItems.Contains(obj)) return;

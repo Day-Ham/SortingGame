@@ -19,6 +19,7 @@ public class Item : MonoBehaviour
     public Transform HeldBy { get; private set; }
 
     public bool isBeingPlaced;
+    public bool isFinishPulsing;
 
     public bool IsPlaced;
     public bool isInShelf;
@@ -33,7 +34,7 @@ public class Item : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if (isBeingPlaced)
+        if (isBeingPlaced || isFinishPulsing)
         {
             stoppedTimer = 0f;
             return;
