@@ -70,7 +70,7 @@ public class RobotBuddy : MonoBehaviour
             Debug.Log($"Robot lost {targetItem.name} to another holder. Initiating chase!");
             isChasingStolenItem = true;
 
-            SteamManager.instance.UnlockAchievement(eAchievement.BullyBuddy);
+            SteamManager.instance.StealFromRobotBuddy();
             
             ResetToPickUp();
         }

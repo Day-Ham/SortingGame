@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("capacityPrice", "sprintPrice", "reachPrice", "jumpPrice", "throwToShelfPrice", "robotBuddyPrice", "upgradeCapacity", "canSprint", "upgradeReach", "upgradeJump", "canThrowToShelf", "boughtRobotBuddy")]
+	[ES3PropertiesAttribute("capacityPrice", "sprintPrice", "reachPrice", "jumpPrice", "robotBuddyPrice", "upgradeCapacity", "canSprint", "upgradeReach", "upgradeJump", "boughtRobotBuddy")]
 	public class ES3UserType_PlayerUpgrade : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -20,13 +20,11 @@ namespace ES3Types
 			writer.WritePrivateField("sprintPrice", instance);
 			writer.WritePrivateField("reachPrice", instance);
 			writer.WritePrivateField("jumpPrice", instance);
-			writer.WritePrivateField("throwToShelfPrice", instance);
 			writer.WritePrivateField("robotBuddyPrice", instance);
 			writer.WritePrivateField("upgradeCapacity", instance);
 			writer.WritePrivateField("canSprint", instance);
 			writer.WritePrivateField("upgradeReach", instance);
 			writer.WritePrivateField("upgradeJump", instance);
-			writer.WritePrivateField("canThrowToShelf", instance);
 			writer.WritePrivateField("boughtRobotBuddy", instance);
 		}
 
@@ -50,9 +48,6 @@ namespace ES3Types
 					case "jumpPrice":
 					instance = (PlayerUpgrade)reader.SetPrivateField("jumpPrice", reader.Read<System.Int32>(), instance);
 					break;
-					case "throwToShelfPrice":
-					instance = (PlayerUpgrade)reader.SetPrivateField("throwToShelfPrice", reader.Read<System.Int32>(), instance);
-					break;
 					case "robotBuddyPrice":
 					instance = (PlayerUpgrade)reader.SetPrivateField("robotBuddyPrice", reader.Read<System.Int32>(), instance);
 					break;
@@ -63,16 +58,13 @@ namespace ES3Types
 					instance = (PlayerUpgrade)reader.SetPrivateField("canSprint", reader.Read<System.Boolean>(), instance);
 					break;
 					case "upgradeReach":
-					instance = (PlayerUpgrade)reader.SetPrivateField("upgradeReach", reader.Read<System.Single>(), instance);
+					instance = (PlayerUpgrade)reader.SetPrivateField("upgradeReach", reader.Read<System.Int32>(), instance);
 					break;
 					case "upgradeJump":
 					instance = (PlayerUpgrade)reader.SetPrivateField("upgradeJump", reader.Read<System.Int32>(), instance);
 					break;
-					case "canThrowToShelf":
-					instance = (PlayerUpgrade)reader.SetPrivateField("canThrowToShelf", reader.Read<System.Boolean>(), instance);
-					break;
 					case "boughtRobotBuddy":
-					instance = (PlayerUpgrade)reader.SetPrivateField("boughtRobotBuddy", reader.Read<System.Single>(), instance);
+					instance = (PlayerUpgrade)reader.SetPrivateField("boughtRobotBuddy", reader.Read<System.Int32>(), instance);
 					break;
 					default:
 						reader.Skip();

@@ -22,7 +22,7 @@ namespace ES3Types
 			writer.WritePrivateField("shelfPositions", instance);
 			writer.WriteProperty("heldItems", instance.heldItems, ES3Internal.ES3TypeMgr.GetOrCreateES3Type(typeof(System.Collections.Generic.List<Item>)));
 			writer.WritePrivateField("displayName", instance);
-			writer.WritePrivateFieldByRef("currentItem", instance);
+			writer.WritePropertyByRef("currentItem", instance.currentItem);
 			writer.WritePrivateField("maxItems", instance);
 			writer.WritePrivateFieldByRef("displayNameTxt", instance);
 			writer.WritePrivateFieldByRef("background", instance);
@@ -60,8 +60,8 @@ namespace ES3Types
 					instance = (ItemChecker)reader.SetPrivateField("displayName", reader.Read<System.String>(), instance);
 					break;
 					case "currentItem":
-					instance = (ItemChecker)reader.SetPrivateField("currentItem", reader.Read<Item>(), instance);
-					break;
+						instance.currentItem = reader.Read<Item>(ES3UserType_Item.Instance);
+						break;
 					case "maxItems":
 					instance = (ItemChecker)reader.SetPrivateField("maxItems", reader.Read<System.Int32>(), instance);
 					break;

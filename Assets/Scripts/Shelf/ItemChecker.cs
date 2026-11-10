@@ -482,28 +482,6 @@ public class ItemChecker : MonoBehaviour
         displayNameTxt.text = heldItems.Count > 0 ? displayName : "";
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!playerUpgrade.CanThrowToShelf)
-            return;
-
-        if (isAssignedToBuddy)
-            return;
-
-        Item item = other.GetComponentInParent<Item>();
-
-        if (item == null)
-            return;
-
-        if (heldItems.Contains(item))
-            return;
-
-        if (!IsItemValid(item))
-            return;
-
-        PlaceItem(item);
-    }
-
     public void CleanAndReorganize()
     {
         Debug.Log($"{name} has {transform.childCount} children before cleaning.");

@@ -27,6 +27,9 @@ public class PlayerSkills : MonoBehaviour
     [SerializeField] private int skill3Level;
     [SerializeField] private int skill3Price = 50;
 
+    [Header("Steam Manager Check")]
+    [SerializeField] private bool skillUsed;
+
     private float highlightTimer;
     private float skill1CooldownTimer;
     private float skill2CooldownTimer;
@@ -195,6 +198,9 @@ public class PlayerSkills : MonoBehaviour
 
         highlightTimer = highlightDuration;
         skill1CooldownTimer = skill1Cooldown;
+
+        skillUsed = true;
+        SteamManager.instance.SkillWasUsed();
     }
 
 
@@ -275,6 +281,8 @@ public class PlayerSkills : MonoBehaviour
         skill1Price += 50;
         ui.FillSlider(ui.skill1Slider, 5);
 
+        SteamManager.instance.SkillPurchased(1, skill1Level, 5);
+
         if (saveManager != null)
             saveManager.SaveGame();
     }
@@ -349,6 +357,9 @@ public class PlayerSkills : MonoBehaviour
             yield return new WaitUntil(() => !playerInteraction.isPickingUp);
         }
 
+        skillUsed = true;
+        SteamManager.instance.SkillWasUsed();
+
         skill2CooldownTimer = skill2Cooldown;
     }
 
@@ -375,6 +386,8 @@ public class PlayerSkills : MonoBehaviour
 
         skill2Price += 50;
         ui.FillSlider(ui.skill2Slider, 5);
+
+        SteamManager.instance.SkillPurchased(2, skill2Level, 5);
 
         if (saveManager != null)
             saveManager.SaveGame();
@@ -439,6 +452,9 @@ public class PlayerSkills : MonoBehaviour
             matchingShelf.PlaceItem(item);
 
             skill3Used = true;
+            
+            skillUsed = true;
+            SteamManager.instance.SkillWasUsed();
 
             if (skill3Used)
                 skill3CooldownTimer = skill3Cooldown;
@@ -472,6 +488,8 @@ public class PlayerSkills : MonoBehaviour
 
         ui.FillSlider(ui.skill3Slider, 5);
 
+        SteamManager.instance.SkillPurchased(3, skill3Level, 5);
+
         if (saveManager != null)
             saveManager.SaveGame();
     }
@@ -479,6 +497,11 @@ public class PlayerSkills : MonoBehaviour
 
     public void OnLoading()
     {
+        if (skillUsed)
+        {
+            SteamManager.instance.SkillWasUsed();
+        }
+
         if (ui == null) return;
 
         if (skill1Level > 0) ui.EnableUI(ui.skill1Icon);
@@ -493,16 +516,19 @@ public class PlayerSkills : MonoBehaviour
         for (int i = 0; i < skill1Level; i++)
         {
             ui.FillSlider(ui.skill1Slider, 5);
+            SteamManager.instance.SkillPurchased(1, skill1Level, 5);
         }
 
         for (int i = 0; i < skill2Level; i++)
         {
             ui.FillSlider(ui.skill2Slider, 5);
+            SteamManager.instance.SkillPurchased(2, skill2Level, 5);
         }
 
         for (int i = 0; i < skill3Level; i++)
         {
             ui.FillSlider(ui.skill3Slider, 5);
+            SteamManager.instance.SkillPurchased(3, skill3Level, 5);
         }
     }
 
@@ -527,6 +553,7 @@ public class PlayerSkills : MonoBehaviour
 
             skill1Price += 50;
             ui.FillSlider(ui.skill1Slider, 5);
+            SteamManager.instance.SkillPurchased(1, skill1Level, 5);
         }
 
         //Skill 2
@@ -547,6 +574,7 @@ public class PlayerSkills : MonoBehaviour
 
             skill2Price += 50;
             ui.FillSlider(ui.skill2Slider, 5);
+            SteamManager.instance.SkillPurchased(2, skill2Level, 5);
         }
 
         //Skill 3
@@ -568,6 +596,7 @@ public class PlayerSkills : MonoBehaviour
             skill3Price += 50;
 
             ui.FillSlider(ui.skill3Slider, 5);
+            SteamManager.instance.SkillPurchased(3, skill3Level, 5);
         }
     }
 

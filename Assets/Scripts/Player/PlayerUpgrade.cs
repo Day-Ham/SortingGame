@@ -8,7 +8,6 @@ public class PlayerUpgrade : MonoBehaviour
     [SerializeField] private int sprintPrice = 50;
     [SerializeField] private int reachPrice = 50;
     [SerializeField] private int jumpPrice = 50;
-    [SerializeField] private int throwToShelfPrice = 500;
     [SerializeField] private int robotBuddyPrice = 1000;
     CurrencyManager currencyManager;
 
@@ -16,11 +15,9 @@ public class PlayerUpgrade : MonoBehaviour
     [SerializeField] private int upgradeCapacity = 0;
     [SerializeField] private bool canSprint = false;
     public bool CanSprint => canSprint;
-    [SerializeField] private float upgradeReach = 0f;
+    [SerializeField] private int upgradeReach = 0;
     [SerializeField] private int upgradeJump = 0;
-    [SerializeField] private bool canThrowToShelf = false;
-    public bool CanThrowToShelf => canThrowToShelf;
-    [SerializeField] private float boughtRobotBuddy = 0f;
+    [SerializeField] private int boughtRobotBuddy = 0;
 
     //Upgrade References
     private PlayerMovement playerMovement;
@@ -76,7 +73,9 @@ public class PlayerUpgrade : MonoBehaviour
 
         ui.FillSlider(ui.upgradeCapacitySlider, 5);
 
-        if(saveManager != null)
+        SteamManager.instance.UpgradePurchased(0, upgradeCapacity, 10);
+
+        if (saveManager != null)
             saveManager.SaveGame();
     }
 
@@ -93,6 +92,8 @@ public class PlayerUpgrade : MonoBehaviour
 
         ui.FillSlider(ui.upgradeSprintSlider, 1);
 
+        SteamManager.instance.UpgradePurchased(1, 1, 1);
+
         if (saveManager != null)
             saveManager.SaveGame();
     }
@@ -105,11 +106,13 @@ public class PlayerUpgrade : MonoBehaviour
         if (!TryBuyUpgrade(ref reachPrice))
             return;
 
-        upgradeReach += 2f;
+        upgradeReach += 2;
 
         playerInteraction.UpgradeReach(2);
 
         ui.FillSlider(ui.upgradeReachSlider, 5);
+
+        SteamManager.instance.UpgradePurchased(2, upgradeReach, 10);
 
         if (saveManager != null)
             saveManager.SaveGame();
@@ -129,19 +132,7 @@ public class PlayerUpgrade : MonoBehaviour
 
         ui.FillSlider(ui.upgradeJumpSlider, 3);
 
-        if (saveManager != null)
-            saveManager.SaveGame();
-    }
-
-    public void BuyUpgradeThrowToShelf()
-    {
-        if (canThrowToShelf) return;
-
-        if (!TryBuyUpgrade(ref throwToShelfPrice)) return;
-
-        canThrowToShelf = true;
-
-        ui.FillSlider(ui.upgradeThrowSlider, 1);
+        SteamManager.instance.UpgradePurchased(3, upgradeJump, 3);
 
         if (saveManager != null)
             saveManager.SaveGame();
@@ -161,6 +152,8 @@ public class PlayerUpgrade : MonoBehaviour
 
         ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
 
+        SteamManager.instance.UpgradePurchased(5, boughtRobotBuddy, 3);
+
         if (saveManager != null)
             saveManager.SaveGame();
     }
@@ -173,30 +166,32 @@ public class PlayerUpgrade : MonoBehaviour
         for (int i = 0; i < upgradeCapacity; i += 2)
         {
             ui.FillSlider(ui.upgradeCapacitySlider, 5);
+            SteamManager.instance.UpgradePurchased(0, upgradeCapacity, 10);
         }
 
         if (canSprint)
         {
             playerMovement.UnlockSprint();
             ui.FillSlider(ui.upgradeSprintSlider, 1);
+            SteamManager.instance.UpgradePurchased(1, 1, 1);
         }
 
         for (int i = 0; i < upgradeReach; i += 2)
         {
             ui.FillSlider(ui.upgradeReachSlider, 5);
+            SteamManager.instance.UpgradePurchased(2, upgradeReach, 10);
         }
 
         for (int i = 0; i < upgradeJump; i++)
         {
             ui.FillSlider(ui.upgradeJumpSlider, 3);
+            SteamManager.instance.UpgradePurchased(3, upgradeJump, 3);
         }
-
-        if (canThrowToShelf)
-            ui.FillSlider(ui.upgradeThrowSlider, 1);
 
         for (int i = 0; i < boughtRobotBuddy; i++)
         {
             ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
+            SteamManager.instance.UpgradePurchased(5, boughtRobotBuddy, 3);
         }
     }
 
@@ -212,7 +207,8 @@ public class PlayerUpgrade : MonoBehaviour
 
             playerInteraction.UpgradeCapacity(2);
 
-            ui.FillSlider(ui.upgradeCapacitySlider, 5);  
+            ui.FillSlider(ui.upgradeCapacitySlider, 5);
+            SteamManager.instance.UpgradePurchased(0, upgradeCapacity, 10);
         }
 
         //Sprint
@@ -221,6 +217,7 @@ public class PlayerUpgrade : MonoBehaviour
             canSprint = true;
             playerMovement.UnlockSprint();
             ui.FillSlider(ui.upgradeSprintSlider, 1);
+            SteamManager.instance.UpgradePurchased(1, 1, 1);
         }
 
         //Reach
@@ -229,11 +226,12 @@ public class PlayerUpgrade : MonoBehaviour
             if (upgradeReach >= 10f)
                 break;
 
-            upgradeReach += 2f;
+            upgradeReach += 2;
 
             playerInteraction.UpgradeReach(2);
 
             ui.FillSlider(ui.upgradeReachSlider, 5);
+            SteamManager.instance.UpgradePurchased(2, upgradeReach, 10);
         }
 
         //Jump
@@ -246,6 +244,7 @@ public class PlayerUpgrade : MonoBehaviour
             playerMovement.UpgradeJump();
 
             ui.FillSlider(ui.upgradeJumpSlider, 3);
+            SteamManager.instance.UpgradePurchased(3, upgradeJump, 3);
         }
     }
 
@@ -260,17 +259,8 @@ public class PlayerUpgrade : MonoBehaviour
             robotBuddySpawner.SpawnRobotBuddy();
 
             ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
+            SteamManager.instance.UpgradePurchased(5, boughtRobotBuddy, 3);
         }
-    }
-
-    public void MaxThrow()
-    {
-        //Throw Shelf
-        if (canThrowToShelf) return;
-
-        canThrowToShelf = true;
-
-        ui.FillSlider(ui.upgradeThrowSlider, 1);
     }
 
     public void ResetUpgrades()
@@ -288,10 +278,6 @@ public class PlayerUpgrade : MonoBehaviour
         playerMovement.ResetSprintAndJump();
         ui.upgradeSprintSlider.value = ui.upgradeSprintSlider.minValue;
         ui.upgradeJumpSlider.value = ui.upgradeJumpSlider.minValue;
-
-        //Throw Shelf
-        canThrowToShelf = false;
-        ui.upgradeThrowSlider.value = ui.upgradeThrowSlider.minValue;
     }
 
     public void ResetRobotBuddy()

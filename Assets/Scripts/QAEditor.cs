@@ -24,7 +24,6 @@ public class QAEditor : MonoBehaviour
     [SerializeField] private Button maxLevelUpgrades;
     [SerializeField] private Button resetLevelUpgrades;
     [SerializeField] private Toggle includeRobotBuddy;
-    [SerializeField] private Toggle includeThrowUpgrade;
 
     [Header("Scene")]
     [SerializeField] private Button newGameButton;
@@ -142,11 +141,6 @@ public class QAEditor : MonoBehaviour
         if (includeRobotBuddy.isOn)
         {
             upgrades.BuyAllRobotBuddies();
-        }
-
-        if (includeThrowUpgrade.isOn)
-        {
-            upgrades.MaxThrow();
         }
     }
 

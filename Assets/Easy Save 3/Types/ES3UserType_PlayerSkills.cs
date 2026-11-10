@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("playerInteraction", "currencyManager", "highlightDuration", "skill1Cooldown", "highlightLayerName", "shelfHighlightLayerName", "skill1Level", "skill1Price", "skill2Cooldown", "skill2Level", "skill2Price", "skill3Cooldown", "skill3Level", "skill3Price", "highlightTimer", "skill1CooldownTimer", "skill2CooldownTimer", "skill3CooldownTimer", "skill3Used", "highlightLayer", "shelfHighlightLayer", "highlightedObjects", "originalLayers")]
+	[ES3PropertiesAttribute("playerInteraction", "currencyManager", "highlightDuration", "skill1Cooldown", "highlightLayerName", "shelfHighlightLayerName", "skill1Level", "skill1Price", "skill2Cooldown", "skill2Level", "skill2Price", "skill3Cooldown", "skill3Level", "skill3Price", "skillUsed", "highlightTimer", "skill1CooldownTimer", "skill2CooldownTimer", "skill3CooldownTimer", "skill3Used", "highlightLayer", "shelfHighlightLayer", "highlightedObjects", "originalLayers")]
 	public class ES3UserType_PlayerSkills : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -30,6 +30,7 @@ namespace ES3Types
 			writer.WritePrivateField("skill3Cooldown", instance);
 			writer.WritePrivateField("skill3Level", instance);
 			writer.WritePrivateField("skill3Price", instance);
+			writer.WritePrivateField("skillUsed", instance);
 			writer.WritePrivateField("highlightTimer", instance);
 			writer.WritePrivateField("skill1CooldownTimer", instance);
 			writer.WritePrivateField("skill2CooldownTimer", instance);
@@ -90,6 +91,9 @@ namespace ES3Types
 					break;
 					case "skill3Price":
 					instance = (PlayerSkills)reader.SetPrivateField("skill3Price", reader.Read<System.Int32>(), instance);
+					break;
+					case "skillUsed":
+					instance = (PlayerSkills)reader.SetPrivateField("skillUsed", reader.Read<System.Boolean>(), instance);
 					break;
 					case "highlightTimer":
 					instance = (PlayerSkills)reader.SetPrivateField("highlightTimer", reader.Read<System.Single>(), instance);
