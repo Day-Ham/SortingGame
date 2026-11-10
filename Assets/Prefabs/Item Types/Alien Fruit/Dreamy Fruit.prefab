@@ -142,8 +142,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8832
   isBeingPlaced: 0
+  isFinishPulsing: 0
   IsPlaced: 0
   isInShelf: 0
+  placementRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &-6506092296685947021
 MonoBehaviour:
   m_ObjectHideFlags: 0

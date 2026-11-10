@@ -112,7 +112,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -149,8 +149,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8832
   isBeingPlaced: 0
+  isFinishPulsing: 0
   IsPlaced: 0
   isInShelf: 0
+  placementRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &-1494444734789044018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +188,7 @@ MonoBehaviour:
     - {fileID: -1494444734789044018, guid: d8a81b3835b7064429ab242765e0075e, type: 3}
     - {fileID: 6992663833090942539, guid: d8a81b3835b7064429ab242765e0075e, type: 3}
     - {fileID: 2386201889443766609, guid: d8a81b3835b7064429ab242765e0075e, type: 3}
-    - {fileID: 7256583712106153907, guid: d8a81b3835b7064429ab242765e0075e, type: 3}
+    - {fileID: 0}
     - {fileID: 1125006501762234180, guid: b11364bf38783874288699fde286ce04, type: 3}
     - {fileID: -8679921383154817045, guid: b11364bf38783874288699fde286ce04, type: 3}
     _Values: 5001c603e539807cbe20208cebb22b30adea2791b209625a49fc1f0eeecd8a21a56f51673d02704388770248ff7a36785b39fa3bd30d0e5e60944416e58d7210ee7a207c2b37f345c91dcbab93a72e666a0118849e3c0d567be337780f26863aefc12074ac0df56d83f4372eb878d617ad0ba5d42593fd2aefe6553298ad365aac0f5381e1912e2e71e5ce690b9cf94ef68600aa04df9d0dba4fcb0481b1155ac4f6ed350bac6d011a7f04a6aee7bd782bb01338732f696bl

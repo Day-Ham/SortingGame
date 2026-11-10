@@ -131,8 +131,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8832
   isBeingPlaced: 0
+  isFinishPulsing: 0
   IsPlaced: 0
   isInShelf: 0
+  placementRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &9200073115134632040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,15 +162,14 @@ MonoBehaviour:
     - {fileID: 297981673075575930, guid: f1cab0628aca2274bb38e0a8aaf458c5, type: 3}
     - {fileID: 5662121911355911073, guid: f1cab0628aca2274bb38e0a8aaf458c5, type: 3}
     - {fileID: 9200073115134632040, guid: f1cab0628aca2274bb38e0a8aaf458c5, type: 3}
-    - {fileID: 2610320958837805589, guid: f1cab0628aca2274bb38e0a8aaf458c5, type: 3}
-    - {fileID: 7152642023718227106, guid: f1cab0628aca2274bb38e0a8aaf458c5, type: 3}
+    - {fileID: 0}
     - {fileID: 5993528786282949824, guid: f1cab0628aca2274bb38e0a8aaf458c5, type: 3}
     - {fileID: -6478536213147159724, guid: f132da84ac3bd4a44bd44500f6340aec, type: 3}
     - {fileID: 2800000, guid: f00b615a25cca864596bcd6000404f83, type: 3}
     - {fileID: -5023624866596571984, guid: f132da84ac3bd4a44bd44500f6340aec, type: 3}
     - {fileID: -7511558181221131132, guid: f132da84ac3bd4a44bd44500f6340aec, type: 3}
     - {fileID: -8679921383154817045, guid: f132da84ac3bd4a44bd44500f6340aec, type: 3}
-    _Values: e2efe10d5a45724c7a552d4f56c94f25c843ddeeb0c56e0f34b0dbddb305b537a28088d8f0cb6725f4c364d66dc07023e3c79c2c4f6ecb638141bbe8987b633e25474847c057646536f885c57399cc220183884ac1d02f32fdd618fd838ced1627e115a075312e7076b8c450331b7e6b5d160871fa06ae6dc43c8407a52cd910f2d3cb13c768cc02e3b95df5c09ecf1d2f6949b99a201617ec54e6a9f1553503l
+    _Values: e2efe10d5a45724c7a552d4f56c94f25c843ddeeb0c56e0f34b0dbddb305b537a28088d8f0cb6725f4c364d66dc07023e3c79c2c4f6ecb638141bbe8987b633e25474847c057646536f885c57399cc220183884ac1d02f32fdd618fd838ced1627e115a075312e705d160871fa06ae6dc43c8407a52cd910f2d3cb13c768cc02e3b95df5c09ecf1d2f6949b99a201617ec54e6a9f1553503l
 --- !u!114 &5662121911355911073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +244,7 @@ Rigidbody:
   serializedVersion: 5
   m_Mass: 1
   m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_AngularDamping: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}

@@ -3,7 +3,67 @@ guid: 86f1391669bad4b498fe8f47c2132022
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base.003
+    second: {fileID: 2100000, guid: 895851a59f7976541aa8f65908e7dd13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blood.003
+    second: {fileID: 2100000, guid: a009b8db356701e489e38268b88bb5fe, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Label.003
+    second: {fileID: 2100000, guid: b7e833bcca90e984bbb3e98c1acfb144, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: IVB_Base_Material_BaseColor
+    second: {fileID: 2800000, guid: efa341bcdac8bb24b9f4370f0b39c207, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: IVB_Base_Material_Metallic
+    second: {fileID: 2800000, guid: 3420188515081354788418880f8ad54e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: IVB_Base_Material_Normal
+    second: {fileID: 2800000, guid: 16a24434c05a363419c818ba8f953ca3, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: IVB_Base_Material_Roughness
+    second: {fileID: 2800000, guid: 9c09922441a6a5a498d9acab4caa0857, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: IVB_Blood_Material.001_BaseColor
+    second: {fileID: 2800000, guid: 59066f4f0b06ebe409cceab87ef988a2, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: IVB_Blood_Material.001_Metallic
+    second: {fileID: 2800000, guid: 6e07e87b1d3f581499bc63cd550be588, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: IVB_Blood_Material.001_Normal
+    second: {fileID: 2800000, guid: 39e32f430d7f0454999251424bc77ca0, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: IVB_Blood_Material.001_Roughness
+    second: {fileID: 2800000, guid: 3fbacc4892725e64c88c6b9cac8b786b, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: SmallScale
+    second: {fileID: 2800000, guid: 3bca0bff92317304e98f1de82c12000c, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

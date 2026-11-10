@@ -19,7 +19,7 @@ MonoBehaviour:
   useRandomRotation: 0
   randomRotationOffset: {x: 0, y: 0, z: 0}
   rows: 3
-  columns: 3
+  columns: 4
   spacing: {x: 0.4, y: 0.1, z: 0.4}
   pickUpSFX: {fileID: 0}
   putDownSFX: {fileID: 0}

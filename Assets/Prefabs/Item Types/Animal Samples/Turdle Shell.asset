@@ -15,9 +15,11 @@ MonoBehaviour:
   displayName: Turdle Shell
   description: 
   type: 1
-  preferredOrientation: {x: 0, y: 0, z: 0}
-  rows: 3
-  columns: 2
+  preferredOrientation: {x: 25, y: 0, z: 0}
+  useRandomRotation: 0
+  randomRotationOffset: {x: 0, y: 0, z: 0}
+  rows: 2
+  columns: 4
   spacing: {x: 0.5, y: 0.1, z: 0.4}
   pickUpSFX: {fileID: 0}
   putDownSFX: {fileID: 0}

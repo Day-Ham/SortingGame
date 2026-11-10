@@ -152,8 +152,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8832
   isBeingPlaced: 0
+  isFinishPulsing: 0
   IsPlaced: 0
   isInShelf: 0
+  placementRotationOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &823137790581565987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +188,7 @@ MonoBehaviour:
     - {fileID: 1083058640458768694, guid: af6e6ee2f986c8b42b56edd2b7b2a2f0, type: 3}
     - {fileID: 823137790581565987, guid: af6e6ee2f986c8b42b56edd2b7b2a2f0, type: 3}
     - {fileID: 3769791400005688619, guid: af6e6ee2f986c8b42b56edd2b7b2a2f0, type: 3}
-    - {fileID: 7058905764643964371, guid: af6e6ee2f986c8b42b56edd2b7b2a2f0, type: 3}
+    - {fileID: 0}
     - {fileID: 4468219771389312920, guid: af6e6ee2f986c8b42b56edd2b7b2a2f0, type: 3}
     - {fileID: 8368610007804464306, guid: af6e6ee2f986c8b42b56edd2b7b2a2f0, type: 3}
     - {fileID: -1143595986606948581, guid: f48421413c881c54b9737cad525a34ca, type: 3}

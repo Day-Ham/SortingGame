@@ -15,11 +15,11 @@ MonoBehaviour:
   displayName: Brain in a Jar
   description: 
   type: 1
-  preferredOrientation: {x: 0, y: 0, z: 0}
+  preferredOrientation: {x: 15, y: 0, z: 0}
   useRandomRotation: 0
   randomRotationOffset: {x: 0, y: 0, z: 0}
   rows: 3
-  columns: 3
-  spacing: {x: 0.4, y: 0.1, z: 0.4}
+  columns: 5
+  spacing: {x: 0.4, y: 0.1, z: 0.3}
   pickUpSFX: {fileID: 0}
   putDownSFX: {fileID: 0}
