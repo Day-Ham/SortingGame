@@ -2780,7 +2780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 6544723153825544774}
     m_SelectOnDown: {fileID: 4691855406579395332}
@@ -6187,7 +6187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 3
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -6306,7 +6306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1352683965673747036}
     m_SelectOnDown: {fileID: 4691855406579395332}
@@ -7285,7 +7285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 6915345346073611357}
     m_SelectOnDown: {fileID: 1352683965673747036}
@@ -8533,7 +8533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1611676045301248884}
     m_SelectOnDown: {fileID: 1729306239955229378}
@@ -8959,7 +8959,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 6544723153825544774}
     m_SelectOnDown: {fileID: 6544723153825544774}
@@ -10111,7 +10111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: X
+      value: Square
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -10277,7 +10277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad/Right
+      value: D-Pad Right
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -10447,7 +10447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: B
+      value: Circle
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -10617,7 +10617,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad/Up
+      value: D-Pad Up
       objectReference: {fileID: 0}
     - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -11150,7 +11150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: RB
+      value: R1
       objectReference: {fileID: 0}
     - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -11513,7 +11513,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: LB
+      value: L1
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -12019,7 +12019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: Y
+      value: Triangle
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -12548,7 +12548,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: LT
+      value: L2
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -12718,7 +12718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: A
+      value: Cross
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -13069,7 +13069,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad/Down
+      value: D-Pad Down
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -13250,7 +13250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad/Left
+      value: D-Pad Left
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
