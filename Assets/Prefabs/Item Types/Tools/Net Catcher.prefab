@@ -103,7 +103,7 @@ GameObject:
   - component: {fileID: 6277832993276982933}
   - component: {fileID: 3062141232105297558}
   - component: {fileID: 3042920625097035555}
-  - component: {fileID: 7490707133559041597}
+  - component: {fileID: 2804137411785094111}
   - component: {fileID: -8535283217183809019}
   - component: {fileID: 304543060569839297}
   - component: {fileID: -4880233167418119289}
@@ -234,10 +234,10 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 17.13107, y: 72.533066, z: 1.5}
-  m_Center: {x: 0.20531581, y: 5.1725225, z: 0}
---- !u!135 &7490707133559041597
-SphereCollider:
+  m_Size: {x: 6.3191257, y: 49.20114, z: 1.5}
+  m_Center: {x: -0.13281639, y: -5.76976, z: 0}
+--- !u!136 &2804137411785094111
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -254,9 +254,11 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 6.6810417
-  m_Center: {x: 0, y: 29.090525, z: -4.9051023}
+  serializedVersion: 2
+  m_Radius: 5.440093
+  m_Height: 18.813066
+  m_Direction: 1
+  m_Center: {x: 0, y: 29.656845, z: -3.5387745}
 --- !u!114 &-8535283217183809019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,10 +274,10 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 11150224a04d3db4f906fe6a0168706c, type: 2}
   stopSpeed: 0.05
   stopTime: 0.2
-  supportCheckDistance: 0.1
+  supportCheckDistance: 0.2
   supportLayers:
     serializedVersion: 2
-    m_Bits: 8832
+    m_Bits: 8840
   isBeingPlaced: 0
   isFinishPulsing: 0
   IsPlaced: 0
@@ -317,7 +319,7 @@ MonoBehaviour:
     - {fileID: -4880233167418119289, guid: 310d0a1cb19f71b4da86a521fbffa063, type: 3}
     - {fileID: -8535283217183809019, guid: 310d0a1cb19f71b4da86a521fbffa063, type: 3}
     - {fileID: 11400000, guid: 11150224a04d3db4f906fe6a0168706c, type: 2}
-    - {fileID: 7490707133559041597, guid: 310d0a1cb19f71b4da86a521fbffa063, type: 3}
+    - {fileID: 0}
     - {fileID: 2800000, guid: 397e62b2125c10043ba6766cd357eaa6, type: 3}
     - {fileID: -9186707164081085573, guid: 25af2623da6cbb64e994228082d1cbbe, type: 3}
     - {fileID: -5066523906300639224, guid: 25af2623da6cbb64e994228082d1cbbe, type: 3}

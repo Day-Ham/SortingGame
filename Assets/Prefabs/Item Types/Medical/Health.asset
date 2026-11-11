@@ -16,8 +16,10 @@ MonoBehaviour:
   description: 
   type: 4
   preferredOrientation: {x: 0, y: 0, z: 0}
+  useRandomRotation: 0
+  randomRotationOffset: {x: 0, y: 0, z: 0}
   rows: 3
-  columns: 4
+  columns: 5
   spacing: {x: 0.3, y: 0.5, z: 0.3}
   pickUpSFX: {fileID: 0}
   putDownSFX: {fileID: 0}

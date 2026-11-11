@@ -3,7 +3,12 @@ guid: 4a7e1e5a79a36cc49821575236f2e7e2
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Shelves_Grdient
+    second: {fileID: 2800000, guid: 10142843176f9304da0e77e8051d34dd, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

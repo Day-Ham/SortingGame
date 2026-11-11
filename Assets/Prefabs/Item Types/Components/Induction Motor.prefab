@@ -437,7 +437,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &6991787478308867332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -453,10 +453,10 @@ MonoBehaviour:
   itemData: {fileID: 11400000, guid: 596b463faca781a4ca8c8077d6dae57a, type: 2}
   stopSpeed: 0.05
   stopTime: 0.2
-  supportCheckDistance: 0.1
+  supportCheckDistance: 0.2
   supportLayers:
     serializedVersion: 2
-    m_Bits: 8832
+    m_Bits: 8840
   isBeingPlaced: 0
   isFinishPulsing: 0
   IsPlaced: 0

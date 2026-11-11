@@ -12,7 +12,8 @@ public class ItemSpawner : MonoBehaviour
 
     [Header("Spawning")]
     [SerializeField] private BoxCollider spawnArea;
-    [SerializeField] private float spawnHeight = 0.5f;
+    [SerializeField] private float minSpawnHeight = 0.5f;
+    [SerializeField] private float maxSpawnHeight = 1.5f;
 
     [Header("Settings")]
     [SerializeField] private int maxAttempts = 30;
@@ -74,12 +75,13 @@ public class ItemSpawner : MonoBehaviour
         {
             float randomX = UnityEngine.Random.Range(bounds.min.x, bounds.max.x);
             float randomZ = UnityEngine.Random.Range(bounds.min.z, bounds.max.z);
+            float randomY = UnityEngine.Random.Range(minSpawnHeight, maxSpawnHeight);
 
             Vector3 randomPoint = new Vector3(randomX, bounds.center.y, randomZ);
 
             if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, 2f, NavMesh.AllAreas))
             {
-                return hit.position + Vector3.up * spawnHeight;
+                return hit.position + Vector3.up * randomY;
             }
         }
 
