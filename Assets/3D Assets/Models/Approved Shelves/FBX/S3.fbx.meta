@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Material
     second: {fileID: 2100000, guid: 3fceff8641d8509479197e33c0b63384, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Shelves_Grdient
+    second: {fileID: 2800000, guid: b7557ac4df8cb0b49a5379de9f454097, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
