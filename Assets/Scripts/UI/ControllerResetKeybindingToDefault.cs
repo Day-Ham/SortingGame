@@ -1,9 +1,9 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class ControllerResetKeybindingToDefault : MonoBehaviour
 {
     [SerializeField] private GameObject resetToDefaultPrompt;
-    [SerializeField] private SetsUIElementToSelectOnInteraction selectable;
     // Update is called once per frame
     void Update()
     {
@@ -17,10 +17,17 @@ public class ControllerResetKeybindingToDefault : MonoBehaviour
 
     private void OpenDefaultPrompt()
     {
-        resetToDefaultPrompt.SetActive(true);
+        TweenMenuOpen(resetToDefaultPrompt);
+    }
 
-        if (selectable == null) return;
-
-        selectable.SelectAndRemember(selectable.gameObject);
+    private void TweenMenuOpen(GameObject menu)
+    {
+        menu.SetActive(true);
+        Transform menuTransform = menu.transform;
+        menuTransform.DOKill();
+        menuTransform.localScale = Vector3.zero;
+        menuTransform.DOScale(Vector3.one, 0.25f)
+            .SetEase(Ease.OutBack)
+            .SetUpdate(true);
     }
 }

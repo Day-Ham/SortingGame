@@ -60,6 +60,7 @@ public class UserInput : MonoBehaviour
     private InputAction navigateAction;
     private InputAction submitAction;
     private InputAction uiEscapeAction;
+    private InputAction uiEscape1Action;
     private InputAction resetBindingsAction;
     private InputAction primaryTabLeftAction;
     private InputAction primaryTabRightAction;
@@ -108,6 +109,7 @@ public class UserInput : MonoBehaviour
         navigateAction = playerInput.actions.FindAction("Navigate");
         submitAction = playerInput.actions.FindAction("Submit");
         uiEscapeAction = playerInput.actions.FindAction("UI/Escape");
+        uiEscape1Action = playerInput.actions.FindAction("UI/Escape1");
         resetBindingsAction = playerInput.actions.FindAction("ResetBindings");
         primaryTabLeftAction = playerInput.actions.FindAction("PrimaryTabLeft");
         primaryTabRightAction = playerInput.actions.FindAction("PrimaryTabRight");
@@ -120,7 +122,7 @@ public class UserInput : MonoBehaviour
         // Game
         MoveInput = PlayerInputEnabled ? moveAction.ReadValue<Vector2>() : Vector2.zero;
         LookInput = PlayerInputEnabled ? lookAction.ReadValue<Vector2>() : Vector2.zero;
-        SprintInput = PlayerInputEnabled && sprintAction.IsPressed();
+        SprintInput = PlayerInputEnabled && sprintAction.WasPressedThisFrame();
         JumpInput = PlayerInputEnabled && jumpAction.WasPressedThisFrame();
         CrouchInput = PlayerInputEnabled && crouchAction.WasPressedThisFrame();
         InteractionInput = PlayerInputEnabled && interactAction.WasPressedThisFrame();
@@ -143,7 +145,7 @@ public class UserInput : MonoBehaviour
         SecondaryTabRightInput = UIInputEnabled && secondaryTabRightAction.WasPressedThisFrame();
 
         // Game & UI
-        EscapeInput = playerEscapeAction.WasPressedThisFrame() || uiEscapeAction.WasPressedThisFrame();
+        EscapeInput = playerEscapeAction.WasPressedThisFrame() || uiEscapeAction.WasPressedThisFrame() || uiEscape1Action.WasPressedThisFrame();
 
     }
 

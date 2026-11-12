@@ -175,7 +175,7 @@ public class GameUIManager : MonoBehaviour
                 if (duplicatePrompt.activeInHierarchy) return;
                 if (defaultPrompt.activeInHierarchy)
                 {
-                    DisableUI(defaultPrompt);
+                    ShrinkAway(defaultPrompt);
                     return;
                 }
 
@@ -385,7 +385,7 @@ public class GameUIManager : MonoBehaviour
 
     public void CancelDefault()
     {
-        defaultPrompt.SetActive(false);
+        ShrinkAway(defaultPrompt);
     }
 
     private void LoadTitleScreen()

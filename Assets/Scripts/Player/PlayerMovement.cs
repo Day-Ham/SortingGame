@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float crouchSpeed;
 
     private Vector3 targetCameraPosition;
+    [SerializeField] private bool isSprinting;
     private bool isCrouching;
     private Vector2 moveInput;
     private int jumpsRemaining;
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        isSprinting = false;
         isCrouching = false;
         targetCameraPosition = new Vector3(0f, 1f, 0f);
         camera.transform.localPosition = targetCameraPosition;
@@ -48,12 +50,12 @@ public class PlayerMovement : MonoBehaviour
         moveInput = UserInput.instance.MoveInput;
         Vector3 moveDirection = transform.right * moveInput.x + transform.forward * moveInput.y;
 
-        float currentSpeed = moveSpeed;
-
-        if (canSprint && UserInput.instance.SprintInput && moveInput.y > 0)
+        if (canSprint && UserInput.instance.SprintInput)
         {
-            currentSpeed = sprintSpeed;
+            isSprinting = !isSprinting;
         }
+
+        float currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
 
         controller.Move(moveDirection * currentSpeed * Time.deltaTime);
 

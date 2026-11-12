@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -90,7 +91,7 @@ public class TitleScreenManager : MonoBehaviour
 
             if (defaultPrompt.activeInHierarchy)
             {
-                defaultPrompt.SetActive(false);
+                TweenMenuClose(defaultPrompt);
                 Debug.Log("TitleScreenManager closed default prompt: Update");
                 return;
             }
@@ -115,9 +116,17 @@ public class TitleScreenManager : MonoBehaviour
     {
         if (isSecondarySelected) return;
 
+        if (settingsMenu.activeInHierarchy)
+        {
+            TweenMenuClose(settingsMenu);
+        }
+
+        if (playMenu.activeInHierarchy)
+        {
+            TweenMenuClose(playMenu);
+        }
+
         mainMenu.SetActive(true);
-        playMenu.SetActive(false);
-        settingsMenu.SetActive(false);
         Debug.Log("TitleScreenManager: Opened Main Menu");
     }
 
@@ -125,9 +134,8 @@ public class TitleScreenManager : MonoBehaviour
     {
         if (isSecondarySelected) return;
 
+        TweenMenuOpen(playMenu);
         mainMenu.SetActive(false);
-        playMenu.SetActive(true);
-        settingsMenu.SetActive(false);
 
         //default stage is 1;
         InitializeStage();
@@ -136,10 +144,8 @@ public class TitleScreenManager : MonoBehaviour
     public void OpenSettingsMenu()
     {
         if (isSecondarySelected) return;
-
         mainMenu.SetActive(false);
-        playMenu.SetActive(false);
-        settingsMenu.SetActive(true);
+        TweenMenuOpen(settingsMenu);
     }
 
     private void InitializeStage()
@@ -171,7 +177,7 @@ public class TitleScreenManager : MonoBehaviour
     {
         if (resumeGameBtn.gameObject.activeInHierarchy)
         {
-            newGamePrompt.SetActive(true);
+            TweenMenuOpen(newGamePrompt);
             if (inputDetector.CurrentMode == InputDeviceDetector.InputMode.Gamepad)
             {
                 playMenuSelectUI.SelectAndRemember(cancelNewGameButton.gameObject);
@@ -203,12 +209,12 @@ public class TitleScreenManager : MonoBehaviour
             playMenuSelectUI.ReturnToPreviousSelection();
         }
 
-        newGamePrompt.SetActive(false);
+        TweenMenuClose(newGamePrompt);
     }
 
     public void CancelDefault()
     {
-        defaultPrompt.SetActive(false);
+        TweenMenuClose(defaultPrompt);
         Debug.Log("TitleScreenManager closed default prompt: CancelDefault");
     }
 
@@ -227,6 +233,30 @@ public class TitleScreenManager : MonoBehaviour
     public void Quit()
     {
         SceneLoader.Instance.QuitGame();
+    }
+
+    private void TweenMenuOpen(GameObject menu)
+    {
+        menu.SetActive(true);
+        Transform menuTransform = menu.transform;
+        menuTransform.DOKill();
+        menuTransform.localScale = Vector3.zero;
+        menuTransform.DOScale(Vector3.one, 0.25f)
+            .SetEase(Ease.OutBack)
+            .SetUpdate(true);
+    }
+
+    private void TweenMenuClose(GameObject menu)
+    {
+        menu.transform.DOKill();
+        menu.transform.DOScale(Vector3.zero, 0.25f)
+            .SetEase(Ease.InBack)
+            .SetUpdate(true)
+            .OnComplete(() =>
+            {
+                menu.transform.localScale = Vector3.one;
+                menu.SetActive(false);
+            });
     }
 }
 

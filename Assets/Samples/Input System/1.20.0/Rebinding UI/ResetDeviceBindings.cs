@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +21,6 @@ public class ResetDeviceBindings : MonoBehaviour
 
     private void Start()
     {
-
         defaultButton.onClick.AddListener(OpenDefaultPrompt);
         confirmResetButton.onClick.AddListener(ResetControlsSchemeBinding);
         cancelResetButton.onClick.AddListener(CloseDefaultPrompt);
@@ -61,12 +61,36 @@ public class ResetDeviceBindings : MonoBehaviour
 
     private void OpenDefaultPrompt()
     {
-        resetToDefaultPromp.SetActive(true);
+        TweenMenuOpen(resetToDefaultPromp);
     }
 
     private void CloseDefaultPrompt()
     {
-        resetToDefaultPromp.SetActive(false);
+        TweenMenuClose(resetToDefaultPromp);
+    }
+
+    private void TweenMenuOpen(GameObject menu)
+    {
+        menu.SetActive(true);
+        Transform menuTransform = menu.transform;
+        menuTransform.DOKill();
+        menuTransform.localScale = Vector3.zero;
+        menuTransform.DOScale(Vector3.one, 0.25f)
+            .SetEase(Ease.OutBack)
+            .SetUpdate(true);
+    }
+
+    private void TweenMenuClose(GameObject menu)
+    {
+        menu.transform.DOKill();
+        menu.transform.DOScale(Vector3.zero, 0.25f)
+            .SetEase(Ease.InBack)
+            .SetUpdate(true)
+            .OnComplete(() =>
+            {
+                menu.transform.localScale = Vector3.one;
+                menu.SetActive(false);
+            });
     }
 }
 
