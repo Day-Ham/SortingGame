@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -177,7 +178,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             if (m_RebindDuplicatePromp != null)
             {
-                m_RebindDuplicatePromp.SetActive(false);
+                TweenMenuClose(m_RebindDuplicatePromp);
                 Debug.Log("RebindActionUI closed duplicate prompt: CloseDuplicatePrompt()");
             }
             if (m_RebindOverlay != null)
@@ -381,7 +382,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             if (m_RebindDuplicatePromp != null)
             {
-                m_RebindDuplicatePromp.SetActive(true);
+                TweenMenuOpen(m_RebindDuplicatePromp);
                 Debug.Log("Duplicate prompt opened: ShowDuplicatePrompt()");
             }
 
@@ -545,6 +546,30 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             if (m_ActionLabel == null) return;
             InputAction action = m_Action?.action;
             m_ActionLabel.text = action != null ? action.name : string.Empty;
+        }
+
+        private void TweenMenuOpen(GameObject menu)
+        {
+            menu.SetActive(true);
+            Transform menuTransform = menu.transform;
+            menuTransform.DOKill();
+            menuTransform.localScale = Vector3.zero;
+            menuTransform.DOScale(Vector3.one, 0.25f)
+                .SetEase(Ease.OutBack)
+                .SetUpdate(true);
+        }
+
+        private void TweenMenuClose(GameObject menu)
+        {
+            menu.transform.DOKill();
+            menu.transform.DOScale(Vector3.zero, 0.25f)
+                .SetEase(Ease.InBack)
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    menu.transform.localScale = Vector3.one;
+                    menu.SetActive(false);
+                });
         }
 
 #if UNITY_EDITOR
