@@ -24,6 +24,8 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
     private GameObject currentSelected;
     private bool isSecondarySelected;
 
+    [SerializeField] private List<SetsUIElementToSelectOnInteraction> prompts = new List<SetsUIElementToSelectOnInteraction>();
+
     private void Awake()
     {
         eventSystem = FindAnyObjectByType<EventSystem>();
@@ -40,6 +42,8 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
         inputDetector = InputDeviceDetector.Instance;
         userInput = UserInput.instance;
         titleManager = FindAnyObjectByType<TitleScreenManager>();
+
+        GetPrompts();
     }
 
     private void OnDisable()
@@ -95,6 +99,13 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
             if (selected != null)
             {
                 Debug.Log("Currently Selected: " + selected.name);
+            }
+
+            SetsUIElementToSelectOnInteraction prompt = CheckIfAPromptIsActive();
+            if (prompt != null && selected == null)
+            {
+                prompt.JumpToElement(prompt.elementToSelect.gameObject);
+                return;
             }
 
             if (hoveredElement == null && selected == null)
@@ -341,5 +352,33 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
     public void ClearSelectionHistory()
     {
         selectionHistory.Clear();
+    }
+
+    private void GetPrompts()
+    {
+        int promptLayer = LayerMask.NameToLayer("Prompt");
+
+        SetsUIElementToSelectOnInteraction[] setUIs = FindObjectsByType<SetsUIElementToSelectOnInteraction>(
+            FindObjectsInactive.Include);
+
+        foreach (SetsUIElementToSelectOnInteraction setUI in setUIs)
+        {
+            if (setUI.gameObject.layer == promptLayer)
+            {
+                prompts.Add(setUI);
+            }
+        }
+    }
+
+    private SetsUIElementToSelectOnInteraction CheckIfAPromptIsActive()
+    {
+        foreach (SetsUIElementToSelectOnInteraction prompt in prompts)
+        {
+            if (prompt.gameObject.activeInHierarchy)
+            {
+                return prompt;
+            }
+        }
+        return null;
     }
 }

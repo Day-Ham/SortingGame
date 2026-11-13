@@ -93,7 +93,7 @@ public class KeybindingOverlayManager : MonoBehaviour
         if (gameObject.activeInHierarchy && !selectedRemoved)
         {
             previousSelected = EventSystem.current.currentSelectedGameObject;
-            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(previousSelected);
 
             if (setUISelected != null)
             {
