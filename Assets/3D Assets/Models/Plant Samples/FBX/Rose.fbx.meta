@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 22b2eabb03eac614b9f7bb49428682d6
+guid: c142b1e77e4773a478c15c377febb15e
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Rose Texture
+    second: {fileID: 2800000, guid: 423d1fbce6c065a429612a2b32c8a292, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

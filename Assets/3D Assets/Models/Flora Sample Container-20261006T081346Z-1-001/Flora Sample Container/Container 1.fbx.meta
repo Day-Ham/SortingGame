@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9cadac83620c5494f83a0af0d95c54b9
+guid: 95de3e19343734c4ea9e96931d86118b
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
@@ -111,6 +111,6 @@ ModelImporter:
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
-  userData: 
+  userData: ModelOrientationEuler=-90,0,0
   assetBundleName: 
   assetBundleVariant: 

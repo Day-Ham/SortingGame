@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: -468998583662660350}
   - component: {fileID: 8521413437996671080}
   - component: {fileID: 6557317506332465117}
-  - component: {fileID: 5788488532136727884}
+  - component: {fileID: 8901280459921526615}
   m_Layer: 7
-  m_Name: Berry
+  m_Name: Gold Apple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 12, y: 12, z: 12}
+  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -45,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8203511284200565866}
-  m_Mesh: {fileID: -7551733326587499687, guid: 1057b9c7ab4b9cf46b69ac2f4b815a9c, type: 3}
+  m_Mesh: {fileID: -1590701770819592551, guid: c8f1b4ecf1e95204dbec353bad79b404, type: 3}
 --- !u!23 &7459330125138561696
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -71,8 +71,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -341432028807443549, guid: 1057b9c7ab4b9cf46b69ac2f4b815a9c, type: 3}
-  - {fileID: 3291327772709480214, guid: 1057b9c7ab4b9cf46b69ac2f4b815a9c, type: 3}
+  - {fileID: 2100000, guid: 03355f5f593ba6e4caa3f45f240d65ba, type: 2}
+  - {fileID: 2100000, guid: 03355f5f593ba6e4caa3f45f240d65ba, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   componentsToSave:
   - {fileID: -468998583662660350}
   - {fileID: 2388932461786806864}
---- !u!135 &5788488532136727884
+--- !u!135 &8901280459921526615
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -221,5 +221,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.014699403
-  m_Center: {x: 0.0013346742, y: 0.002873045, z: -0.000023656525}
+  m_Radius: 1.1770433
+  m_Center: {x: -0.051927943, y: 0.009294973, z: -0.011610489}

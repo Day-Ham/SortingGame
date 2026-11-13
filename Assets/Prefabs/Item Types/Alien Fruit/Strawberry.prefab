@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d749d6f0381d5494b91dcb51b1ffc6d5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 20
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d749d6f0381d5494b91dcb51b1ffc6d5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 20
+      value: 0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d749d6f0381d5494b91dcb51b1ffc6d5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 20
+      value: 0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d749d6f0381d5494b91dcb51b1ffc6d5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -64,6 +64,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: d749d6f0381d5494b91dcb51b1ffc6d5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 03355f5f593ba6e4caa3f45f240d65ba, type: 2}
+    - target: {fileID: -5754084199372789682, guid: d749d6f0381d5494b91dcb51b1ffc6d5, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5301173083913249939, guid: 970e9dfc8be0df845bec7d59e32a41ba, type: 3}
     - target: {fileID: 919132149155446097, guid: d749d6f0381d5494b91dcb51b1ffc6d5, type: 3}
       propertyPath: m_Name
       value: Strawberry
@@ -90,7 +98,7 @@ PrefabInstance:
       addedObject: {fileID: 8045115199123930268}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d749d6f0381d5494b91dcb51b1ffc6d5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4785068021598845487}
+      addedObject: {fileID: 227194199226238439}
   m_SourcePrefab: {fileID: 100100000, guid: d749d6f0381d5494b91dcb51b1ffc6d5, type: 3}
 --- !u!4 &6964932837791097110 stripped
 Transform:
@@ -211,8 +219,8 @@ MonoBehaviour:
   componentsToSave:
   - {fileID: 6964932837791097110}
   - {fileID: -4898613376562064385}
---- !u!135 &4785068021598845487
-SphereCollider:
+--- !u!136 &227194199226238439
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -229,6 +237,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.00844791
-  m_Center: {x: 0.000030989944, y: 0.0011610739, z: 0.00003412068}
+  serializedVersion: 2
+  m_Radius: 0.77837336
+  m_Height: 1.6963187
+  m_Direction: 1
+  m_Center: {x: -0.00058200955, y: 0.008464515, z: -0.0033782423}
