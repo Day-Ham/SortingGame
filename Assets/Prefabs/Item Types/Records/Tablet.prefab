@@ -64,6 +64,14 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 98a2148af4e973d41ace8765caea4a0c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: -7297036880993844879, guid: 8b3632dba1e80444fa905afed165e7e1, type: 3}
+    - target: {fileID: -5754084199372789682, guid: 98a2148af4e973d41ace8765caea4a0c, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5227114353745133182, guid: 8b3632dba1e80444fa905afed165e7e1, type: 3}
     - target: {fileID: 919132149155446097, guid: 98a2148af4e973d41ace8765caea4a0c, type: 3}
       propertyPath: m_Name
       value: Tablet

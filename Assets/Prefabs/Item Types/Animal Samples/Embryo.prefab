@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f48421413c881c54b9737cad525a34ca, type: 3}
       propertyPath: m_LocalScale.x
-      value: 20
+      value: 0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f48421413c881c54b9737cad525a34ca, type: 3}
       propertyPath: m_LocalScale.y
-      value: 20
+      value: 0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f48421413c881c54b9737cad525a34ca, type: 3}
       propertyPath: m_LocalScale.z
-      value: 20
+      value: 0.19999999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f48421413c881c54b9737cad525a34ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -64,6 +64,22 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f48421413c881c54b9737cad525a34ca, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 03355f5f593ba6e4caa3f45f240d65ba, type: 2}
+    - target: {fileID: -7511558181221131132, guid: f48421413c881c54b9737cad525a34ca, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 03355f5f593ba6e4caa3f45f240d65ba, type: 2}
+    - target: {fileID: -7511558181221131132, guid: f48421413c881c54b9737cad525a34ca, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 03355f5f593ba6e4caa3f45f240d65ba, type: 2}
+    - target: {fileID: -5754084199372789682, guid: f48421413c881c54b9737cad525a34ca, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -7204220146221454782, guid: ad86c428d115d3241aeebdf8f816f34f, type: 3}
     - target: {fileID: 919132149155446097, guid: f48421413c881c54b9737cad525a34ca, type: 3}
       propertyPath: m_Name
       value: Embryo
@@ -90,10 +106,10 @@ PrefabInstance:
       addedObject: {fileID: 3769791400005688619}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f48421413c881c54b9737cad525a34ca, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4510022136733443380}
+      addedObject: {fileID: 6609625915780121982}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f48421413c881c54b9737cad525a34ca, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8704783578798470110}
+      addedObject: {fileID: 8522917815364691544}
   m_SourcePrefab: {fileID: 100100000, guid: f48421413c881c54b9737cad525a34ca, type: 3}
 --- !u!4 &8368610007804464306 stripped
 Transform:
@@ -216,7 +232,7 @@ MonoBehaviour:
   componentsToSave:
   - {fileID: 8368610007804464306}
   - {fileID: 1083058640458768694}
---- !u!136 &4510022136733443380
+--- !u!136 &6609625915780121982
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,11 +251,11 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.012610283
-  m_Height: 0.036328685
+  m_Radius: 1.2533909
+  m_Height: 3.6328688
   m_Direction: 1
-  m_Center: {x: -0.002329728, y: -0.0011650175, z: -0.001106042}
---- !u!135 &8704783578798470110
+  m_Center: {x: 0.067958236, y: -0.15462476, z: 0.04550743}
+--- !u!135 &8522917815364691544
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -258,5 +274,5 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.0028597028
-  m_Center: {x: 0.0073964032, y: -0.016577426, z: 0.0034581386}
+  m_Radius: 0.24990575
+  m_Center: {x: 1.0708132, y: -1.6685188, z: 0.52998054}

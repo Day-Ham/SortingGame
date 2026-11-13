@@ -15,6 +15,8 @@ public enum ItemType
     PlantSamples,
     Glassware,
     Gadgets,
-    AlienMeats
+    AlienMeats,
+    TableComponents,
+    TableGadgets
 }
 

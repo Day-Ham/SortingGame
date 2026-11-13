@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: Camera
   description: 
   type: 11
-  preferredOrientation: {x: 0, y: -90, z: 0}
+  preferredOrientation: {x: 0, y: 0, z: 0}
   useRandomRotation: 0
   randomRotationOffset: {x: 0, y: 0, z: 0}
   rows: 2

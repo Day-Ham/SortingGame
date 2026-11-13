@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   displayName: Laughing Gas
   description: 
-  type: 5
+  type: 13
   preferredOrientation: {x: 0, y: 0, z: 0}
   useRandomRotation: 0
   randomRotationOffset: {x: 0, y: 0, z: 0}

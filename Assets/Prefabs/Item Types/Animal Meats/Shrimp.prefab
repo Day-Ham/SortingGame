@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 15.000001
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 15.000001
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
       propertyPath: m_LocalScale.z
-      value: 15.000001
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -64,6 +64,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 03355f5f593ba6e4caa3f45f240d65ba, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 03355f5f593ba6e4caa3f45f240d65ba, type: 2}
+    - target: {fileID: -5754084199372789682, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 6049758417479126150, guid: 5476367f330016546a2ccb1e587c3057, type: 3}
     - target: {fileID: 919132149155446097, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
       propertyPath: m_Name
       value: Shrimp
@@ -90,10 +102,10 @@ PrefabInstance:
       addedObject: {fileID: -8428807931253956231}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6700668585775286460}
+      addedObject: {fileID: 8842338132720483218}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 757809023253909994}
+      addedObject: {fileID: 1952700409211038416}
   m_SourcePrefab: {fileID: 100100000, guid: 24ec839c583d7c34780ebe7229ec64e3, type: 3}
 --- !u!4 &1280177147828316404 stripped
 Transform:
@@ -215,28 +227,7 @@ MonoBehaviour:
   componentsToSave:
   - {fileID: 1280177147828316404}
   - {fileID: 4638363005630519446}
---- !u!135 &6700668585775286460
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1913971540862530126}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 0.0074714706
-  m_Center: {x: 0.014413306, y: -0.011791622, z: 0.0054228143}
---- !u!136 &757809023253909994
+--- !u!136 &8842338132720483218
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -255,7 +246,30 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.009734095
-  m_Height: 0.03281959
+  m_Radius: 1.0451412
+  m_Height: 3.3065953
   m_Direction: 1
-  m_Center: {x: 0.0019647118, y: 0.001581635, z: 0.0014418184}
+  m_Center: {x: -0.06784687, y: -0.10534008, z: 0.015199283}
+--- !u!136 &1952700409211038416
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913971540862530126}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.40085402
+  m_Height: 2.2339072
+  m_Direction: 0
+  m_Center: {x: 1.3553019, y: -1.2575169, z: 0.3651439}

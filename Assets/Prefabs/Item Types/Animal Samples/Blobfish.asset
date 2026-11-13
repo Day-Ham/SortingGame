@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2c4083d100808e4f957ffd8f744a0f7, type: 3}
   m_Name: Blobfish
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  displayName: Male Blobfish
+  displayName: Blobfish
   description: 
   type: 1
   preferredOrientation: {x: 0, y: 25, z: 0}
