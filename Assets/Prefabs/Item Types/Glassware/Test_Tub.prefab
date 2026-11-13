@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 3127921071202712485}
   - component: {fileID: 8884030824650551103}
   - component: {fileID: 6230364227350982640}
+  - component: {fileID: 7217579219626149269}
+  - component: {fileID: 7812383604342190745}
   m_Layer: 7
   m_Name: Test_Tub
   m_TagString: Untagged
@@ -212,6 +214,67 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.43494293, y: 0.20647532, z: 0.4250963}
   m_Center: {x: -0.002461631, y: 1.1533586, z: 0.0024613095}
+--- !u!114 &7217579219626149269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3731759706299733291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3Internal.ES3Prefab
+  prefabId: 1451077638163671776
+  localRefs:
+    _Keys:
+    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    - {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    - {fileID: 3127921071202712485, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 4983445559577190678, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 7755576138566201604, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 2991170879301047796, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 7896962519582466213, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 11400000, guid: 1b83557d361411440969601aa99a93bb, type: 2}
+    - {fileID: 5418012587124399469, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 3731759706299733291, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: -1761099038643416382, guid: 10a0b29044a03664c9b6952faf557025, type: 3}
+    - {fileID: 2800000, guid: 39cb0c78f2977554981729835ab75905, type: 3}
+    - {fileID: 5217060457567411043, guid: 10a0b29044a03664c9b6952faf557025, type: 3}
+    - {fileID: 6708438335908866973, guid: 10a0b29044a03664c9b6952faf557025, type: 3}
+    - {fileID: 8884030824650551103, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 7217579219626149269, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 7812383604342190745, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 1772762041267720123, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 6230364227350982640, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 6093596572517532470, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 2450785328053060868, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    - {fileID: 8616472510820601176, guid: 899b736d99ea17d4ab3b757b8fad24bb, type: 3}
+    _Values: 76b85324aa2f8e7ad9caae41bb614662a7ea2c5ba0844c7228f368b0fda65f7181e5a2b3ae924c08617e6709d30a7f7ada61e76a27148f019da1825010847d7e17f6ff46c6f16922c58dccc04f2fcb68a10eeb7ef36baf63184fe4d36960353155b4b29b76f616313d2aa5a97ea93a164c643830aa9ace0d0e30e7d4dde71552da7eaea1436a647a5fb1db1c1f3edf5a5b2bf841079d825b941eb26268c088338a1532e27cf8fe57e3e02257707eb50f6b3c1b1c49b18a6el
+--- !u!114 &7812383604342190745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3731759706299733291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3AutoSave
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  saveDestroyed: 0
+  componentsToSave:
+  - {fileID: 8616472510820601176}
+  - {fileID: 8884030824650551103}
 --- !u!1 &5418012587124399469
 GameObject:
   m_ObjectHideFlags: 0

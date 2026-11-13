@@ -89,6 +89,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1637666497773127306}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3020484098681066394}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2852701101294830901}
   m_SourcePrefab: {fileID: 100100000, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
 --- !u!1 &1275393589192403819 stripped
 GameObject:
@@ -188,3 +194,69 @@ MonoBehaviour:
   IsPlaced: 0
   isInShelf: 0
   placementRotationOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &3020484098681066394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275393589192403819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3Internal.ES3Prefab
+  prefabId: 8408624791382476467
+  localRefs:
+    _Keys:
+    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    - {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    - {fileID: 3267098263532142196, guid: 76770c71d4deca34fb4863584db60ddb, type: 3}
+    - {fileID: -6478536213147159724, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
+    - {fileID: 2800000, guid: 180fd906c3d6f6d40aaa3d6970fb92c4, type: 3}
+    - {fileID: 11400000, guid: 31b8335027f9ccf438ecf76cbef4baeb, type: 2}
+    - {fileID: -7511558181221131132, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
+    - {fileID: 3912740434777172415, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
+    - {fileID: 919132149155446097, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
+    - {fileID: 1275393589192403819, guid: 76770c71d4deca34fb4863584db60ddb, type: 3}
+    - {fileID: -5495902117074765545, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
+    - {fileID: 771214800917105342, guid: 76770c71d4deca34fb4863584db60ddb, type: 3}
+    - {fileID: -5754084199372789682, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
+    - {fileID: 6550754959536159857, guid: 76770c71d4deca34fb4863584db60ddb, type: 3}
+    - {fileID: 1664586056934592213, guid: 76770c71d4deca34fb4863584db60ddb, type: 3}
+    - {fileID: 1943526555266314705, guid: 76770c71d4deca34fb4863584db60ddb, type: 3}
+    - {fileID: 2179927768849649163, guid: 76770c71d4deca34fb4863584db60ddb, type: 3}
+    - {fileID: 1647233997285664658, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
+    - {fileID: -8679921383154817045, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
+    - {fileID: 1637666497773127306, guid: 76770c71d4deca34fb4863584db60ddb, type: 3}
+    - {fileID: 3020484098681066394, guid: 76770c71d4deca34fb4863584db60ddb, type: 3}
+    - {fileID: 2852701101294830901, guid: 76770c71d4deca34fb4863584db60ddb, type: 3}
+    _Values: cb4bb45d5e2db357f4842363b477b069eb042a6942a67a6db194487499e44c2b1ca95b295280e012896e72a0f9fe9e58baf4cdd576718e2b30b8be4a2e75fb749b2e51b2265b09541b303203ff32cc406635ec22ea516213ef413bac5db01548f74f80ae45483225509599a158018b68ff5b9fd8b01a28111ae9516be957a757fdd2a2c7deeb2e7c4a7f5d97694a4d6b4b2d5175f2b1963965cc2a1a86b4c1063b4dcfb1bde9872f8c208b211404600ce38dba3136e5464fl
+--- !u!114 &2852701101294830901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275393589192403819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3AutoSave
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  saveDestroyed: 0
+  componentsToSave:
+  - {fileID: 1943526555266314705}
+  - {fileID: 1637666497773127306}
+--- !u!4 &1943526555266314705 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 79e25789646ef9945999dd0b30a8573f, type: 3}
+  m_PrefabInstance: {fileID: 2121884164047410746}
+  m_PrefabAsset: {fileID: 0}

@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9cadac83620c5494f83a0af0d95c54b9, type: 3}
       propertyPath: m_Name
-      value: Alien Stargazer
+      value: Alien Spikefruit
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 9cadac83620c5494f83a0af0d95c54b9, type: 3}
       propertyPath: m_Layer
@@ -166,6 +166,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cadac83620c5494f83a0af0d95c54b9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8700607636110677327}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cadac83620c5494f83a0af0d95c54b9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4279875781392929123}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cadac83620c5494f83a0af0d95c54b9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3685312315622507883}
   m_SourcePrefab: {fileID: 100100000, guid: 9cadac83620c5494f83a0af0d95c54b9, type: 3}
 --- !u!4 &6174502539442555201 stripped
 Transform:
@@ -249,3 +255,74 @@ MonoBehaviour:
   IsPlaced: 0
   isInShelf: 0
   placementRotationOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &4279875781392929123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6844325691392578555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3Internal.ES3Prefab
+  prefabId: 4506215099351472414
+  localRefs:
+    _Keys:
+    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    - {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    - {fileID: 919132149155446097, guid: b877a87fc7b06224ca229921f52b9045, type: 3}
+    - {fileID: -8679921383154817045, guid: 9cadac83620c5494f83a0af0d95c54b9, type: 3}
+    - {fileID: -5754084199372789682, guid: 9cadac83620c5494f83a0af0d95c54b9, type: 3}
+    - {fileID: 7070623711463180004, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 1213154465787787869, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 2100000, guid: 03355f5f593ba6e4caa3f45f240d65ba, type: 2}
+    - {fileID: 2100000, guid: 1332d68c5a94a6f46b891ebb0be3d11c, type: 2}
+    - {fileID: 2100000, guid: ee4f9d00d1daec040849e6f46dcf02d3, type: 2}
+    - {fileID: -5754084199372789682, guid: b877a87fc7b06224ca229921f52b9045, type: 3}
+    - {fileID: 1281445088204563769, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 2844628009241720312, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 6174502539442555201, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 6928294686062767628, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 2800000, guid: 8df004d0322bab24da28a00b59175372, type: 3}
+    - {fileID: 1303311131091783572, guid: b877a87fc7b06224ca229921f52b9045, type: 3}
+    - {fileID: 3685312315622507883, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 8700607636110677327, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 4279875781392929123, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 919132149155446097, guid: 9cadac83620c5494f83a0af0d95c54b9, type: 3}
+    - {fileID: -6207207691166016298, guid: 9cadac83620c5494f83a0af0d95c54b9, type: 3}
+    - {fileID: 6844325691392578555, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 3184597676331822914, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 2800000, guid: 78c0d0d69317021428ae84c5484bef40, type: 3}
+    - {fileID: 3976971795573329559, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: 5042643467145540142, guid: 462a2e583c2b9a348891fd50ac3b610d, type: 3}
+    - {fileID: -7511558181221131132, guid: 9cadac83620c5494f83a0af0d95c54b9, type: 3}
+    - {fileID: -7511558181221131132, guid: b877a87fc7b06224ca229921f52b9045, type: 3}
+    - {fileID: 11400000, guid: f13ab55622ca01349a16c2453c2a5527, type: 2}
+    - {fileID: 5487593041133929332, guid: b877a87fc7b06224ca229921f52b9045, type: 3}
+    - {fileID: -8679921383154817045, guid: b877a87fc7b06224ca229921f52b9045, type: 3}
+    _Values: 0073e9c37b31bb2bc11fbda557e11a4edd0c779628d0e762ffd382713dd23c5b558345a38de4e7179d965aaa6e993e2ea482eaf126defa7e14a93fd420527b2c8c86c24eb42c6811e26104399290c60c20381453e974101aec6b0dd32de6ca3a8592cc1d0f0a2817ca22cfd52d3094666ce61637aaa3cd3ee77f54b2003123465e67caa6ae91180098dd3a203a3b3e045dc89d97ae5d6b41e2ee7e64127ca20db518a7ddb430bd71693523eb8547cc0132926693b4e53b3e07814837b6e63067a01d4f8a8716d25019c6cf6b4e8f1711e786f88b932d49266c3a6bea2f90a6159615a5b65c25bc279bc9d940f8abb47cd63efeee51256d77e0462e7b4a28e642f9c3650f5233205al
+--- !u!114 &3685312315622507883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6844325691392578555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3AutoSave
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  saveDestroyed: 0
+  componentsToSave:
+  - {fileID: 6174502539442555201}
+  - {fileID: 8700607636110677327}

@@ -104,6 +104,8 @@ GameObject:
   - component: {fileID: 6958547542221312268}
   - component: {fileID: -2139652557415839650}
   - component: {fileID: -3859745520430709754}
+  - component: {fileID: -1200416205856607918}
+  - component: {fileID: 2327896887323280807}
   m_Layer: 7
   m_Name: Pill Bottle Normal
   m_TagString: Untagged
@@ -256,3 +258,65 @@ MonoBehaviour:
   IsPlaced: 0
   isInShelf: 0
   placementRotationOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &-1200416205856607918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7374890021649818405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3Internal.ES3Prefab
+  prefabId: 594783257100106403
+  localRefs:
+    _Keys:
+    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    - {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    - {fileID: 5620589831883116994, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: 5710176342819969257, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: 2327896887323280807, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: -1200416205856607918, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: -3859745520430709754, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: 6958547542221312268, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: -2139652557415839650, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: 3191860260612803061, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: 5483521951330398744, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: 7374890021649818405, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: 938209674121510425, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: 8393578589860172249, guid: a9f341f0fda1dbd42ab41e0250cb3b58, type: 3}
+    - {fileID: -6936142122551264705, guid: a9f341f0fda1dbd42ab41e0250cb3b58, type: 3}
+    - {fileID: 2800000, guid: 6dd4e713d382cf146af831c697e62e41, type: 3}
+    - {fileID: 7549727089247424770, guid: a9f341f0fda1dbd42ab41e0250cb3b58, type: 3}
+    - {fileID: 2800000, guid: 848f6ef61e2622a42acf476c15599c16, type: 3}
+    - {fileID: 2800000, guid: 1e7ac14184f7e8c479295a389e811cbe, type: 3}
+    - {fileID: 2100000, guid: 7de715e22cbc6ee439c33149d646f976, type: 2}
+    - {fileID: 3978577040877864207, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: 4688443172075213361, guid: 7d474277f308d374ebe1ed4c7b79cbd2, type: 3}
+    - {fileID: 11400000, guid: 7c83d101ea918d94b9d5fdba01ddf4e5, type: 2}
+    _Values: 02ed0743e65af86387985f3a4f3d956aacac9ea8077ec56aa30e3c85165490082737cf28752c366cf732c8bcb8e16b539656ec3eaf995f32e908663262ac0e42b471f12a183edf2e3fdc7644bfb33866dd008dc97360d233d8123a95b3d71a7001b989be4fe2316153bc42b98357c04d45f6f4220ef8b659e3c6c3564a656a59aea65285f3c9f313bcdb960a4adb11754ba1dbaacb3d7f1ab7cb54c6dcd7815a47cff26605be5a0fe6c2f49a6885fb1e31c817748566ff7fd9380ba98ac08d70l
+--- !u!114 &2327896887323280807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7374890021649818405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3AutoSave
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  saveDestroyed: 0
+  componentsToSave:
+  - {fileID: 3191860260612803061}
+  - {fileID: -3859745520430709754}

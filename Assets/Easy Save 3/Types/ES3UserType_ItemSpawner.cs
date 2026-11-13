@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("items", "itemsSpawned", "maxItems", "spawnArea", "spawnHeight", "maxAttempts", "obstacleLayer")]
+	[ES3PropertiesAttribute("items", "itemsSpawned", "maxItems", "spawnArea", "minSpawnHeight", "maxSpawnHeight", "maxAttempts", "obstacleLayer")]
 	public class ES3UserType_ItemSpawner : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -20,7 +20,8 @@ namespace ES3Types
 			writer.WritePrivateField("itemsSpawned", instance);
 			writer.WritePrivateField("maxItems", instance);
 			writer.WritePrivateFieldByRef("spawnArea", instance);
-			writer.WritePrivateField("spawnHeight", instance);
+			writer.WritePrivateField("minSpawnHeight", instance);
+			writer.WritePrivateField("maxSpawnHeight", instance);
 			writer.WritePrivateField("maxAttempts", instance);
 			writer.WritePrivateField("obstacleLayer", instance);
 		}
@@ -45,8 +46,11 @@ namespace ES3Types
 					case "spawnArea":
 					instance = (ItemSpawner)reader.SetPrivateField("spawnArea", reader.Read<UnityEngine.BoxCollider>(), instance);
 					break;
-					case "spawnHeight":
-					instance = (ItemSpawner)reader.SetPrivateField("spawnHeight", reader.Read<System.Single>(), instance);
+					case "minSpawnHeight":
+					instance = (ItemSpawner)reader.SetPrivateField("minSpawnHeight", reader.Read<System.Single>(), instance);
+					break;
+					case "maxSpawnHeight":
+					instance = (ItemSpawner)reader.SetPrivateField("maxSpawnHeight", reader.Read<System.Single>(), instance);
 					break;
 					case "maxAttempts":
 					instance = (ItemSpawner)reader.SetPrivateField("maxAttempts", reader.Read<System.Int32>(), instance);

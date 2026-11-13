@@ -91,7 +91,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6302793137499037374}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8031418831251590197}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -2984610406880395265}
   m_SourcePrefab: {fileID: 100100000, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
+--- !u!4 &509645940276884734 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
+  m_PrefabInstance: {fileID: 42811912719766293}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &889866529525214788 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
@@ -211,3 +222,63 @@ MonoBehaviour:
   IsPlaced: 0
   isInShelf: 0
   placementRotationOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &-8031418831251590197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889866529525214788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3Internal.ES3Prefab
+  prefabId: 4910598136684020335
+  localRefs:
+    _Keys:
+    - {fileID: 8164388750953057965, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
+    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    - {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    - {fileID: 3512099473694358363, guid: cf09ce263ab08ef4d9ae9f581cc52da1, type: 3}
+    - {fileID: -9186707164081085573, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
+    - {fileID: 919132149155446097, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
+    - {fileID: -7511558181221131132, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
+    - {fileID: -8679921383154817045, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
+    - {fileID: 889866529525214788, guid: cf09ce263ab08ef4d9ae9f581cc52da1, type: 3}
+    - {fileID: 1682530506898640785, guid: cf09ce263ab08ef4d9ae9f581cc52da1, type: 3}
+    - {fileID: 11400000, guid: 30a84d9a6187fa944b01b34bd82f2e2f, type: 2}
+    - {fileID: 2800000, guid: 397e62b2125c10043ba6766cd357eaa6, type: 3}
+    - {fileID: -8031418831251590197, guid: cf09ce263ab08ef4d9ae9f581cc52da1, type: 3}
+    - {fileID: 6302793137499037374, guid: cf09ce263ab08ef4d9ae9f581cc52da1, type: 3}
+    - {fileID: -2984610406880395265, guid: cf09ce263ab08ef4d9ae9f581cc52da1, type: 3}
+    - {fileID: 6511048494175644369, guid: cf09ce263ab08ef4d9ae9f581cc52da1, type: 3}
+    - {fileID: 5096274485973711128, guid: cf09ce263ab08ef4d9ae9f581cc52da1, type: 3}
+    - {fileID: 8785825536676846634, guid: cf09ce263ab08ef4d9ae9f581cc52da1, type: 3}
+    - {fileID: 509645940276884734, guid: cf09ce263ab08ef4d9ae9f581cc52da1, type: 3}
+    - {fileID: 2697102456961415705, guid: cf09ce263ab08ef4d9ae9f581cc52da1, type: 3}
+    - {fileID: -5754084199372789682, guid: 9f3b606632318c04d82e401ea079e062, type: 3}
+    _Values: de44be1b055fc0463d3f16e7fc25421d95ebb75c03c0bd2ce6a0995457338b11dee9f364931c3b65ae521782c2455a58d0178547a829af48cb2839aa0ec05a4efaea837f0ffac500c0a24f103ac84160fe15ca9a3a9311708cab67a8c4522c2e1d1342831a2656439134d4636de24777beaf19da06fc005407f9b06128cf222393dbea1da80bf366b8ff8124c4aada7812b685ac7bbf1d3c4fe214fa829b4b1a6ea07313c5897c106e02e5602aff6b06l
+--- !u!114 &-2984610406880395265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889866529525214788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3AutoSave
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  saveDestroyed: 0
+  componentsToSave:
+  - {fileID: 509645940276884734}
+  - {fileID: 6302793137499037374}

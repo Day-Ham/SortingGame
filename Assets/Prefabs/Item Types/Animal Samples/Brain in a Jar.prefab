@@ -286,6 +286,8 @@ GameObject:
   - component: {fileID: 3100991525792451771}
   - component: {fileID: 7398684479395205764}
   - component: {fileID: 743188581456096725}
+  - component: {fileID: 6872320818860366392}
+  - component: {fileID: -8988002678618673322}
   m_Layer: 7
   m_Name: Brain in a Jar
   m_TagString: Untagged
@@ -484,3 +486,77 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.034910183, y: 0.0038190805, z: 0.035743743}
   m_Center: {x: -0.0002360823, y: 0.035527032, z: -0.0013059363}
+--- !u!114 &6872320818860366392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8933119757977117963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3Internal.ES3Prefab
+  prefabId: 652833375087552149
+  localRefs:
+    _Keys:
+    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    - {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    - {fileID: 11400000, guid: 4967b89e660009148864f9e46daf81cc, type: 2}
+    - {fileID: 7398684479395205764, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 2319842076248707747, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 4212569981190291103, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 1060440823542149254, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 3714284378174355817, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+    - {fileID: 761312732139115715, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 3192119870977717926, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 6892731351901025561, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 8959106675926725446, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 4093380544976514219, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 8933119757977117963, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 4881355452139971012, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 2507494574224349254, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: -876546973899608171, guid: e0e03b2b15f65464a9f98c54d729de74, type: 3}
+    - {fileID: 2800000, guid: 2b5b76f0d803ad14a88bbec95728aea3, type: 3}
+    - {fileID: 8556262120643298411, guid: e0e03b2b15f65464a9f98c54d729de74, type: 3}
+    - {fileID: 4874126678125670354, guid: e0e03b2b15f65464a9f98c54d729de74, type: 3}
+    - {fileID: 1065733200342822780, guid: e0e03b2b15f65464a9f98c54d729de74, type: 3}
+    - {fileID: 4293751317952506913, guid: e0e03b2b15f65464a9f98c54d729de74, type: 3}
+    - {fileID: 7065439566198968859, guid: e0e03b2b15f65464a9f98c54d729de74, type: 3}
+    - {fileID: 435963976002415287, guid: e0e03b2b15f65464a9f98c54d729de74, type: 3}
+    - {fileID: 3100991525792451771, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: -8988002678618673322, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 6872320818860366392, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 7054087615913518051, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 4666556660658864889, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 6872123253720474866, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 1890852065803796616, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 1308901321289279170, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 743188581456096725, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    - {fileID: 7035661633932933930, guid: 19570ba116180fe489803a6efd72a975, type: 3}
+    _Values: 85668d4f086ec5302249c6148416542ffab2951526c2bc1a1aa03fbe4148343aa589adeb6b868f53aa754498b5e4737627700d7e8e2efc18c7209a27bd5c0456eee457cc38cac1313bcce430e9252f3e2f9282756303515140a2719d14d0ae5fab7369a9ad8472697e018a62b8cbf40b78ed181f1c7d0b1177e5e9e75222887da7356d829c3f1316ef040079f105192e98f22de82d0e8358385758742a4487547a390452252b70118e7ed2bb97979138db02872a5022e47a97bee15585035861af1808633bc1f06b7ee3a451c4373f5f76dda177c5128c0db7b944ebb059032e5b84123991a311013af527bff817337fc0f0708c96cc522653dc101ced2d8775d3844b8c6c3b441e529cdec683ca4520a2af792f9dbc9c5ce9bb919504d36507l
+--- !u!114 &-8988002678618673322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8933119757977117963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3AutoSave
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  saveDestroyed: 0
+  componentsToSave:
+  - {fileID: 1308901321289279170}
+  - {fileID: 3100991525792451771}

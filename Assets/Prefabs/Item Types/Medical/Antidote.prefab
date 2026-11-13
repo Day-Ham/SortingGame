@@ -85,7 +85,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6518733287187561279}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1078748198682254438}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -7176362077226272179}
   m_SourcePrefab: {fileID: 100100000, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
+--- !u!4 &7177337423143034190 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
+  m_PrefabInstance: {fileID: 7210754650695514789}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7552772933211293684 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
@@ -165,3 +176,61 @@ MonoBehaviour:
   IsPlaced: 0
   isInShelf: 0
   placementRotationOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &1078748198682254438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552772933211293684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3Internal.ES3Prefab
+  prefabId: 4144557147563348720
+  localRefs:
+    _Keys:
+    - {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+    - {fileID: 4800000, guid: e6e9a19c3678ded42a3bc431ebef7dbd, type: 3}
+    - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
+    - {fileID: 3749272135975684691, guid: a8ce9b1eabc58b34e8079547ad81705e, type: 3}
+    - {fileID: 6067718477853086443, guid: a8ce9b1eabc58b34e8079547ad81705e, type: 3}
+    - {fileID: -7511558181221131132, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
+    - {fileID: 11400000, guid: f6c8a91d560e72146baae680e615ffad, type: 2}
+    - {fileID: 7552772933211293684, guid: a8ce9b1eabc58b34e8079547ad81705e, type: 3}
+    - {fileID: 8345216870429828641, guid: a8ce9b1eabc58b34e8079547ad81705e, type: 3}
+    - {fileID: 7177337423143034190, guid: a8ce9b1eabc58b34e8079547ad81705e, type: 3}
+    - {fileID: 5599668336878860410, guid: a8ce9b1eabc58b34e8079547ad81705e, type: 3}
+    - {fileID: 919132149155446097, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
+    - {fileID: 2800000, guid: 23a184080d512ce45aacca7feda96036, type: 3}
+    - {fileID: 9185737683893222716, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
+    - {fileID: 3161495810150112430, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
+    - {fileID: 6518733287187561279, guid: a8ce9b1eabc58b34e8079547ad81705e, type: 3}
+    - {fileID: 1078748198682254438, guid: a8ce9b1eabc58b34e8079547ad81705e, type: 3}
+    - {fileID: -7176362077226272179, guid: a8ce9b1eabc58b34e8079547ad81705e, type: 3}
+    - {fileID: -8679921383154817045, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
+    - {fileID: -5754084199372789682, guid: 142ad994ee871d44b9925cef80b63731, type: 3}
+    _Values: 2e7d4e989d8fbb45fd23dd8765dbff008a69d7f72f58221b16111c9c70120b48475e3c94f08ccb0e3c8e69b05af97f342d2e21d2bb83977a2e26d21ffd3a23224cba213a22971171d58b04ddabc9440cd65e8e672a23c9015f967d738ce12a1086b6455f118d3f0e6eaf3661cb22fc319da67ecbd99fc80dad646546eb7b015b3318a55a803d3e5ff784b043e21c123ff500a78d3609731289bca93435769848l
+--- !u!114 &-7176362077226272179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552772933211293684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::ES3AutoSave
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  saveDestroyed: 0
+  componentsToSave:
+  - {fileID: 7177337423143034190}
+  - {fileID: 6518733287187561279}
