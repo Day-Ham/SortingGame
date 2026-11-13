@@ -210,7 +210,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (ui == null) return;
         ui.SetUIText(ui.amountHeldText, heldItems.Count.ToString());
-        ui.SetUIText(ui.maxHeldItemsText, "/ " + maxHeldItems.ToString());
+        ui.SetUIText(ui.maxHeldItemsText, maxHeldItems.ToString());
 
         // No items
         if (heldItems.Count == 0)

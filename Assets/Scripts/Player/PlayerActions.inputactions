@@ -738,17 +738,6 @@
                 },
                 {
                     "name": "",
-                    "id": "9e6ff903-8e70-41ec-8875-3ac14ffa90b4",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard",
-                    "action": "Escape1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "84862090-1be0-4ed7-aac1-79b922c9438c",
                     "path": "<Gamepad>/buttonNorth",
                     "interactions": "",

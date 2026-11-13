@@ -189,16 +189,16 @@ MonoBehaviour:
     numpadPeriod: {fileID: 21300000, guid: 7d3d041e427a5064aa64dc9879cb53d0, type: 3}
     numpadEquals: {fileID: 21300000, guid: 032b056fdaf44b243ae0c9a1d7577b05, type: 3}
     numpadComma: {fileID: 21300000, guid: 31eb83b63a69a9342bbee6e6e300849e, type: 3}
-    leftMouse: {fileID: 21300000, guid: bffdf8cbd8232a14c9e2eb0ebe93c6c4, type: 3}
-    rightMouse: {fileID: 21300000, guid: 3c477db1ce513e54c828b3ceeb5caf46, type: 3}
-    middleMouse: {fileID: 21300000, guid: 75d38e34a5887f3439d5351f8493e77b, type: 3}
-    forwardMouse: {fileID: 21300000, guid: d6c213c65751dc44f96262d3ea9cc0fb, type: 3}
-    backMouse: {fileID: 21300000, guid: 4d13b7133ac17aa47a8f32f25c6ec8a3, type: 3}
+    leftMouse: {fileID: 21300000, guid: 19f853df2dd3d5b45b348e3fe362279a, type: 3}
+    rightMouse: {fileID: 21300000, guid: bbadfcca715c80b4fbab4da0acf07e07, type: 3}
+    middleMouse: {fileID: 21300000, guid: efa2a3504f39a4e4980589b7b32e3384, type: 3}
+    forwardMouse: {fileID: 21300000, guid: 8844d1c9f8347e54cb0749a4a18beb47, type: 3}
+    backMouse: {fileID: 21300000, guid: d78cd7d70e045084e8129063ed018991, type: 3}
     mousePosition: {fileID: 0}
     mouseDelta: {fileID: 0}
-    scrollWheel: {fileID: 21300000, guid: 75d38e34a5887f3439d5351f8493e77b, type: 3}
-    scrollUp: {fileID: 0}
-    scrollDown: {fileID: 0}
+    scrollWheel: {fileID: 21300000, guid: efa2a3504f39a4e4980589b7b32e3384, type: 3}
+    scrollUp: {fileID: 21300000, guid: 420ede99f44e7c74db39c45f915b78e6, type: 3}
+    scrollDown: {fileID: 21300000, guid: 7aedaf03e311c424f98eccc1004b8ca8, type: 3}
   xbox:
     buttonSouth: {fileID: 21300000, guid: 3fabb41ef8768f649b64314906becee5, type: 3}
     buttonNorth: {fileID: 21300000, guid: a0193431052c12f4c9d81e98aa80668c, type: 3}
@@ -693,16 +693,16 @@ MonoBehaviour:
     numpadPeriod: {fileID: 21300000, guid: 7d3d041e427a5064aa64dc9879cb53d0, type: 3}
     numpadEquals: {fileID: 21300000, guid: 032b056fdaf44b243ae0c9a1d7577b05, type: 3}
     numpadComma: {fileID: 21300000, guid: 31eb83b63a69a9342bbee6e6e300849e, type: 3}
-    leftMouse: {fileID: 21300000, guid: bffdf8cbd8232a14c9e2eb0ebe93c6c4, type: 3}
-    rightMouse: {fileID: 21300000, guid: 3c477db1ce513e54c828b3ceeb5caf46, type: 3}
-    middleMouse: {fileID: 21300000, guid: 75d38e34a5887f3439d5351f8493e77b, type: 3}
-    forwardMouse: {fileID: 21300000, guid: d6c213c65751dc44f96262d3ea9cc0fb, type: 3}
-    backMouse: {fileID: 21300000, guid: 4d13b7133ac17aa47a8f32f25c6ec8a3, type: 3}
+    leftMouse: {fileID: 21300000, guid: 19f853df2dd3d5b45b348e3fe362279a, type: 3}
+    rightMouse: {fileID: 21300000, guid: bbadfcca715c80b4fbab4da0acf07e07, type: 3}
+    middleMouse: {fileID: 21300000, guid: efa2a3504f39a4e4980589b7b32e3384, type: 3}
+    forwardMouse: {fileID: 21300000, guid: 8844d1c9f8347e54cb0749a4a18beb47, type: 3}
+    backMouse: {fileID: 21300000, guid: d78cd7d70e045084e8129063ed018991, type: 3}
     mousePosition: {fileID: 0}
     mouseDelta: {fileID: 0}
-    scrollWheel: {fileID: 21300000, guid: 75d38e34a5887f3439d5351f8493e77b, type: 3}
-    scrollUp: {fileID: 0}
-    scrollDown: {fileID: 0}
+    scrollWheel: {fileID: 21300000, guid: efa2a3504f39a4e4980589b7b32e3384, type: 3}
+    scrollUp: {fileID: 21300000, guid: 420ede99f44e7c74db39c45f915b78e6, type: 3}
+    scrollDown: {fileID: 21300000, guid: 7aedaf03e311c424f98eccc1004b8ca8, type: 3}
   xbox:
     buttonSouth: {fileID: 21300000, guid: 3fabb41ef8768f649b64314906becee5, type: 3}
     buttonNorth: {fileID: 21300000, guid: a0193431052c12f4c9d81e98aa80668c, type: 3}
@@ -5203,7 +5203,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ControllerRestKeybindingToDefault
   resetToDefaultPrompt: {fileID: 5997705361947274067}
-  selectable: {fileID: 0}
 --- !u!114 &7586342084329525824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10111,7 +10110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: Square
+      value: X
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -10277,7 +10276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad Right
+      value: RB
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -10447,7 +10446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: Circle
+      value: D-Pad/Left
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -10617,7 +10616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad Up
+      value: RT
       objectReference: {fileID: 0}
     - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -11150,7 +11149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: R1
+      value: Left Stick Press
       objectReference: {fileID: 0}
     - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -11513,7 +11512,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: L1
+      value: D-Pad/Up
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -12019,7 +12018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: Triangle
+      value: Y
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -12548,7 +12547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: L2
+      value: D-Pad/Right
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -12718,7 +12717,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: Cross
+      value: A
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -13069,7 +13068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad Down
+      value: LT
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
@@ -13250,7 +13249,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad Left
+      value: LB
       objectReference: {fileID: 0}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
