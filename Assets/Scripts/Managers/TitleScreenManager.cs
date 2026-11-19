@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -45,7 +46,7 @@ public class TitleScreenManager : MonoBehaviour
     UserInput input;
     PlayerInput playerInput;
     InputDeviceDetector inputDetector;
-
+    SetsUIElementToSelectOnInteraction mainMenuSelectUI;
     SetsUIElementToSelectOnInteraction playMenuSelectUI;
     public bool isSecondarySelected;
 
@@ -68,12 +69,15 @@ public class TitleScreenManager : MonoBehaviour
     {
         inputDetector = InputDeviceDetector.Instance;
         input = UserInput.instance;
+        mainMenuSelectUI = mainMenu.GetComponent<SetsUIElementToSelectOnInteraction>();
         playMenuSelectUI = playMenu.GetComponent<SetsUIElementToSelectOnInteraction>();
         
         playerInput = FindAnyObjectByType<PlayerInput>();
         playerInput.SwitchCurrentActionMap("UI");
 
         isSecondarySelected = false;
+
+        
 
         OpenMainMenu();
     }
@@ -126,6 +130,7 @@ public class TitleScreenManager : MonoBehaviour
             TweenMenuClose(playMenu);
         }
 
+        mainMenuSelectUI.enabled = true;
         mainMenu.SetActive(true);
         Debug.Log("TitleScreenManager: Opened Main Menu");
     }
@@ -134,17 +139,20 @@ public class TitleScreenManager : MonoBehaviour
     {
         if (isSecondarySelected) return;
 
+        mainMenuSelectUI.enabled = false;
+        EventSystem.current.SetSelectedGameObject(null);
         TweenMenuOpen(playMenu);
-        mainMenu.SetActive(false);
 
-        //default stage is 1;
         InitializeStage();
     }
 
     public void OpenSettingsMenu()
     {
         if (isSecondarySelected) return;
-        mainMenu.SetActive(false);
+
+        mainMenuSelectUI.enabled = false;
+        EventSystem.current.SetSelectedGameObject(null);
+
         TweenMenuOpen(settingsMenu);
     }
 
