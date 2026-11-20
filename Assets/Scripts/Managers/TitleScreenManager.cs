@@ -41,6 +41,11 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] private Button cancelDefaultButton;
     [SerializeField] private Button settingsBackButton;
 
+    [Header("Credits")]
+    [SerializeField] private GameObject credits;
+    [SerializeField] private Button creditsButton;
+    [SerializeField] private CreditsManager creditsManager;
+
     private int stageIndex;
 
     UserInput input;
@@ -62,6 +67,7 @@ public class TitleScreenManager : MonoBehaviour
         playBackBtn.onClick.AddListener(OpenMainMenu);
         settingsBackButton.onClick.AddListener(OpenMainMenu);
         cancelDefaultButton.onClick.AddListener(CancelDefault);
+        creditsButton.onClick.AddListener(PlayCredits);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -86,12 +92,7 @@ public class TitleScreenManager : MonoBehaviour
     {
         if (input.EscapeInput)
         {
-            if (keybindingOverlay.activeInHierarchy) return;
-            if (duplicatePrompt.activeInHierarchy)
-            {
-                Debug.Log("TitleScreenManager: Duplicate prompt is open, do nothing");
-                return;
-            }
+            if (keybindingOverlay.activeInHierarchy || duplicatePrompt.activeInHierarchy) return;
 
             if (defaultPrompt.activeInHierarchy)
             {
@@ -130,6 +131,11 @@ public class TitleScreenManager : MonoBehaviour
             TweenMenuClose(playMenu);
         }
 
+        if (credits.activeInHierarchy && creditsManager.playingCredits)
+        {
+            creditsManager.StopCredits();
+        }
+
         mainMenuSelectUI.enabled = true;
         mainMenu.SetActive(true);
         Debug.Log("TitleScreenManager: Opened Main Menu");
@@ -154,6 +160,16 @@ public class TitleScreenManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
 
         TweenMenuOpen(settingsMenu);
+    }
+
+    public void PlayCredits()
+    {
+        if (isSecondarySelected) return;
+
+        mainMenuSelectUI.enabled = false;
+        EventSystem.current.SetSelectedGameObject(null);
+
+        credits.SetActive(true);
     }
 
     private void InitializeStage()
