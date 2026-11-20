@@ -15,7 +15,7 @@ MonoBehaviour:
   displayName: Hologram Projector
   description: 
   type: 11
-  preferredOrientation: {x: 0, y: 45, z: 180}
+  preferredOrientation: {x: 0, y: 25, z: 180}
   useRandomRotation: 0
   randomRotationOffset: {x: 0, y: 0, z: 0}
   rows: 2
