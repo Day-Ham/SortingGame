@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 06172a02816a2f447b13adcee8810bf4
+guid: c433945b33733594a97db4384e9266ef
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3073802945527130688
-    second: Screenshot 2026-10-27 154409_0
+      213: -8768014895063467246
+    second: FastForwardButtonInteract2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -102,13 +102,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Screenshot 2026-10-27 154409_0
+      name: FastForwardButtonInteract2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1118
-        height: 659
+        width: 476
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -117,8 +117,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 04aa1b54e7758aa20800000000000000
-      internalID: 3073802945527130688
+      spriteID: 21b786a68e0c15680800000000000000
+      internalID: -8768014895063467246
       vertices: []
       indices: 
       edges: []

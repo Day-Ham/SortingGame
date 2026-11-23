@@ -24,16 +24,7 @@ public class InputPrompt : MonoBehaviour
     {
         if (promptImage == null) return;
 
-        if (sprite == null)
-        {
-            promptImage.enabled = false;
-        }
-        else
-        {
-            promptImage.enabled = true;
-        }
-
         promptImage.sprite = sprite;
-        promptImage.enabled = sprite != null;
+        promptImage.gameObject.SetActive(sprite != null);
     }
 }

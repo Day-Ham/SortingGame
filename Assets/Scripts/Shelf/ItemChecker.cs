@@ -23,6 +23,10 @@ public class ItemChecker : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TMP_Text displayNameTxt;
     [SerializeField] private Image background;
+    [SerializeField] private Sprite incompleteShelfDisplay;
+    [SerializeField] private Color incompleteColor;
+    [SerializeField] private Sprite completeShelfDisplay;
+    [SerializeField] private Color completeColor;
 
     [Header("Player")]
     PlayerInteraction player;
@@ -326,7 +330,8 @@ public class ItemChecker : MonoBehaviour
             }
             else
             {
-                background.color = Color.white;
+                background.sprite = incompleteShelfDisplay;
+                displayNameTxt.color = incompleteColor;
                 currentItem.gameObject.layer = LayerMask.NameToLayer("Pickup");
             }
                         
@@ -354,7 +359,8 @@ public class ItemChecker : MonoBehaviour
         heldItems.RemoveAt(heldItems.Count - 1);
         ui.UpdateShelvedCount(-1);
 
-        background.color = Color.white;
+        background.sprite = incompleteShelfDisplay; 
+        displayNameTxt.color = incompleteColor;
 
         if (heldItems.Count == 0)
         {
@@ -395,7 +401,8 @@ public class ItemChecker : MonoBehaviour
 
     private void OnShelfComplete()
     {
-        background.color = Color.green;
+        background.sprite = completeShelfDisplay;
+        displayNameTxt.color = completeColor;
         PulseCompletedItems();
 
         if (AudioManager.Instance != null)

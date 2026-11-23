@@ -1,6 +1,9 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class CreditsManager : MonoBehaviour
 {
@@ -9,6 +12,7 @@ public class CreditsManager : MonoBehaviour
     [SerializeField] private CanvasGroup creditsGroup;
     [SerializeField] private Button exitButton;
     [SerializeField] private Button speedUpButton;
+    [SerializeField] private TMP_Text speedUpTxt;
 
     [Header("Move Parameters")]
     [SerializeField] private float moveDistance;
@@ -95,6 +99,7 @@ public class CreditsManager : MonoBehaviour
         creditsText.transform.localPosition = Vector3.zero;
         creditsGroup.alpha = 0f;
         speedMultiplier = 1;
+        speedUpTxt.text = "X" + speedMultiplier;
 
         CloseCredits();
     }
@@ -114,9 +119,10 @@ public class CreditsManager : MonoBehaviour
             speedMultiplier = 1;
         }
 
+        speedUpTxt.text = "X" + speedMultiplier;
+
         Debug.Log("Multiplier: " + speedMultiplier);
 
         moveTween.timeScale = speedMultiplier;
     }
-
 }

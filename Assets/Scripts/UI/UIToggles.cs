@@ -59,8 +59,6 @@ public class UIToggles : MonoBehaviour
     {
         if (UserInput.instance == null) return;
 
-        Debug.Log("PlayerInputEnabled: " + UserInput.instance.PlayerInputEnabled);
-
         if (tabCooldownTimer > 0f)
         {
             tabCooldownTimer -= Time.unscaledDeltaTime;

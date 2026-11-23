@@ -8941,6 +8941,18 @@ PrefabInstance:
       propertyPath: m_text
       value: Scroll Down
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 6058165185285260727}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 3122941515364205932}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -9122,6 +9134,18 @@ PrefabInstance:
       propertyPath: m_text
       value: Shift
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 3455900650110736121}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 1563926839826225970}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -9144,6 +9168,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 1467350643845252748}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8972408788458072447 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 1467350643845252748}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &1603474368247055569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9292,6 +9327,18 @@ PrefabInstance:
       propertyPath: m_text
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 3531418486889627639}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 6310662675652619913}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -9314,6 +9361,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 1603474368247055569}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9122562843856333602 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 1603474368247055569}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &1890538675672895738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9641,8 +9699,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: X
+      value: Square
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 2325790459196607268}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 2888772657328013609}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -9665,6 +9735,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 2050098373276623861}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8406562957323324422 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 2050098373276623861}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &2496255617101768306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9807,8 +9888,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: RB
+      value: R1
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 2888772657328013609}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 4212803959977906693}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -9831,6 +9924,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 2496255617101768306}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5367462417780967809 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 2496255617101768306}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &2582030752939930187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9977,8 +10081,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad/Left
+      value: D-Pad Left
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 4212803959977906693}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 6260376754692812389}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -10001,6 +10117,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 2582030752939930187}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5407770549083102648 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 2582030752939930187}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &2693543871468965385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10147,7 +10274,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: RT
+      value: R2
       objectReference: {fileID: 0}
     - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -10342,6 +10469,18 @@ PrefabInstance:
       propertyPath: m_text
       value: E
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 6392952762313370699}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 3531418486889627639}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -10364,6 +10503,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 3056989160478438837}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4807010489873586758 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 3056989160478438837}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &3486104188130083768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10512,6 +10662,18 @@ PrefabInstance:
       propertyPath: m_text
       value: RMB
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 2493732281432736702}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 4807010489873586758}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -10534,6 +10696,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 3486104188130083768}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6392952762313370699 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 3486104188130083768}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &3616847922574343204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10680,7 +10853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: Left Stick Press
+      value: L3
       objectReference: {fileID: 0}
     - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Navigation.m_Mode
@@ -10875,6 +11048,18 @@ PrefabInstance:
       propertyPath: m_text
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 6310662675652619913}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 8710032989407850983}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -10897,6 +11082,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 4380763017166826052}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6058165185285260727 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 4380763017166826052}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &4483375892439450006
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11043,8 +11239,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad/Up
+      value: D-Pad Up
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 5407770549083102648}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 3452847481671163626}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -11067,6 +11275,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 4483375892439450006}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6260376754692812389 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 4483375892439450006}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &4560615520883409274
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11215,6 +11434,18 @@ PrefabInstance:
       propertyPath: m_text
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 9122562843856333602}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 6058165185285260727}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -11237,6 +11468,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
   m_PrefabInstance: {fileID: 4560615520883409274}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6310662675652619913 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 4560615520883409274}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!1001 &4657591573846492978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11381,6 +11623,18 @@ PrefabInstance:
       propertyPath: m_text
       value: A
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 1679302977812303819}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 3455900650110736121}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -11398,6 +11652,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+--- !u!114 &2916752833242835137 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 4657591573846492978}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &5145908050948818355 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
@@ -11549,8 +11814,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: Y
+      value: Triangle
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 8406562957323324422}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 5367462417780967809}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -11568,6 +11845,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+--- !u!114 &2888772657328013609 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 4670108081895599834}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &5117611214457334875 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
@@ -11732,7 +12020,7 @@ PrefabInstance:
     - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Navigation.m_SelectOnDown
       value: 
-      objectReference: {fileID: 1679302977812303819}
+      objectReference: {fileID: 8279303913730637577}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -11910,6 +12198,18 @@ PrefabInstance:
       propertyPath: m_text
       value: D
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 2916752833242835137}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 8972408788458072447}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -11927,6 +12227,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+--- !u!114 &3455900650110736121 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 5128657381853559050}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &4676496116614265739 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
@@ -12078,8 +12389,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: D-Pad/Right
+      value: D-Pad Right
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 6260376754692812389}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 2629583337306638130}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -12097,6 +12420,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+--- !u!114 &3452847481671163626 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 5130602309547995417}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &4681889121758720920 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
@@ -12248,8 +12582,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: A
+      value: Cross
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 6550720843026240471}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 8406562957323324422}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -12431,6 +12777,18 @@ PrefabInstance:
       propertyPath: m_text
       value: LMB
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 1563926839826225970}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 6392952762313370699}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -12448,6 +12806,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+--- !u!114 &2493732281432736702 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 5351105043998026829}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &5586741073383009996 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
@@ -12599,8 +12968,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: LT
+      value: L2
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 3452847481671163626}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 5600250337788305914}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -12780,8 +13161,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6422210698158924158, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_text
-      value: LB
+      value: L1
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 5367462417780967809}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 5407770549083102648}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -12799,6 +13192,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+--- !u!114 &4212803959977906693 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 5958146867385810422}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &6153449559788535671 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
@@ -12952,6 +13356,18 @@ PrefabInstance:
       propertyPath: m_text
       value: Q
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 4807010489873586758}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 9122562843856333602}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -12969,6 +13385,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+--- !u!114 &3531418486889627639 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 6474887107591081988}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &6778354235032507013 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
@@ -13122,6 +13549,18 @@ PrefabInstance:
       propertyPath: m_text
       value: Space
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 8972408788458072447}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 2493732281432736702}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -13139,6 +13578,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+--- !u!114 &1563926839826225970 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+  m_PrefabInstance: {fileID: 9037979873221424321}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
 --- !u!224 &8838239538869941824 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 561514848825475713, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
@@ -13288,6 +13738,18 @@ PrefabInstance:
       propertyPath: m_text
       value: S
       objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnUp
+      value: 
+      objectReference: {fileID: 8279303913730637577}
+    - target: {fileID: 7555199470006480883, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 2916752833242835137}
     - target: {fileID: 8644336773426779577, guid: 0c85b448e6db9294284d50d7287d238e, type: 3}
       propertyPath: m_Color.b
       value: 1
