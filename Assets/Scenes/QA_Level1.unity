@@ -2462,7 +2462,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 1421037128}
   elementToSelect: {fileID: 1786492430}
-  secondaryOption: {fileID: 0}
   prompts: []
 --- !u!114 &64156334 stripped
 MonoBehaviour:
@@ -36046,7 +36045,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 1421037128}
   elementToSelect: {fileID: 233200400}
-  secondaryOption: {fileID: 0}
   prompts: []
 --- !u!1 &1413481087
 GameObject:

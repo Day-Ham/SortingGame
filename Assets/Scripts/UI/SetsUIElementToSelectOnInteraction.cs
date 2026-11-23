@@ -12,9 +12,6 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
     private Stack<GameObject> selectionHistory = new Stack<GameObject>();
     public Dictionary<Button, Sprite> normalSprites { get; private set; } = new();
 
-    [Header("Custom Secondary Element")]
-    [SerializeField] private GameObject secondaryOption;
-
     private InputDeviceDetector inputDetector;
     private InputDeviceDetector.InputMode mode;
     private UserInput userInput;
@@ -77,6 +74,16 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
 
         if (Cursor.visible && mode == InputDeviceDetector.InputMode.KeyboardMouse)
         {
+            if (CheckIfAPromptIsActive() == null)
+            {
+                while (selectionHistory.Count > 0)
+                {
+                    ReturnToPreviousSelection();
+                }
+
+                EventSystem.current.SetSelectedGameObject(null);
+            }
+
             hoveredElement = GetHoveredUI();
         }
 
@@ -104,6 +111,9 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
             SetsUIElementToSelectOnInteraction prompt = CheckIfAPromptIsActive();
             if (prompt != null && selected == null)
             {
+                GameObject element = prompt.elementToSelect.gameObject;
+                if (element == null) return;
+
                 prompt.JumpToElement(prompt.elementToSelect.gameObject);
                 return;
             }
@@ -208,21 +218,7 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
         if (isSecondarySelected || currentSelected == null) return;
 
         GameObject secondaryUI = null;
-        if (secondaryOption != null)
-        {
-            if (secondaryOption.CompareTag("SecondaryUIElement"))
-            {
-                secondaryUI = secondaryOption;
-            }
-            else
-            {
-                secondaryUI = FindChildWithTag(secondaryOption.transform, "SecondaryUIElement");
-            }
-        }
-        else
-        {
-            secondaryUI = FindChildWithTag(currentSelected.transform, "SecondaryUIElement");
-        }
+        secondaryUI = FindChildWithTag(currentSelected.transform, "SecondaryUIElement");
 
         if (secondaryUI == null) return;
 
