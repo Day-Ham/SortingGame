@@ -17,6 +17,8 @@ public enum ItemType
     Gadgets,
     AlienMeats,
     TableComponents,
-    TableGadgets
+    TableGadgets,
+    PillBottles
+
 }
 
