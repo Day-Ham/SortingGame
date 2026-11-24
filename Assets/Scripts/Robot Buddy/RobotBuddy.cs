@@ -291,7 +291,7 @@ public class RobotBuddy : MonoBehaviour
 
     private void DropItem()
     {
-        if (heldObject != null /*&& targetItem.HeldBy == transform*/)
+        if (heldObject != null)
         {
             heldObject.transform.SetParent(itemSpawner != null ? itemSpawner.transform : null);
             if (heldRigidbody != null)
@@ -369,8 +369,17 @@ public class RobotBuddy : MonoBehaviour
         Debug.Log($" Robot placed {targetItem.name} on {targetShelf.name}.");
         isResetingVertically = true; //go back to initial hover height
 
+        FinishPlacingItem();
         ResetTargetShelf();
-        CancelPickup();
+    }
+
+    private void FinishPlacingItem()
+    {
+        isPickingUp = false;
+        heldObject = null;
+        heldRigidbody = null;
+        targetItem = null;
+
         isPlacing = false;
         isChasingStolenItem = false;
     }

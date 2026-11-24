@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class PlayerSkills : MonoBehaviour
 {
@@ -16,16 +17,19 @@ public class PlayerSkills : MonoBehaviour
     [SerializeField] private string shelfHighlightLayerName = "ShelfHighlight";
     [SerializeField] private int skill1Level;
     [SerializeField] private int skill1Price = 50;
+    [SerializeField] private TMP_Text skill1PriceText;
 
     [Header("Skill 2")]
     [SerializeField] private float skill2Cooldown = 20f;
     [SerializeField] private int skill2Level;
     [SerializeField] private int skill2Price = 50;
+    [SerializeField] private TMP_Text skill2PriceText;
 
     [Header("Skill 3")]
     [SerializeField] private float skill3Cooldown = 30f;
     [SerializeField] private int skill3Level;
     [SerializeField] private int skill3Price = 50;
+    [SerializeField] private TMP_Text skill3PriceText;
 
     [Header("Steam Manager Check")]
     [SerializeField] private bool skillUsed;
@@ -61,6 +65,7 @@ public class PlayerSkills : MonoBehaviour
         ui.skill3CooldownSlider.value = 1f;
 
         OnLoading();
+        UpdateUIPrices();
     }
 
     private void Update()
@@ -279,6 +284,9 @@ public class PlayerSkills : MonoBehaviour
         }
 
         skill1Price += 50;
+
+        UpdateUIPrices();
+
         ui.FillSlider(ui.skill1Slider, 5);
 
         SteamManager.instance.SkillPurchased(1, skill1Level, 5);
@@ -385,6 +393,9 @@ public class PlayerSkills : MonoBehaviour
         }
 
         skill2Price += 50;
+
+        UpdateUIPrices();
+
         ui.FillSlider(ui.skill2Slider, 5);
 
         SteamManager.instance.SkillPurchased(2, skill2Level, 5);
@@ -486,6 +497,8 @@ public class PlayerSkills : MonoBehaviour
 
         skill3Price += 50;
 
+        UpdateUIPrices();
+
         ui.FillSlider(ui.skill3Slider, 5);
 
         SteamManager.instance.SkillPurchased(3, skill3Level, 5);
@@ -494,7 +507,13 @@ public class PlayerSkills : MonoBehaviour
             saveManager.SaveGame();
     }
     #endregion
-
+    private void UpdateUIPrices()
+    {
+        skill1PriceText.text = skill1Price.ToString("F0");
+        skill2PriceText.text = skill2Price.ToString("F0");
+        skill3PriceText.text = skill3Price.ToString("F0");
+    }
+      
     public void OnLoading()
     {
         if (skillUsed)
@@ -530,7 +549,11 @@ public class PlayerSkills : MonoBehaviour
             ui.FillSlider(ui.skill3Slider, 5);
             SteamManager.instance.SkillPurchased(3, skill3Level, 5);
         }
+
+        UpdateUIPrices();
     }
+
+    
 
     //QA EDITOR
     public void BuyMaxSkills()

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class PlayerUpgrade : MonoBehaviour
@@ -10,6 +11,13 @@ public class PlayerUpgrade : MonoBehaviour
     [SerializeField] private int jumpPrice = 50;
     [SerializeField] private int robotBuddyPrice = 1000;
     CurrencyManager currencyManager;
+
+    [Header("Cost UI")]
+    [SerializeField] private TMP_Text capacityPriceTxt;
+    [SerializeField] private TMP_Text sprintPriceTxt;
+    [SerializeField] private TMP_Text reachPriceTxt;
+    [SerializeField] private TMP_Text jumpPriceTxt;
+    [SerializeField] private TMP_Text robotBuddyPriceTxt;
 
     [Header("Upgrade Values")]
     [SerializeField] private int upgradeCapacity = 0;
@@ -42,6 +50,7 @@ public class PlayerUpgrade : MonoBehaviour
         ui = GameUIManager.instance;
 
         OnLoading();
+        UpdateUIPrices();
     }
 
     #region GeneralUse
@@ -67,6 +76,8 @@ public class PlayerUpgrade : MonoBehaviour
         if (!TryBuyUpgrade(ref capacityPrice))
             return;
 
+        UpdateUIPrices();
+
         upgradeCapacity += 2;
 
         playerInteraction.UpgradeCapacity(2);
@@ -87,6 +98,8 @@ public class PlayerUpgrade : MonoBehaviour
         if (!TryBuyUpgrade(ref sprintPrice))
             return;
 
+        UpdateUIPrices();
+
         canSprint = true;
         playerMovement.UnlockSprint();
 
@@ -105,6 +118,8 @@ public class PlayerUpgrade : MonoBehaviour
 
         if (!TryBuyUpgrade(ref reachPrice))
             return;
+
+        UpdateUIPrices();
 
         upgradeReach += 2;
 
@@ -126,6 +141,8 @@ public class PlayerUpgrade : MonoBehaviour
         if (!TryBuyUpgrade(ref jumpPrice))
             return;
 
+        UpdateUIPrices();
+
         upgradeJump++;
 
         playerMovement.UpgradeJump();
@@ -144,6 +161,8 @@ public class PlayerUpgrade : MonoBehaviour
 
         if (!TryBuyUpgrade(ref robotBuddyPrice)) return;
 
+        UpdateUIPrices();
+
         boughtRobotBuddy++;
 
         SteamManager.instance.UnlockAchievement(eAchievement.LittleBuddy);
@@ -156,6 +175,15 @@ public class PlayerUpgrade : MonoBehaviour
 
         if (saveManager != null)
             saveManager.SaveGame();
+    }
+
+    private void UpdateUIPrices()
+    {
+        capacityPriceTxt.text = capacityPrice.ToString("F0");
+        sprintPriceTxt.text = sprintPrice.ToString("F0");
+        reachPriceTxt.text = reachPrice.ToString("F0");
+        jumpPriceTxt.text = jumpPrice.ToString("F0");
+        robotBuddyPriceTxt.text = robotBuddyPrice.ToString("F0");
     }
     #endregion
 
@@ -193,6 +221,8 @@ public class PlayerUpgrade : MonoBehaviour
             ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
             SteamManager.instance.UpgradePurchased(5, boughtRobotBuddy, 3);
         }
+
+        UpdateUIPrices();
     }
 
     public void BuyMaxUpgradess()

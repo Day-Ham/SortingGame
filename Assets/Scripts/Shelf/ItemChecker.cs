@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class ItemChecker : MonoBehaviour
@@ -63,11 +62,8 @@ public class ItemChecker : MonoBehaviour
         currency = FindAnyObjectByType<CurrencyManager>();
         if (currency == null)
             Debug.Log("Currency Manager is not found");
-    }
 
-    private void Start()
-    {
-        ui = GameUIManager.instance;
+        ui = FindAnyObjectByType<GameUIManager>();
     }
 
     private void Update()
@@ -315,6 +311,8 @@ public class ItemChecker : MonoBehaviour
             //finalize position
             rb.Move(transform.TransformPoint(targetPosition), transform.rotation * targetRotation);
 
+            rb.isKinematic = true;
+
             Collider[] colliders = currentItem.GetComponentsInChildren<Collider>();
             foreach (Collider col in colliders)
             {
@@ -338,13 +336,11 @@ public class ItemChecker : MonoBehaviour
             if (AudioManager.Instance != null)
                 AudioManager.Instance.Play("Put Down");
 
-            rb.isKinematic = true;
-
             isPlacingItem = false;
             currentItem.isBeingPlaced = false;
 
             AddUpgradePoints(); //adds money if first time being placed on shelf
-            ui.UpdateShelvedCount(1);
+            GameUIManager.instance.UpdateShelvedCount(1);
 
             Debug.Log("Placed " + currentItem.name + " on the shelf.");
             currentItem = null;
@@ -471,7 +467,10 @@ public class ItemChecker : MonoBehaviour
         currentItem.IsPlaced = true;
         currency.ChangeUpgradePoints(1);
 
-        SteamManager.instance.ItemShelvedCounter();
+        if (SteamManager.instance != null)
+        {
+            SteamManager.instance.ItemShelvedCounter();
+        }
     }
 
     private void AddSkillPoints(ItemSpawnEntry item)
@@ -527,6 +526,11 @@ public class ItemChecker : MonoBehaviour
 
             item.transform.position = transform.TransformPoint(shelfPositions[i]);
             item.transform.rotation = transform.rotation * item.PlacementRotation;
+
+            if (ui != null)
+            {
+                ui.UpdateShelvedCount(1);
+            }
         }
 
         currentItem = null;
