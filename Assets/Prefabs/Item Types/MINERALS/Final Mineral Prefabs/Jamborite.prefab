@@ -84,13 +84,16 @@ PrefabInstance:
       addedObject: {fileID: 3118560699119925600}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2bd3c77e64058e94da872a76f1a6f519, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3699857103134788340}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2bd3c77e64058e94da872a76f1a6f519, type: 3}
-      insertIndex: -1
       addedObject: {fileID: -4189236370478588798}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2bd3c77e64058e94da872a76f1a6f519, type: 3}
       insertIndex: -1
       addedObject: {fileID: -5939752236057922643}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2bd3c77e64058e94da872a76f1a6f519, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -435832146460885231}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2bd3c77e64058e94da872a76f1a6f519, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 569661384599809735}
   m_SourcePrefab: {fileID: 100100000, guid: 2bd3c77e64058e94da872a76f1a6f519, type: 3}
 --- !u!4 &6233287328352631394 stripped
 Transform:
@@ -121,6 +124,8 @@ MonoBehaviour:
   supportLayers:
     serializedVersion: 2
     m_Bits: 8840
+  IsHeld: 0
+  HeldBy: {fileID: 0}
   isBeingPlaced: 0
   isFinishPulsing: 0
   IsPlaced: 0
@@ -153,28 +158,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!64 &3699857103134788340
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6758431207598760152}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6681374882462626894, guid: 2bd3c77e64058e94da872a76f1a6f519, type: 3}
 --- !u!114 &-4189236370478588798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,7 +180,7 @@ MonoBehaviour:
     - {fileID: 4800000, guid: 36e335017ad71d54fbb10842863188ae, type: 3}
     - {fileID: 5100952269125910797, guid: 5c9ac9f061aff10459c4977e9a521b7b, type: 3}
     - {fileID: 6758431207598760152, guid: 5c9ac9f061aff10459c4977e9a521b7b, type: 3}
-    - {fileID: 3699857103134788340, guid: 5c9ac9f061aff10459c4977e9a521b7b, type: 3}
+    - {fileID: 0}
     - {fileID: 3118560699119925600, guid: 5c9ac9f061aff10459c4977e9a521b7b, type: 3}
     - {fileID: 6233287328352631394, guid: 5c9ac9f061aff10459c4977e9a521b7b, type: 3}
     - {fileID: -5939752236057922643, guid: 5c9ac9f061aff10459c4977e9a521b7b, type: 3}
@@ -233,3 +216,45 @@ MonoBehaviour:
   componentsToSave:
   - {fileID: 6233287328352631394}
   - {fileID: 7759738914535878976}
+--- !u!135 &-435832146460885231
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758431207598760152}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.69
+  m_Center: {x: -0.00000011920929, y: -0.000624001, z: -0.0005528927}
+--- !u!65 &569661384599809735
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758431207598760152}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.29948285, y: 2.540454, z: 2.3692482}
+  m_Center: {x: -0.0038567935, y: 0.0032329562, z: -0.00055290764}

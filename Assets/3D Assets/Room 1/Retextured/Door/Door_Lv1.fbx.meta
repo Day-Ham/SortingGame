@@ -3,7 +3,17 @@ guid: 4c778e711980bb348ae7934670611b2d
 ModelImporter:
   serializedVersion: 24600
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Door Texture
+    second: {fileID: 2800000, guid: 94decc1f0027dc948a7114fbfc81baaf, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Texture
+    second: {fileID: 2800000, guid: 74ef3dafba0f4d24b83626c6dc050d4e, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -49,7 +59,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
