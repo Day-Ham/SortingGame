@@ -81,7 +81,7 @@ public class Item : MonoBehaviour
 
     private bool HasSupport()
     {
-        float rayDistance = GetComponent<Collider>().bounds.extents.y + supportCheckDistance;
+        float rayDistance = GetComponent<MeshFilter>().sharedMesh.bounds.extents.y + supportCheckDistance;
         return Physics.Raycast(transform.position, Vector3.down, rayDistance, supportLayers);
     }
 

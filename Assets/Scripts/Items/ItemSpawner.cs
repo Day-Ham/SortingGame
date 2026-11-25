@@ -99,12 +99,12 @@ public class ItemSpawner : MonoBehaviour
     private bool IsPositionBlocked(Vector3 position, GameObject itemPrefab)
     {
         Collider col = itemPrefab.GetComponent<Collider>();
-        if (col == null)
-        {
-            Debug.LogWarning("Item has no Collider.");
-            return false;
-        }
-        Vector3 halfExtents = col.bounds.extents;
+        if (col == null) return false;
+
+        MeshFilter meshFilter = itemPrefab.GetComponent<MeshFilter>();
+        if (meshFilter == null) return false;
+
+        Vector3 halfExtents = meshFilter.sharedMesh.bounds.extents;
         return Physics.CheckBox(position, halfExtents, Quaternion.identity,obstacleLayer,QueryTriggerInteraction.Ignore);
     }
 

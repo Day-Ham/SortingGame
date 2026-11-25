@@ -45,11 +45,11 @@ public class SceneLoader : MonoBehaviour
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneIndex);
         while (!asyncLoad.isDone)
         {
-            loadingProgressBar.value = asyncLoad.progress;
+            loadingProgressBar.value = asyncLoad.progress/0.9f;
             yield return null;
         }
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1f);
 
         yield return loadingCanvasGroup.DOFade(0f, 0.5f).WaitForCompletion();
         loadingScreenObj.SetActive(false);
