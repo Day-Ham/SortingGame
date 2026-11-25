@@ -29,7 +29,7 @@ public class SaveManager : MonoBehaviour
     public void LoadGame(int index)
     {
         SceneManager.sceneLoaded += OnSaveSceneLoaded;
-        SceneManager.LoadScene(index);
+        SceneLoader.Instance.LoadSceneByIndex(index);
     }
 
     private void OnSaveSceneLoaded(Scene scene, LoadSceneMode mode)
