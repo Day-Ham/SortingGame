@@ -26,8 +26,6 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
     private void Awake()
     {
         eventSystem = FindAnyObjectByType<EventSystem>();
-        if (eventSystem == null)
-            Debug.Log("Did not find an Event System in your Scene", this);
 
         normalSprites.Clear();
         StoreNormalSprites();
@@ -102,11 +100,6 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
             if (isSecondarySelected) return;
 
             GameObject selected = GetSelectedUI();
-
-            if (selected != null)
-            {
-                Debug.Log("Currently Selected: " + selected.name);
-            }
 
             SetsUIElementToSelectOnInteraction prompt = CheckIfAPromptIsActive();
             if (prompt != null && selected == null)
