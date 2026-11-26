@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Linq;
 using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class PlayerSkills : MonoBehaviour
@@ -53,8 +54,14 @@ public class PlayerSkills : MonoBehaviour
     [SerializeField] private int totalPointsSpent;
 
     [Header("Reset")]
-    [SerializeField] private GameObject resetPrompt;
-    [SerializeField] private Button resetSkills;
+    [SerializeField] private Button resetButton;
+    public GameObject resetPrompt;
+    [SerializeField] private Button confirmResetButton;
+    [SerializeField] private Button cancelResetButton;
+
+    [Header("Other UI Elements")]
+    public GameObject skillsMenu;
+    [SerializeField] private Button closeButton;
 
     [Header("Steam Manager Check")]
     [SerializeField] private bool skillUsed;
@@ -74,7 +81,10 @@ public class PlayerSkills : MonoBehaviour
 
     private void Start()
     {
-        resetSkills.onClick.AddListener(ResetSkills);
+        resetButton.onClick.AddListener(OpenResetPrompt);
+        confirmResetButton.onClick.AddListener(ResetSkills);
+        cancelResetButton.onClick.AddListener(CloseResetPrompt);
+        closeButton.onClick.AddListener(CloseSkillsMenu);
 
         skill1CooldownSlider.value = 1f;
         skill2CooldownSlider.value = 1f;
@@ -86,6 +96,39 @@ public class PlayerSkills : MonoBehaviour
 
     private void Update()
     {
+        if (UserInput.instance == null && PauseManager.instance == null) return;
+
+        if (UserInput.instance.ResetBindingsInput)
+        {
+            if (skillsMenu.activeInHierarchy && !resetPrompt.activeInHierarchy)
+                OpenResetPrompt();
+        }
+
+        if (UserInput.instance.EscapeInput)
+        {
+            if (resetPrompt.activeInHierarchy)
+            {
+                CloseResetPrompt();
+                return;
+            }
+            else if (skillsMenu.activeInHierarchy)
+            {
+                CloseSkillsMenu();
+            }
+        }
+
+        if (UserInput.instance.SkillInput && !PauseManager.instance.isPaused)
+        {
+            if (!skillsMenu.activeInHierarchy)
+            {
+                OpenSkillsMenu();
+            }
+            else if (skillsMenu.activeInHierarchy && !resetPrompt.activeInHierarchy)
+            {
+                CloseSkillsMenu();
+            }
+        }
+
         if (UserInput.instance != null)
         {
             if (UserInput.instance.Skill1Input)
@@ -102,12 +145,6 @@ public class PlayerSkills : MonoBehaviour
             {
                 ActivateSkill3();
             }
-        }
-
-        if (resetPrompt.activeInHierarchy && UserInput.instance != null)
-        {
-            
-   
         }
 
         for (int i = highlightedObjects.Count - 1; i >= 0; i--)
@@ -549,7 +586,42 @@ public class PlayerSkills : MonoBehaviour
         skill2PriceText.text = skill2CurrentPrice.ToString("F0");
         skill3PriceText.text = skill3CurrentPrice.ToString("F0");
     }
-      
+
+    #region Menu and Prompt Handling
+    private void OpenSkillsMenu()
+    {
+        if (GameUIManager.instance != null)
+        {
+            GameUIManager.instance.SetAsCurrentOpenMenu(skillsMenu);
+        }
+    }
+
+    private void CloseSkillsMenu()
+    {
+        if (GameUIManager.instance != null)
+        {
+            GameUIManager.instance.CloseMenu(skillsMenu);
+        }
+    }
+
+    private void OpenResetPrompt()
+    {
+        if (GameUIManager.instance != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            GameUIManager.instance.TweenOpen(resetPrompt);
+        }
+    }
+
+    private void CloseResetPrompt()
+    {
+        if (GameUIManager.instance != null)
+        {
+            GameUIManager.instance.ClosePrompt(resetPrompt);
+        }
+    }
+    #endregion
+
     public void OnLoading()
     {
         if (skillUsed)
@@ -599,6 +671,36 @@ public class PlayerSkills : MonoBehaviour
     public void FillBuySlider(Slider slider, int maxValue)
     {
         slider.value += 1f / maxValue;
+    }
+
+    public void ResetSkills()
+    {
+        //Skill 1
+        skill1Level = 0;
+        skill1Icon.SetActive(false);
+        highlightDuration = 10f;
+        skill1CurrentPrice = skill1InitialPrice;
+        skill1BuySlider.value = 0f;
+
+        //Skill 2
+        skill2Level = 0;
+        skill2Icon.SetActive(false); ;
+        skill2Cooldown = 20f;
+        skill2CurrentPrice = skill2InitialPrice;
+        skill2BuySlider.value = 0f;
+
+        //Skill 3
+        skill3Level = 0;
+        skill3Icon.SetActive(false);
+        skill3Cooldown = 30f;
+        skill3CurrentPrice = skill3InitialPrice;
+        skill3BuySlider.value = 0f;
+
+        currencyManager.ChangeSkillPoints(totalPointsSpent);
+        totalPointsSpent = 0;
+
+        UpdateUIPrices();
+        CloseResetPrompt();
     }
 
     //QA EDITOR
@@ -672,34 +774,5 @@ public class PlayerSkills : MonoBehaviour
             if (SteamManager.instance)
                 SteamManager.instance.SkillPurchased(3, skill3Level, 5);
         }
-    }
-
-    public void ResetSkills()
-    {
-        //Skill 1
-        skill1Level = 0;
-        skill1Icon.SetActive(false);
-        highlightDuration = 10f;
-        skill1CurrentPrice = skill1InitialPrice;
-        skill1BuySlider.value = 0f;
-
-        //Skill 2
-        skill2Level = 0;
-        skill2Icon.SetActive(false); ;
-        skill2Cooldown = 20f;
-        skill2CurrentPrice = skill2InitialPrice;
-        skill2BuySlider.value = 0f;
-
-        //Skill 3
-        skill3Level = 0;
-        skill3Icon.SetActive(false);
-        skill3Cooldown = 30f;
-        skill3CurrentPrice = skill3InitialPrice;
-        skill3BuySlider.value = 0f;
-
-        currencyManager.ChangeSkillPoints(totalPointsSpent);
-        totalPointsSpent = 0;
-
-        UpdateUIPrices();
     }
 }

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Purchasing;
 using UnityEngine.UI;
 
@@ -81,22 +82,37 @@ public class PlayerUpgrade : MonoBehaviour
 
     private void Update()
     {
-        if (UserInput.instance == null) return;
+        if (UserInput.instance == null && PauseManager.instance == null) return;
 
-        if (resetPrompt.activeInHierarchy)
+        if (UserInput.instance.ResetBindingsInput)
         {
-            if (UserInput.instance.ResetBindingsInput)
+            if (upgradesMenu.activeInHierarchy && !resetPrompt.activeInHierarchy)
                 OpenResetPrompt();
         }
 
-        if (UserInput.instance.EscapeInput && upgradesMenu.activeInHierarchy)
+        if (UserInput.instance.EscapeInput)
         {
-
+            if (resetPrompt.activeInHierarchy)
+            {
+                CloseResetPrompt();
+                return;
+            }
+            else if (upgradesMenu.activeInHierarchy)
+            {
+                CloseUpgradesMenu();
+            }
         }
 
-        if (UserInput.instance.UpgradeInput && upgradesMenu.activeInHierarchy)
+        if (UserInput.instance.UpgradeInput && !PauseManager.instance.isPaused)
         {
-
+            if (!upgradesMenu.activeInHierarchy)
+            {
+                OpenUpgradesMenu();
+            }
+            else if (upgradesMenu.activeInHierarchy && !resetPrompt.activeInHierarchy)
+            {
+                CloseUpgradesMenu();
+            }
         }
     }
 
@@ -114,9 +130,19 @@ public class PlayerUpgrade : MonoBehaviour
 
         return true;
     }
+
+    public void UpdateCooldownSlider(Slider slider, float cooldownTime, float cooldownTimer)
+    {
+        slider.value = 1f - (cooldownTimer / cooldownTime);
+    }
+
+    public void FillBuySlider(Slider slider, int maxValue)
+    {
+        slider.value += 1f / maxValue;
+    }
     #endregion
 
-    #region BuyUpgradeButtons
+    #region Buy Upgrade
     public void BuyUpgradeCapacity()
     {
         if (upgradeCapacity >= 10)
@@ -283,26 +309,12 @@ public class PlayerUpgrade : MonoBehaviour
         UpdateUIPrices();
     }
 
-    public void UpdateCooldownSlider(Slider slider, float cooldownTime, float cooldownTimer)
+    #region Menu and Prompt Handling
+    private void OpenUpgradesMenu()
     {
-        slider.value = 1f - (cooldownTimer / cooldownTime);
-    }
-
-    public void FillBuySlider(Slider slider, int maxValue)
-    {
-        slider.value += 1f / maxValue;
-    }
-
-    private void OpenResetPrompt()
-    {
-        resetPrompt.SetActive(true);
-    }
-
-    private void CloseResetPrompt()
-    {
-        if(GameUIManager.instance != null)
+        if (GameUIManager.instance != null)
         {
-            GameUIManager.instance.ShrinkAway(resetPrompt);
+            GameUIManager.instance.SetAsCurrentOpenMenu(upgradesMenu);
         }
     }
 
@@ -313,6 +325,24 @@ public class PlayerUpgrade : MonoBehaviour
             GameUIManager.instance.CloseMenu(upgradesMenu);
         }
     }
+
+    private void OpenResetPrompt()
+    {
+        if (GameUIManager.instance != null)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+            GameUIManager.instance.TweenOpen(resetPrompt);
+        }
+    }
+
+    private void CloseResetPrompt()
+    {
+        if(GameUIManager.instance != null)
+        {
+            GameUIManager.instance.ClosePrompt(resetPrompt);
+        }
+    }
+    #endregion
 
     public void ResetUpgrades()
     {
@@ -347,8 +377,7 @@ public class PlayerUpgrade : MonoBehaviour
         totalPointsSpent = 0;
 
         UpdateUIPrices();
-
-        CloseUpgradesMenu();
+        CloseResetPrompt();
     }
 
     public void ResetRobotBuddy()

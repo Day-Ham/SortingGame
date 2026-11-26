@@ -156,7 +156,7 @@ public class PlayerInteraction : MonoBehaviour
         if (lookAtPickUpObject == null)
         {
             ui.SetUIText(ui.lookedAtItemNameText, "");
-            ui.DisableUI(ui.lookedAtItemNameText.gameObject);
+            ui.lookedAtItemNameText.gameObject.SetActive(false);
             return;
         }
 
@@ -165,7 +165,7 @@ public class PlayerInteraction : MonoBehaviour
         if (item != null && item.Data != null)
         {
             ui.SetUIText(ui.lookedAtItemNameText, item.Data.displayName);
-            ui.EnableUI(ui.lookedAtItemNameText.gameObject);
+            ui.lookedAtItemNameText.gameObject.SetActive(true);
             return;
         }
     }

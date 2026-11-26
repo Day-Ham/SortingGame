@@ -102,6 +102,7 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
             GameObject selected = GetSelectedUI();
 
             SetsUIElementToSelectOnInteraction prompt = CheckIfAPromptIsActive();
+
             if (prompt != null && selected == null)
             {
                 GameObject element = prompt.elementToSelect.gameObject;
@@ -163,25 +164,23 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
         List<RaycastResult> results = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerData, results);
 
-        foreach (RaycastResult result in results)
+        if (results.Count == 0) return null;
+        Transform current = results[0].gameObject.transform;
+
+        while (current != null)
         {
-            Transform current = result.gameObject.transform;
-
-            while (current != null)
+            if (current.CompareTag("MainUIElement"))
             {
-                if (current.CompareTag("MainUIElement"))
+                Selectable selectable = current.GetComponent<Selectable>();
+
+                if (selectable != null &&
+                    selectable.navigation.mode != Navigation.Mode.None)
                 {
-                    Selectable selectable = current.GetComponent<Selectable>();
-
-                    if (selectable != null &&
-                        selectable.navigation.mode != Navigation.Mode.None)
-                    {
-                        return current.gameObject;
-                    }
+                    return current.gameObject;
                 }
-
-                current = current.parent;
             }
+
+            current = current.parent;
         }
 
         return null;
