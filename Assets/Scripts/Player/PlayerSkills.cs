@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerSkills : MonoBehaviour
 {
@@ -12,42 +13,55 @@ public class PlayerSkills : MonoBehaviour
 
     [Header("Skill 1")]
     [SerializeField] private float highlightDuration = 10f;
+    private float highlightTimer;
     [SerializeField] private float skill1Cooldown = 20f;
+    private float skill1CooldownTimer;
+    [SerializeField] private int skill1Level;
+    [SerializeField] private int skill1InitialPrice = 50;
+    [SerializeField] private int skill1CurrentPrice;
     [SerializeField] private string highlightLayerName = "Highlight";
     [SerializeField] private string shelfHighlightLayerName = "ShelfHighlight";
-    [SerializeField] private int skill1Level;
-    [SerializeField] private int skill1Price = 50;
-    [SerializeField] private TMP_Text skill1PriceText;
+    private int highlightLayer;
+    private int shelfHighlightLayer;
+    private List<GameObject> highlightedObjects = new List<GameObject>();
+    private Dictionary<GameObject, int> originalLayers = new Dictionary<GameObject, int>();
+
 
     [Header("Skill 2")]
     [SerializeField] private float skill2Cooldown = 20f;
+    private float skill2CooldownTimer;
     [SerializeField] private int skill2Level;
-    [SerializeField] private int skill2Price = 50;
-    [SerializeField] private TMP_Text skill2PriceText;
+    [SerializeField] private int skill2InitialPrice = 50;
+    [SerializeField] private int skill2CurrentPrice;
 
     [Header("Skill 3")]
     [SerializeField] private float skill3Cooldown = 30f;
+    private float skill3CooldownTimer;
     [SerializeField] private int skill3Level;
-    [SerializeField] private int skill3Price = 50;
+    [SerializeField] private int skill3InitialPrice = 50;
+    [SerializeField] private int skill3CurrentPrice;
+    private bool skill3Used;
+
+    [Header("Points")]
+    [SerializeField] private int totalPointsSpent;
+
+    [Header("UI Elements")]
+    [SerializeField] private GameObject skill1Icon;
+    [SerializeField] private GameObject skill2Icon;
+    [SerializeField] private GameObject skill3Icon;
+    [SerializeField] private Slider skill1CooldownSlider;
+    [SerializeField] private Slider skill2CooldownSlider;
+    [SerializeField] private Slider skill3CooldownSlider;
+    [SerializeField] private TMP_Text skill1PriceText;
+    [SerializeField] private TMP_Text skill2PriceText;
     [SerializeField] private TMP_Text skill3PriceText;
+    [SerializeField] private Slider skill1BuySlider;
+    [SerializeField] private Slider skill2BuySlider;
+    [SerializeField] private Slider skill3BuySlider;
+    [SerializeField] private Button resetSkills;
 
     [Header("Steam Manager Check")]
     [SerializeField] private bool skillUsed;
-
-    private float highlightTimer;
-    private float skill1CooldownTimer;
-    private float skill2CooldownTimer;
-    private float skill3CooldownTimer;
-    private bool skill3Used;
-
-    private int highlightLayer;
-    private int shelfHighlightLayer;
-
-    private List<GameObject> highlightedObjects = new List<GameObject>();
-    private Dictionary<GameObject, int> originalLayers = new Dictionary<GameObject, int>();
-    private GameUIManager ui;
-
-    private SaveManager saveManager;
 
     private void Awake()
     {
@@ -57,12 +71,11 @@ public class PlayerSkills : MonoBehaviour
 
     private void Start()
     {
-        saveManager = SaveManager.instance;
-        ui = GameUIManager.instance;
+        resetSkills.onClick.AddListener(ResetSkills);
 
-        ui.skill1CooldownSlider.value = 1f;
-        ui.skill2CooldownSlider.value = 1f;
-        ui.skill3CooldownSlider.value = 1f;
+        skill1CooldownSlider.value = 1f;
+        skill2CooldownSlider.value = 1f;
+        skill3CooldownSlider.value = 1f;
 
         OnLoading();
         UpdateUIPrices();
@@ -87,7 +100,16 @@ public class PlayerSkills : MonoBehaviour
                 ActivateSkill3();
             }
         }
-        
+
+        if (GameUIManager.instance != null)
+        {
+            if (GameUIManager.instance.skillsMenu.activeInHierarchy && UserInput.instance != null)
+            {
+                if (UserInput.instance.ResetBindingsInput)
+                    ResetSkills();
+            }
+        }
+
         for (int i = highlightedObjects.Count - 1; i >= 0; i--)
         {
             GameObject obj = highlightedObjects[i];
@@ -120,12 +142,12 @@ public class PlayerSkills : MonoBehaviour
         {
             skill1CooldownTimer -= Time.deltaTime;
 
-            ui.UpdateTimerSlider(ui.skill1CooldownSlider, skill1Cooldown, skill1CooldownTimer);
+            UpdateCooldownSlider(skill1CooldownSlider, skill1Cooldown, skill1CooldownTimer);
     
             if (skill1CooldownTimer <= 0f)
             {
                 skill1CooldownTimer = 0f;
-                ui.skill1CooldownSlider.value = 1f;
+                skill1CooldownSlider.value = 1f;
             }
         }
 
@@ -133,13 +155,12 @@ public class PlayerSkills : MonoBehaviour
         {
             skill2CooldownTimer -= Time.deltaTime;
 
-            ui.UpdateTimerSlider(ui.skill2CooldownSlider, skill2Cooldown, skill2CooldownTimer);
-
+            UpdateCooldownSlider(skill2CooldownSlider, skill2Cooldown, skill2CooldownTimer);
 
             if (skill2CooldownTimer <= 0f)
             {
                 skill2CooldownTimer = 0f;
-                ui.skill2CooldownSlider.value = 1f;
+                skill2CooldownSlider.value = 1f;
             }
         }
 
@@ -147,12 +168,12 @@ public class PlayerSkills : MonoBehaviour
         {
             skill3CooldownTimer -= Time.deltaTime;
 
-            ui.UpdateTimerSlider(ui.skill3CooldownSlider, skill3Cooldown, skill3CooldownTimer);
+            UpdateCooldownSlider(skill3CooldownSlider, skill3Cooldown, skill3CooldownTimer);
 
             if (skill3CooldownTimer <= 0f)
             {
                 skill3CooldownTimer = 0f;
-                ui.skill3CooldownSlider.value = 1f;
+                skill3CooldownSlider.value = 1f;
             }
         }
     }
@@ -205,7 +226,9 @@ public class PlayerSkills : MonoBehaviour
         skill1CooldownTimer = skill1Cooldown;
 
         skillUsed = true;
-        SteamManager.instance.SkillWasUsed();
+
+        if(SteamManager.instance != null)
+            SteamManager.instance.SkillWasUsed();
     }
 
 
@@ -267,32 +290,34 @@ public class PlayerSkills : MonoBehaviour
         if (skill1Level >= 5)
             return;
 
-        if (currencyManager.skillPoints < skill1Price)
+        if (currencyManager.skillPoints < skill1CurrentPrice)
             return;
 
-        currencyManager.ChangeSkillPoints(-skill1Price);
+        currencyManager.ChangeSkillPoints(-skill1CurrentPrice);
+        totalPointsSpent += skill1CurrentPrice;
 
         skill1Level++;
 
         if (skill1Level == 1)
         {
-            ui.EnableUI(ui.skill1Icon);
+            skill1Icon.SetActive(true);
         }
         else
         {
             highlightDuration += 2f;
         }
 
-        skill1Price += 50;
+        skill1CurrentPrice += Mathf.CeilToInt(skill1CurrentPrice * 0.5f);
 
         UpdateUIPrices();
 
-        ui.FillSlider(ui.skill1Slider, 5);
+        FillBuySlider(skill1BuySlider, 5);
 
-        SteamManager.instance.SkillPurchased(1, skill1Level, 5);
+        if (SteamManager.instance != null)
+            SteamManager.instance.SkillPurchased(1, skill1Level, 5);
 
-        if (saveManager != null)
-            saveManager.SaveGame();
+        if (SaveManager.instance != null)
+            SaveManager.instance.SaveGame();
     }
     #endregion
 
@@ -366,7 +391,10 @@ public class PlayerSkills : MonoBehaviour
         }
 
         skillUsed = true;
-        SteamManager.instance.SkillWasUsed();
+
+        if (SteamManager.instance != null)
+            SteamManager.instance.SkillWasUsed();
+        
 
         skill2CooldownTimer = skill2Cooldown;
     }
@@ -376,32 +404,35 @@ public class PlayerSkills : MonoBehaviour
         if (skill2Level >= 5)
             return;
 
-        if (currencyManager.skillPoints < skill2Price)
+        if (currencyManager.skillPoints < skill2CurrentPrice)
             return;
 
-        currencyManager.ChangeSkillPoints(-skill2Price);
+        currencyManager.ChangeSkillPoints(-skill2CurrentPrice);
+        totalPointsSpent += skill2CurrentPrice;
 
         skill2Level++;
 
         if (skill2Level == 1)
         {
-            ui.EnableUI(ui.skill2Icon);
+            skill2Icon.SetActive(true);
         }
         else
         {
             skill2Cooldown -= 2f;
         }
 
-        skill2Price += 50;
+        skill2CurrentPrice += Mathf.CeilToInt(skill2CurrentPrice * 0.5f);
 
         UpdateUIPrices();
 
-        ui.FillSlider(ui.skill2Slider, 5);
+        FillBuySlider(skill2BuySlider, 5);
 
-        SteamManager.instance.SkillPurchased(2, skill2Level, 5);
+        if (SteamManager.instance != null)
+            SteamManager.instance.SkillPurchased(2, skill2Level, 5);
+        
 
-        if (saveManager != null)
-            saveManager.SaveGame();
+        if (SaveManager.instance != null)
+            SaveManager.instance.SaveGame();
     }
     #endregion
 
@@ -465,7 +496,9 @@ public class PlayerSkills : MonoBehaviour
             skill3Used = true;
             
             skillUsed = true;
-            SteamManager.instance.SkillWasUsed();
+
+            if(SteamManager.instance != null)
+                SteamManager.instance.SkillWasUsed();
 
             if (skill3Used)
                 skill3CooldownTimer = skill3Cooldown;
@@ -479,81 +512,93 @@ public class PlayerSkills : MonoBehaviour
         if (skill3Level >= 5)
             return;
 
-        if (currencyManager.skillPoints < skill3Price)
+        if (currencyManager.skillPoints < skill3CurrentPrice)
             return;
 
-        currencyManager.ChangeSkillPoints(-skill3Price);
+        currencyManager.ChangeSkillPoints(-skill3CurrentPrice);
+        totalPointsSpent += skill3CurrentPrice;
 
         skill3Level++;
 
         if (skill3Level == 1)
         {
-            ui.EnableUI(ui.skill3Icon);
+            skill3Icon.SetActive(true);
         }
         else
         {
             skill3Cooldown -= 2f;
         }
 
-        skill3Price += 50;
+        skill3CurrentPrice += Mathf.CeilToInt(skill3CurrentPrice * 0.5f);
 
         UpdateUIPrices();
 
-        ui.FillSlider(ui.skill3Slider, 5);
+        FillBuySlider(skill3BuySlider, 5);
 
-        SteamManager.instance.SkillPurchased(3, skill3Level, 5);
+        if (SteamManager.instance != null)
+            SteamManager.instance.SkillPurchased(3, skill3Level, 5);
 
-        if (saveManager != null)
-            saveManager.SaveGame();
+        if (SaveManager.instance != null)
+            SaveManager.instance.SaveGame();
     }
     #endregion
     private void UpdateUIPrices()
     {
-        skill1PriceText.text = skill1Price.ToString("F0");
-        skill2PriceText.text = skill2Price.ToString("F0");
-        skill3PriceText.text = skill3Price.ToString("F0");
+        skill1PriceText.text = skill1CurrentPrice.ToString("F0");
+        skill2PriceText.text = skill2CurrentPrice.ToString("F0");
+        skill3PriceText.text = skill3CurrentPrice.ToString("F0");
     }
       
     public void OnLoading()
     {
         if (skillUsed)
         {
-            SteamManager.instance.SkillWasUsed();
+            if(SteamManager.instance)
+                SteamManager.instance.SkillWasUsed();
         }
 
-        if (ui == null) return;
+        if (skill1Level > 0) skill1Icon.SetActive(true);
+        else skill1Icon.SetActive(false);
 
-        if (skill1Level > 0) ui.EnableUI(ui.skill1Icon);
-        else ui.DisableUI(ui.skill1Icon);
+        if (skill2Level > 0) skill2Icon.SetActive(true);
+        else skill2Icon.SetActive(false);
 
-        if (skill2Level > 0) ui.EnableUI(ui.skill2Icon);
-        else ui.DisableUI(ui.skill2Icon);
-
-        if (skill3Level > 0) ui.EnableUI(ui.skill3Icon);
-        else ui.DisableUI(ui.skill3Icon);
+        if (skill3Level > 0) skill3Icon.SetActive(true);
+        else skill3Icon.SetActive(false);
 
         for (int i = 0; i < skill1Level; i++)
         {
-            ui.FillSlider(ui.skill1Slider, 5);
-            SteamManager.instance.SkillPurchased(1, skill1Level, 5);
+            FillBuySlider(skill1BuySlider, 5);
+            if (SteamManager.instance)
+                SteamManager.instance.SkillPurchased(1, skill1Level, 5);
         }
 
         for (int i = 0; i < skill2Level; i++)
         {
-            ui.FillSlider(ui.skill2Slider, 5);
-            SteamManager.instance.SkillPurchased(2, skill2Level, 5);
+            FillBuySlider(skill2BuySlider, 5);
+            if (SteamManager.instance)
+                SteamManager.instance.SkillPurchased(2, skill2Level, 5);
         }
 
         for (int i = 0; i < skill3Level; i++)
         {
-            ui.FillSlider(ui.skill3Slider, 5);
-            SteamManager.instance.SkillPurchased(3, skill3Level, 5);
+            FillBuySlider(skill3BuySlider, 5);
+            if (SteamManager.instance)
+                SteamManager.instance.SkillPurchased(3, skill3Level, 5);
         }
 
         UpdateUIPrices();
     }
 
-    
+    public void UpdateCooldownSlider(Slider slider, float cooldownTime, float cooldownTimer)
+    {
+        slider.value = 1f - (cooldownTimer / cooldownTime);
+    }
+
+    public void FillBuySlider(Slider slider, int maxValue)
+    {
+        slider.value += 1f / maxValue;
+    }
 
     //QA EDITOR
     public void BuyMaxSkills()
@@ -567,16 +612,17 @@ public class PlayerSkills : MonoBehaviour
 
             if (skill1Level == 1)
             {
-                ui.EnableUI(ui.skill1Icon);
+                skill1Icon.SetActive(true);
             }
             else
             {
                 highlightDuration += 2f;
             }
 
-            skill1Price += 50;
-            ui.FillSlider(ui.skill1Slider, 5);
-            SteamManager.instance.SkillPurchased(1, skill1Level, 5);
+            skill1CurrentPrice += 50;
+            FillBuySlider(skill1BuySlider, 5);
+            if (SteamManager.instance)
+                SteamManager.instance.SkillPurchased(1, skill1Level, 5);
         }
 
         //Skill 2
@@ -588,16 +634,17 @@ public class PlayerSkills : MonoBehaviour
 
             if (skill2Level == 1)
             {
-                ui.EnableUI(ui.skill2Icon);
+                skill2Icon.SetActive(true);
             }
             else
             {
                 skill2Cooldown -= 2f;
             }
 
-            skill2Price += 50;
-            ui.FillSlider(ui.skill2Slider, 5);
-            SteamManager.instance.SkillPurchased(2, skill2Level, 5);
+            skill1CurrentPrice += 50;
+            FillBuySlider(skill2BuySlider, 5);
+            if (SteamManager.instance)
+                SteamManager.instance.SkillPurchased(2, skill2Level, 5);
         }
 
         //Skill 3
@@ -609,17 +656,18 @@ public class PlayerSkills : MonoBehaviour
 
             if (skill3Level == 1)
             {
-                ui.EnableUI(ui.skill3Icon);
+                skill3Icon.SetActive(true);
             }
             else
             {
                 skill3Cooldown -= 2f;
             }
 
-            skill3Price += 50;
+            skill1CurrentPrice += 50;
 
-            ui.FillSlider(ui.skill3Slider, 5);
-            SteamManager.instance.SkillPurchased(3, skill3Level, 5);
+            FillBuySlider(skill3BuySlider, 5);
+            if (SteamManager.instance)
+                SteamManager.instance.SkillPurchased(3, skill3Level, 5);
         }
     }
 
@@ -627,26 +675,28 @@ public class PlayerSkills : MonoBehaviour
     {
         //Skill 1
         skill1Level = 0;
-        ui.DisableUI(ui.skill1Icon);
+        skill1Icon.SetActive(false);
         highlightDuration = 10f;
-
-        skill1Price = 50;
-        ui.skill1Slider.value = ui.skill1Slider.minValue;
-
+        skill1CurrentPrice = skill1InitialPrice;
+        skill1BuySlider.value = 0f;
 
         //Skill 2
         skill2Level = 0;
-        ui.DisableUI(ui.skill2Icon);
+        skill2Icon.SetActive(false); ;
         skill2Cooldown = 20f;
-
-        skill2Price = 50;
-        ui.skill2Slider.value = ui.skill2Slider.minValue;
+        skill2CurrentPrice = skill2InitialPrice;
+        skill2BuySlider.value = 0f;
 
         //Skill 3
         skill3Level = 0;
-        ui.DisableUI(ui.skill3Icon);
+        skill3Icon.SetActive(false);
         skill3Cooldown = 30f;
-        skill3Price = 50;
-        ui.skill3Slider.value = ui.skill3Slider.minValue;
+        skill3CurrentPrice = skill3InitialPrice;
+        skill3BuySlider.value = 0f;
+
+        currencyManager.ChangeSkillPoints(totalPointsSpent);
+        totalPointsSpent = 0;
+
+        UpdateUIPrices();
     }
 }

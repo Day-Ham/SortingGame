@@ -37,6 +37,7 @@ public class GameUIManager : MonoBehaviour
     [Header("Upgrades Menu")]
     [SerializeField] private Button upgradesCloseButton;
     public GameObject upgradesMenu;
+    [SerializeField] private Button resetUpgradesBtn; 
 
     [Header("Upgrades Buy Sliders")]
     public Slider upgradeCapacitySlider;
@@ -45,28 +46,9 @@ public class GameUIManager : MonoBehaviour
     public Slider upgradeJumpSlider;
     public Slider upgradeRobotBuddySlider;
 
-    [Header("Skills")]
     [Header("Skills Menu")]
     [SerializeField] private Button skillsCloseButton;
-
     public GameObject skillsMenu;
-
-    [Header("Skills Buy Sliders")]
-    public Slider skill1Slider;
-    public Slider skill2Slider;
-    public Slider skill3Slider;
-
-    [Header("Skill 1")]
-    public GameObject skill1Icon;
-    public Slider skill1CooldownSlider;
-    
-    [Header("Skill 2")]
-    public GameObject skill2Icon;
-    public Slider skill2CooldownSlider;
-    
-    [Header("Skill 3")]
-    public GameObject skill3Icon;
-    public Slider skill3CooldownSlider;
 
     [Header("Menu")]
     [Header("Pause Menu")]

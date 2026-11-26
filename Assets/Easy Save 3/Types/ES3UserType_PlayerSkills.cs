@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("playerInteraction", "currencyManager", "highlightDuration", "skill1Cooldown", "highlightLayerName", "shelfHighlightLayerName", "skill1Level", "skill1Price", "skill2Cooldown", "skill2Level", "skill2Price", "skill3Cooldown", "skill3Level", "skill3Price", "skillUsed", "highlightTimer", "skill1CooldownTimer", "skill2CooldownTimer", "skill3CooldownTimer", "skill3Used", "highlightLayer", "shelfHighlightLayer", "highlightedObjects", "originalLayers")]
+	[ES3PropertiesAttribute("highlightDuration", "skill1Cooldown", "highlightLayerName", "shelfHighlightLayerName", "skill1Level", "skill1InitialPrice", "skill1CurrentPrice", "skill2Cooldown", "skill2Level", "skill2InitialPrice", "skill2CurrentPrice", "skill3Cooldown", "skill3Level", "skill3InitialPrice", "skill3CurrentPrice", "totalPointsSpent", "skillUsed", "highlightTimer", "skill1CooldownTimer", "skill2CooldownTimer", "skill3CooldownTimer", "highlightLayer", "shelfHighlightLayer")]
 	public class ES3UserType_PlayerSkills : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -16,30 +16,29 @@ namespace ES3Types
 		{
 			var instance = (PlayerSkills)obj;
 			
-			writer.WritePrivateFieldByRef("playerInteraction", instance);
-			writer.WritePrivateFieldByRef("currencyManager", instance);
 			writer.WritePrivateField("highlightDuration", instance);
 			writer.WritePrivateField("skill1Cooldown", instance);
 			writer.WritePrivateField("highlightLayerName", instance);
 			writer.WritePrivateField("shelfHighlightLayerName", instance);
 			writer.WritePrivateField("skill1Level", instance);
-			writer.WritePrivateField("skill1Price", instance);
+			writer.WritePrivateField("skill1InitialPrice", instance);
+			writer.WritePrivateField("skill1CurrentPrice", instance);
 			writer.WritePrivateField("skill2Cooldown", instance);
 			writer.WritePrivateField("skill2Level", instance);
-			writer.WritePrivateField("skill2Price", instance);
+			writer.WritePrivateField("skill2InitialPrice", instance);
+			writer.WritePrivateField("skill2CurrentPrice", instance);
 			writer.WritePrivateField("skill3Cooldown", instance);
 			writer.WritePrivateField("skill3Level", instance);
-			writer.WritePrivateField("skill3Price", instance);
+			writer.WritePrivateField("skill3InitialPrice", instance);
+			writer.WritePrivateField("skill3CurrentPrice", instance);
+			writer.WritePrivateField("totalPointsSpent", instance);
 			writer.WritePrivateField("skillUsed", instance);
 			writer.WritePrivateField("highlightTimer", instance);
 			writer.WritePrivateField("skill1CooldownTimer", instance);
 			writer.WritePrivateField("skill2CooldownTimer", instance);
 			writer.WritePrivateField("skill3CooldownTimer", instance);
-			writer.WritePrivateField("skill3Used", instance);
 			writer.WritePrivateField("highlightLayer", instance);
 			writer.WritePrivateField("shelfHighlightLayer", instance);
-			writer.WritePrivateField("highlightedObjects", instance);
-			writer.WritePrivateField("originalLayers", instance);
 		}
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
@@ -50,12 +49,6 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					
-					case "playerInteraction":
-					instance = (PlayerSkills)reader.SetPrivateField("playerInteraction", reader.Read<PlayerInteraction>(), instance);
-					break;
-					case "currencyManager":
-					instance = (PlayerSkills)reader.SetPrivateField("currencyManager", reader.Read<CurrencyManager>(), instance);
-					break;
 					case "highlightDuration":
 					instance = (PlayerSkills)reader.SetPrivateField("highlightDuration", reader.Read<System.Single>(), instance);
 					break;
@@ -71,8 +64,11 @@ namespace ES3Types
 					case "skill1Level":
 					instance = (PlayerSkills)reader.SetPrivateField("skill1Level", reader.Read<System.Int32>(), instance);
 					break;
-					case "skill1Price":
-					instance = (PlayerSkills)reader.SetPrivateField("skill1Price", reader.Read<System.Int32>(), instance);
+					case "skill1InitialPrice":
+					instance = (PlayerSkills)reader.SetPrivateField("skill1InitialPrice", reader.Read<System.Int32>(), instance);
+					break;
+					case "skill1CurrentPrice":
+					instance = (PlayerSkills)reader.SetPrivateField("skill1CurrentPrice", reader.Read<System.Int32>(), instance);
 					break;
 					case "skill2Cooldown":
 					instance = (PlayerSkills)reader.SetPrivateField("skill2Cooldown", reader.Read<System.Single>(), instance);
@@ -80,8 +76,11 @@ namespace ES3Types
 					case "skill2Level":
 					instance = (PlayerSkills)reader.SetPrivateField("skill2Level", reader.Read<System.Int32>(), instance);
 					break;
-					case "skill2Price":
-					instance = (PlayerSkills)reader.SetPrivateField("skill2Price", reader.Read<System.Int32>(), instance);
+					case "skill2InitialPrice":
+					instance = (PlayerSkills)reader.SetPrivateField("skill2InitialPrice", reader.Read<System.Int32>(), instance);
+					break;
+					case "skill2CurrentPrice":
+					instance = (PlayerSkills)reader.SetPrivateField("skill2CurrentPrice", reader.Read<System.Int32>(), instance);
 					break;
 					case "skill3Cooldown":
 					instance = (PlayerSkills)reader.SetPrivateField("skill3Cooldown", reader.Read<System.Single>(), instance);
@@ -89,8 +88,14 @@ namespace ES3Types
 					case "skill3Level":
 					instance = (PlayerSkills)reader.SetPrivateField("skill3Level", reader.Read<System.Int32>(), instance);
 					break;
-					case "skill3Price":
-					instance = (PlayerSkills)reader.SetPrivateField("skill3Price", reader.Read<System.Int32>(), instance);
+					case "skill3InitialPrice":
+					instance = (PlayerSkills)reader.SetPrivateField("skill3InitialPrice", reader.Read<System.Int32>(), instance);
+					break;
+					case "skill3CurrentPrice":
+					instance = (PlayerSkills)reader.SetPrivateField("skill3CurrentPrice", reader.Read<System.Int32>(), instance);
+					break;
+					case "totalPointsSpent":
+					instance = (PlayerSkills)reader.SetPrivateField("totalPointsSpent", reader.Read<System.Int32>(), instance);
 					break;
 					case "skillUsed":
 					instance = (PlayerSkills)reader.SetPrivateField("skillUsed", reader.Read<System.Boolean>(), instance);
@@ -107,20 +112,11 @@ namespace ES3Types
 					case "skill3CooldownTimer":
 					instance = (PlayerSkills)reader.SetPrivateField("skill3CooldownTimer", reader.Read<System.Single>(), instance);
 					break;
-					case "skill3Used":
-					instance = (PlayerSkills)reader.SetPrivateField("skill3Used", reader.Read<System.Boolean>(), instance);
-					break;
 					case "highlightLayer":
 					instance = (PlayerSkills)reader.SetPrivateField("highlightLayer", reader.Read<System.Int32>(), instance);
 					break;
 					case "shelfHighlightLayer":
 					instance = (PlayerSkills)reader.SetPrivateField("shelfHighlightLayer", reader.Read<System.Int32>(), instance);
-					break;
-					case "highlightedObjects":
-					instance = (PlayerSkills)reader.SetPrivateField("highlightedObjects", reader.Read<System.Collections.Generic.List<UnityEngine.GameObject>>(), instance);
-					break;
-					case "originalLayers":
-					instance = (PlayerSkills)reader.SetPrivateField("originalLayers", reader.Read<System.Collections.Generic.Dictionary<UnityEngine.GameObject, System.Int32>>(), instance);
 					break;
 					default:
 						reader.Skip();
