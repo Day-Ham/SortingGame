@@ -147,7 +147,6 @@ public class QAEditor : MonoBehaviour
     private void ResetLevelUpgrades()
     {
         upgrades.ResetUpgrades();
-        upgrades.ResetRobotBuddy();
     }
 
     private void NewGame()

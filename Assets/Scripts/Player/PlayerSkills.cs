@@ -7,17 +7,13 @@ using UnityEngine.UI;
 
 public class PlayerSkills : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private PlayerInteraction playerInteraction;
-    [SerializeField] private CurrencyManager currencyManager;
-
     [Header("Skill 1")]
-    [SerializeField] private float highlightDuration = 10f;
+    [SerializeField] private float highlightDuration = 10;
     private float highlightTimer;
     [SerializeField] private float skill1Cooldown = 20f;
     private float skill1CooldownTimer;
     [SerializeField] private int skill1Level;
-    [SerializeField] private int skill1InitialPrice = 50;
+    [SerializeField] private int skill1InitialPrice;
     [SerializeField] private int skill1CurrentPrice;
     [SerializeField] private string highlightLayerName = "Highlight";
     [SerializeField] private string shelfHighlightLayerName = "ShelfHighlight";
@@ -25,48 +21,55 @@ public class PlayerSkills : MonoBehaviour
     private int shelfHighlightLayer;
     private List<GameObject> highlightedObjects = new List<GameObject>();
     private Dictionary<GameObject, int> originalLayers = new Dictionary<GameObject, int>();
-
+    [SerializeField] private GameObject skill1Icon;
+    [SerializeField] private Slider skill1CooldownSlider;
+    [SerializeField] private TMP_Text skill1PriceText;
+    [SerializeField] private Slider skill1BuySlider;
 
     [Header("Skill 2")]
     [SerializeField] private float skill2Cooldown = 20f;
     private float skill2CooldownTimer;
     [SerializeField] private int skill2Level;
-    [SerializeField] private int skill2InitialPrice = 50;
+    [SerializeField] private int skill2InitialPrice;
     [SerializeField] private int skill2CurrentPrice;
+    [SerializeField] private GameObject skill2Icon;
+    [SerializeField] private Slider skill2CooldownSlider;
+    [SerializeField] private TMP_Text skill2PriceText;
+    [SerializeField] private Slider skill2BuySlider;
 
     [Header("Skill 3")]
     [SerializeField] private float skill3Cooldown = 30f;
     private float skill3CooldownTimer;
     [SerializeField] private int skill3Level;
-    [SerializeField] private int skill3InitialPrice = 50;
+    [SerializeField] private int skill3InitialPrice;
     [SerializeField] private int skill3CurrentPrice;
+    [SerializeField] private GameObject skill3Icon;
+    [SerializeField] private Slider skill3CooldownSlider;
+    [SerializeField] private TMP_Text skill3PriceText;
+    [SerializeField] private Slider skill3BuySlider;
     private bool skill3Used;
 
     [Header("Points")]
     [SerializeField] private int totalPointsSpent;
 
-    [Header("UI Elements")]
-    [SerializeField] private GameObject skill1Icon;
-    [SerializeField] private GameObject skill2Icon;
-    [SerializeField] private GameObject skill3Icon;
-    [SerializeField] private Slider skill1CooldownSlider;
-    [SerializeField] private Slider skill2CooldownSlider;
-    [SerializeField] private Slider skill3CooldownSlider;
-    [SerializeField] private TMP_Text skill1PriceText;
-    [SerializeField] private TMP_Text skill2PriceText;
-    [SerializeField] private TMP_Text skill3PriceText;
-    [SerializeField] private Slider skill1BuySlider;
-    [SerializeField] private Slider skill2BuySlider;
-    [SerializeField] private Slider skill3BuySlider;
+    [Header("Reset")]
+    [SerializeField] private GameObject resetPrompt;
     [SerializeField] private Button resetSkills;
 
     [Header("Steam Manager Check")]
     [SerializeField] private bool skillUsed;
 
+    //References
+    private PlayerInteraction playerInteraction;
+    private CurrencyManager currencyManager;
+
     private void Awake()
     {
         highlightLayer = LayerMask.NameToLayer(highlightLayerName);
         shelfHighlightLayer = LayerMask.NameToLayer(shelfHighlightLayerName);
+
+        playerInteraction = GetComponent<PlayerInteraction>();
+        currencyManager = FindAnyObjectByType<CurrencyManager>();
     }
 
     private void Start()
@@ -101,13 +104,10 @@ public class PlayerSkills : MonoBehaviour
             }
         }
 
-        if (GameUIManager.instance != null)
+        if (resetPrompt.activeInHierarchy && UserInput.instance != null)
         {
-            if (GameUIManager.instance.skillsMenu.activeInHierarchy && UserInput.instance != null)
-            {
-                if (UserInput.instance.ResetBindingsInput)
-                    ResetSkills();
-            }
+            
+   
         }
 
         for (int i = highlightedObjects.Count - 1; i >= 0; i--)
@@ -304,6 +304,7 @@ public class PlayerSkills : MonoBehaviour
         }
         else
         {
+            skill1Cooldown -= 2f;
             highlightDuration += 2f;
         }
 
@@ -603,6 +604,8 @@ public class PlayerSkills : MonoBehaviour
     //QA EDITOR
     public void BuyMaxSkills()
     {
+        ResetSkills();
+
         //Skill 1
         for (int i = 0; i<5; i++)
         {
@@ -619,7 +622,7 @@ public class PlayerSkills : MonoBehaviour
                 highlightDuration += 2f;
             }
 
-            skill1CurrentPrice += 50;
+            skill1CurrentPrice += Mathf.CeilToInt(skill1CurrentPrice * 0.5f);
             FillBuySlider(skill1BuySlider, 5);
             if (SteamManager.instance)
                 SteamManager.instance.SkillPurchased(1, skill1Level, 5);
@@ -641,7 +644,7 @@ public class PlayerSkills : MonoBehaviour
                 skill2Cooldown -= 2f;
             }
 
-            skill1CurrentPrice += 50;
+            skill2CurrentPrice += Mathf.CeilToInt(skill2CurrentPrice * 0.5f);
             FillBuySlider(skill2BuySlider, 5);
             if (SteamManager.instance)
                 SteamManager.instance.SkillPurchased(2, skill2Level, 5);
@@ -663,7 +666,7 @@ public class PlayerSkills : MonoBehaviour
                 skill3Cooldown -= 2f;
             }
 
-            skill1CurrentPrice += 50;
+            skill3CurrentPrice += Mathf.CeilToInt(skill3CurrentPrice * 0.5f);
 
             FillBuySlider(skill3BuySlider, 5);
             if (SteamManager.instance)

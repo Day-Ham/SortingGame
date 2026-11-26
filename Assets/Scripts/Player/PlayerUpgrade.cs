@@ -1,40 +1,64 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Purchasing;
+using UnityEngine.UI;
 
 public class PlayerUpgrade : MonoBehaviour
 {
-    [Header("Cost")]
-    [Header("Upgrade Prices")]
-    [SerializeField] private int capacityPrice = 50;
-    [SerializeField] private int sprintPrice = 50;
-    [SerializeField] private int reachPrice = 50;
-    [SerializeField] private int jumpPrice = 50;
-    [SerializeField] private int robotBuddyPrice = 1000;
-    CurrencyManager currencyManager;
-
-    [Header("Cost UI")]
-    [SerializeField] private TMP_Text capacityPriceTxt;
-    [SerializeField] private TMP_Text sprintPriceTxt;
-    [SerializeField] private TMP_Text reachPriceTxt;
-    [SerializeField] private TMP_Text jumpPriceTxt;
-    [SerializeField] private TMP_Text robotBuddyPriceTxt;
-
-    [Header("Upgrade Values")]
+    [Header("Capacity")]
+    [SerializeField] private int capacityInitialPrice;
+    [SerializeField] private int capacityCurrentPrice;
     [SerializeField] private int upgradeCapacity = 0;
+    [SerializeField] private TMP_Text capacityPriceTxt;
+    [SerializeField] private Slider upgradeCapacitySlider;
+
+    [Header("Sprint")]
+    [SerializeField] private int sprintInitialPrice;
+    [SerializeField] private int sprintCurrentPrice;
     [SerializeField] private bool canSprint = false;
     public bool CanSprint => canSprint;
+    [SerializeField] private TMP_Text sprintPriceTxt;
+    [SerializeField] private Slider upgradeSprintSlider;
+
+    [Header("Reach")]
+    [SerializeField] private int reachInitialPrice;
+    [SerializeField] private int reachCurrentPrice;
     [SerializeField] private int upgradeReach = 0;
+    [SerializeField] private TMP_Text reachPriceTxt;
+    [SerializeField] private Slider upgradeReachSlider;
+
+    [Header("Jump")]
+    [SerializeField] private int jumpInitialPrice;
+    [SerializeField] private int jumpCurrentPrice;
     [SerializeField] private int upgradeJump = 0;
+    [SerializeField] private TMP_Text jumpPriceTxt;
+    [SerializeField] private Slider upgradeJumpSlider;
+
+    [Header("RobotBuddy")]
+    [SerializeField] private int robotBuddyInitialPrice;
+    [SerializeField] private int robotBuddyCurrentPrice;
     [SerializeField] private int boughtRobotBuddy = 0;
+    [SerializeField] private TMP_Text robotBuddyPriceTxt;
+    [SerializeField] private Slider upgradeRobotBuddySlider;
+
+    [Header("Points")]
+    [SerializeField] private int totalPointsSpent;
+
+    [Header("Reset")]
+    [SerializeField] private Button resetButton;
+    public GameObject resetPrompt;
+    [SerializeField] private Button confirmResetButton;
+    [SerializeField] private Button cancelResetButton;
+
+    [Header("Other UI Elements")]
+    public GameObject upgradesMenu;
+    [SerializeField] private Button closeButton;
 
     //Upgrade References
     private PlayerMovement playerMovement;
     private PlayerInteraction playerInteraction;
     private RobotBuddySpawner robotBuddySpawner;
-
-    private SaveManager saveManager;
-
-    private GameUIManager ui;
+    private CurrencyManager currencyManager;
 
     private void Awake()
     {
@@ -46,11 +70,34 @@ public class PlayerUpgrade : MonoBehaviour
 
     private void Start()
     {
-        saveManager = SaveManager.instance;
-        ui = GameUIManager.instance;
+        resetButton.onClick.AddListener(OpenResetPrompt);
+        confirmResetButton.onClick.AddListener(ResetUpgrades);
+        cancelResetButton.onClick.AddListener(CloseResetPrompt);
+        closeButton.onClick.AddListener(CloseUpgradesMenu);
 
         OnLoading();
         UpdateUIPrices();
+    }
+
+    private void Update()
+    {
+        if (UserInput.instance == null) return;
+
+        if (resetPrompt.activeInHierarchy)
+        {
+            if (UserInput.instance.ResetBindingsInput)
+                OpenResetPrompt();
+        }
+
+        if (UserInput.instance.EscapeInput && upgradesMenu.activeInHierarchy)
+        {
+
+        }
+
+        if (UserInput.instance.UpgradeInput && upgradesMenu.activeInHierarchy)
+        {
+
+        }
     }
 
     #region GeneralUse
@@ -61,7 +108,9 @@ public class PlayerUpgrade : MonoBehaviour
 
         currencyManager.ChangeUpgradePoints(-price);
 
-        price += 50;
+        totalPointsSpent += price;
+
+        price += Mathf.CeilToInt(price * 0.5f);
 
         return true;
     }
@@ -73,7 +122,7 @@ public class PlayerUpgrade : MonoBehaviour
         if (upgradeCapacity >= 10)
             return;
 
-        if (!TryBuyUpgrade(ref capacityPrice))
+        if (!TryBuyUpgrade(ref capacityCurrentPrice))
             return;
 
         UpdateUIPrices();
@@ -82,12 +131,13 @@ public class PlayerUpgrade : MonoBehaviour
 
         playerInteraction.UpgradeCapacity(2);
 
-        ui.FillSlider(ui.upgradeCapacitySlider, 5);
+        FillBuySlider(upgradeCapacitySlider, 5);
 
-        SteamManager.instance.UpgradePurchased(0, upgradeCapacity, 10);
+        if(SteamManager.instance != null)
+            SteamManager.instance.UpgradePurchased(0, upgradeCapacity, 10);
 
-        if (saveManager != null)
-            saveManager.SaveGame();
+        if (SaveManager.instance != null)
+            SaveManager.instance.SaveGame();
     }
 
     public void BuyUpgradeSprint()
@@ -95,7 +145,7 @@ public class PlayerUpgrade : MonoBehaviour
         if (canSprint)
             return;
 
-        if (!TryBuyUpgrade(ref sprintPrice))
+        if (!TryBuyUpgrade(ref sprintCurrentPrice))
             return;
 
         UpdateUIPrices();
@@ -103,12 +153,13 @@ public class PlayerUpgrade : MonoBehaviour
         canSprint = true;
         playerMovement.UnlockSprint();
 
-        ui.FillSlider(ui.upgradeSprintSlider, 1);
+        FillBuySlider(upgradeSprintSlider, 1);
 
-        SteamManager.instance.UpgradePurchased(1, 1, 1);
-
-        if (saveManager != null)
-            saveManager.SaveGame();
+        if (SteamManager.instance != null)
+            SteamManager.instance.UpgradePurchased(1, 1, 1);
+        
+        if (SaveManager.instance != null)
+            SaveManager.instance.SaveGame();
     }
 
     public void BuyUpgradeReach()
@@ -116,7 +167,7 @@ public class PlayerUpgrade : MonoBehaviour
         if (upgradeReach >= 10f)
             return;
 
-        if (!TryBuyUpgrade(ref reachPrice))
+        if (!TryBuyUpgrade(ref reachCurrentPrice))
             return;
 
         UpdateUIPrices();
@@ -125,12 +176,13 @@ public class PlayerUpgrade : MonoBehaviour
 
         playerInteraction.UpgradeReach(2);
 
-        ui.FillSlider(ui.upgradeReachSlider, 5);
+        FillBuySlider(upgradeReachSlider, 5);
 
-        SteamManager.instance.UpgradePurchased(2, upgradeReach, 10);
+        if (SteamManager.instance != null)
+            SteamManager.instance.UpgradePurchased(2, upgradeReach, 10);
 
-        if (saveManager != null)
-            saveManager.SaveGame();
+        if (SaveManager.instance != null)
+            SaveManager.instance.SaveGame();
     }
 
     public void BuyUpgradeJump()
@@ -138,7 +190,7 @@ public class PlayerUpgrade : MonoBehaviour
         if (upgradeJump >= 3)
             return;
 
-        if (!TryBuyUpgrade(ref jumpPrice))
+        if (!TryBuyUpgrade(ref jumpCurrentPrice))
             return;
 
         UpdateUIPrices();
@@ -147,149 +199,118 @@ public class PlayerUpgrade : MonoBehaviour
 
         playerMovement.UpgradeJump();
 
-        ui.FillSlider(ui.upgradeJumpSlider, 3);
+        FillBuySlider(upgradeJumpSlider, 3);
 
-        SteamManager.instance.UpgradePurchased(3, upgradeJump, 3);
+        if (SteamManager.instance != null)
+            SteamManager.instance.UpgradePurchased(3, upgradeJump, 3);
 
-        if (saveManager != null)
-            saveManager.SaveGame();
+        if (SaveManager.instance != null)
+            SaveManager.instance.SaveGame();
     }
 
     public void BuyARobotBuddy()
     {
         if(boughtRobotBuddy >= 3) return;
 
-        if (!TryBuyUpgrade(ref robotBuddyPrice)) return;
+        if (!TryBuyUpgrade(ref robotBuddyCurrentPrice)) return;
 
         UpdateUIPrices();
 
         boughtRobotBuddy++;
-
-        SteamManager.instance.UnlockAchievement(eAchievement.LittleBuddy);
+       
+        if (SteamManager.instance != null)
+            SteamManager.instance.UnlockAchievement(eAchievement.LittleBuddy);
 
         robotBuddySpawner.SpawnRobotBuddy();
 
-        ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
+        FillBuySlider(upgradeRobotBuddySlider, 3);
+        
+        if (SteamManager.instance != null)
+            SteamManager.instance.UpgradePurchased(5, boughtRobotBuddy, 3);
 
-        SteamManager.instance.UpgradePurchased(5, boughtRobotBuddy, 3);
-
-        if (saveManager != null)
-            saveManager.SaveGame();
+        if (SaveManager.instance != null)
+            SaveManager.instance.SaveGame();
     }
 
     private void UpdateUIPrices()
     {
-        capacityPriceTxt.text = capacityPrice.ToString("F0");
-        sprintPriceTxt.text = sprintPrice.ToString("F0");
-        reachPriceTxt.text = reachPrice.ToString("F0");
-        jumpPriceTxt.text = jumpPrice.ToString("F0");
-        robotBuddyPriceTxt.text = robotBuddyPrice.ToString("F0");
+        capacityPriceTxt.text = capacityCurrentPrice.ToString("F0");
+        sprintPriceTxt.text = sprintCurrentPrice.ToString("F0");
+        reachPriceTxt.text = reachCurrentPrice.ToString("F0");
+        jumpPriceTxt.text = jumpCurrentPrice.ToString("F0");
+        robotBuddyPriceTxt.text = robotBuddyCurrentPrice.ToString("F0");
     }
     #endregion
 
     public void OnLoading()
     {
-        if (ui == null) return;
-
         for (int i = 0; i < upgradeCapacity; i += 2)
         {
-            ui.FillSlider(ui.upgradeCapacitySlider, 5);
-            SteamManager.instance.UpgradePurchased(0, upgradeCapacity, 10);
+            FillBuySlider(upgradeCapacitySlider, 5);
+            if (SteamManager.instance != null)
+                SteamManager.instance.UpgradePurchased(0, upgradeCapacity, 10);
         }
 
         if (canSprint)
         {
             playerMovement.UnlockSprint();
-            ui.FillSlider(ui.upgradeSprintSlider, 1);
-            SteamManager.instance.UpgradePurchased(1, 1, 1);
+            FillBuySlider(upgradeSprintSlider, 1);
+            if (SteamManager.instance != null)
+                SteamManager.instance.UpgradePurchased(1, 1, 1);
         }
 
         for (int i = 0; i < upgradeReach; i += 2)
         {
-            ui.FillSlider(ui.upgradeReachSlider, 5);
-            SteamManager.instance.UpgradePurchased(2, upgradeReach, 10);
+            FillBuySlider(upgradeReachSlider, 5);
+            if (SteamManager.instance != null)
+                SteamManager.instance.UpgradePurchased(2, upgradeReach, 10);
         }
 
         for (int i = 0; i < upgradeJump; i++)
         {
-            ui.FillSlider(ui.upgradeJumpSlider, 3);
-            SteamManager.instance.UpgradePurchased(3, upgradeJump, 3);
+            FillBuySlider(upgradeJumpSlider, 3);
+            if (SteamManager.instance != null)
+                SteamManager.instance.UpgradePurchased(3, upgradeJump, 3);
         }
 
         for (int i = 0; i < boughtRobotBuddy; i++)
         {
-            ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
-            SteamManager.instance.UpgradePurchased(5, boughtRobotBuddy, 3);
+            FillBuySlider(upgradeRobotBuddySlider, 3);
+            if (SteamManager.instance != null)
+                SteamManager.instance.UpgradePurchased(5, boughtRobotBuddy, 3);
         }
 
         UpdateUIPrices();
     }
 
-    public void BuyMaxUpgradess()
+    public void UpdateCooldownSlider(Slider slider, float cooldownTime, float cooldownTimer)
     {
-        //Capacity
-        for (int i = 0; i<5; i++)
+        slider.value = 1f - (cooldownTimer / cooldownTime);
+    }
+
+    public void FillBuySlider(Slider slider, int maxValue)
+    {
+        slider.value += 1f / maxValue;
+    }
+
+    private void OpenResetPrompt()
+    {
+        resetPrompt.SetActive(true);
+    }
+
+    private void CloseResetPrompt()
+    {
+        if(GameUIManager.instance != null)
         {
-            if (upgradeCapacity >= 10)
-                break;
-
-            upgradeCapacity += 2;
-
-            playerInteraction.UpgradeCapacity(2);
-
-            ui.FillSlider(ui.upgradeCapacitySlider, 5);
-            SteamManager.instance.UpgradePurchased(0, upgradeCapacity, 10);
-        }
-
-        //Sprint
-        if (!canSprint)
-        {
-            canSprint = true;
-            playerMovement.UnlockSprint();
-            ui.FillSlider(ui.upgradeSprintSlider, 1);
-            SteamManager.instance.UpgradePurchased(1, 1, 1);
-        }
-
-        //Reach
-        for (int i = 0; i < 5; i++)
-        {
-            if (upgradeReach >= 10f)
-                break;
-
-            upgradeReach += 2;
-
-            playerInteraction.UpgradeReach(2);
-
-            ui.FillSlider(ui.upgradeReachSlider, 5);
-            SteamManager.instance.UpgradePurchased(2, upgradeReach, 10);
-        }
-
-        //Jump
-        for (int i = 0; i < 3; i++)
-        {
-            if (upgradeJump >= 3) break;
-
-            upgradeJump++;
-
-            playerMovement.UpgradeJump();
-
-            ui.FillSlider(ui.upgradeJumpSlider, 3);
-            SteamManager.instance.UpgradePurchased(3, upgradeJump, 3);
+            GameUIManager.instance.ShrinkAway(resetPrompt);
         }
     }
 
-    public void BuyAllRobotBuddies()
+    private void CloseUpgradesMenu()
     {
-        for (int i = 0; i < 3; i++)
+        if (GameUIManager.instance != null)
         {
-            if (boughtRobotBuddy >= 3) return;
-
-            boughtRobotBuddy++;
-
-            robotBuddySpawner.SpawnRobotBuddy();
-
-            ui.FillSlider(ui.upgradeRobotBuddySlider, 3);
-            SteamManager.instance.UpgradePurchased(5, boughtRobotBuddy, 3);
+            GameUIManager.instance.CloseMenu(upgradesMenu);
         }
     }
 
@@ -297,17 +318,37 @@ public class PlayerUpgrade : MonoBehaviour
     {
         //Capacity & Reach
         upgradeCapacity = 0;
+        upgradeCapacitySlider.value = 0f;
+        capacityCurrentPrice = capacityInitialPrice;
+
         upgradeReach = 0;
+        upgradeReachSlider.value = 0f;
+        reachCurrentPrice = reachInitialPrice;
+
         playerInteraction.ResetCapacityAndReach();
-        ui.upgradeCapacitySlider.value = ui.upgradeCapacitySlider.minValue;
-        ui.upgradeReachSlider.value = ui.upgradeReachSlider.minValue;
+
 
         //Sprint & Jump
         canSprint = false;
+        upgradeSprintSlider.value = 0f;
+        sprintCurrentPrice = sprintInitialPrice;
+
         upgradeJump = 0;
+        upgradeJumpSlider.value = 0f;
+        reachCurrentPrice = reachInitialPrice;
+
         playerMovement.ResetSprintAndJump();
-        ui.upgradeSprintSlider.value = ui.upgradeSprintSlider.minValue;
-        ui.upgradeJumpSlider.value = ui.upgradeJumpSlider.minValue;
+
+
+        //RobotBuddy
+        ResetRobotBuddy();
+
+        currencyManager.ChangeUpgradePoints(totalPointsSpent);
+        totalPointsSpent = 0;
+
+        UpdateUIPrices();
+
+        CloseUpgradesMenu();
     }
 
     public void ResetRobotBuddy()
@@ -332,6 +373,83 @@ public class PlayerUpgrade : MonoBehaviour
             Destroy(robot.gameObject);
         }
 
-        ui.upgradeRobotBuddySlider.value = ui.upgradeRobotBuddySlider.minValue;
+        upgradeRobotBuddySlider.value = 0f;
+        robotBuddyCurrentPrice = robotBuddyInitialPrice;
     }
+
+    // QA EDITOR
+    public void BuyMaxUpgradess()
+    {
+        //Capacity
+        for (int i = 0; i<5; i++)
+        {
+            if (upgradeCapacity >= 10)
+                break;
+
+            upgradeCapacity += 2;
+
+            playerInteraction.UpgradeCapacity(2);
+
+            FillBuySlider(upgradeCapacitySlider, 5);
+            if (SteamManager.instance != null)
+                SteamManager.instance.UpgradePurchased(0, upgradeCapacity, 10);
+        }
+
+        //Sprint
+        if (!canSprint)
+        {
+            canSprint = true;
+            playerMovement.UnlockSprint();
+            FillBuySlider(upgradeSprintSlider, 1);
+            if (SteamManager.instance != null)
+                SteamManager.instance.UpgradePurchased(1, 1, 1);
+        }
+
+        //Reach
+        for (int i = 0; i < 5; i++)
+        {
+            if (upgradeReach >= 10f)
+                break;
+
+            upgradeReach += 2;
+
+            playerInteraction.UpgradeReach(2);
+
+            FillBuySlider(upgradeReachSlider, 5);
+            if (SteamManager.instance != null)
+                SteamManager.instance.UpgradePurchased(2, upgradeReach, 10);
+        }
+
+        //Jump
+        for (int i = 0; i < 3; i++)
+        {
+            if (upgradeJump >= 3) break;
+
+            upgradeJump++;
+
+            playerMovement.UpgradeJump();
+
+            FillBuySlider(upgradeJumpSlider, 3);
+            if (SteamManager.instance != null)
+                SteamManager.instance.UpgradePurchased(3, upgradeJump, 3);
+        }
+    }
+
+    public void BuyAllRobotBuddies()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            if (boughtRobotBuddy >= 3) return;
+
+            boughtRobotBuddy++;
+
+            robotBuddySpawner.SpawnRobotBuddy();
+
+            FillBuySlider(upgradeRobotBuddySlider, 3);
+            if (SteamManager.instance != null)
+                SteamManager.instance.UpgradePurchased(5, boughtRobotBuddy, 3);
+        }
+    }
+
+    
 }

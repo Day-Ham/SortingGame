@@ -33,24 +33,15 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private TMP_Text maxItemText;
     private int maxItemCount;
 
-    [Header("Upgrades")]
-    [Header("Upgrades Menu")]
-    [SerializeField] private Button upgradesCloseButton;
-    public GameObject upgradesMenu;
-    [SerializeField] private Button resetUpgradesBtn; 
-
-    [Header("Upgrades Buy Sliders")]
-    public Slider upgradeCapacitySlider;
-    public Slider upgradeSprintSlider;
-    public Slider upgradeReachSlider;
-    public Slider upgradeJumpSlider;
-    public Slider upgradeRobotBuddySlider;
+    [Header("Upgrade Menu")]
+    [SerializeField] private GameObject upgradesMenu;
+    [SerializeField] private GameObject upgradesResetPrompt;
 
     [Header("Skills Menu")]
-    [SerializeField] private Button skillsCloseButton;
     public GameObject skillsMenu;
+    [SerializeField] private Button skillsCloseButton;
+    private GameObject skillsResetPrompt;
 
-    [Header("Menu")]
     [Header("Pause Menu")]
     public GameObject pauseMenu;
     [SerializeField] private Button resumeButton;
@@ -74,6 +65,7 @@ public class GameUIManager : MonoBehaviour
     private GameObject closingMenu;
     public bool isSecondarySelected;
 
+    private PlayerUpgrade upgrades;
     PlayerInput playerInput;
     UserInput input;
     PauseManager pause;
@@ -89,19 +81,26 @@ public class GameUIManager : MonoBehaviour
 
     private void Start()
     {
+        upgrades = FindAnyObjectByType<PlayerUpgrade>();
+        if (upgrades != null)
+        {
+            upgradesMenu = upgrades.upgradesMenu;
+            upgradesResetPrompt = upgrades.resetPrompt;
+        }
+
         playerInput = FindAnyObjectByType<PlayerInput>();
+        
         input = UserInput.instance;
         pause = PauseManager.instance;
         sceneLoader = SceneLoader.Instance;
 
-        resumeButton.onClick.AddListener(ResumeButtonAction);
-        settingsButton.onClick.AddListener(SetSettingsMenuAsCurrent);
+        resumeButton.onClick.AddListener(() => CloseMenu(pauseMenu));
+        settingsButton.onClick.AddListener(()=> SetAsCurrentOpenMenu(settingsMenu));
         returnToTitleScreenButton.onClick.AddListener(LoadTitleScreen);
         quitButton.onClick.AddListener(QuitGame);
-        settingsBackButton.onClick.AddListener(SetPauseMenuAsCurrent);
-        skillsCloseButton.onClick.AddListener(CloseSkills);
-        upgradesCloseButton.onClick.AddListener(CloseUpgrades);
-        cancelDefaultButton.onClick.AddListener(CancelDefault);
+        settingsBackButton.onClick.AddListener(ReturnFromSettingsToPause);
+        skillsCloseButton.onClick.AddListener(() => CloseMenu(skillsMenu));
+        cancelDefaultButton.onClick.AddListener(() => ShrinkAway(defaultPrompt));
 
         AddMenusAndPromptsToLists();
 
@@ -121,7 +120,10 @@ public class GameUIManager : MonoBehaviour
         DisableInactiveMenus();
 
         if (input.UpgradeInput && !pause.isPaused)
-        {
+        {            
+            if (upgradesResetPrompt.activeInHierarchy)
+                    return;
+
             if (currentOpenMenu == upgradesMenu)
             {
                 CloseMenu(currentOpenMenu);
@@ -133,6 +135,8 @@ public class GameUIManager : MonoBehaviour
 
         if (input.SkillInput && !pause.isPaused)
         {
+            if (skillsResetPrompt.activeInHierarchy) return;
+
             if (currentOpenMenu == skillsMenu)
             {
                 CloseMenu(currentOpenMenu);
@@ -164,6 +168,10 @@ public class GameUIManager : MonoBehaviour
                 ReturnFromSettingsToPause();
                 return;
             }
+
+            if (upgradesResetPrompt.activeInHierarchy) return;
+
+            if (skillsResetPrompt.activeInHierarchy) return;
 
             CloseMenu(currentOpenMenu);
             return;
@@ -268,7 +276,7 @@ public class GameUIManager : MonoBehaviour
             .SetUpdate(true);
     }
 
-    private void CloseMenu(GameObject menu)
+    public void CloseMenu(GameObject menu)
     {
         if (menu == null || menu == closingMenu)
             return;
@@ -314,23 +322,13 @@ public class GameUIManager : MonoBehaviour
         pause.LockCursor();
     }
 
-    private void SetSettingsMenuAsCurrent()
-    {
-        SetAsCurrentOpenMenu(settingsMenu);
-    }
-
-    private void SetPauseMenuAsCurrent()
-    {
-        ReturnFromSettingsToPause();
-    }
-
     public void ReturnFromSettingsToPause()
     {
         SetAsCurrentOpenMenu(pauseMenu);
         ShrinkAway(settingsMenu);
     }
 
-    private void ShrinkAway(GameObject menu)
+    public void ShrinkAway(GameObject menu)
     {
         if (menu == null)
             return;
@@ -350,29 +348,11 @@ public class GameUIManager : MonoBehaviour
                 DisableUI(menu);
             });
     }
-    private void CloseUpgrades()
-    {
-        CloseMenu(upgradesMenu);
-    }
-    private void CloseSkills()
-    {
-        CloseMenu(skillsMenu);
-    }
     #endregion
-
-    private void ResumeButtonAction()
-    {
-        CloseMenu(pauseMenu);
-    }
-
-    public void CancelDefault()
-    {
-        ShrinkAway(defaultPrompt);
-    }
 
     private void LoadTitleScreen()
     {
-        ResumeButtonAction();
+        CloseMenu(pauseMenu);
         pause.DisablePlayerControl();
         pause.UnlockCursor();
         SaveManager.instance.SaveGame();
@@ -381,7 +361,7 @@ public class GameUIManager : MonoBehaviour
 
     private void QuitGame()
     {
-        ResumeButtonAction();
+        CloseMenu(pauseMenu);
         pause.DisablePlayerControl();
         pause.UnlockCursor();
         SaveManager.instance.SaveGame();
