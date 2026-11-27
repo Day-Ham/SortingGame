@@ -21,7 +21,7 @@ public class ItemChecker : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private TMP_Text displayNameTxt;
-    [SerializeField] private Image background;
+    [SerializeField] private Renderer background;
     [SerializeField] private Sprite incompleteShelfDisplay;
     [SerializeField] private Color incompleteColor;
     [SerializeField] private Sprite completeShelfDisplay;
@@ -49,6 +49,9 @@ public class ItemChecker : MonoBehaviour
 
     private void Awake()
     {
+        if (background != null)
+            background.gameObject.SetActive(false);
+
         player = FindAnyObjectByType<PlayerInteraction>();
         playerUpgrade = FindAnyObjectByType<PlayerUpgrade>();
        
@@ -311,6 +314,9 @@ public class ItemChecker : MonoBehaviour
             //finalize position
             rb.Move(transform.TransformPoint(targetPosition), transform.rotation * targetRotation);
 
+            if (!background.gameObject.activeSelf)
+                background.gameObject.SetActive(true);
+
             rb.isKinematic = true;
 
             UpdateUI();
@@ -322,7 +328,7 @@ public class ItemChecker : MonoBehaviour
             }
             else
             {
-                background.sprite = incompleteShelfDisplay;
+                background.material.color = incompleteColor;
                 displayNameTxt.color = incompleteColor;
                 currentItem.gameObject.layer = LayerMask.NameToLayer("Pickup");
             }
@@ -349,7 +355,7 @@ public class ItemChecker : MonoBehaviour
         heldItems.RemoveAt(heldItems.Count - 1);
         currencyAndShelvedManager.UpdateShelvedCount(-1);
 
-        background.sprite = incompleteShelfDisplay; 
+        background.material.color = incompleteColor; 
         displayNameTxt.color = incompleteColor;
 
         if (heldItems.Count == 0)
@@ -357,6 +363,8 @@ public class ItemChecker : MonoBehaviour
             maxItems = 0;
             displayName = "";
             shelfPositions.Clear();
+
+            background.gameObject.SetActive(false);
         }
 
         UpdateUI();
@@ -391,7 +399,7 @@ public class ItemChecker : MonoBehaviour
 
     private void OnShelfComplete()
     {
-        background.sprite = completeShelfDisplay;
+        background.material.color = completeColor;
         displayNameTxt.color = completeColor;
         PulseCompletedItems();
 
