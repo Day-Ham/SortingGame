@@ -1,11 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
     public static PauseManager instance;
     public bool isPaused;
 
-    InputDeviceDetector inputDetector;
+    [Header("UI")]
+    public GameObject pauseMenu;
+    [SerializeField] private Button resumeButton;
+    [SerializeField] private Button returnToTitleScreenButton;
+    [SerializeField] private Button quitButton;
 
     private void Awake()
     {
@@ -15,12 +20,39 @@ public class PauseManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (UserInput.instance == null || SettingsManager.Instance == null || GameUIManager.instance == null) return;
+
+        if (UserInput.instance.EscapeInput)
+        {
+            if (pauseMenu.activeInHierarchy)
+            {
+                if (SettingsManager.Instance.settingsMenu.activeInHierarchy)
+                {
+                    return;
+                }
+                else
+                {
+                    ClosePauseMenu();
+                }
+            }
+            else if (GameUIManager.instance.currentOpenMenu == null)
+            {
+                OpenPauseMenu();
+            }
+        }
+    }
+
     private void Start()
     {
-        inputDetector = InputDeviceDetector.Instance;
+        resumeButton.onClick.AddListener(ClosePauseMenu);
+        returnToTitleScreenButton.onClick.AddListener(LoadTitleScreen);
+        quitButton.onClick.AddListener(QuitGame);
 
         ResumeGame();
     }
+
     public void PauseGame()
     {
         isPaused = true;
@@ -57,7 +89,7 @@ public class PauseManager : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
 
-        if (inputDetector.CurrentMode == InputDeviceDetector.InputMode.Gamepad)
+        if (InputDeviceDetector.Instance.CurrentMode == InputDeviceDetector.InputMode.Gamepad)
         {
             Cursor.visible = false;
         }
@@ -65,5 +97,53 @@ public class PauseManager : MonoBehaviour
         {
             Cursor.visible = true;
         }
+    }
+
+    private void OpenPauseMenu()
+    {
+        if (GameUIManager.instance != null)
+        {
+            GameUIManager.instance.isPauseMenu = true;
+            GameUIManager.instance.SetAsCurrentOpenMenu(pauseMenu);
+        }
+    }
+
+    private void ClosePauseMenu()
+    {
+        if (GameUIManager.instance != null)
+        {
+            GameUIManager.instance.isPauseMenu = true;
+            GameUIManager.instance.CloseMenu(pauseMenu);
+        }  
+    }
+
+    private void LoadTitleScreen()
+    {
+        if (GameUIManager.instance != null)
+            GameUIManager.instance.CloseMenu(pauseMenu);
+       
+        DisablePlayerControl();
+        UnlockCursor();
+
+        if (SaveManager.instance != null)
+            SaveManager.instance.SaveGame();
+
+        if (SceneLoader.Instance != null)
+            SceneLoader.Instance.LoadSceneByIndex(0);
+    }
+
+    private void QuitGame()
+    {
+        if (GameUIManager.instance != null)
+            GameUIManager.instance.CloseMenu(pauseMenu);
+        
+        DisablePlayerControl();
+        UnlockCursor();
+
+        if (SaveManager.instance != null)
+            SaveManager.instance.SaveGame();
+
+        if (SceneLoader.Instance != null)
+            SceneLoader.Instance.QuitGame();
     }
 }

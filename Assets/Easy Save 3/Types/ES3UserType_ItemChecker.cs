@@ -78,7 +78,7 @@ namespace ES3Types
 					instance = (ItemChecker)reader.SetPrivateField("spawner", reader.Read<ItemSpawner>(), instance);
 					break;
 					case "currency":
-					instance = (ItemChecker)reader.SetPrivateField("currency", reader.Read<CurrencyManager>(), instance);
+					instance = (ItemChecker)reader.SetPrivateField("currency", reader.Read<CurrencyAndShelvedCountManager>(), instance);
 					break;
 					case "m_CancellationTokenSource":
 					instance = (ItemChecker)reader.SetPrivateField("m_CancellationTokenSource", reader.Read<System.Threading.CancellationTokenSource>(), instance);

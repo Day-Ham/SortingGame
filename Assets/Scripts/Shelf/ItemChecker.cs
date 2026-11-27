@@ -35,7 +35,7 @@ public class ItemChecker : MonoBehaviour
     ItemSpawner spawner;
 
     [Header("Currency Manager")]
-    CurrencyManager currency;
+    CurrencyAndShelvedCountManager currencyAndShelvedManager;
 
     [Header("Placing Parameters")]
     public float moveSpeed = 30f;
@@ -59,8 +59,8 @@ public class ItemChecker : MonoBehaviour
         if (spawner == null)
             Debug.Log("Item Spawner is not found");
 
-        currency = FindAnyObjectByType<CurrencyManager>();
-        if (currency == null)
+        currencyAndShelvedManager = FindAnyObjectByType<CurrencyAndShelvedCountManager>();
+        if (currencyAndShelvedManager == null)
             Debug.Log("Currency Manager is not found");
 
         ui = FindAnyObjectByType<GameUIManager>();
@@ -334,7 +334,7 @@ public class ItemChecker : MonoBehaviour
             currentItem.isBeingPlaced = false;
 
             AddUpgradePoints(); //adds money if first time being placed on shelf
-            GameUIManager.instance.UpdateShelvedCount(1);
+            currencyAndShelvedManager.UpdateShelvedCount(1);
 
             Debug.Log("Placed " + currentItem.name + " on the shelf.");
             currentItem = null;
@@ -347,7 +347,7 @@ public class ItemChecker : MonoBehaviour
 
         Item item = heldItems[heldItems.Count - 1];
         heldItems.RemoveAt(heldItems.Count - 1);
-        ui.UpdateShelvedCount(-1);
+        currencyAndShelvedManager.UpdateShelvedCount(-1);
 
         background.sprite = incompleteShelfDisplay; 
         displayNameTxt.color = incompleteColor;
@@ -449,7 +449,7 @@ public class ItemChecker : MonoBehaviour
         if (currentItem.IsPlaced) return;
         
         currentItem.IsPlaced = true;
-        currency.ChangeUpgradePoints(1);
+        currencyAndShelvedManager.ChangeUpgradePoints(1);
 
         if (SteamManager.instance != null)
         {
@@ -462,7 +462,7 @@ public class ItemChecker : MonoBehaviour
         if (item.isComplete) return;
 
         item.isComplete = true;
-        currency.ChangeSkillPoints(1);
+        currencyAndShelvedManager.ChangeSkillPoints(1);
 
         SteamManager.instance.CompletedShelvesCounter();
     }
@@ -513,7 +513,7 @@ public class ItemChecker : MonoBehaviour
 
             if (ui != null)
             {
-                ui.UpdateShelvedCount(1);
+                currencyAndShelvedManager.UpdateShelvedCount(1);
             }
         }
 

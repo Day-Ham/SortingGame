@@ -48,9 +48,9 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
 
         ClearSelectionHistory();
 
-        if (GameUIManager.instance != null)
+        if (SettingsManager.Instance != null)
         {
-            GameUIManager.instance.isSecondarySelected = isSecondarySelected;
+            SettingsManager.Instance.isSecondarySelected = isSecondarySelected;
         }
 
         if (titleManager != null)
@@ -100,6 +100,7 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
             if (isSecondarySelected) return;
 
             GameObject selected = GetSelectedUI();
+            Debug.Log("Currently Selected Element: " + selected);
 
             SetsUIElementToSelectOnInteraction prompt = CheckIfAPromptIsActive();
 
@@ -230,9 +231,9 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
 
         isSecondarySelected = true;
 
-        if (GameUIManager.instance != null)
+        if (SettingsManager.Instance != null)
         {
-            GameUIManager.instance.isSecondarySelected = isSecondarySelected;
+            SettingsManager.Instance.isSecondarySelected = isSecondarySelected;
         }
 
         if (titleManager != null)
@@ -263,9 +264,9 @@ public class SetsUIElementToSelectOnInteraction : MonoBehaviour
 
         isSecondarySelected = false;
 
-        if (GameUIManager.instance != null)
+        if (SettingsManager.Instance != null)
         {
-            GameUIManager.instance.isSecondarySelected = isSecondarySelected;
+            SettingsManager.Instance.isSecondarySelected = isSecondarySelected;
         }
 
         if (titleManager != null)

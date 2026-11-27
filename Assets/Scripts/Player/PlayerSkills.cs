@@ -68,7 +68,7 @@ public class PlayerSkills : MonoBehaviour
 
     //References
     private PlayerInteraction playerInteraction;
-    private CurrencyManager currencyManager;
+    private CurrencyAndShelvedCountManager currencyAndShelvedManager;
 
     private void Awake()
     {
@@ -76,7 +76,7 @@ public class PlayerSkills : MonoBehaviour
         shelfHighlightLayer = LayerMask.NameToLayer(shelfHighlightLayerName);
 
         playerInteraction = GetComponent<PlayerInteraction>();
-        currencyManager = FindAnyObjectByType<CurrencyManager>();
+        currencyAndShelvedManager = FindAnyObjectByType<CurrencyAndShelvedCountManager>();
     }
 
     private void Start()
@@ -327,10 +327,10 @@ public class PlayerSkills : MonoBehaviour
         if (skill1Level >= 5)
             return;
 
-        if (currencyManager.skillPoints < skill1CurrentPrice)
+        if (currencyAndShelvedManager.skillPoints < skill1CurrentPrice)
             return;
 
-        currencyManager.ChangeSkillPoints(-skill1CurrentPrice);
+        currencyAndShelvedManager.ChangeSkillPoints(-skill1CurrentPrice);
         totalPointsSpent += skill1CurrentPrice;
 
         skill1Level++;
@@ -442,10 +442,10 @@ public class PlayerSkills : MonoBehaviour
         if (skill2Level >= 5)
             return;
 
-        if (currencyManager.skillPoints < skill2CurrentPrice)
+        if (currencyAndShelvedManager.skillPoints < skill2CurrentPrice)
             return;
 
-        currencyManager.ChangeSkillPoints(-skill2CurrentPrice);
+        currencyAndShelvedManager.ChangeSkillPoints(-skill2CurrentPrice);
         totalPointsSpent += skill2CurrentPrice;
 
         skill2Level++;
@@ -550,10 +550,10 @@ public class PlayerSkills : MonoBehaviour
         if (skill3Level >= 5)
             return;
 
-        if (currencyManager.skillPoints < skill3CurrentPrice)
+        if (currencyAndShelvedManager.skillPoints < skill3CurrentPrice)
             return;
 
-        currencyManager.ChangeSkillPoints(-skill3CurrentPrice);
+        currencyAndShelvedManager.ChangeSkillPoints(-skill3CurrentPrice);
         totalPointsSpent += skill3CurrentPrice;
 
         skill3Level++;
@@ -617,7 +617,7 @@ public class PlayerSkills : MonoBehaviour
     {
         if (GameUIManager.instance != null)
         {
-            GameUIManager.instance.ClosePrompt(resetPrompt);
+            GameUIManager.instance.TweenClose(resetPrompt);
         }
     }
     #endregion
@@ -696,7 +696,7 @@ public class PlayerSkills : MonoBehaviour
         skill3CurrentPrice = skill3InitialPrice;
         skill3BuySlider.value = 0f;
 
-        currencyManager.ChangeSkillPoints(totalPointsSpent);
+        currencyAndShelvedManager.ChangeSkillPoints(totalPointsSpent);
         totalPointsSpent = 0;
 
         UpdateUIPrices();

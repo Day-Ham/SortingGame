@@ -59,14 +59,14 @@ public class PlayerUpgrade : MonoBehaviour
     private PlayerMovement playerMovement;
     private PlayerInteraction playerInteraction;
     private RobotBuddySpawner robotBuddySpawner;
-    private CurrencyManager currencyManager;
+    private CurrencyAndShelvedCountManager currencyAndShelvedManager;
 
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerInteraction = GetComponent<PlayerInteraction>();
         robotBuddySpawner = FindAnyObjectByType<RobotBuddySpawner>();
-        currencyManager = FindAnyObjectByType<CurrencyManager>();
+        currencyAndShelvedManager = FindAnyObjectByType<CurrencyAndShelvedCountManager>();
     }
 
     private void Start()
@@ -119,10 +119,10 @@ public class PlayerUpgrade : MonoBehaviour
     #region GeneralUse
     private bool TryBuyUpgrade(ref int price)
     {
-        if (currencyManager.upgradePoints < price)
+        if (currencyAndShelvedManager.upgradePoints < price)
             return false;
 
-        currencyManager.ChangeUpgradePoints(-price);
+        currencyAndShelvedManager.ChangeUpgradePoints(-price);
 
         totalPointsSpent += price;
 
@@ -339,7 +339,7 @@ public class PlayerUpgrade : MonoBehaviour
     {
         if(GameUIManager.instance != null)
         {
-            GameUIManager.instance.ClosePrompt(resetPrompt);
+            GameUIManager.instance.TweenClose(resetPrompt);
         }
     }
     #endregion
@@ -373,7 +373,7 @@ public class PlayerUpgrade : MonoBehaviour
         //RobotBuddy
         ResetRobotBuddy();
 
-        currencyManager.ChangeUpgradePoints(totalPointsSpent);
+        currencyAndShelvedManager.ChangeUpgradePoints(totalPointsSpent);
         totalPointsSpent = 0;
 
         UpdateUIPrices();

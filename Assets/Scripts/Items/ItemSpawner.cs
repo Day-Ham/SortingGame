@@ -19,12 +19,13 @@ public class ItemSpawner : MonoBehaviour
     [SerializeField] private int maxAttempts = 30;
     [SerializeField] private LayerMask obstacleLayer;
 
-    private GameUIManager ui;
+    private CurrencyAndShelvedCountManager currencyAndShelvedManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ui = GameUIManager.instance;
-        UpdateUICount();
+        currencyAndShelvedManager = FindAnyObjectByType<CurrencyAndShelvedCountManager>();
+        if(currencyAndShelvedManager != null)
+            UpdateUICount();
 
         if (itemsSpawned) return;
         InstantiateItems();
@@ -62,9 +63,9 @@ public class ItemSpawner : MonoBehaviour
 
     private void UpdateUICount()
     {
-        if (ui == null) return;
+        if (currencyAndShelvedManager == null) return;
 
-        ui.SetMaxNumberItems(maxItems);
+        currencyAndShelvedManager.SetMaxNumberItems(maxItems);
     }
 
     Vector3 GetRandomSpawnPoint()

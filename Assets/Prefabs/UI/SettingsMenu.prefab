@@ -202,7 +202,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 0}
   elementToSelect: {fileID: 8279303913730637577}
-  secondaryOption: {fileID: 0}
   prompts: []
 --- !u!114 &2873979203955987904
 MonoBehaviour:
@@ -820,7 +819,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 0}
   elementToSelect: {fileID: 6550720843026240471}
-  secondaryOption: {fileID: 0}
   prompts: []
 --- !u!114 &2924847055393945086
 MonoBehaviour:
@@ -1889,7 +1887,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 0}
   elementToSelect: {fileID: 6448486817688979007}
-  secondaryOption: {fileID: 0}
   prompts: []
 --- !u!1 &1458069661250346314
 GameObject:
@@ -4619,7 +4616,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 0}
   elementToSelect: {fileID: 5020821334084164328}
-  secondaryOption: {fileID: 0}
   prompts: []
 --- !u!1 &4538395704228635986
 GameObject:
@@ -4907,7 +4903,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 0}
   elementToSelect: {fileID: 3152178394351156098}
-  secondaryOption: {fileID: 0}
   prompts: []
 --- !u!1 &4851970715370107538
 GameObject:
@@ -6123,7 +6118,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SetsUIElementToSelectOnInteraction
   eventSystem: {fileID: 0}
   elementToSelect: {fileID: 187278051430222931}
-  secondaryOption: {fileID: 0}
   prompts: []
 --- !u!1 &6068754571153291365
 GameObject:
@@ -6993,7 +6987,6 @@ GameObject:
   - component: {fileID: 7998318036125558409}
   - component: {fileID: 2911367778932411874}
   - component: {fileID: 8538118939677104384}
-  - component: {fileID: 784919813985751347}
   m_Layer: 14
   m_Name: SettingsMenu
   m_TagString: Untagged
@@ -7058,27 +7051,6 @@ MonoBehaviour:
   - {fileID: 2330343479436280116}
   - {fileID: 4204011899773852204}
   - {fileID: 5820653899762291232}
---- !u!114 &784919813985751347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7081546914215915408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dab9d38ae1b8934b919fe243f8bb685, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SettingsPanel
-  masterVolumeSlider: {fileID: 850677219518099632}
-  masterVolumeText: {fileID: 1899139569735144908}
-  musicVolumeSlider: {fileID: 5875272948863881342}
-  musicVolumeText: {fileID: 8000997056409787273}
-  sfxVolumeSlider: {fileID: 3628719581420408207}
-  sfxVolumeText: {fileID: 2195547666689076831}
-  sensitivitySlider: {fileID: 4019604879777524630}
-  sensitivityText: {fileID: 6660450291572426969}
-  closeSettingsButton: {fileID: 4691855406579395332}
 --- !u!1 &7246328112406064210
 GameObject:
   m_ObjectHideFlags: 0

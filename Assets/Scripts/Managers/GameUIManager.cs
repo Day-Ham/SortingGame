@@ -1,69 +1,25 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameUIManager : MonoBehaviour
 {
     public static GameUIManager instance;
 
-    [Header("Player HUD")]
-    [Header("Crosshair")]
-    [SerializeField] private Image crosshairImage;
-    public Sprite normalCrosshair;
-    public Sprite oCrosshair;
-    public Sprite xCrosshair;
-
-    [Header("Looked at Object")]
-    public TMP_Text lookedAtItemNameText;
-
-    [Header("Held Item")]
-    public TMP_Text amountHeldText;
-    public TMP_Text maxHeldItemsText;
-    public TMP_Text heldItemNameText;
-    public TMP_Text[] backpackItemNames;
-
-    [Header("Shelved Count")]
-    [SerializeField] private TMP_Text shelvedItemText;
-    private int shelvedItemCount;
-    [SerializeField] private TMP_Text maxItemText;
-    private int maxItemCount;
-
-    [Header("Skills Menu")]
-    public GameObject skillsMenu;
-    [SerializeField] private Button skillsCloseButton;
-
-    [Header("Pause Menu")]
-    public GameObject pauseMenu;
-    [SerializeField] private Button resumeButton;
-    [SerializeField] private Button settingsButton;
-    [SerializeField] private Button returnToTitleScreenButton;
-    [SerializeField] private Button quitButton;
-
-    [Header("Settings Menu")]
-    public GameObject settingsMenu;
-    [SerializeField] private GameObject keybindingOverlay;
-    [SerializeField] private GameObject duplicatePrompt;
-    [SerializeField] private GameObject defaultPrompt;
-    [SerializeField] private Button cancelDefaultButton;
-    [SerializeField] private Button settingsBackButton;
-
-
     //Checks
     [SerializeField] private List<GameObject> menus = new List<GameObject>();
+    public bool isPauseMenu;
+    public bool isSettingsMenu;
 
     public GameObject currentOpenMenu;
+    private GameObject previousOpenMenu;
     private GameObject closingMenu;
-    public bool isSecondarySelected;
 
     PlayerInput playerInput;
     UserInput input;
     PauseManager pause;
-    SceneLoader sceneLoader;
 
     private void Awake()
     {
@@ -79,15 +35,6 @@ public class GameUIManager : MonoBehaviour
         
         input = UserInput.instance;
         pause = PauseManager.instance;
-        sceneLoader = SceneLoader.Instance;
-
-        resumeButton.onClick.AddListener(() => CloseMenu(pauseMenu));
-        settingsButton.onClick.AddListener(()=> SetAsCurrentOpenMenu(settingsMenu));
-        returnToTitleScreenButton.onClick.AddListener(LoadTitleScreen);
-        quitButton.onClick.AddListener(QuitGame);
-        settingsBackButton.onClick.AddListener(ReturnFromSettingsToPause);
-        skillsCloseButton.onClick.AddListener(() => CloseMenu(skillsMenu));
-        cancelDefaultButton.onClick.AddListener(() => ClosePrompt(defaultPrompt));
 
         AddMenusAndPromptsToLists();
 
@@ -98,51 +45,37 @@ public class GameUIManager : MonoBehaviour
                 menu.SetActive(false);
             }
         }
-
-        isSecondarySelected = false;
     }
 
     private void Update()
     {
-        if (input.EscapeInput && !isSecondarySelected)
-        {
-            if (keybindingOverlay.activeInHierarchy) return;
+        //if (input.EscapeInput && !isSecondarySelected)
+        //{
+        //    if (keybindingOverlay.activeInHierarchy) return;
 
-            if (currentOpenMenu == null)
-            {
-                SetAsCurrentOpenMenu(pauseMenu);
-                return;
-            }
+        //    if (currentOpenMenu == null)
+        //    {
+        //        SetAsCurrentOpenMenu(pauseMenu);
+        //        return;
+        //    }
 
-            if (currentOpenMenu == settingsMenu)
-            {
-                if (duplicatePrompt.activeInHierarchy) return;
-                if (defaultPrompt.activeInHierarchy)
-                {
-                    ClosePrompt(defaultPrompt);
-                    return;
-                }
+        //    if (currentOpenMenu == settingsMenu)
+        //    {
+        //        if (duplicatePrompt.activeInHierarchy) return;
+        //        if (defaultPrompt.activeInHierarchy)
+        //        {
+        //            TweenClose(defaultPrompt);
+        //            return;
+        //        }
 
-                ReturnFromSettingsToPause();
-                return;
-            }
+        //        ReturnFromSettingsToPause();
+        //        return;
+        //    }
 
-            CloseMenu(currentOpenMenu);
-            return;
-        }
+        //    CloseMenu(currentOpenMenu);
+        //    return;
+        //}
     }
-
-    #region Set UIs
-    public void SetCrosshair(Sprite sprite)
-    {
-        crosshairImage.sprite = sprite;
-    }
-
-    public void SetUIText(TMP_Text tmpText, string text)
-    {
-        tmpText.text = text;
-    }
-    #endregion
 
     #region Menus
     private void AddMenusAndPromptsToLists()
@@ -151,7 +84,7 @@ public class GameUIManager : MonoBehaviour
         GameObject[] menuUI = FindObjectsByType<GameObject>(FindObjectsInactive.Include)
             .Where(obj => obj.layer == menuLayer)
             .ToArray();
-        foreach(GameObject menu in menuUI)
+        foreach (GameObject menu in menuUI)
         {
             menus.Add(menu);
         }
@@ -163,7 +96,7 @@ public class GameUIManager : MonoBehaviour
 
         foreach (GameObject menu in menus)
         {
-            if(menu != currentOpenMenu && menu != closingMenu)
+            if (menu != currentOpenMenu && menu != closingMenu)
             {
                 menu.SetActive(false);
             }
@@ -183,19 +116,31 @@ public class GameUIManager : MonoBehaviour
             closingMenu = null;
         }
 
+        if (isSettingsMenu)
+        {
+            previousOpenMenu = currentOpenMenu;
+        }
+
         currentOpenMenu = menu;
         TweenOpen(currentOpenMenu);
 
-        if (currentOpenMenu == pauseMenu || currentOpenMenu == settingsMenu)
+        if (isPauseMenu)
         {
             pause.PauseGame();
+            isPauseMenu = false;
+            return;
+        }
+
+        pause.DisablePlayerControl();
+        pause.UnlockCursor();
+
+        if (isSettingsMenu) 
+        {
+            isSettingsMenu = false;
             return;
         }
 
         DisableInactiveMenus();
-
-        pause.DisablePlayerControl();
-        pause.UnlockCursor();
     }
 
     public void TweenOpen(GameObject menu)
@@ -224,20 +169,36 @@ public class GameUIManager : MonoBehaviour
                     return;
 
                 closingMenu = null;
-                currentOpenMenu = null;
                 menu.transform.localScale = Vector3.one;
                 menu.SetActive(false);
+
+                if (isSettingsMenu)
+                {
+                    currentOpenMenu = previousOpenMenu;
+                    previousOpenMenu = null;
+                }
+                else
+                {
+                    currentOpenMenu = null;
+                }
+
                 FinishCloseMenu(menu);
             });
     }
-
     private void FinishCloseMenu(GameObject menu)
     {
+        if (isSettingsMenu)
+        {
+            isSettingsMenu = false;
+            return;
+        }
+
         playerInput.SwitchCurrentActionMap("Player");
 
-        if (menu == pauseMenu || menu == settingsMenu)
+        if (isPauseMenu && !isSettingsMenu)
         {
             pause.ResumeGame();
+            isPauseMenu = false;
             return;
         }
 
@@ -245,7 +206,7 @@ public class GameUIManager : MonoBehaviour
         pause.LockCursor();
     }
 
-    public void ClosePrompt(GameObject menu)
+    public void TweenClose(GameObject menu)
     {
         if (menu == null)
             return;
@@ -265,48 +226,7 @@ public class GameUIManager : MonoBehaviour
                 menu.SetActive(false);
             });
     }
-
-    public void ReturnFromSettingsToPause()
-    {
-        SetAsCurrentOpenMenu(pauseMenu);
-        ClosePrompt(settingsMenu);
-    }
-
-    
     #endregion
 
-    private void LoadTitleScreen()
-    {
-        CloseMenu(pauseMenu);
-        pause.DisablePlayerControl();
-        pause.UnlockCursor();
-        SaveManager.instance.SaveGame();
-        sceneLoader.LoadSceneByIndex(0);
-    }
-
-    private void QuitGame()
-    {
-        CloseMenu(pauseMenu);
-        pause.DisablePlayerControl();
-        pause.UnlockCursor();
-        SaveManager.instance.SaveGame();
-        sceneLoader.QuitGame();
-    }
-
-    public void UpdateShelvedCount(int count)
-    {
-        shelvedItemCount += count;
-        shelvedItemText.text = shelvedItemCount.ToString("F0");
-
-        if (shelvedItemCount == maxItemCount)
-        {
-            SteamManager.instance.CompleteStage(SceneManager.GetActiveScene().buildIndex);
-        }
-    }
-
-    public void SetMaxNumberItems(int maxCount)
-    {
-        maxItemCount = maxCount;
-        maxItemText.text = maxItemCount.ToString("F0");
-    }
+    
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -14,6 +16,13 @@ public class PlayerInteraction : MonoBehaviour
     public GameObject LookedAtObject => lookedAtObject;
     private GameObject lookAtPickUpObject;
     private GameObject lookAtInteractObject;
+    [SerializeField] private TMP_Text lookedAtItemNameText;
+
+    [Header("Crosshairs")]
+    [SerializeField] private Image crosshairImage;
+    public Sprite normalCrosshair;
+    public Sprite oCrosshair;
+    public Sprite xCrosshair;
 
     [Header("Pickup")]
     [SerializeField] private float pickupRange = 3f;
@@ -35,10 +44,14 @@ public class PlayerInteraction : MonoBehaviour
 
     [Header("Backpack")]
     [SerializeField] private int maxHeldItems = 3;
-    [SerializeField] private float switchDelay = 0.25f;
-    public List<GameObject> heldItems = new List<GameObject>();
-    public bool isSwitching;
     public int MaxHeldItems => maxHeldItems;
+    [SerializeField] private float switchDelay = 0.25f;
+    public bool isSwitching;
+    public List<GameObject> heldItems = new List<GameObject>();
+    public TMP_Text amountHeldText;
+    public TMP_Text maxHeldItemsText;
+    public TMP_Text heldItemNameText;
+    public TMP_Text[] backpackItemNames;
 
     [Header("Throw")]
     [SerializeField] private float throwForce = 5f;    
@@ -155,8 +168,8 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (lookAtPickUpObject == null)
         {
-            ui.SetUIText(ui.lookedAtItemNameText, "");
-            ui.lookedAtItemNameText.gameObject.SetActive(false);
+            lookedAtItemNameText.text = "";
+            lookedAtItemNameText.gameObject.SetActive(false);
             return;
         }
 
@@ -164,8 +177,9 @@ public class PlayerInteraction : MonoBehaviour
         Item item = lookAtPickUpObject.GetComponent<Item>();
         if (item != null && item.Data != null)
         {
-            ui.SetUIText(ui.lookedAtItemNameText, item.Data.displayName);
-            ui.lookedAtItemNameText.gameObject.SetActive(true);
+
+            lookedAtItemNameText.text = item.Data.displayName;
+            lookedAtItemNameText.gameObject.SetActive(true);
             return;
         }
     }
@@ -175,7 +189,7 @@ public class PlayerInteraction : MonoBehaviour
         // no object found
         if (lookAtPickUpObject == null && lookAtInteractObject == null)
         {
-            ui.SetCrosshair(ui.normalCrosshair);
+            crosshairImage.sprite = normalCrosshair;
 
             UpdateOutlineTarget(null);
             return;
@@ -192,34 +206,34 @@ public class PlayerInteraction : MonoBehaviour
                 //check if item is viable to be put on the shelf and change crosshairs to match
                 if (checker.IsItemValid())
                 {
-                    ui.SetCrosshair(ui.oCrosshair);
+                    crosshairImage.sprite = oCrosshair;
                 }
                 else
                 {
-                    ui.SetCrosshair(ui.xCrosshair);
+                    crosshairImage.sprite = xCrosshair;
                 }
             }
         }
         else
         {
-            ui.SetCrosshair(ui.normalCrosshair);
+            crosshairImage.sprite = normalCrosshair;
         }
     }
 
     void UpdateInventoryUI()
     {
         if (ui == null) return;
-        ui.SetUIText(ui.amountHeldText, heldItems.Count.ToString());
-        ui.SetUIText(ui.maxHeldItemsText, maxHeldItems.ToString());
+        amountHeldText.text = heldItems.Count.ToString();
+        maxHeldItemsText.text = maxHeldItems.ToString();
 
         // No items
         if (heldItems.Count == 0)
         {
-            ui.SetUIText(ui.heldItemNameText, "");
+            heldItemNameText.text = "";
 
-            for (int i = 0; i < ui.backpackItemNames.Length; i++)
+            for (int i = 0; i < backpackItemNames.Length; i++)
             {
-                ui.SetUIText(ui.backpackItemNames[i], "");
+                backpackItemNames[i].text = "";
             }
 
             return;
@@ -232,16 +246,16 @@ public class PlayerInteraction : MonoBehaviour
 
             if (heldItem != null && heldItem.Data != null)
             {
-                ui.SetUIText(ui.heldItemNameText, heldItem.Data.displayName);
+                heldItemNameText.text = heldItem.Data.displayName;
             }
             else
             {
-                ui.SetUIText(ui.heldItemNameText, "");
+                heldItemNameText.text = "";
             }
         }
         else
         {
-            ui.SetUIText(ui.heldItemNameText, "");
+            heldItemNameText.text = "";
         }
 
         // Other backpack items, starting after the active item
@@ -255,17 +269,17 @@ public class PlayerInteraction : MonoBehaviour
 
             Item item = itemObject.GetComponent<Item>();
 
-            if (item != null && item.Data != null && i - 1 < ui.backpackItemNames.Length)
+            if (item != null && item.Data != null && i - 1 < backpackItemNames.Length)
             {
-                ui.SetUIText(ui.backpackItemNames[i - 1], item.Data.displayName);
+                backpackItemNames[i - 1].text = item.Data.displayName;
             }
         }
 
         // Clear unused backpack UI slots
-        int displayedItems = Mathf.Max(0, Mathf.Min(heldItems.Count - 1, ui.backpackItemNames.Length));
-        for (int i = displayedItems; i < ui.backpackItemNames.Length; i++)
+        int displayedItems = Mathf.Max(0, Mathf.Min(heldItems.Count - 1, backpackItemNames.Length));
+        for (int i = displayedItems; i < backpackItemNames.Length; i++)
         {
-            ui.SetUIText(ui.backpackItemNames[i], "");
+            backpackItemNames[i].text = "";
         }
     }
     #endregion
@@ -693,7 +707,7 @@ public class PlayerInteraction : MonoBehaviour
             heldRigidbody = null;
             isPickingUp = false;
 
-            ui.SetUIText(ui.heldItemNameText, "");
+            heldItemNameText.text = "";
 
             if (heldItems.Count == 0)
             {

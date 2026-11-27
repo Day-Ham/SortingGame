@@ -35,7 +35,7 @@ public class QAEditor : MonoBehaviour
     private PlayerUpgrade upgrades;
 
     [Header("Other Scripts")]
-    [SerializeField] private CurrencyManager currency;
+    [SerializeField] private CurrencyAndShelvedCountManager currencyAndShelvedManager;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -104,16 +104,16 @@ public class QAEditor : MonoBehaviour
             }
         }
 
-        currency.skillPoints = skillPoints;
-        currency.upgradePoints = upgradePoints;
+        currencyAndShelvedManager.skillPoints = skillPoints;
+        currencyAndShelvedManager.upgradePoints = upgradePoints;
 
-        currency.UpdateUI(); // return to private on final build
+        currencyAndShelvedManager.UpdateUI(); // return to private on final build
     }
 
     private void ResetPoints()
     {
-        currency.skillPoints = 0;
-        currency.upgradePoints = 0;
+        currencyAndShelvedManager.skillPoints = 0;
+        currencyAndShelvedManager.upgradePoints = 0;
 
         skillPointsInputField.text = "";
         upgradePointsInputField.text = "";
@@ -121,7 +121,7 @@ public class QAEditor : MonoBehaviour
         skillPointsInputField.placeholder.GetComponent<TMP_Text>().text = "Enter integer...";
         upgradePointsInputField.placeholder.GetComponent<TMP_Text>().text = "Enter integer...";
 
-        currency.UpdateUI(); // return to private on final build
+        currencyAndShelvedManager.UpdateUI(); // return to private on final build
     }
 
     private void MaxLevelSkills()

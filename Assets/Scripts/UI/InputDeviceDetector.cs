@@ -117,7 +117,6 @@ public class InputDeviceDetector : MonoBehaviour
         }
         else if (mode == InputMode.KeyboardMouse)
         {
-            Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
     }
