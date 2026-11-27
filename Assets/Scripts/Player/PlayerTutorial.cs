@@ -3,9 +3,12 @@ using TMPro;
 
 public class PlayerTutorial : MonoBehaviour
 {
-    [SerializeField] private TMP_Text tutorialText;
     [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private int tutorialCount = 1;
+    [SerializeField] GameObject pickUpTutorial;
+    [SerializeField] GameObject placeTutorial;
+    [SerializeField] GameObject throwTutorial;
+    [SerializeField] GameObject changeTutorial;
 
     PlayerInteraction playerInteraction;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,8 +35,7 @@ public class PlayerTutorial : MonoBehaviour
                 break;
 
             case 2:
-                if (UserInput.instance.ThrowInput && playerInteraction.LookedAtObject != null 
-                    && playerInteraction.LookedAtObject.GetComponent<ItemChecker>() != null)
+                if (playerInteraction.HasPlacedItem)
                 {
                     tutorialCount++;
                     UpdateTutorialText();
@@ -62,20 +64,34 @@ public class PlayerTutorial : MonoBehaviour
         switch (tutorialCount)
         {
             case 1:
-                tutorialText.text = "Click LMB to pick up item.";
+                pickUpTutorial.SetActive(true);
+                placeTutorial.SetActive(false);
+                throwTutorial.SetActive(false);
+                changeTutorial.SetActive(false);
                 break;
 
             case 2:
-                tutorialText.text = "Click RMB to place item.";
+                pickUpTutorial.SetActive(false);
+                placeTutorial.SetActive(true);
+                throwTutorial.SetActive(false);
+                changeTutorial.SetActive(false);
                 break;
 
             case 3:
-                tutorialText.text = "Click RMB to throw item.";
+                pickUpTutorial.SetActive(false);
+                placeTutorial.SetActive(false);
+                throwTutorial.SetActive(true);
+                changeTutorial.SetActive(false);
                 break;
 
             case 4:
-                tutorialText.text = "Scroll up or Scroll down to change item.";
+                pickUpTutorial.SetActive(false);
+                placeTutorial.SetActive(false);
+                throwTutorial.SetActive(false);
+                changeTutorial.SetActive(true);
                 break;
         }
     }
+
+
 }

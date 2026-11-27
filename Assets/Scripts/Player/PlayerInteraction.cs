@@ -67,6 +67,8 @@ public class PlayerInteraction : MonoBehaviour
     [Header("Target Layers")]
     [SerializeField] private LayerMask throwTargetLayers;
 
+    public bool HasPlacedItem { get; private set; }
+
     private void Start()
     {
         ui = GameUIManager.instance;
@@ -630,6 +632,7 @@ public class PlayerInteraction : MonoBehaviour
             
             Debug.Log("NOW PLACING THE ITEM");
             checker.PlaceItem();
+            HasPlacedItem = true;
             return;
         }
 

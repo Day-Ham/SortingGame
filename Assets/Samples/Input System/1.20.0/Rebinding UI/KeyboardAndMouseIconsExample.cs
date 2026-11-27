@@ -239,6 +239,15 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             {
                 string key = controlPath.ToLowerInvariant();
 
+                if (key.Contains("/scroll/y"))
+                    return scrollWheel;
+
+                if (key.Contains("/scroll/up"))
+                    return scrollUp;
+
+                if (key.Contains("/scroll/down"))
+                    return scrollDown;
+
                 int slashIndex = key.LastIndexOf('/');
                 if (slashIndex >= 0)
                     key = key.Substring(slashIndex + 1);

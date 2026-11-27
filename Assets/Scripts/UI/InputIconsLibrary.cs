@@ -166,8 +166,14 @@ public struct KeyboardMouseIcons
     {
         string key = controlPath.ToLowerInvariant();
 
-        if (key.EndsWith("/scroll/y"))
+        if (key.Contains("/scroll/y"))
             return scrollWheel;
+
+        if (key.Contains("/scroll/up"))
+            return scrollUp;
+
+        if (key.Contains("/scroll/down"))
+            return scrollDown;
 
         int slashIndex = key.LastIndexOf('/');
         if (slashIndex >= 0)
