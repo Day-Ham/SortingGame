@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
@@ -55,7 +56,6 @@ public class SettingsManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
@@ -69,7 +69,8 @@ public class SettingsManager : MonoBehaviour
 
         isSecondarySelected = false;
 
-        pauseMenuSetUI = PauseManager.instance.pauseMenu.GetComponent<SetsUIElementToSelectOnInteraction>();
+        if(PauseManager.instance != null)
+            pauseMenuSetUI = PauseManager.instance.pauseMenu.GetComponent<SetsUIElementToSelectOnInteraction>();
     }
 
     private void Update()
@@ -196,6 +197,16 @@ public class SettingsManager : MonoBehaviour
             if (pauseMenuSetUI != null)
                 pauseMenuSetUI.enabled = false;
         }
+        else
+        {
+            TitleScreenManager title = FindAnyObjectByType<TitleScreenManager>();
+            if (title == null) return;
+
+            title.mainMenuSelectUI.enabled = false;
+            EventSystem.current.SetSelectedGameObject(null);
+
+            title.TweenMenuOpen(settingsMenu);
+        }
     }
 
     private void CloseSettingsMenu()
@@ -223,6 +234,12 @@ public class SettingsManager : MonoBehaviour
         if (GameUIManager.instance != null)
         {
             GameUIManager.instance.TweenClose(defaultPrompt);
+        }
+        else
+        {
+            TitleScreenManager title = FindAnyObjectByType<TitleScreenManager>();
+            if (title != null)
+                title.TweenMenuClose(defaultPrompt);
         }
     }
     #endregion

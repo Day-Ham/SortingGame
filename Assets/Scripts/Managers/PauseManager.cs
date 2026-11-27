@@ -120,16 +120,22 @@ public class PauseManager : MonoBehaviour
     private void LoadTitleScreen()
     {
         if (GameUIManager.instance != null)
-            GameUIManager.instance.CloseMenu(pauseMenu);
-       
-        DisablePlayerControl();
-        UnlockCursor();
+        {
+            Debug.Log("game manager ok");
+            ClosePauseMenu();
+        }
 
         if (SaveManager.instance != null)
+        {
+            Debug.Log("save manager ok");
             SaveManager.instance.SaveGame();
+        } 
 
         if (SceneLoader.Instance != null)
+        {
+            Debug.Log("scene loader ok");
             SceneLoader.Instance.LoadSceneByIndex(0);
+        }      
     }
 
     private void QuitGame()

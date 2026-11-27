@@ -12,14 +12,14 @@ public class InputDeviceDetector : MonoBehaviour
         Gamepad
     }
 
-    private PauseManager pause;
-
     public InputMode CurrentMode { get; private set; }
         = InputMode.KeyboardMouse;
 
     public event Action<InputMode> OnInputModeChanged;
 
     private bool initialized;
+
+    [SerializeField] private PlayerInput playerInput;
 
     private void Awake()
     {
@@ -30,8 +30,6 @@ public class InputDeviceDetector : MonoBehaviour
         }
 
         Instance = this;
-
-        pause = PauseManager.instance;
     }
 
     private void OnEnable()
@@ -111,6 +109,11 @@ public class InputDeviceDetector : MonoBehaviour
 
         OnInputModeChanged?.Invoke(mode);
 
+        SetCursor(mode);
+    }
+
+    private void SetCursor(InputMode mode)
+    {
         if (mode == InputMode.Gamepad)
         {
             Cursor.visible = false;
@@ -118,6 +121,15 @@ public class InputDeviceDetector : MonoBehaviour
         else if (mode == InputMode.KeyboardMouse)
         {
             Cursor.visible = true;
+
+            if (playerInput.currentActionMap.name == "Player")
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+            }
         }
     }
 }

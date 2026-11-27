@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("itemType", "shelfType", "shelfArea", "shelfPositions", "heldItems", "displayName", "currentItem", "maxItems", "displayNameTxt", "background", "player", "spawner", "currency", "m_CancellationTokenSource", "enabled", "name")]
+	[ES3PropertiesAttribute("itemType", "shelfType", "shelfArea", "shelfPositions", "heldItems", "displayName", "currentItem", "maxItems", "displayNameTxt", "background", "player", "spawner", "m_CancellationTokenSource", "enabled", "name")]
 	public class ES3UserType_ItemChecker : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -28,7 +28,6 @@ namespace ES3Types
 			writer.WritePrivateFieldByRef("background", instance);
 			writer.WritePrivateFieldByRef("player", instance);
 			writer.WritePrivateFieldByRef("spawner", instance);
-			writer.WritePrivateFieldByRef("currency", instance);
 			writer.WritePrivateField("m_CancellationTokenSource", instance);
 			writer.WriteProperty("enabled", instance.enabled, ES3Type_bool.Instance);
 		}
@@ -76,9 +75,6 @@ namespace ES3Types
 					break;
 					case "spawner":
 					instance = (ItemChecker)reader.SetPrivateField("spawner", reader.Read<ItemSpawner>(), instance);
-					break;
-					case "currency":
-					instance = (ItemChecker)reader.SetPrivateField("currency", reader.Read<CurrencyAndShelvedCountManager>(), instance);
 					break;
 					case "m_CancellationTokenSource":
 					instance = (ItemChecker)reader.SetPrivateField("m_CancellationTokenSource", reader.Read<System.Threading.CancellationTokenSource>(), instance);

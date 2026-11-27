@@ -47,36 +47,6 @@ public class GameUIManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        //if (input.EscapeInput && !isSecondarySelected)
-        //{
-        //    if (keybindingOverlay.activeInHierarchy) return;
-
-        //    if (currentOpenMenu == null)
-        //    {
-        //        SetAsCurrentOpenMenu(pauseMenu);
-        //        return;
-        //    }
-
-        //    if (currentOpenMenu == settingsMenu)
-        //    {
-        //        if (duplicatePrompt.activeInHierarchy) return;
-        //        if (defaultPrompt.activeInHierarchy)
-        //        {
-        //            TweenClose(defaultPrompt);
-        //            return;
-        //        }
-
-        //        ReturnFromSettingsToPause();
-        //        return;
-        //    }
-
-        //    CloseMenu(currentOpenMenu);
-        //    return;
-        //}
-    }
-
     #region Menus
     private void AddMenusAndPromptsToLists()
     {

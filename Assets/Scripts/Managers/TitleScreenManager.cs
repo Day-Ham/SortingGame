@@ -13,7 +13,6 @@ public class TitleScreenManager : MonoBehaviour
     [Header("Main Menu")]
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private Button playButton;
-    [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
 
     [Header("Play")]
@@ -33,14 +32,6 @@ public class TitleScreenManager : MonoBehaviour
     [Header("Stage Data")]
     [SerializeField] private List<StageData> stageData;
 
-    [Header("Settings")]
-    [SerializeField] private GameObject settingsMenu;
-    [SerializeField] private GameObject keybindingOverlay;
-    [SerializeField] private GameObject duplicatePrompt;
-    [SerializeField] private GameObject defaultPrompt;
-    [SerializeField] private Button cancelDefaultButton;
-    [SerializeField] private Button settingsBackButton;
-
     [Header("Credits")]
     [SerializeField] private GameObject credits;
     [SerializeField] private Button creditsButton;
@@ -51,22 +42,19 @@ public class TitleScreenManager : MonoBehaviour
     UserInput input;
     PlayerInput playerInput;
     InputDeviceDetector inputDetector;
-    SetsUIElementToSelectOnInteraction mainMenuSelectUI;
+    public SetsUIElementToSelectOnInteraction mainMenuSelectUI;
     SetsUIElementToSelectOnInteraction playMenuSelectUI;
     public bool isSecondarySelected;
 
     private void Awake()
     {
         playButton.onClick.AddListener(OpenPlayMenu);
-        settingsButton.onClick.AddListener(OpenSettingsMenu);
         quitButton.onClick.AddListener(Quit); 
         newGameBtn.onClick.AddListener(NewGame);
         confirmNewGameButton.onClick.AddListener(StartNewGame);
         cancelNewGameButton.onClick.AddListener(CancelNewGame);
         resumeGameBtn.onClick.AddListener(LoadStage);
         playBackBtn.onClick.AddListener(OpenMainMenu);
-        settingsBackButton.onClick.AddListener(OpenMainMenu);
-        cancelDefaultButton.onClick.AddListener(CancelDefault);
         creditsButton.onClick.AddListener(PlayCredits);
     }
 
@@ -80,6 +68,7 @@ public class TitleScreenManager : MonoBehaviour
         
         playerInput = FindAnyObjectByType<PlayerInput>();
         playerInput.SwitchCurrentActionMap("UI");
+        Cursor.lockState = CursorLockMode.None;
 
         isSecondarySelected = false;
 
@@ -92,14 +81,7 @@ public class TitleScreenManager : MonoBehaviour
     {
         if (input.EscapeInput)
         {
-            if (keybindingOverlay.activeInHierarchy || duplicatePrompt.activeInHierarchy) return;
-
-            if (defaultPrompt.activeInHierarchy)
-            {
-                TweenMenuClose(defaultPrompt);
-                Debug.Log("TitleScreenManager closed default prompt: Update");
-                return;
-            }
+            if (SettingsManager.Instance.settingsMenu.activeInHierarchy) return;
 
             if (newGamePrompt.activeInHierarchy)
             {
@@ -121,9 +103,9 @@ public class TitleScreenManager : MonoBehaviour
     {
         if (isSecondarySelected) return;
 
-        if (settingsMenu.activeInHierarchy)
+        if (SettingsManager.Instance.settingsMenu.activeInHierarchy)
         {
-            TweenMenuClose(settingsMenu);
+            TweenMenuClose(SettingsManager.Instance.settingsMenu);
         }
 
         if (playMenu.activeInHierarchy)
@@ -150,16 +132,6 @@ public class TitleScreenManager : MonoBehaviour
         TweenMenuOpen(playMenu);
 
         InitializeStage();
-    }
-
-    public void OpenSettingsMenu()
-    {
-        if (isSecondarySelected) return;
-
-        mainMenuSelectUI.enabled = false;
-        EventSystem.current.SetSelectedGameObject(null);
-
-        TweenMenuOpen(settingsMenu);
     }
 
     public void PlayCredits()
@@ -236,12 +208,6 @@ public class TitleScreenManager : MonoBehaviour
         TweenMenuClose(newGamePrompt);
     }
 
-    public void CancelDefault()
-    {
-        TweenMenuClose(defaultPrompt);
-        Debug.Log("TitleScreenManager closed default prompt: CancelDefault");
-    }
-
     public void LoadStage()
     {
         if (SceneLoader.Instance == null)
@@ -259,7 +225,7 @@ public class TitleScreenManager : MonoBehaviour
         SceneLoader.Instance.QuitGame();
     }
 
-    private void TweenMenuOpen(GameObject menu)
+    public void TweenMenuOpen(GameObject menu)
     {
         menu.SetActive(true);
         Transform menuTransform = menu.transform;
@@ -270,7 +236,7 @@ public class TitleScreenManager : MonoBehaviour
             .SetUpdate(true);
     }
 
-    private void TweenMenuClose(GameObject menu)
+    public void TweenMenuClose(GameObject menu)
     {
         menu.transform.DOKill();
         menu.transform.DOScale(Vector3.zero, 0.25f)
